@@ -9,12 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 087d57d282b2c764db86741b10528730, type: 3}
-  m_Name: Crystal
+  m_Script: {fileID: 11500000, guid: 1ad57a2887d40234486f51954a01ee40, type: 3}
+  m_Name: FastHands
   m_EditorClassIdentifier: 
-  maxHealth: 1
-  damage: 1
-  speed: 3
-  score: 5
-  deathEffect: {fileID: 0}
-  experience: 30
+  icon: {fileID: 0}
+  upgradeName: Fast Hands
+  description: Increase reload speed by 5.
+  prerequisites: []
+  incompatibleUpgrades: []
+  type: 0

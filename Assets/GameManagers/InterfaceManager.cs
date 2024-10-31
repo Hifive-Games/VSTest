@@ -19,6 +19,8 @@ public class InterfaceManager : MonoBehaviour
     public GameObject gameOverUI;
     public GameObject levelUpUI;
 
+    public TMP_Text healthText;
+
     private void Awake()
     {
         if (Instance == null)
@@ -32,6 +34,11 @@ public class InterfaceManager : MonoBehaviour
         }
 
         originalPosition = killCountText.transform.position;
+    }
+
+    public void UpdateHealthText(int health)
+    {
+        healthText.text = "Health: " + health;
     }
 
     public void ShowLevelUpUI()

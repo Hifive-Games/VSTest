@@ -11,7 +11,6 @@ public class Experiance : MonoBehaviour
         if (other.TryGetComponent(out Player player))
         {
             player.AddExperience(experience);
-            //play the sfx but start 0.2's in
             PlayerMagnet.Instance.audioSource.PlayOneShot(PlayerMagnet.Instance.expSfx);
             ObjectPooler.Instance.ReturnObject(gameObject, gameObject);
         }

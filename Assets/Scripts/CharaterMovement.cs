@@ -75,6 +75,7 @@ public class CharaterMovement : MonoBehaviour
             model.transform.forward = direction;
         }
     }
+    
 
     public void SetSpeed(float speed)
     {

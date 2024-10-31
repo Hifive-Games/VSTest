@@ -57,7 +57,7 @@ public class EnemySpawner : MonoBehaviour
     public void IncreaseSpwanRate()
     {
         spawnRate /= 1.01f;
-        maxEnemies = (int)math.ceil(maxEnemies * 1.01f);
+        maxEnemies = (int)math.ceil(maxEnemies + 2);
 
         if(spawnRate <= 0.001f) spawnRate = 0.001f;
     }

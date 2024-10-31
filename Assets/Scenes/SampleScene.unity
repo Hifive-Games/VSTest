@@ -415,6 +415,7 @@ GameObject:
   - component: {fileID: 268313474}
   - component: {fileID: 268313473}
   - component: {fileID: 268313472}
+  - component: {fileID: 268313476}
   m_Layer: 5
   m_Name: LevelUpPanel
   m_TagString: Untagged
@@ -506,6 +507,22 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: -600, y: -400}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &268313476
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 268313471}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be7100278b2d47e4db8290de5c815586, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  UpgradePrefab: {fileID: 3379568057184866186, guid: 07452d3b27b7ed848a6af01e6dc6e341,
+    type: 3}
+  allUpgrades: []
+  numberOfUpgrades: 3
 --- !u!1 &302595092
 GameObject:
   m_ObjectHideFlags: 0
@@ -1467,6 +1484,7 @@ GameObject:
   - component: {fileID: 964302098}
   - component: {fileID: 964302102}
   - component: {fileID: 964302103}
+  - component: {fileID: 964302104}
   m_Layer: 7
   m_Name: Player
   m_TagString: Player
@@ -1648,14 +1666,14 @@ MonoBehaviour:
   weaponData: {fileID: 11400000, guid: dc0baa45cb528b6418bbf67892be578f, type: 2}
   gun: {fileID: 1180177253}
   bulletSpawn: {fileID: 302595093}
-  fireRate: 0.1
+  fireRate: 1.2
   nextFire: 0
   damage: 0
   bulletSpeed: 0
   bulletLifeTime: 0
   isWeponDataChanged: 1
-  isAutoTargeting: 0
-  isAutoShooting: 0
+  isAutoTargeting: 1
+  isAutoShooting: 1
 --- !u!114 &964302102
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1675,8 +1693,8 @@ MonoBehaviour:
     health: 10
     armor: 5
     speed: 0
-  weaponData: {fileID: 964302101}
   xpBar: {fileID: 331127687}
+  isInvincible: 0
 --- !u!114 &964302103
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1689,6 +1707,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2511016405537d74693e254ec544c2e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &964302104
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 964302091}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e14e4970457787a4b9924acef3401c96, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  allUpgrades:
+  - {fileID: 11400000, guid: c853dade6b76ac940bd7a2cc3a3d82ee, type: 2}
+  - {fileID: 11400000, guid: 8ccef93825e1d6944ae9a693f7e76776, type: 2}
+  - {fileID: 11400000, guid: d720c42be2fd549449c270f092f48a10, type: 2}
+  - {fileID: 11400000, guid: 53fa447c27506594c8d40ce38abb75a7, type: 2}
+  - {fileID: 11400000, guid: 130162f0e1061aa44ba55062bb09127e, type: 2}
 --- !u!1001 &1133960591
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1866,7 +1902,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 201033521}
-  - {fileID: 1333578114}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1222135125
@@ -1961,109 +1996,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!1 &1333578113
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1333578114}
-  - component: {fileID: 1333578115}
-  - component: {fileID: 1333578116}
-  m_Layer: 0
-  m_Name: Upgrades
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1333578114
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1333578113}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1222135124}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1333578115
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1333578113}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5020be200285f214480c980683fe146f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  upgrades:
-  - isWeaponUpgrade: 0
-    upgradeName: Health
-    upgradeDescription: Health Up
-    upgradeID: 0
-    isPassive: 0
-    upgradeSprite: {fileID: 0}
-    rarity: 0
-  - isWeaponUpgrade: 0
-    upgradeName: Armor
-    upgradeDescription: Armor Up
-    upgradeID: 1
-    isPassive: 0
-    upgradeSprite: {fileID: 0}
-    rarity: 0
-  - isWeaponUpgrade: 0
-    upgradeName: Move Speed
-    upgradeDescription: Move Speed Up.
-    upgradeID: 2
-    isPassive: 1
-    upgradeSprite: {fileID: 0}
-    rarity: 0
-  - isWeaponUpgrade: 1
-    upgradeName: Weapon Damage
-    upgradeDescription: Weapon Damage Up
-    upgradeID: 3
-    isPassive: 1
-    upgradeSprite: {fileID: 0}
-    rarity: 0
-  - isWeaponUpgrade: 1
-    upgradeName: Weapon Speed
-    upgradeDescription: Weapon Speed Up.
-    upgradeID: 4
-    isPassive: 0
-    upgradeSprite: {fileID: 0}
-    rarity: 0
-  - isWeaponUpgrade: 1
-    upgradeName: Bullet Speed
-    upgradeDescription: Bullet Speed Up.
-    upgradeID: 5
-    isPassive: 0
-    upgradeSprite: {fileID: 0}
-    rarity: 0
---- !u!114 &1333578116
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1333578113}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b5930df8119516e48a4c8139da737a0b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  levelUpPool: {fileID: 1333578115}
-  upgrade: {fileID: 3379568057184866186, guid: 07452d3b27b7ed848a6af01e6dc6e341, type: 3}
-  choosenUpgrades: []
 --- !u!1 &1344438588
 GameObject:
   m_ObjectHideFlags: 0
@@ -2188,6 +2120,7 @@ MonoBehaviour:
   failedUI: {fileID: 1523089201}
   gameOverUI: {fileID: 1245271999}
   levelUpUI: {fileID: 268313471}
+  healthText: {fileID: 0}
 --- !u!114 &1440298655
 MonoBehaviour:
   m_ObjectHideFlags: 0

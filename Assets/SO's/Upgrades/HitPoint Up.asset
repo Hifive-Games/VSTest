@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   icon: {fileID: 0}
   upgradeName: HitPoint Up
-  description: Increase HP by 10.
+  description: Increase HP by 10..
   prerequisites: []
   incompatibleUpgrades: []
   type: 0

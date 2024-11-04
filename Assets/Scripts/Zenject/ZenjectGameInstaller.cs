@@ -9,7 +9,7 @@ public class ZenjectGameInstaller : MonoInstaller
     {
     
        // Container.Bind<GridManager>().FromComponentInHierarchy().AsSingle();
-       Container.Bind<MainMenuUIManager>().FromComponentInHierarchy().AsSingle();
+       // Container.Bind<PassiveUpgradeManager>().FromComponentInHierarchy().AsSingle();
        
        /*
         Container.Bind<SaveManager>()

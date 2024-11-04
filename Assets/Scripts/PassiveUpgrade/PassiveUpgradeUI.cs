@@ -1,6 +1,8 @@
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 
 public class PassiveUpgradeUI : MonoBehaviour
 {
@@ -10,7 +12,26 @@ public class PassiveUpgradeUI : MonoBehaviour
 
     private PassiveUpgradeData m_PassiveUpgradeData; // UpgradeData referansı
     private System.Action<PassiveUpgradeData> _onUpgradeClicked; // Yükseltme butonuna tıklama olayını temsil eder
+    
+    [SerializeField] private Button upgradeButton;
 
+    private void OnEnable()
+    {
+        upgradeButton.onClick.AddListener(UpgradeButtonOnClick);
+    }
+
+    private void OnDisable()
+    {
+        upgradeButton.onClick.RemoveListener(UpgradeButtonOnClick);
+    }
+
+    private void UpgradeButtonOnClick()
+    {
+        // Event'i tetikliyoruz
+        PassiveUpgradeManager.RequestUpgrade(m_PassiveUpgradeData);
+    }
+    
+    
     public void SetUpgrade(PassiveUpgradeData passiveUpgradeData, System.Action<PassiveUpgradeData> onUpgradeClicked)
     {
         m_PassiveUpgradeData = passiveUpgradeData;
@@ -27,8 +48,12 @@ public class PassiveUpgradeUI : MonoBehaviour
 
     public void UpdateUI()
     {
+        Debug.Log("PassiveUpgradeUI +  UpdateUI");
+        
         int currentLevel = PlayerPrefs.GetInt(m_PassiveUpgradeData.upgradeName + "_Level", 0);
-    
+        Debug.Log("1");
+
+
         // _upgradeData'nın null olup olmadığını kontrol et
         if (m_PassiveUpgradeData == null)
         {
@@ -52,8 +77,11 @@ public class PassiveUpgradeUI : MonoBehaviour
                 nextValueText.text = $"Next: -";
                 //upgradeButton.interactable = false; // Butonu devre dışı bırak
             }
-
-           
+        
+        }
+        else
+        {
+            Debug.LogError("Abicim hata");
         }
         
     }

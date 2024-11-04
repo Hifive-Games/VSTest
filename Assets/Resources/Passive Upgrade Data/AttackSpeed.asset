@@ -15,7 +15,10 @@ MonoBehaviour:
   upgradeName: AttackSpeed
   upgradeLevels:
   - value: 1
+    cost: 10
   - value: 2
+    cost: 100
   - value: 3
+    cost: 1000
   currentLevel: 0
-  currentValue: 0
+  currentValue: 1

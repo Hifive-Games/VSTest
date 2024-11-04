@@ -279,7 +279,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 645cc53129540784d8c6cddb62c30458, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetPanel: {fileID: 0}
 --- !u!1 &399378773
 GameObject:
   m_ObjectHideFlags: 0
@@ -622,12 +621,6 @@ MonoBehaviour:
   randomUpgradePrefab: {fileID: 8604814856023289566, guid: 9201f3fe55ffc7e40a7c2f339e6aaa6d,
     type: 3}
   randomUpgradeParent: {fileID: 1569381428}
-  upgradeButtons: []
-  highlightColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-  finalColor: {r: 1, g: 0, b: 0, a: 1}
-  flashCount: 3
-  highlightDuration: 0.1
-  finalColorDuration: 3
 --- !u!4 &664995512
 Transform:
   m_ObjectHideFlags: 0
@@ -1216,12 +1209,12 @@ PrefabInstance:
     - target: {fileID: 8248390621947466815, guid: b1e650ef892ad8945bdfdcbbac38b790,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 302
+      value: 271
       objectReference: {fileID: 0}
     - target: {fileID: 8248390621947466815, guid: b1e650ef892ad8945bdfdcbbac38b790,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -142
+      value: -81
       objectReference: {fileID: 0}
     - target: {fileID: 8248390621947466815, guid: b1e650ef892ad8945bdfdcbbac38b790,
         type: 3}
@@ -1982,7 +1975,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 645cc53129540784d8c6cddb62c30458, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetPanel: {fileID: 0}
 --- !u!1 &1569381427
 GameObject:
   m_ObjectHideFlags: 0

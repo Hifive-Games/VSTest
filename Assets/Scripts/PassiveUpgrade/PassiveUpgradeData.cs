@@ -15,4 +15,6 @@ public class PassiveUpgradeData : ScriptableObject
 public class PassiveUpgradeLevel
 {
     public float value; // Bu seviyedeki değer
+    public int cost; // Bu seviyedeki değer
+
 }

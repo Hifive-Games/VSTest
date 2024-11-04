@@ -41,7 +41,6 @@ public class PassiveUpgradeManager : MonoBehaviour
     }
     private void Start()
     {
-        // Coroutine başlat
         StartCoroutine(InitializeUpgrades());
     }
 
@@ -136,9 +135,12 @@ public class PassiveUpgradeManager : MonoBehaviour
 
         if (currentLevel < passiveUpgrade.upgradeLevels.Count)
         {
-            //int cost = costData.GetCost(costData.currentLevelCostIndex); // Geçerli maliyeti al
-
-            int cost = 10;
+            /* Eğer sonraki level için cost değeri check etmemiz gerekirse bunu kullan.
+            if (currentLevel < passiveUpgrade.upgradeLevels.Count - 1)
+            {
+            }
+            */
+            int cost = passiveUpgrade.upgradeLevels[passiveUpgrade.currentLevel].cost;
             
             if (CanAffordUpgrade(cost)) // Maliyet kontrolü
             {

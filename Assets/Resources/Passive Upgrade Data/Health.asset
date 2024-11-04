@@ -15,8 +15,12 @@ MonoBehaviour:
   upgradeName: Health
   upgradeLevels:
   - value: 100
+    cost: 10
   - value: 200
+    cost: 100
   - value: 300
+    cost: 1000
   - value: 400
+    cost: 10000
   currentLevel: 0
-  currentValue: 0
+  currentValue: 100

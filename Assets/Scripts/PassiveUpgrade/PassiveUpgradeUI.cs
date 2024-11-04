@@ -9,6 +9,8 @@ public class PassiveUpgradeUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI upgradeNameText; // Yükseltme adı metni
     [SerializeField] private TextMeshProUGUI currentValueText; // Geçerli değer metni
     [SerializeField] private TextMeshProUGUI nextValueText; // Sonraki değer metni
+    [SerializeField] private TextMeshProUGUI costText; // Sonraki değer metni
+
 
     private PassiveUpgradeData m_PassiveUpgradeData; // UpgradeData referansı
     private System.Action<PassiveUpgradeData> _onUpgradeClicked; // Yükseltme butonuna tıklama olayını temsil eder
@@ -38,7 +40,6 @@ public class PassiveUpgradeUI : MonoBehaviour
         _onUpgradeClicked = onUpgradeClicked;
 
         UpdateUI(); // UI'yi güncelle
-        upgradeNameText.text = m_PassiveUpgradeData.upgradeName; // Yükseltme adını ayarla
     }
 
     public string GetUpgradeName()
@@ -48,12 +49,8 @@ public class PassiveUpgradeUI : MonoBehaviour
 
     public void UpdateUI()
     {
-        Debug.Log("PassiveUpgradeUI +  UpdateUI");
-        
         int currentLevel = PlayerPrefs.GetInt(m_PassiveUpgradeData.upgradeName + "_Level", 0);
-        Debug.Log("1");
-
-
+        
         // _upgradeData'nın null olup olmadığını kontrol et
         if (m_PassiveUpgradeData == null)
         {
@@ -70,11 +67,13 @@ public class PassiveUpgradeUI : MonoBehaviour
             if (currentLevel + 1 < m_PassiveUpgradeData.upgradeLevels.Count)
             {
                 nextValueText.text = $"Next: {m_PassiveUpgradeData.upgradeLevels[currentLevel + 1].value}"; // Sonraki değer
+                costText.text =$"Cost: "+ m_PassiveUpgradeData.upgradeLevels[m_PassiveUpgradeData.currentLevel].cost; // sonraki cost
             }
             else
             {
                 currentValueText.text = $"Current: {levelData.value}";
                 nextValueText.text = $"Next: -";
+                costText.text = $"Cost: -";
                 //upgradeButton.interactable = false; // Butonu devre dışı bırak
             }
         
@@ -84,15 +83,12 @@ public class PassiveUpgradeUI : MonoBehaviour
             Debug.LogError("Abicim hata");
         }
         
+        
+        upgradeNameText.text = m_PassiveUpgradeData.upgradeName; // Yükseltme adını ayarla
+
+        
+
+        
     }
 
-    private void OnUpgradeButtonClicked()
-    {
-        _onUpgradeClicked?.Invoke(m_PassiveUpgradeData); // Yükseltmeyi uygula
-    }
-
-    public PassiveUpgradeData GetUpgradeData()
-    {
-        return m_PassiveUpgradeData;
-    }
 }

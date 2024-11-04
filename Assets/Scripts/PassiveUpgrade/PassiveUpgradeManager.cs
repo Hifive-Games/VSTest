@@ -23,7 +23,6 @@ public class PassiveUpgradeManager : MonoBehaviour
 
     
     #region Animation
-
     
     [HideInInspector]public List<GameObject> upgradeButtons; // Upgrade butonlarının Image bileşenleri
     [SerializeField] private Color highlightColor = Color.yellow;

@@ -11,6 +11,16 @@ public class ZenjectGameInstaller : MonoInstaller
        // Container.Bind<GridManager>().FromComponentInHierarchy().AsSingle();
        // Container.Bind<PassiveUpgradeManager>().FromComponentInHierarchy().AsSingle();
        
+       Container.Bind<FileSaveLoadSystem>()
+           .FromNewComponentOnNewGameObject() // Yeni bir GameObject oluştur ve onun üzerine SaveManager ekle
+           .AsSingle() // SaveManager'ı singleton olarak tanımla
+           .OnInstantiated((InjectContext context, FileSaveLoadSystem saveManager) => 
+           {
+               // SaveManager objesini sahneler arası silinmez yapıyoruz
+               DontDestroyOnLoad(saveManager.gameObject);
+           })
+           .NonLazy(); 
+       
        /*
         Container.Bind<SaveManager>()
             .FromNewComponentOnNewGameObject() // Yeni bir GameObject oluştur ve onun üzerine SaveManager ekle

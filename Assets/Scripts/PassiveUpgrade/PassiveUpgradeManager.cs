@@ -14,15 +14,10 @@ public class PassiveUpgradeManager : MonoBehaviour
     [SerializeField] private Transform PassiveUpgradeUIParent; // UI objeleri için parent
     [SerializeField] private GameObject playerMoneyPrefab; // Player money texti
     [SerializeField] private Transform playerMoneyParent; // Player money texti için parent
-    [SerializeField] private GameObject randomUpgradePrefab; // Player money texti
-    [SerializeField] private Transform randomUpgradeParent; // Player money texti için parent
-    //[SerializeField] private CostData costData; // CostData ScriptableObject'i
     private TextMeshProUGUI playerMoneyText; // Player money text bileşeni
     private Dictionary<string, int> upgradeLevels = new Dictionary<string, int>(); // Yükseltme seviyeleri
     private List<PassiveUpgradeUI> upgradeUIs = new List<PassiveUpgradeUI>(); // Yükseltme UI bileşenleri
-
-    // Cost datasını dosyadan çek prefablara bak !
-
+    
     public static event UnityAction<PassiveUpgradeData> OnUpgradeRequested;
 
     public static void RequestUpgrade(PassiveUpgradeData data)
@@ -46,9 +41,6 @@ public class PassiveUpgradeManager : MonoBehaviour
 
     private IEnumerator InitializeUpgrades()
     {
-        // Maliyet indeksini yükle
-        // costData.LoadCostIndex();
-
         // PassiveUpgradeData'yı yükle
         yield return StartCoroutine(LoadPassiveUpgradeDataFromResources());
 
@@ -150,14 +142,6 @@ public class PassiveUpgradeManager : MonoBehaviour
                     upgradeLevels[passiveUpgrade.upgradeName]++;
                     SaveUpgrade(passiveUpgrade);
                 }
-
-                // Maliyeti artır
-                
-                /*
-                costData.IncreaseCostIndex(); // Maliyet indeksini artır
-                costData.SaveCostIndex(); // Maliyet indeksini kaydet
-                */
-
             }
             else
             {

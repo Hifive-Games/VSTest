@@ -14,10 +14,11 @@ public class PassiveUpgradeData : ScriptableObject,IUpgradeIdentifiable
      İnterface kullanmamızın sebebi; Identifier okuyup gerekli ID bilgisini almak. Burada dikkat gerektiren yer;
      bir tane daha  "PassiveUpgradePrefix" gibi bir string tanımlayıp Identifier tam haline ulaştırmak.
     */
-    public string Identifier => $"{PassiveUpgradePrefix}";
-    public string LevelPropery => $"{currentLevel}";
-    public string ValuePropery => $"{PassiveUpgradePrefix}";
+    
     public const string PassiveUpgradePrefix = "PassiveUpgrade_";
+    public string Identifier => $"{PassiveUpgradePrefix}{upgradeName}{'_'}";
+    public string LevelPropery => "Level";
+    public string ValuePropery => "Value";
 
 }
 
@@ -33,4 +34,10 @@ public interface IUpgradeIdentifiable
     string Identifier { get; }
     string LevelPropery{ get; }
     string ValuePropery{ get; }
+    
+    /*
+     * Identifier = istediğimiz başlangıç adı + name
+     * diğerleri de istediğimiz string (elle vermemiz gerekiyor)
+     */
+    
 }

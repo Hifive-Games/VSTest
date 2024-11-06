@@ -16,7 +16,6 @@ public class PassiveUpgradeUI : MonoBehaviour
     private System.Action<PassiveUpgradeData> _onUpgradeClicked; // Yükseltme butonuna tıklama olayını temsil eder
     
     [SerializeField] private Button upgradeButton;
-
     private void OnEnable()
     {
         upgradeButton.onClick.AddListener(UpgradeButtonOnClick);
@@ -49,7 +48,7 @@ public class PassiveUpgradeUI : MonoBehaviour
 
     public void UpdateUI()
     {
-        int currentLevel = PlayerPrefs.GetInt(m_PassiveUpgradeData.upgradeName + "_Level", 0);
+        int currentLevel = FileSaveLoadManager.Instance.GetLevelDataFromFile(m_PassiveUpgradeData);
         
         // _upgradeData'nın null olup olmadığını kontrol et
         if (m_PassiveUpgradeData == null)
@@ -64,7 +63,7 @@ public class PassiveUpgradeUI : MonoBehaviour
             currentValueText.text = $"Current: {levelData.value}"; // Geçerli değeri göster
         
             // Sonraki seviyenin değerini kontrol et
-            if (currentLevel + 1 < m_PassiveUpgradeData.upgradeLevels.Count)
+            if (currentLevel+1 < m_PassiveUpgradeData.upgradeLevels.Count)
             {
                 nextValueText.text = $"Next: {m_PassiveUpgradeData.upgradeLevels[currentLevel + 1].value}"; // Sonraki değer
                 costText.text =$"Cost: "+ m_PassiveUpgradeData.upgradeLevels[m_PassiveUpgradeData.currentLevel].cost; // sonraki cost
@@ -74,7 +73,7 @@ public class PassiveUpgradeUI : MonoBehaviour
                 currentValueText.text = $"Current: {levelData.value}";
                 nextValueText.text = $"Next: -";
                 costText.text = $"Cost: -";
-                //upgradeButton.interactable = false; // Butonu devre dışı bırak
+                upgradeButton.interactable = false; // Butonu devre dışı bırak
             }
         
         }

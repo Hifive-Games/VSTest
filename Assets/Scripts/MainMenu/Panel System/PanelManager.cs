@@ -5,9 +5,9 @@ public class PanelManager : MonoBehaviour
 {
     public static PanelManager Instance { get; private set; }
 
-    [SerializeField] private GameObject mainPanel; // Geri dönülemeyen ana panel
-    private Stack<GameObject> panelStack = new Stack<GameObject>();
-    private GameObject currentPanel;
+    [SerializeField] private PanelController mainPanel; // Geri dönülemeyen ana panel
+    private Stack<PanelController> panelStack = new Stack<PanelController>();
+    private PanelController currentPanel;
 
     private void Awake()
     {
@@ -27,18 +27,18 @@ public class PanelManager : MonoBehaviour
         OpenPanel(mainPanel); // Başlangıçta ana paneli aç
     }
 
-    public void OpenPanel(GameObject panel)
+    public void OpenPanel(PanelController panel)
     {
         // Mevcut paneli yığın içerisine ekle
         if (currentPanel != null)
         {
             panelStack.Push(currentPanel); // Mevcut paneli yığına ekle
-            currentPanel.SetActive(false);  // Mevcut paneli kapat
+            currentPanel.OpenPanel();  // Mevcut paneli kapat
         }
 
         // Yeni paneli etkinleştir
         currentPanel = panel;
-        currentPanel.SetActive(true); // Yeni paneli aç
+        currentPanel.OpenPanel(); // Yeni paneli aç
     }
 
     public void GoBack()
@@ -46,9 +46,9 @@ public class PanelManager : MonoBehaviour
         // Ana panelde geri gitmeye çalışılmasını önlemek için yığının boşluğunu kontrol et
         if (panelStack.Count > 0)
         {
-            currentPanel.SetActive(false); // Şu anki paneli kapat
+            currentPanel.ClosePanel(); // Şu anki paneli kapat
             currentPanel = panelStack.Pop(); // Yığından önceki paneli al
-            currentPanel.SetActive(true); // Önceki paneli aç
+            currentPanel.OpenPanel(); // Önceki paneli aç
         }
         else
         {

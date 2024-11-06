@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 public class ButtonController : MonoBehaviour
 {
-    [SerializeField] private GameObject targetPanel;
+    [SerializeField] private PanelController targetPanel;
 
     private void Start()
     {

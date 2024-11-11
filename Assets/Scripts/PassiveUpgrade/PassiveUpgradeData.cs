@@ -15,8 +15,8 @@ public class PassiveUpgradeData : ScriptableObject,IUpgradeIdentifiable
      bir tane daha  "PassiveUpgradePrefix" gibi bir string tanımlayıp Identifier tam haline ulaştırmak.
     */
     
-    public const string PassiveUpgradePrefix = "PassiveUpgrade_";
-    public string Identifier => $"{PassiveUpgradePrefix}{upgradeName}{'_'}";
+    public const string PassiveUpgradePrefix = "PassiveUpgrade";
+    public string Identifier => $"{PassiveUpgradePrefix}{'_'}{upgradeName}{'_'}";
     public string LevelPropery => "Level";
     public string ValuePropery => "Value";
 

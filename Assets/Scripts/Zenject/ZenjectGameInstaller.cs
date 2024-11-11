@@ -9,7 +9,7 @@ public class ZenjectGameInstaller : MonoInstaller
     {
     
        // Container.Bind<GridManager>().FromComponentInHierarchy().AsSingle();
-       // Container.Bind<PassiveUpgradeManager>().FromComponentInHierarchy().AsSingle();
+       Container.Bind<PassiveUpgradeManager>().FromComponentInHierarchy().AsSingle();
        /*
        Container.Bind<FileSaveLoadSystem>()
            .FromNewComponentOnNewGameObject() // Yeni bir GameObject oluştur ve onun üzerine SaveManager ekle

@@ -20,14 +20,6 @@ public class PassiveUpgradeManager : MonoBehaviour
     private List<PassiveUpgradeUI> upgradeUIs = new List<PassiveUpgradeUI>(); // Yükseltme UI bileşenleri
     
     public static event UnityAction<PassiveUpgradeData> OnUpgradeRequested;
-
-    #region Paths
-
-    [SerializeField] private const string PathPassiveUpgradeData="Passive Upgrade Data";
-
-    #endregion
-    
-    
     public static void RequestUpgrade(PassiveUpgradeData data)
     {
         OnUpgradeRequested?.Invoke(data);
@@ -66,7 +58,7 @@ public class PassiveUpgradeManager : MonoBehaviour
     private IEnumerator LoadPassiveUpgradeDataFromResources()
     {
         // Resources klasöründen PassiveUpgradeData türündeki tüm varlıkları yükle
-        PassiveUpgradeData[] loadedUpgrades = Resources.LoadAll<PassiveUpgradeData>(PathPassiveUpgradeData);
+        PassiveUpgradeData[] loadedUpgrades = Resources.LoadAll<PassiveUpgradeData>(ResourcePathManager.Instance.GetPassiveUpgradeDataPath());
 
         // upgrades listesine tüm yüklü varlıkları ekle
         upgrades.AddRange(loadedUpgrades);
@@ -148,7 +140,7 @@ public class PassiveUpgradeManager : MonoBehaviour
         }
 
         UpdatePlayerMoneyUI(); // Yükseltmeden sonra PlayerMoney UI'sını güncelle
-        UpdateUI(passiveUpgrade);
+        UpdateAllPassiveUpgradeUI();
     }
 
     private bool CanAffordUpgrade(int cost)
@@ -165,6 +157,8 @@ public class PassiveUpgradeManager : MonoBehaviour
         // Eğer son seviyeye ulaşılmamışsa yükseltme yapılabilir
         if (currentLevel < passiveUpgrade.upgradeLevels.Count - 1)
         {
+            int cost = passiveUpgrade.upgradeLevels[passiveUpgrade.currentLevel].cost;
+            
             int nextLevel = currentLevel + 1;
             float nextValue = passiveUpgrade.upgradeLevels[nextLevel].value;
 
@@ -177,7 +171,7 @@ public class PassiveUpgradeManager : MonoBehaviour
 
             int playerMoney = FileSaveLoadManager.Instance.GetPlayerMoneyDataFromFile();
             // int cost = costData.GetCost(costData.currentLevelCostIndex); // Geçerli maliyeti al
-            int cost = 10;
+            
             playerMoney -= cost; // Oyuncunun parasını azalt
             FileSaveLoadManager.Instance.SetPlayerMoneyDataFromFile(playerMoney);
             PlayerPrefs.Save();
@@ -192,20 +186,15 @@ public class PassiveUpgradeManager : MonoBehaviour
         }
     }
     
-
-    private void UpdateUI(PassiveUpgradeData passiveUpgrade)
+    public void UpdateAllPassiveUpgradeUI()
     {
         foreach (var ui in upgradeUIs)
         {
-            if (ui.GetUpgradeName() == passiveUpgrade.upgradeName)
-            {
-                ui.UpdateUI();
-                break;
-            }
+            ui.UpdateUI();
         }
     }
 
-    private void UpdatePlayerMoneyUI()
+    public void UpdatePlayerMoneyUI() // bunu ve update ui function unu başka bir class a geçir bi ara
     {
         // Eğer "PlayerMoney" PlayerPrefs'te yoksa, 0 değeri ile oluştur
         if (!FileSaveLoadManager.Instance.HasKeyCheckMoney())
@@ -217,26 +206,13 @@ public class PassiveUpgradeManager : MonoBehaviour
         int playerMoney = FileSaveLoadManager.Instance.GetPlayerMoneyDataFromFile();
         playerMoneyText.text = $"Money: {playerMoney}"; // Parayı TextMeshPro bileşenine ata
     }
-    
-    
-  
-    [Button()]
-    public void SetMoney()
-    {
-        FileSaveLoadManager.Instance.SetPlayerMoneyDataFromFile(1000);
-        PlayerPrefs.Save();
-        UpdatePlayerMoneyUI();
-    }
 
     [Button()]
     public void ResetAllPlayerPrefs()
     {
         PlayerPrefs.DeleteAll();
         PlayerPrefs.Save();
-        foreach (var var in upgrades)
-        {
-            UpdateUI(var);
-        }
+        UpdateAllPassiveUpgradeUI();
     }
     
     

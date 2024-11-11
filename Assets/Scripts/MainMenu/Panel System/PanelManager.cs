@@ -1,26 +1,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PanelManager : MonoBehaviour
+public class PanelManager : MonoBehaviourSingleton<PanelManager>
 {
-    public static PanelManager Instance { get; private set; }
-
     [SerializeField] private PanelController mainPanel; // Geri dönülemeyen ana panel
     private Stack<PanelController> panelStack = new Stack<PanelController>();
     private PanelController currentPanel;
-
-    private void Awake()
-    {
-        if (Instance == null)
-        {
-            Instance = this;
-        }
-        else
-        {
-            Destroy(gameObject);
-            return;
-        }
-    }
 
     private void Start()
     {

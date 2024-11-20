@@ -16,9 +16,11 @@ public class PassiveUpgradeData : ScriptableObject,IUpgradeIdentifiable
     */
     
     public const string PassiveUpgradePrefix = "PassiveUpgrade";
-    public string Identifier => $"{PassiveUpgradePrefix}{'_'}{upgradeName}{'_'}";
+    public string Identifier => $"{PassiveUpgradePrefix}";
     public string LevelPropery => "Level";
     public string ValuePropery => "Value";
+
+    public string Prefix = "_";
 
 }
 
@@ -34,6 +36,7 @@ public interface IUpgradeIdentifiable
     string Identifier { get; }
     string LevelPropery{ get; }
     string ValuePropery{ get; }
+
     
     /*
      * Identifier = istediğimiz başlangıç adı + name

@@ -78,7 +78,9 @@ public class PassiveUpgradeManager : MonoBehaviour
         int savedLevel = FileSaveLoadManager.Instance.GetLevelDataFromFile(passiveUpgrade);
         float savedValue = FileSaveLoadManager.Instance.GetValueDataFromFile(passiveUpgrade);
 
-        if (savedLevel == 0 && !PlayerPrefs.HasKey(passiveUpgrade.Identifier + passiveUpgrade.LevelPropery))
+        if (savedLevel == 0 && !PlayerPrefs.HasKey(passiveUpgrade.Identifier+ passiveUpgrade.Prefix+
+                                                   passiveUpgrade.name + passiveUpgrade.Prefix+
+                                                   passiveUpgrade.LevelPropery))
         {
             FileSaveLoadManager.Instance.SetLevelDataFromFile(passiveUpgrade, 0);
             FileSaveLoadManager.Instance.SetValueDataFromFile(passiveUpgrade, passiveUpgrade.upgradeLevels[0].value);

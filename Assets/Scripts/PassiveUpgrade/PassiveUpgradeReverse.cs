@@ -33,10 +33,11 @@ public class PassiveUpgradeReverse : MonoBehaviour
                 
                 // Seviye düşürüyoruz ve yeni seviyeyi kaydediyoruz
                 currentLevel--;
-                FileSaveLoadManager.Instance.SetLevelDataFromFile(upgrade, currentLevel);
             }
 
             // Seviye 0 olduğunda, başlangıç değerini kaydediyoruz
+            
+            FileSaveLoadManager.Instance.SetLevelDataFromFile(upgrade, 0);
             FileSaveLoadManager.Instance.SetValueDataFromFile(upgrade, upgrade.upgradeLevels[0].value);
         }
         Debug.Log("Total refund: " + totalRefund);

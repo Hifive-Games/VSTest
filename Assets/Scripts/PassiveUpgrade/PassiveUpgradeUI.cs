@@ -66,7 +66,7 @@ public class PassiveUpgradeUI : MonoBehaviour
             if (currentLevel+1 < m_PassiveUpgradeData.upgradeLevels.Count)
             {
                 nextValueText.text = $"Next: {m_PassiveUpgradeData.upgradeLevels[currentLevel + 1].value}"; // Sonraki değer
-                costText.text =$"Cost: "+ m_PassiveUpgradeData.upgradeLevels[m_PassiveUpgradeData.currentLevel].cost; // sonraki cost
+                costText.text =$"Cost: "+ m_PassiveUpgradeData.upgradeLevels[currentLevel].cost; // sonraki cost
             }
             else
             {

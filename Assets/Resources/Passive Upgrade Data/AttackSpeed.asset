@@ -20,5 +20,6 @@ MonoBehaviour:
     cost: 100
   - value: 3
     cost: 1000
-  currentLevel: 0
-  currentValue: 1
+  currentLevel: 2
+  currentValue: 3
+  Prefix: _

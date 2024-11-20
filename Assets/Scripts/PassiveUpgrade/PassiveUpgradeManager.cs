@@ -8,7 +8,7 @@ using UnityEngine.Events;
 using UnityEngine.UI;
 using Zenject;
 
-public class PassiveUpgradeManager : MonoBehaviour
+public class PassiveUpgradeManager : MonoBehaviourSingleton<PassiveUpgradeManager>
 {
     [SerializeField] private List<PassiveUpgradeData> upgrades = new List<PassiveUpgradeData>();
     [SerializeField] private GameObject PassiveUpgradeUIPrefab; // Yükseltme UI prefabı
@@ -16,7 +16,7 @@ public class PassiveUpgradeManager : MonoBehaviour
     [SerializeField] private GameObject playerMoneyPrefab; // Player money texti
     [SerializeField] private Transform playerMoneyParent; // Player money texti için parent
     private TextMeshProUGUI playerMoneyText; // Player money text bileşeni
-    private Dictionary<string, int> upgradeLevels = new Dictionary<string, int>(); // Yükseltme seviyeleri
+    //private Dictionary<string, int> upgradeLevels = new Dictionary<string, int>(); // Yükseltme seviyeleri
     private List<PassiveUpgradeUI> upgradeUIs = new List<PassiveUpgradeUI>(); // Yükseltme UI bileşenleri
     
     public static event UnityAction<PassiveUpgradeData> OnUpgradeRequested;
@@ -60,7 +60,8 @@ public class PassiveUpgradeManager : MonoBehaviour
         // Resources klasöründen PassiveUpgradeData türündeki tüm varlıkları yükle
         PassiveUpgradeData[] loadedUpgrades = Resources.LoadAll<PassiveUpgradeData>(ResourcePathManager.Instance.GetPassiveUpgradeDataPath());
 
-        // upgrades listesine tüm yüklü varlıkları ekle
+        if (upgrades != null && upgrades.Count > 0) { upgrades.Clear(); }
+        
         upgrades.AddRange(loadedUpgrades);
 
         // Yükleme işlemi tamamlandı, diğer işlemlere geçebilirsiniz
@@ -90,13 +91,13 @@ public class PassiveUpgradeManager : MonoBehaviour
             passiveUpgrade.currentLevel = savedLevel;
             passiveUpgrade.currentValue = savedValue;
         }
-
-        upgradeLevels[passiveUpgrade.upgradeName] = passiveUpgrade.currentLevel;
     }
 
     private void SaveUpgrade(PassiveUpgradeData passiveUpgrade)
     {
-        int currentLevel = upgradeLevels[passiveUpgrade.upgradeName];
+        //int currentLevel = upgradeLevels[passiveUpgrade.upgradeName];
+        int currentLevel = FileSaveLoadManager.Instance.GetLevelDataFromFile(passiveUpgrade);
+
         FileSaveLoadManager.Instance.SetLevelDataFromFile(passiveUpgrade,currentLevel);
     }
 
@@ -111,8 +112,8 @@ public class PassiveUpgradeManager : MonoBehaviour
 
     public void Upgrade(PassiveUpgradeData passiveUpgrade)
     {
-        int currentLevel = upgradeLevels[passiveUpgrade.upgradeName];
-
+        //int currentLevel = upgradeLevels[passiveUpgrade.upgradeName];
+        int currentLevel = FileSaveLoadManager.Instance.GetLevelDataFromFile(passiveUpgrade);
         if (currentLevel < passiveUpgrade.upgradeLevels.Count)
         {
             /* Eğer sonraki level için cost değeri check etmemiz gerekirse bunu kullan.
@@ -127,7 +128,8 @@ public class PassiveUpgradeManager : MonoBehaviour
                 if (ApplyUpgrade(passiveUpgrade))
                 {
                     // Seviye artışı
-                    upgradeLevels[passiveUpgrade.upgradeName]++;
+                    //upgradeLevels[passiveUpgrade.upgradeName]++;
+                    FileSaveLoadManager.Instance.SetLevelDataFromFile(passiveUpgrade,currentLevel+1);
                     SaveUpgrade(passiveUpgrade);
                 }
             }
@@ -154,12 +156,12 @@ public class PassiveUpgradeManager : MonoBehaviour
     private bool ApplyUpgrade(PassiveUpgradeData passiveUpgrade)
     {
         // Mevcut seviye
-        int currentLevel = passiveUpgrade.currentLevel;
+        int currentLevel = FileSaveLoadManager.Instance.GetLevelDataFromFile(passiveUpgrade);
 
         // Eğer son seviyeye ulaşılmamışsa yükseltme yapılabilir
         if (currentLevel < passiveUpgrade.upgradeLevels.Count - 1)
         {
-            int cost = passiveUpgrade.upgradeLevels[passiveUpgrade.currentLevel].cost;
+            int cost = passiveUpgrade.upgradeLevels[currentLevel].cost;
             
             int nextLevel = currentLevel + 1;
             float nextValue = passiveUpgrade.upgradeLevels[nextLevel].value;

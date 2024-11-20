@@ -20,19 +20,7 @@ public class FileSaveLoadManager : MonoBehaviourSingletonPersistent<FileSaveLoad
                                PassiveUpgradeData.LevelPropery,level);
             SaveChanges();
         }
-        public float GetValueDataFromFile(PassiveUpgradeData PassiveUpgradeData)
-        {
-            return PlayerPrefs.GetInt(PassiveUpgradeData.Identifier+PassiveUpgradeData.Prefix+
-                                      PassiveUpgradeData.name+PassiveUpgradeData.Prefix+
-                                      PassiveUpgradeData.ValuePropery);
-        }
-        public void SetValueDataFromFile(PassiveUpgradeData PassiveUpgradeData, float value)
-        {
-            PlayerPrefs.SetFloat(PassiveUpgradeData.Identifier+PassiveUpgradeData.Prefix+
-                                 PassiveUpgradeData.name+PassiveUpgradeData.Prefix+
-                                 PassiveUpgradeData.ValuePropery,value);
-            SaveChanges();
-        }
+        
         public void SaveChanges()
         {
             PlayerPrefs.Save();

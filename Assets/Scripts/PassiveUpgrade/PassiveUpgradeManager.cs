@@ -77,19 +77,13 @@ public class PassiveUpgradeManager : MonoBehaviourSingleton<PassiveUpgradeManage
     private void LoadUpgrade(PassiveUpgradeData passiveUpgrade)
     {
         int savedLevel = FileSaveLoadManager.Instance.GetLevelDataFromFile(passiveUpgrade);
-        float savedValue = FileSaveLoadManager.Instance.GetValueDataFromFile(passiveUpgrade);
+        float savedValue = passiveUpgrade.upgradeLevels[savedLevel].value;
 
         if (savedLevel == 0 && !PlayerPrefs.HasKey(passiveUpgrade.Identifier+ passiveUpgrade.Prefix+
                                                    passiveUpgrade.name + passiveUpgrade.Prefix+
                                                    passiveUpgrade.LevelPropery))
         {
             FileSaveLoadManager.Instance.SetLevelDataFromFile(passiveUpgrade, 0);
-            FileSaveLoadManager.Instance.SetValueDataFromFile(passiveUpgrade, passiveUpgrade.upgradeLevels[0].value);
-        }
-        else
-        {
-            passiveUpgrade.currentLevel = savedLevel;
-            passiveUpgrade.currentValue = savedValue;
         }
     }
 
@@ -121,7 +115,7 @@ public class PassiveUpgradeManager : MonoBehaviourSingleton<PassiveUpgradeManage
             {
             }
             */
-            int cost = passiveUpgrade.upgradeLevels[passiveUpgrade.currentLevel].cost;
+            int cost = passiveUpgrade.upgradeLevels[currentLevel].cost;
             
             if (CanAffordUpgrade(cost)) // Maliyet kontrolü
             {
@@ -165,13 +159,8 @@ public class PassiveUpgradeManager : MonoBehaviourSingleton<PassiveUpgradeManage
             
             int nextLevel = currentLevel + 1;
             float nextValue = passiveUpgrade.upgradeLevels[nextLevel].value;
-
-            // Mevcut seviyeyi ve değeri güncelle
-            passiveUpgrade.currentLevel = nextLevel;
-            passiveUpgrade.currentValue = nextValue;
-
+            
             FileSaveLoadManager.Instance.SetLevelDataFromFile(passiveUpgrade, nextLevel);
-            FileSaveLoadManager.Instance.SetValueDataFromFile(passiveUpgrade, nextValue);
 
             int playerMoney = FileSaveLoadManager.Instance.GetPlayerMoneyDataFromFile();
             // int cost = costData.GetCost(costData.currentLevelCostIndex); // Geçerli maliyeti al

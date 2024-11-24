@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2537fb66173ce64d8cfa49d5a850f48, type: 3}
+  m_Name: SpellArea
+  m_EditorClassIdentifier: 
+  ID: 2001
+  Name: Spell Area
+  Description: Increase spell area.
+  upgradetype: 4
+  Icons: []
+  isUnlocked: 0
+  upgradeEffects: []
+  rarity: 0
+  currentLevel: 0
+  maximumLevel: 10
+  valueforEachLevel: 03000000030000000300000003000000030000000300000003000000030000000300000003000000
+  valueforEachRarityLevel: 0000000002000000040000000600000008000000
+  preRequesties: []
+  incompatibleUpgrades: []
+  rarityWeights:
+  - rarity: 0
+    weight: 80
+  - rarity: 0
+    weight: 40
+  - rarity: 0
+    weight: 20
+  - rarity: 0
+    weight: 10
+  - rarity: 0
+    weight: 5

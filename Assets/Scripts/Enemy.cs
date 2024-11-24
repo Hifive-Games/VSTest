@@ -34,7 +34,7 @@ public class Enemy : Enemies
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.TryGetComponent(out Player player))
+        if (other.TryGetComponent(out PlayerStats player))
         {
             player.TakeDamage(damage);
         }

@@ -32,7 +32,7 @@ public interface IUpgradeIdentifiable
     string LevelPropery{ get; }
 
     /*
-     * Identifier = istediğimiz başlangıç adı + name
+     * Identifier = istediğimiz başlangıç adı
      * diğerleri de istediğimiz string (elle vermemiz gerekiyor)
      */
     

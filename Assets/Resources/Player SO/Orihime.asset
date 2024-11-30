@@ -16,4 +16,4 @@ MonoBehaviour:
   characterName: Orihime
   prefab: {fileID: 2152671373348267484, guid: 2d24b23802be6c24aad90884b7985855, type: 3}
   characterImage: {fileID: 21300000, guid: b7c9bd36b984d39459c42658a861dd08, type: 3}
-  isSelected: 1
+  isSelected: 0

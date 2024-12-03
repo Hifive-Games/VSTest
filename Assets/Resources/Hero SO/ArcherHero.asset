@@ -9,11 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d43eb4173319e444ebe7a8f13476cb68, type: 3}
-  m_Name: Ichigo
+  m_Script: {fileID: 11500000, guid: 7de0d27a332cb0742afb316834833e49, type: 3}
+  m_Name: ArcherHero
   m_EditorClassIdentifier: 
   id: 0
   characterName: Ichigo
   prefab: {fileID: 3396665030701579226, guid: 2dc79dc877281704fb818a53f0a6f646, type: 3}
-  characterImage: {fileID: 21300000, guid: 005888ede18a58e4db8d069cfa3007cb, type: 3}
+  characterImage: {fileID: 21300000, guid: d117005b9e011dc4a975702d12b10516, type: 3}
   isSelected: 1
+  AppliedPassiveUpgrades:
+  - {fileID: 11400000, guid: edab2d8fa536ae245b680d1c3c26970c, type: 2}

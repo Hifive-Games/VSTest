@@ -12,8 +12,8 @@ public class PassiveUpgradeUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI costText; // Sonraki değer metni
 
 
-    private PassiveUpgradeData m_PassiveUpgradeData; // UpgradeData referansı
-    private System.Action<PassiveUpgradeData> _onUpgradeClicked; // Yükseltme butonuna tıklama olayını temsil eder
+    private PassiveUpgradeBaseData m_PassiveUpgradeBaseData; // UpgradeData referansı
+    private System.Action<PassiveUpgradeBaseData> _onUpgradeClicked; // Yükseltme butonuna tıklama olayını temsil eder
     
     [SerializeField] private Button upgradeButton;
     private void OnEnable()
@@ -29,13 +29,13 @@ public class PassiveUpgradeUI : MonoBehaviour
     private void UpgradeButtonOnClick()
     {
         // Event'i tetikliyoruz
-        PassiveUpgradeManager.RequestUpgrade(m_PassiveUpgradeData);
+        PassiveUpgradeManager.RequestUpgrade(m_PassiveUpgradeBaseData);
     }
     
     
-    public void SetUpgrade(PassiveUpgradeData passiveUpgradeData, System.Action<PassiveUpgradeData> onUpgradeClicked)
+    public void SetUpgrade(PassiveUpgradeBaseData passiveUpgradeBaseData, System.Action<PassiveUpgradeBaseData> onUpgradeClicked)
     {
-        m_PassiveUpgradeData = passiveUpgradeData;
+        m_PassiveUpgradeBaseData = passiveUpgradeBaseData;
         _onUpgradeClicked = onUpgradeClicked;
 
         UpdateUI(); // UI'yi güncelle
@@ -43,30 +43,30 @@ public class PassiveUpgradeUI : MonoBehaviour
 
     public string GetUpgradeName()
     {
-        return m_PassiveUpgradeData.upgradeName; // Yükseltme adını döndür
+        return m_PassiveUpgradeBaseData.upgradeName; // Yükseltme adını döndür
     }
 
     public void UpdateUI()
     {
-        int currentLevel = FileSaveLoadManager.Instance.GetLevelDataFromFile(m_PassiveUpgradeData);
+        int currentLevel = FileSaveLoadManager.Instance.GetLevelDataFromFile(m_PassiveUpgradeBaseData);
         
         // _upgradeData'nın null olup olmadığını kontrol et
-        if (m_PassiveUpgradeData == null)
+        if (m_PassiveUpgradeBaseData == null)
         {
             Debug.LogError("UpgradeData is null!");
             return;
         }
     
-        if (currentLevel < m_PassiveUpgradeData.upgradeLevels.Count)
+        if (currentLevel < m_PassiveUpgradeBaseData.upgradeLevels.Count)
         {
-            PassiveUpgradeLevel levelData = m_PassiveUpgradeData.upgradeLevels[currentLevel];
+            PassiveUpgradeLevel levelData = m_PassiveUpgradeBaseData.upgradeLevels[currentLevel];
             currentValueText.text = $"Current: {levelData.value}"; // Geçerli değeri göster
         
             // Sonraki seviyenin değerini kontrol et
-            if (currentLevel+1 < m_PassiveUpgradeData.upgradeLevels.Count)
+            if (currentLevel+1 < m_PassiveUpgradeBaseData.upgradeLevels.Count)
             {
-                nextValueText.text = $"Next: {m_PassiveUpgradeData.upgradeLevels[currentLevel + 1].value}"; // Sonraki değer
-                costText.text =$"Cost: "+ m_PassiveUpgradeData.upgradeLevels[currentLevel].cost; // sonraki cost
+                nextValueText.text = $"Next: {m_PassiveUpgradeBaseData.upgradeLevels[currentLevel + 1].value}"; // Sonraki değer
+                costText.text =$"Cost: "+ m_PassiveUpgradeBaseData.upgradeLevels[currentLevel].cost; // sonraki cost
             }
             else
             {
@@ -83,7 +83,7 @@ public class PassiveUpgradeUI : MonoBehaviour
         }
         
         
-        upgradeNameText.text = m_PassiveUpgradeData.upgradeName; // Yükseltme adını ayarla
+        upgradeNameText.text = m_PassiveUpgradeBaseData.upgradeName; // Yükseltme adını ayarla
 
         
 

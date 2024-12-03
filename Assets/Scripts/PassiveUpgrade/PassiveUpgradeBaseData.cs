@@ -1,8 +1,8 @@
 using System.Collections.Generic;
+using Unity.Collections;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "NewUpgradeData", menuName = "Passive Upgrade System/PassiveUpgradeData")]
-public class PassiveUpgradeData : ScriptableObject,IUpgradeIdentifiable
+public abstract class PassiveUpgradeBaseData : ScriptableObject,IUpgradeIdentifiable
 {
     public string upgradeName; // Yükseltmenin adı
     public List<PassiveUpgradeLevel> upgradeLevels = new List<PassiveUpgradeLevel>(); // Yükseltme seviyeleri
@@ -16,6 +16,7 @@ public class PassiveUpgradeData : ScriptableObject,IUpgradeIdentifiable
     public string LevelPropery => "Level";
 
     public string Prefix = "_";
+    public abstract void ApplyUpgrade(HeroBaseData hero);
 
 }
 

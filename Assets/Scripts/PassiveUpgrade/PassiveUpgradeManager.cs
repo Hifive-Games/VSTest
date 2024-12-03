@@ -10,7 +10,7 @@ using Zenject;
 
 public class PassiveUpgradeManager : MonoBehaviourSingleton<PassiveUpgradeManager>
 {
-    [SerializeField] private List<PassiveUpgradeData> upgrades = new List<PassiveUpgradeData>();
+    [SerializeField] private List<PassiveUpgradeBaseData> upgrades = new List<PassiveUpgradeBaseData>();
     [SerializeField] private GameObject PassiveUpgradeUIPrefab; // Yükseltme UI prefabı
     [SerializeField] private Transform PassiveUpgradeUIParent; // UI objeleri için parent
     [SerializeField] private GameObject playerMoneyPrefab; // Player money texti
@@ -19,10 +19,10 @@ public class PassiveUpgradeManager : MonoBehaviourSingleton<PassiveUpgradeManage
     //private Dictionary<string, int> upgradeLevels = new Dictionary<string, int>(); // Yükseltme seviyeleri
     private List<PassiveUpgradeUI> upgradeUIs = new List<PassiveUpgradeUI>(); // Yükseltme UI bileşenleri
     
-    public static event UnityAction<PassiveUpgradeData> OnUpgradeRequested;
-    public static void RequestUpgrade(PassiveUpgradeData data)
+    public static event UnityAction<PassiveUpgradeBaseData> OnUpgradeRequested;
+    public static void RequestUpgrade(PassiveUpgradeBaseData baseData)
     {
-        OnUpgradeRequested?.Invoke(data);
+        OnUpgradeRequested?.Invoke(baseData);
     }
     
     private void OnEnable()
@@ -58,7 +58,7 @@ public class PassiveUpgradeManager : MonoBehaviourSingleton<PassiveUpgradeManage
     private IEnumerator LoadPassiveUpgradeDataFromResources()
     {
         // Resources klasöründen PassiveUpgradeData türündeki tüm varlıkları yükle
-        PassiveUpgradeData[] loadedUpgrades = Resources.LoadAll<PassiveUpgradeData>(ResourcePathManager.Instance.GetPassiveUpgradeDataPath());
+        PassiveUpgradeBaseData[] loadedUpgrades = Resources.LoadAll<PassiveUpgradeBaseData>(ResourcePathManager.Instance.GetPassiveUpgradeDataPath());
 
         if (upgrades != null && upgrades.Count > 0) { upgrades.Clear(); }
         
@@ -74,57 +74,57 @@ public class PassiveUpgradeManager : MonoBehaviourSingleton<PassiveUpgradeManage
         playerMoneyText = uiObject.GetComponent<TextMeshProUGUI>();
     }
 
-    private void LoadUpgrade(PassiveUpgradeData passiveUpgrade)
+    private void LoadUpgrade(PassiveUpgradeBaseData passiveUpgradeBase)
     {
-        int savedLevel = FileSaveLoadManager.Instance.GetLevelDataFromFile(passiveUpgrade);
-        float savedValue = passiveUpgrade.upgradeLevels[savedLevel].value;
+        int savedLevel = FileSaveLoadManager.Instance.GetLevelDataFromFile(passiveUpgradeBase);
+        float savedValue = passiveUpgradeBase.upgradeLevels[savedLevel].value;
 
-        if (savedLevel == 0 && !PlayerPrefs.HasKey(passiveUpgrade.Identifier+ passiveUpgrade.Prefix+
-                                                   passiveUpgrade.name + passiveUpgrade.Prefix+
-                                                   passiveUpgrade.LevelPropery))
+        if (savedLevel == 0 && !PlayerPrefs.HasKey(passiveUpgradeBase.Identifier+ passiveUpgradeBase.Prefix+
+                                                   passiveUpgradeBase.name + passiveUpgradeBase.Prefix+
+                                                   passiveUpgradeBase.LevelPropery))
         {
-            FileSaveLoadManager.Instance.SetLevelDataFromFile(passiveUpgrade, 0);
+            FileSaveLoadManager.Instance.SetLevelDataFromFile(passiveUpgradeBase, 0);
         }
     }
 
-    private void SaveUpgrade(PassiveUpgradeData passiveUpgrade)
+    private void SaveUpgrade(PassiveUpgradeBaseData passiveUpgradeBase)
     {
         //int currentLevel = upgradeLevels[passiveUpgrade.upgradeName];
-        int currentLevel = FileSaveLoadManager.Instance.GetLevelDataFromFile(passiveUpgrade);
+        int currentLevel = FileSaveLoadManager.Instance.GetLevelDataFromFile(passiveUpgradeBase);
 
-        FileSaveLoadManager.Instance.SetLevelDataFromFile(passiveUpgrade,currentLevel);
+        FileSaveLoadManager.Instance.SetLevelDataFromFile(passiveUpgradeBase,currentLevel);
     }
 
-    private void CreateUpgradeUI(PassiveUpgradeData passiveUpgrade)
+    private void CreateUpgradeUI(PassiveUpgradeBaseData passiveUpgradeBase)
     {
         GameObject uiObject = Instantiate(PassiveUpgradeUIPrefab, PassiveUpgradeUIParent);
 
         PassiveUpgradeUI ui = uiObject.GetComponent<PassiveUpgradeUI>();
-        ui.SetUpgrade(passiveUpgrade, Upgrade); // UpgradeUI'ı ayarla
+        ui.SetUpgrade(passiveUpgradeBase, Upgrade); // UpgradeUI'ı ayarla
         upgradeUIs.Add(ui); // UI objesini listeye ekle
     }
 
-    public void Upgrade(PassiveUpgradeData passiveUpgrade)
+    public void Upgrade(PassiveUpgradeBaseData passiveUpgradeBase)
     {
         //int currentLevel = upgradeLevels[passiveUpgrade.upgradeName];
-        int currentLevel = FileSaveLoadManager.Instance.GetLevelDataFromFile(passiveUpgrade);
-        if (currentLevel < passiveUpgrade.upgradeLevels.Count)
+        int currentLevel = FileSaveLoadManager.Instance.GetLevelDataFromFile(passiveUpgradeBase);
+        if (currentLevel < passiveUpgradeBase.upgradeLevels.Count)
         {
             /* Eğer sonraki level için cost değeri check etmemiz gerekirse bunu kullan.
             if (currentLevel < passiveUpgrade.upgradeLevels.Count - 1)
             {
             }
             */
-            int cost = passiveUpgrade.upgradeLevels[currentLevel].cost;
+            int cost = passiveUpgradeBase.upgradeLevels[currentLevel].cost;
             
             if (CanAffordUpgrade(cost)) // Maliyet kontrolü
             {
-                if (ApplyUpgrade(passiveUpgrade))
+                if (ApplyUpgrade(passiveUpgradeBase))
                 {
                     // Seviye artışı
                     //upgradeLevels[passiveUpgrade.upgradeName]++;
-                    FileSaveLoadManager.Instance.SetLevelDataFromFile(passiveUpgrade,currentLevel+1);
-                    SaveUpgrade(passiveUpgrade);
+                    FileSaveLoadManager.Instance.SetLevelDataFromFile(passiveUpgradeBase,currentLevel+1);
+                    SaveUpgrade(passiveUpgradeBase);
                 }
             }
             else
@@ -147,20 +147,20 @@ public class PassiveUpgradeManager : MonoBehaviourSingleton<PassiveUpgradeManage
         return playerMoney >= cost;
     }
 
-    private bool ApplyUpgrade(PassiveUpgradeData passiveUpgrade)
+    private bool ApplyUpgrade(PassiveUpgradeBaseData passiveUpgradeBase)
     {
         // Mevcut seviye
-        int currentLevel = FileSaveLoadManager.Instance.GetLevelDataFromFile(passiveUpgrade);
+        int currentLevel = FileSaveLoadManager.Instance.GetLevelDataFromFile(passiveUpgradeBase);
 
         // Eğer son seviyeye ulaşılmamışsa yükseltme yapılabilir
-        if (currentLevel < passiveUpgrade.upgradeLevels.Count - 1)
+        if (currentLevel < passiveUpgradeBase.upgradeLevels.Count - 1)
         {
-            int cost = passiveUpgrade.upgradeLevels[currentLevel].cost;
+            int cost = passiveUpgradeBase.upgradeLevels[currentLevel].cost;
             
             int nextLevel = currentLevel + 1;
-            float nextValue = passiveUpgrade.upgradeLevels[nextLevel].value;
+            float nextValue = passiveUpgradeBase.upgradeLevels[nextLevel].value;
             
-            FileSaveLoadManager.Instance.SetLevelDataFromFile(passiveUpgrade, nextLevel);
+            FileSaveLoadManager.Instance.SetLevelDataFromFile(passiveUpgradeBase, nextLevel);
 
             int playerMoney = FileSaveLoadManager.Instance.GetPlayerMoneyDataFromFile();
             // int cost = costData.GetCost(costData.currentLevelCostIndex); // Geçerli maliyeti al
@@ -169,12 +169,12 @@ public class PassiveUpgradeManager : MonoBehaviourSingleton<PassiveUpgradeManage
             FileSaveLoadManager.Instance.SetPlayerMoneyDataFromFile(playerMoney);
             PlayerPrefs.Save();
             
-            Debug.Log($"{passiveUpgrade.upgradeName} yükseltildi. Yeni Seviye: {nextLevel}, Yeni Değer: {nextValue}");
+            Debug.Log($"{passiveUpgradeBase.upgradeName} yükseltildi. Yeni Seviye: {nextLevel}, Yeni Değer: {nextValue}");
             return true;
         }
         else
         {
-            Debug.Log($"{passiveUpgrade.upgradeName} maksimum seviyeye ulaştı!");
+            Debug.Log($"{passiveUpgradeBase.upgradeName} maksimum seviyeye ulaştı!");
             return false;
         }
     }

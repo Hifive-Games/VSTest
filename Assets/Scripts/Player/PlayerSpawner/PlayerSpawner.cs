@@ -1,19 +1,21 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class PlayerSpawner : MonoBehaviour
 {
-    [SerializeField] private PlayerSO[] playerCharacters;  // Karakter SO'larını dizi olarak alıyoruz
+    [FormerlySerializedAs("playerCharacters")] [SerializeField] private HeroBaseData[] Heroes;  // Karakter SO'larını dizi olarak alıyoruz
 
-    private void Start()
+    private void Awake()
     {
         // PlayerSO'ları Resources klasöründen dinamik olarak yüklüyoruz
-        playerCharacters = Resources.LoadAll<PlayerSO>(ResourcePathManager.Instance.GetPlayerSOPath());
+        Heroes = Resources.LoadAll<HeroBaseData>(ResourcePathManager.Instance.GetHeroSOPath());
 
-        PlayerSO selectedCharacter = GetSelectedCharacter();
+        HeroBaseData selectedHero = GetSelectedCharacter();
 
-        if (selectedCharacter != null && selectedCharacter.isSelected)
+        if (selectedHero != null && selectedHero.isSelected)
         {
-            Instantiate(selectedCharacter.prefab, Vector3.zero, Quaternion.identity); // Seçilen karakteri spawn et
+            Instantiate(selectedHero.prefab, Vector3.zero, Quaternion.identity); // Seçilen karakteri spawn et
+            selectedHero.RunAllPassiveUpgrades();
         }
         else
         {
@@ -22,9 +24,9 @@ public class PlayerSpawner : MonoBehaviour
     }
 
     // Seçili karakteri bulma
-    private PlayerSO GetSelectedCharacter()
+    private HeroBaseData GetSelectedCharacter()
     {
-        foreach (var character in playerCharacters)
+        foreach (var character in Heroes)
         {
             if (character.isSelected)
             {

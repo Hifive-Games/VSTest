@@ -9,18 +9,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d745e6a1e1b24004fb4c88336dc53e74, type: 3}
-  m_Name: HpRegen
+  m_Script: {fileID: 11500000, guid: 7f9cd0c4b40f1544791d49e97d1874a0, type: 3}
+  m_Name: HealthPassiveUpgrade
   m_EditorClassIdentifier: 
-  upgradeName: HpRegen
+  upgradeName: Health
   upgradeLevels:
-  - value: 1
-    cost: 10
-  - value: 2
+  - value: 100
     cost: 100
-  - value: 3
-    cost: 1000
-  - value: 5
-    cost: 10000
-  currentLevel: 0
-  currentValue: 1
+  - value: 200
+    cost: 200
+  - value: 300
+    cost: 300
+  Prefix: _

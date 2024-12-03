@@ -7,17 +7,17 @@ public class FileSaveLoadManager : MonoBehaviourSingletonPersistent<FileSaveLoad
     private const string moneyIdentifier="PlayerMoney";
     
     #region Level And Value
-        public int GetLevelDataFromFile(PassiveUpgradeData PassiveUpgradeData)
+        public int GetLevelDataFromFile(PassiveUpgradeBaseData passiveUpgradeBaseData)
         {
-            return PlayerPrefs.GetInt(PassiveUpgradeData.Identifier+PassiveUpgradeData.Prefix+
-                                      PassiveUpgradeData.name+PassiveUpgradeData.Prefix+
-                                      PassiveUpgradeData.LevelPropery);
+            return PlayerPrefs.GetInt(passiveUpgradeBaseData.Identifier+passiveUpgradeBaseData.Prefix+
+                                      passiveUpgradeBaseData.upgradeName+passiveUpgradeBaseData.Prefix+
+                                      passiveUpgradeBaseData.LevelPropery);
         }
-        public void SetLevelDataFromFile(PassiveUpgradeData PassiveUpgradeData, int level)
+        public void SetLevelDataFromFile(PassiveUpgradeBaseData passiveUpgradeBaseData, int level)
         {
-            PlayerPrefs.SetInt(PassiveUpgradeData.Identifier+PassiveUpgradeData.Prefix+
-                               PassiveUpgradeData.name+PassiveUpgradeData.Prefix+
-                               PassiveUpgradeData.LevelPropery,level);
+            PlayerPrefs.SetInt(passiveUpgradeBaseData.Identifier+passiveUpgradeBaseData.Prefix+
+                               passiveUpgradeBaseData.upgradeName+passiveUpgradeBaseData.Prefix+
+                               passiveUpgradeBaseData.LevelPropery,level);
             SaveChanges();
         }
         

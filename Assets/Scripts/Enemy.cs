@@ -31,12 +31,4 @@ public class Enemy : Enemies
             transform.LookAt(player.transform);
         }
     }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.TryGetComponent(out PlayerStats player))
-        {
-            player.TakeDamage(damage);
-        }
-    }
 }

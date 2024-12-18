@@ -1,23 +1,26 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 public class Player : MonoBehaviour
 {
     public static Player Instance;
-    public int level = 1;
-    public int experience = 0;
-    public int experienceToNextLevel = 100;
-    public XPBar xpBar;
 
-    public bool isInvincible = false;
+    public int BaseHealth { get; private set; }
+    public int Health { get; set; }
+    private List<Upgrade> appliedUpgrades;
+
+    public List<IWeapon> EquippedWeapons { get; private set; }
+    public List<ISpell> EquippedSpells { get; private set; }
+
+    public int ExperienceToNextLevel { get; private set; }
 
     private void Awake()
     {
         if (Instance == null)
         {
             Instance = this;
+            BaseHealth = 100;
+            Health = BaseHealth;
+            appliedUpgrades = new List<Upgrade>();
         }
         else
         {
@@ -25,37 +28,43 @@ public class Player : MonoBehaviour
         }
     }
 
-    private void Start()
+    public void ApplyUpgrade(Upgrade upgrade)
     {
-    }
+        if (upgrade.Type != UpgradeType.Player) return;
 
-    //we will add experience to the player until the experience is NOT enough to level up, then we will set xpBar and other things.
-
-    public void AddExperience(int xp)
-    {
-        experience += xp;
-        xpBar.AddXP(experience);
-        if(StillNeedToLevelUp())
+        switch (upgrade.Target)
         {
-            LevelUp();
+            case UpgradeTarget.PlayerHealth:
+                Health += (int)upgrade.Value;
+                break;
+            // Handle other targets if needed
         }
+
+        appliedUpgrades.Add(upgrade);
     }
 
-    public void LevelUp()
+    public List<Upgrade> GetAppliedUpgrades()
     {
-        level++;
-        experience -= experienceToNextLevel;
-        experienceToNextLevel = (int)(experienceToNextLevel * 1.1f);
-        
-        GameManager.Instance.LevelUp();
-
-        xpBar.SetLevel(level);
-        xpBar.SetMaxXP(experienceToNextLevel);
-        xpBar.ResetXP();
+        return new List<Upgrade>(appliedUpgrades);
     }
 
-    public bool StillNeedToLevelUp()
+    public void ResetPlayerStats()
     {
-        return experience >= experienceToNextLevel;
+        Health = BaseHealth;
+        appliedUpgrades.Clear();
+    }
+
+    public void AddExperience(int experience)
+    {
+        // Add experience logic here
+    }
+
+    public void TakeDamage(int damage)
+    {
+        Health -= damage;
+        if (Health <= 0)
+        {
+            // Handle player death
+        }
     }
 }

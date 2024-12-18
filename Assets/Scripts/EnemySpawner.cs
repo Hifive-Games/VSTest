@@ -1,23 +1,16 @@
-using Unity.Mathematics;
+using System.Collections;
 using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
     public static EnemySpawner Instance;
-
-    [SerializeField] private GameObject enemyPrefab;
-    [SerializeField] private GameObject player;
-
-    public int enemyCount = 0;
-    public int maxEnemies = 10;
-    public float spawnRate = 1f;
-    private float nextSpawn = 0f;
-
-    public float minSpawnRadius = 5f;
-    public float maxSpawnRadius = 10f;
-    public bool spawn = true;
-
-    public int killCount = 0;
+    public GameObject enemyPrefab;
+    public float minSpawnRadius;
+    public float maxSpawnRadius;
+    public float spawnRate;
+    public int maxEnemies;
+    private int enemyCount;
+    private GameObject player;
 
     private void Awake()
     {
@@ -34,6 +27,37 @@ public class EnemySpawner : MonoBehaviour
     private void Start()
     {
         player = Player.Instance.gameObject;
+        StartCoroutine(SpawnEnemies());
+    }
+
+    private IEnumerator SpawnEnemies()
+    {
+        while (true)
+        {
+            if (enemyCount < maxEnemies)
+            {
+                int packSize = UnityEngine.Random.Range(3, 7);
+                Vector3 spawnPosition = GetRandomSpawnPositionFromPlayer();
+
+                for (int i = 0; i < packSize; i++)
+                {
+                    if (enemyCount >= maxEnemies) break;
+
+                    Vector3 scatterOffset = new Vector3(
+                        UnityEngine.Random.Range(-1f, 1f),
+                        0,
+                        UnityEngine.Random.Range(-1f, 1f)
+                    );
+
+                    SpawnEnemy(spawnPosition + scatterOffset);
+                    yield return new WaitForSeconds(0.1f); // Small delay between each enemy in the pack
+                }
+
+                InterfaceManager.Instance.UpdateEnemyCount(enemyCount, maxEnemies);
+            }
+
+            yield return new WaitForSeconds(spawnRate);
+        }
     }
 
     public Vector3 GetRandomSpawnPositionFromPlayer()
@@ -43,42 +67,17 @@ public class EnemySpawner : MonoBehaviour
         return randomPosition;
     }
 
-    private void Update()
-    {
-        if (spawn && Time.time > nextSpawn && enemyCount < maxEnemies)
-        {
-            nextSpawn = Time.time + spawnRate;
-            SpawnEnemy();
-
-            InterfaceManager.Instance.UpdateEnemyCount(enemyCount,maxEnemies);
-        }
-    }
-
-    public void IncreaseSpwanRate()
+    public void IncreaseSpawnRate()
     {
         spawnRate /= 1.01f;
-        maxEnemies = (int)math.ceil(maxEnemies + 2);
+        maxEnemies = (int)Mathf.Ceil(maxEnemies + 2);
 
-        if(spawnRate <= 0.001f) spawnRate = 0.001f;
+        if (spawnRate <= 0.001f) spawnRate = 0.001f;
     }
 
-    private void SpawnEnemy()
+    private void SpawnEnemy(Vector3 position)
     {
-        GameObject enemy = ObjectPooler.Instance.GetObject(enemyPrefab);
-        enemy.transform.position = GetRandomSpawnPositionFromPlayer();
+        GameObject enemy = ObjectPooler.Instance.SpawnFromPool(enemyPrefab, position, Quaternion.identity);
         enemyCount++;
-    }
-
-    public Vector3 GetMiddilePointOfTheScreen()
-    {
-        return Camera.main.ScreenToWorldPoint(new Vector3(Screen.width / 2, Screen.height / 2, 0));
-    }
-
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(player.transform.position, minSpawnRadius);
-        Gizmos.color = Color.green;
-        Gizmos.DrawWireSphere(player.transform.position, maxSpawnRadius);
     }
 }

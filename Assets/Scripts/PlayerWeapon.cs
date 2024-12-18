@@ -120,7 +120,7 @@ public class PlayerWeapon : MonoBehaviour
         }
                 
         bullet.TryGetComponent(out Bullet bulletScript);
-        bulletScript.SetBullet(damage, bulletSpeed, bulletLifeTime);
+        bulletScript.Initialize(damage, bulletSpeed, bulletLifeTime);
 
     }
 }

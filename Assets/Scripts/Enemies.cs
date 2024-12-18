@@ -62,10 +62,6 @@ public abstract class Enemies : MonoBehaviour
 
         InterfaceManager.Instance.AddkillCount();
 
-        EnemySpawner.Instance.killCount++;
-        EnemySpawner.Instance.enemyCount--;
-        EnemySpawner.Instance.IncreaseSpwanRate();
-
         InterfaceManager.Instance.CreateKillCountTextShake();
 
         PlayerMagnet.Instance.audioSource.PlayOneShot(PlayerMagnet.Instance.killSfx);

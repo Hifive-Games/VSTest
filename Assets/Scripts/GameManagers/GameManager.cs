@@ -1,25 +1,18 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+using System.Collections.Generic;
+using NEXUS.Utilities;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
 
-    public GameObject player;
-    public int score = 0;
-    public bool isGameOver = false;
-
-    public GameState gameState;
-    public PlayerState playerState;
+    public int score;
 
     private void Awake()
     {
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject);
         }
         else
         {
@@ -27,65 +20,81 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    //We will call this function to start the game
-    public void StartGame()
+    private WeaponManager weaponManager;
+    private SpellManager spellManager;
+    private Player player;
+    private JSONDataHandler jsonDataHandler;
+
+    private void Start()
     {
-        gameState = GameState.InGame;
-        playerState = PlayerState.Alive;
-        score = 0;
-        isGameOver = false;
-        InterfaceManager.Instance.HideGameOverUI();
-        InterfaceManager.Instance.HideFailedUI();
-        InterfaceManager.Instance.HideLevelUpUI();
+        // Initialize managers
+        weaponManager = WeaponManager.Instance;
+        spellManager = SpellManager.Instance;
+        player = Player.Instance;
+        jsonDataHandler = new JSONDataHandler("SaveSlot1");
+
+        // Load and apply upgrades
+        LoadAndApplyUpgrades();
     }
 
-    //We will call this function when the player dies
-    public void GameOver()
+    private void LoadAndApplyUpgrades()
     {
-        gameState = GameState.Win;
-        playerState = PlayerState.Dead;
-        isGameOver = true;
-        InterfaceManager.Instance.ShowGameOverUI();
-    }
-
-    //We will call this function when the player levels up
-    public void LevelUp()
-    {
-        if (playerState == PlayerState.Alive)
+        UpgradeData loadedUpgradeData = jsonDataHandler.LoadData<UpgradeData>("Upgrades.json");
+        if (loadedUpgradeData != null)
         {
-            gameState = GameState.InGame;
-            playerState = PlayerState.LevelUp;
-            InterfaceManager.Instance.ShowLevelUpUI();
-        
-            Time.timeScale = 0f;
-        }
-    }
-
-    //We will call this function when the player fails
-    public void Failed()
-    {
-        gameState = GameState.Failed;
-        playerState = PlayerState.Dead;
-        isGameOver = true;
-        InterfaceManager.Instance.ShowFailedUI();
-    }
-
-    public void HandleGameState()
-    {
-        if (gameState == GameState.InGame)
-        {
-            if (playerState == PlayerState.Dead)
+            foreach (Upgrade upgrade in loadedUpgradeData.Upgrades)
             {
-                GameOver();
-            }
-            else if (playerState == PlayerState.LevelUp)
-            {
-                LevelUp();
+                switch (upgrade.Type)
+                {
+                    case UpgradeType.Weapon:
+                        weaponManager.ApplyUpgrade(upgrade);
+                        break;
+                    case UpgradeType.Player:
+                        player.ApplyUpgrade(upgrade);
+                        break;
+                    case UpgradeType.Spell:
+                        spellManager.ApplyUpgrade(upgrade);
+                        break;
+                }
             }
         }
-        else if (gameState == GameState.Failed)
+        else
         {
-            Failed();
+            Debug.Log("No upgrade data found. Starting with default values.");
         }
+    }
+
+    public void SaveUpgrades()
+    {
+        // Collect upgrades from your game state or inventories
+        UpgradeData upgradeData = new UpgradeData();
+        // Assume you have a way to get all currently applied upgrades
+        upgradeData.Upgrades = GetAllCurrentUpgrades();
+
+        // Save upgrades
+        jsonDataHandler.SaveData(upgradeData, "Upgrades.json");
+    }
+
+    private List<Upgrade> GetAllCurrentUpgrades()
+    {
+        List<Upgrade> upgrades = new List<Upgrade>();
+
+        // Collect weapon upgrades
+        foreach (IWeapon weapon in weaponManager.EquippedWeapons)
+        {
+            // Assuming each weapon keeps track of its applied upgrades
+            upgrades.AddRange(weapon.GetAppliedUpgrades());
+        }
+
+        // Collect player upgrades
+        upgrades.AddRange(player.GetAppliedUpgrades());
+
+        // Collect spell upgrades
+        foreach (ISpell spell in spellManager.EquippedSpells)
+        {
+            upgrades.AddRange(spell.GetAppliedUpgrades());
+        }
+
+        return upgrades;
     }
 }

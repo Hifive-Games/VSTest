@@ -8,7 +8,7 @@ public class Bullet : MonoBehaviour
     public int damage;
     public float lifeTime;
 
-    public void SetBullet(int damage, float speed, float lifeTime)
+    public void Initialize(int damage, float speed, float lifeTime)
     {
         this.damage = damage;
         this.speed = speed;

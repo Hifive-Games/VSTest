@@ -1,30 +1,48 @@
-using UnityEngine;
 using UnityEditor;
-using System.Collections.Generic;
+using UnityEngine;
 
-[CustomEditor(typeof(ActiveUpgradeBaseData))]
+[CustomEditor(typeof(ActiveUpgradeBaseData), true)]
 public class ActiveUpgradeBaseDataEditor : Editor
 {
     public override void OnInspectorGUI()
     {
-        // Bu editördeki hedef nesne
-        ActiveUpgradeBaseData upgradeData = (ActiveUpgradeBaseData)target;
+        // ScriptableObject referansı al
+        var targetObject = (ActiveUpgradeBaseData)target;
 
-        // rareValues listesini Serializing etmek
-        serializedObject.Update();
+        // rareValues hariç diğer alanları otomatik çiz
+        SerializedProperty iterator = serializedObject.GetIterator();
+        iterator.NextVisible(true); // İlk alanı al (genelde "m_Script")
+        do
+        {
+            // Eğer "rareValues" ise atla
+            if (iterator.name == "rareValues")
+                continue;
 
-        // rareValues listesini gösterelim
-        SerializedProperty rareValuesProp = serializedObject.FindProperty("rareValues");
+            EditorGUILayout.PropertyField(iterator, true);
+        } while (iterator.NextVisible(false));
 
-        // rareValues boyutunu değiştirmeyi engellemek için listeyi readonly yapıyoruz
-        EditorGUI.BeginDisabledGroup(true);  // boyut değiştirmeyi engelle
-        EditorGUILayout.PropertyField(rareValuesProp, true); // listeyi düzenlenebilir halde göster
-        EditorGUI.EndDisabledGroup();
+        // rareValues'ü özel olarak çiz
+        SerializedProperty rareValues = serializedObject.FindProperty("rareValues");
+        EditorGUILayout.LabelField("Rare Values", EditorStyles.boldLabel);
 
-        // Diğer verileri düzenlemek için varsayılan gösterimi çağırıyoruz
+        for (int i = 0; i < rareValues.arraySize; i++)
+        {
+            SerializedProperty item = rareValues.GetArrayElementAtIndex(i);
+            EditorGUILayout.PropertyField(item, new GUIContent($"Rare Value {i + 1}"), true);
+        }
+
+        // Düğme ile CreateOrReset çağır
+        if (GUILayout.Button("Reset Rare Values"))
+        {
+            // CreateOrReset'i çağır
+            targetObject.CreateOrReset();
+
+            // Değişiklikleri işaretle ve görünümü güncelle
+            EditorUtility.SetDirty(targetObject); // ScriptableObject'i kirli olarak işaretle
+            serializedObject.Update(); // SerializedProperty'yi güncelle
+            Repaint(); // Editor'ü yeniden çiz
+        }
+
         serializedObject.ApplyModifiedProperties();
-
-        // Default Inspector ekleyebiliriz, böylece diğer alanlar düzenlenebilir
-        DrawDefaultInspector();
     }
 }

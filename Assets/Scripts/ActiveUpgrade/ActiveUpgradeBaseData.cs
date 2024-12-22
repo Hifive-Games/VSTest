@@ -22,16 +22,16 @@ public class RareValue
     public RareLevel rareLevel; // Common, Uncommon, Rare, etc.
     public float value;         // Upgrade değeri
     public float baseProbability; // Temel çıkma ihtimali (yüzde)
-    public float luckFactor;   // Luck ile etkilenecek oran
+    public float luckFactor;    // Luck ile etkilenecek oran
 }
 
 
 [CreateAssetMenu(fileName = "NewActiveUpgrade", menuName = "Upgrades/Active Upgrade")]
 public abstract class ActiveUpgradeBaseData : ScriptableObject
 {
+    public string Description ="Description";
     public List<RareValue> rareValues;
-
-
+    
     public RareLevel GetRandomRareLevel(float playerLuck)
     {
         // Toplam ağırlıklı olasılığı hesaplamak için
@@ -72,22 +72,40 @@ public abstract class ActiveUpgradeBaseData : ScriptableObject
     public void CreateOrReset()
     {
         // Enum değerlerini al
-        var allRareLevels = System.Enum.GetValues(typeof(RareLevel));
-    
+        var allRareLevels = Enum.GetValues(typeof(RareLevel));
+
         // Listeyi sıfırla ve yeniden oluştur
         rareValues = new List<RareValue>(allRareLevels.Length);
 
         // Her enum değerini listeye ekle
         foreach (RareLevel level in allRareLevels)
         {
-            rareValues.Add(new RareValue
+            // Yeni RareValue nesnesini oluştur
+            var rareValue = new RareValue
             {
-                rareLevel = level,          // Enum değeri
-                value = 0f,                 // Varsayılan değer
-                baseProbability = 0f,       // Varsayılan olasılık
-                luckFactor = 0f             // Varsayılan luck faktörü
-            });
+                rareLevel = level // Enum değeri
+            };
+
+            // RareValue sınıfındaki tüm özelliklere varsayılan değerleri atamak için refleksiyon kullan
+            foreach (var property in typeof(RareValue).GetProperties())
+            {
+                if (property.CanWrite)
+                {
+                    // Varsayılan değeri atamak için 'default' keyword'ü kullanılabilir
+                    property.SetValue(rareValue, GetDefaultValue(property.PropertyType));
+                }
+            }
+
+            rareValues.Add(rareValue);
         }
     }
+
+// Varsayılan değeri döndüren yardımcı metod
+    private object GetDefaultValue(Type type)
+    {
+        // Eğer değer tipi değeri ise, varsayılan değeri döndür
+        return type.IsValueType ? Activator.CreateInstance(type) : null;
+    }
+
     
 }

@@ -9,14 +9,14 @@ public class RareValueDrawer : PropertyDrawer
         EditorGUI.BeginProperty(position, label, property);
 
         // Bir satırlık alanı hesapla
-        var lineHeight = EditorGUIUtility.singleLineHeight;
-        var currentRect = new Rect(position.x, position.y, position.width, lineHeight);
+        float lineHeight = EditorGUIUtility.singleLineHeight;
+        Rect currentRect = new Rect(position.x, position.y, position.width, lineHeight);
 
-        // rareLevel alanını sadece okunabilir yap
+        // rareLevel alanını çiz
         var rareLevelProperty = property.FindPropertyRelative("rareLevel");
         EditorGUI.LabelField(currentRect, "Rare Level", rareLevelProperty.enumDisplayNames[rareLevelProperty.enumValueIndex]);
 
-        // Diğer alanları düzenlenebilir şekilde çiz
+        // Diğer alanları çiz
         currentRect.y += lineHeight + EditorGUIUtility.standardVerticalSpacing;
         EditorGUI.PropertyField(currentRect, property.FindPropertyRelative("value"));
 
@@ -27,11 +27,8 @@ public class RareValueDrawer : PropertyDrawer
         EditorGUI.PropertyField(currentRect, property.FindPropertyRelative("luckFactor"));
 
         EditorGUI.EndProperty();
-        
     }
-/*
- * BURADA 4 YAZIYOR YA ONU DA DEĞİŞTİRMEN LAZIM !
- */
+
     public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
     {
         // 4 satır: rareLevel + value + baseProbability + luckFactor

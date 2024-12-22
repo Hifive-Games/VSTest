@@ -5,6 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "AttackSpeedActiveUpgrade", menuName = "Active Upgrade System/AttackSpeedActiveUpgrade")]
 public class AttackSpeedActiveUpgrade : ActiveUpgradeBaseData
 {
+    
     public override void ApplyUpgrade(RareLevel selectedRare, HeroBaseData hero)
     {
         var rareValue = rareValues.Find(r => r.rareLevel == selectedRare);

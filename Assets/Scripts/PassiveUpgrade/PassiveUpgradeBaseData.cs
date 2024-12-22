@@ -15,7 +15,8 @@ public abstract class PassiveUpgradeBaseData : ScriptableObject,IUpgradeIdentifi
     public string Identifier => $"{PassiveUpgradePrefix}";
     public string LevelPropery => "Level";
 
-    public string Prefix = "_";
+    // Bi ara lütfen üşenme ve şu HideInInspector kaldır balım :)
+   [HideInInspector] public string Prefix = "_";
     public abstract void ApplyUpgrade(HeroBaseData hero);
 
 }

@@ -119,7 +119,7 @@ public class PassiveUpgradeManager : MonoBehaviourSingleton<PassiveUpgradeManage
             
             if (CanAffordUpgrade(cost)) // Maliyet kontrolü
             {
-                if (ApplyUpgrade(passiveUpgradeBase))
+                if (CanApplyUpgrade(passiveUpgradeBase))
                 {
                     // Seviye artışı
                     //upgradeLevels[passiveUpgrade.upgradeName]++;
@@ -147,7 +147,7 @@ public class PassiveUpgradeManager : MonoBehaviourSingleton<PassiveUpgradeManage
         return playerMoney >= cost;
     }
 
-    private bool ApplyUpgrade(PassiveUpgradeBaseData passiveUpgradeBase)
+    private bool CanApplyUpgrade(PassiveUpgradeBaseData passiveUpgradeBase)
     {
         // Mevcut seviye
         int currentLevel = FileSaveLoadManager.Instance.GetLevelDataFromFile(passiveUpgradeBase);

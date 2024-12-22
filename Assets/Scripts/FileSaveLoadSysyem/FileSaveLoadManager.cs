@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class FileSaveLoadManager : MonoBehaviourSingletonPersistent<FileSaveLoadManager>
 {
-    private const string moneyIdentifier="PlayerMoney";
-    
     #region Level And Value
         public int GetLevelDataFromFile(PassiveUpgradeBaseData passiveUpgradeBaseData)
         {
@@ -28,9 +26,10 @@ public class FileSaveLoadManager : MonoBehaviourSingletonPersistent<FileSaveLoad
     #endregion
     
     
-    
     // money gibi generic olan 2 sahne arasında kesinlikle kayıt edilenler için bir sistem yok şuan. o yüzden fonksiyonları ları elle yazalım şimdilik
     // money sistemi eklendiğinde burayı düzenlememiz gerekiyor
+    
+    private const string moneyIdentifier="PlayerMoney";
 
     public int GetPlayerMoneyDataFromFile()
     {

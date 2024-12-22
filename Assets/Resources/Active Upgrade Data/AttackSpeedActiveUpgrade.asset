@@ -12,4 +12,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1fdb21fb92024c248dd22d7fcfe7d208, type: 3}
   m_Name: AttackSpeedActiveUpgrade
   m_EditorClassIdentifier: 
-  rareValues: []
+  Description: Description
+  rareValues:
+  - rareLevel: 0
+    value: 1
+    baseProbability: 2
+    luckFactor: 3
+  - rareLevel: 1
+    value: 4
+    baseProbability: 5
+    luckFactor: 6
+  - rareLevel: 2
+    value: 7
+    baseProbability: 8
+    luckFactor: 9
+  - rareLevel: 3
+    value: 10
+    baseProbability: 11
+    luckFactor: 12
+  - rareLevel: 4
+    value: 13
+    baseProbability: 14
+    luckFactor: 15

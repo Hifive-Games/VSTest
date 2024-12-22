@@ -1,9 +1,13 @@
 using System;
 using System.Collections.Generic;
-using NaughtyAttributes;
 using UnityEngine;
 using Random = UnityEngine.Random;
-
+/*
+ * BURADA using NaughtyAttributes; KULLANAMAZSIN ÇÜNKÜ KENDİ EDİTÖR KODU VAR ADI RAREVALUEDRAWER
+ * BURADA YAPTIĞIN HERHANGİ BİR ŞEY GÖRÜNMEZSE EDİTÖR KODUYLA İLGİLİDİR
+ * BURADA POSTPROVESSOR VAR. İLK OLUŞTUĞUNDA ResetRareValues FONKSYİONUNU ÇAĞIRMAK İÇİN
+ *
+ */
 public enum RareLevel
 {
     Common,
@@ -30,6 +34,7 @@ public class RareValue
 public abstract class ActiveUpgradeBaseData : ScriptableObject
 {
     public string Description ="Description";
+    
     public List<RareValue> rareValues;
     
     public RareLevel GetRandomRareLevel(float playerLuck)
@@ -67,9 +72,9 @@ public abstract class ActiveUpgradeBaseData : ScriptableObject
     // Upgrade'i uygula
     public abstract void ApplyUpgrade(RareLevel selectedRare, HeroBaseData hero);
     
-    
-    [Button()]
-    public void CreateOrReset()
+    #region Editor
+
+    public void ResetRareValues()
     {
         // Enum değerlerini al
         var allRareLevels = Enum.GetValues(typeof(RareLevel));
@@ -100,12 +105,16 @@ public abstract class ActiveUpgradeBaseData : ScriptableObject
         }
     }
 
-// Varsayılan değeri döndüren yardımcı metod
+    // Varsayılan değeri döndüren yardımcı metod
     private object GetDefaultValue(Type type)
     {
         // Eğer değer tipi değeri ise, varsayılan değeri döndür
         return type.IsValueType ? Activator.CreateInstance(type) : null;
     }
 
+
+
+    #endregion
     
+  
 }

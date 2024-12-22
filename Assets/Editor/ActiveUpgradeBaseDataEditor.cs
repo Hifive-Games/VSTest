@@ -35,7 +35,7 @@ public class ActiveUpgradeBaseDataEditor : Editor
         if (GUILayout.Button("Reset Rare Values"))
         {
             // CreateOrReset'i çağır
-            targetObject.CreateOrReset();
+            targetObject.ResetRareValues();
 
             // Değişiklikleri işaretle ve görünümü güncelle
             EditorUtility.SetDirty(targetObject); // ScriptableObject'i kirli olarak işaretle
@@ -45,4 +45,5 @@ public class ActiveUpgradeBaseDataEditor : Editor
 
         serializedObject.ApplyModifiedProperties();
     }
+    
 }

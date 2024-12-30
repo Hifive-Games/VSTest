@@ -88,25 +88,50 @@ public class ShinobiHero : TheHero
         yield return new WaitForSecondsRealtime(delay);
         Destroy(obj);
     }
-
-    // Burası TheHero'dan Override edilen fonksiyonlar
+    
+    //Hero Stats
+    // Attack Speed Setter
     public override void SetAttackSpeed(float newRate)
     {
         spawnRate = Mathf.Max(0.1f, newRate);
     }
 
+    // Attack Range Setter
     public override void SetAttackRange(float newRate)
     {
         selfDestructTime = Mathf.Max(0.1f, newRate);
     }
 
+    // Attack Size Setter
     public override void SetAttackSize(float newRate)
     {
-        defaultScale = new Vector3(newRate, newRate, newRate);
+        defaultScale = new Vector3(newRate + defaultScale.x, newRate + defaultScale.y, newRate + defaultScale.z);
     }
 
-    public override void SetAttackAmount(float newRate)
+    // Attack Amount Setter
+    public override void SetAttackAmount(float newCount)
     {
-        shurikenCount = (int)newRate;
+        shurikenCount = (int)Mathf.Max(1f, (int)newCount); // Minimum 1 adet şuriken
+    }
+
+    // Burası TheHero'dan Override edilen fonksiyonlar
+    public override void AddAttackSpeed(float newRate)
+    {
+        spawnRate = Mathf.Max(0.1f, spawnRate+newRate);
+    }
+
+    public override void AddAttackRange(float newRate)
+    {
+        selfDestructTime = Mathf.Max(0.1f, selfDestructTime+newRate);
+    }
+
+    public override void AddAttackSize(float newRate)
+    {
+        defaultScale = new Vector3(newRate+defaultScale.x, newRate+defaultScale.y, newRate+defaultScale.z);
+    }
+
+    public override void AddAttackAmount(float newRate)
+    {
+        shurikenCount = (int)newRate+shurikenCount;
     }
 }

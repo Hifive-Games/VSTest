@@ -35,9 +35,13 @@ public class TheHeroMovementNewInput : MonoBehaviour
     }
     #endregion
 
+    public void AddMoveSpeed(float value)
+    {
+        moveSpeed =moveSpeed+ value;
+    }
     public void SetMoveSpeed(float value)
     {
-        moveSpeed = value;
+        moveSpeed =value;
     }
     
     private Vector2 GetMovementVectorNormalized()

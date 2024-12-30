@@ -1,10 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-
 using System;
 using NaughtyAttributes;
-using UnityEngine;
 
 public class TheHeroHealth : MonoBehaviour
 {
@@ -53,29 +49,58 @@ public class TheHeroHealth : MonoBehaviour
         }
     }
     
+    public void AddMaximumHealth(float health)
+    {
+        currentHealth = currentHealth + health;
+        maxHealth = maxHealth + health;
+    }
     
-    public void SetMaximumHealth(float health)
-    {
-        currentHealth = maxHealth = health;
-    }
     // bi yerde lazım olur belki
-    public void SetHealth(float health)
+    public float GetCurrentHealth()
     {
-        currentHealth = Mathf.Clamp(health, 0, maxHealth);
+        return currentHealth;
     }
-    public void SetHealthRegenAmount(float health)
+    public void AddHealthRegenAmount(float health)
     {
-        healthRegenAmount = Mathf.Clamp(health, 0, maxHealth);
+        healthRegenAmount = Mathf.Clamp(healthRegenAmount+health, 0, maxHealth);
     }
 
     public void AddHealth(float health)
     {
         currentHealth = Mathf.Clamp(currentHealth + health, 0, maxHealth);
     }
-    public float GetHealth()
+  
+    public void AddHealthRegenRate(float newRate)
     {
-        return currentHealth;
+        healthRegenRate = Mathf.Clamp(healthRegenRate+newRate, 0, maxHealth);
     }
+    public void AddCurrentHealth(float health)
+    {
+        currentHealth = Mathf.Clamp(currentHealth + health, 0, maxHealth);
+    }
+    
+    // Setter Fonksiyonları - HeroStats altında
+
+    // Maximum Health Setter
+    public void SetMaximumHealth(float health)
+    {
+        maxHealth = health;
+        currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
+    }
+
+    // Health Regen Amount Setter
+    public void SetHealthRegenAmount(float health)
+    {
+        healthRegenAmount = Mathf.Clamp(health, 0, maxHealth);
+    }
+
+    // Health Setter
+    public void SetCurrentHealth(float health)
+    {
+        currentHealth = Mathf.Clamp(health, 0, maxHealth);
+    }
+
+    // Health Regen Rate Setter
     public void SetHealthRegenRate(float newRate)
     {
         healthRegenRate = Mathf.Clamp(newRate, 0, maxHealth);

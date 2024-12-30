@@ -7,11 +7,12 @@ public class ShinobiHeroBase : HeroBaseData
 {
     public override void HeroAttackSpeedPassiveUpgrade(float value)
     {
-        //base.HeroAttackSpeedPassiveUpgrade(value);
+        base.HeroAttackSpeedPassiveUpgrade(value);
         /*
          Burası syntax için duruyor. Eğer özel bir şekilde
          çağırmak istersem buradan yapabilirim
-         */
-        ShinobiHero.Instance.SetAttackSpeed(value);
+         
+        ShinobiHero.Instance.AddAttackSpeed(value);
+        */
     }
 }

@@ -14,60 +14,51 @@ public enum RareLevel
     Uncommon,
     Rare,
     Epic,
-    Legendary,
+    Legendary
 }
 
 [System.Serializable]
 public class RareValue
 {
-    /*
-     * Buraya ne eklersen ekle: RareValueDrawer sınıfına gidip OnGUI fonksiyonunu düzenlemen lazım yoksa görünmez
-     */
     public RareLevel rareLevel; // Common, Uncommon, Rare, etc.
     public float value;         // Upgrade değeri
     public float baseProbability; // Temel çıkma ihtimali (yüzde)
     public float luckFactor;    // Luck ile etkilenecek oran
 }
 
-
-[CreateAssetMenu(fileName = "NewActiveUpgrade", menuName = "Upgrades/Active Upgrade")]
 public abstract class ActiveUpgradeBaseData : ScriptableObject
 {
-    public string Description ="Description";
+    public string description ="Description";
     
     public List<RareValue> rareValues;
     
     public RareLevel GetRandomRareLevel(float playerLuck)
     {
-        // Toplam ağırlıklı olasılığı hesaplamak için
         float totalWeight = 0f;
 
-        // Olasılıkları ayarla
+        // Toplam ağırlıklı olasılığı hesapla
         foreach (var rareValue in rareValues)
         {
-            // LuckFactor'a göre şansları ayarlıyoruz
-            rareValue.baseProbability *= 1 + (playerLuck / 100 * rareValue.luckFactor);
-            totalWeight += rareValue.baseProbability; // Toplam ağırlığı artır
+            totalWeight += rareValue.baseProbability * (1 + (playerLuck / 100 * rareValue.luckFactor));
         }
 
-        // Rastgele bir değer oluştur
         float randomValue = Random.Range(0, totalWeight);
+        float cumulativeWeight = 0f;
 
         // Ağırlıklı seçim
-        float cumulativeWeight = 0f;
         foreach (var rareValue in rareValues)
         {
-            cumulativeWeight += rareValue.baseProbability;
+            cumulativeWeight += rareValue.baseProbability * (1 + (playerLuck / 100 * rareValue.luckFactor));
             if (randomValue <= cumulativeWeight)
             {
                 return rareValue.rareLevel; // Seçilen RareLevel
             }
         }
 
-        // Hata durumunda default değer döndür
         Debug.LogError("HATA RARE!");
         return RareLevel.Common;
     }
+
 
     // Upgrade'i uygula
     public abstract void ApplyUpgrade(RareLevel selectedRare, HeroBaseData hero);
@@ -111,9 +102,6 @@ public abstract class ActiveUpgradeBaseData : ScriptableObject
         // Eğer değer tipi değeri ise, varsayılan değeri döndür
         return type.IsValueType ? Activator.CreateInstance(type) : null;
     }
-
-
-
     #endregion
     
   

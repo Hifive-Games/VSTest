@@ -5,17 +5,13 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "AttackSpeedActiveUpgrade", menuName = "Active Upgrade System/AttackSpeedActiveUpgrade")]
 public class AttackSpeedActiveUpgrade : ActiveUpgradeBaseData
 {
-    
     public override void ApplyUpgrade(RareLevel selectedRare, HeroBaseData hero)
     {
         var rareValue = rareValues.Find(r => r.rareLevel == selectedRare);
-        if (rareValue != null)
-        {
-            Debug.Log($"Applied {selectedRare} Attack Speed Upgrade: +{rareValue.value}%");
-        }
-        else
-        {
-            Debug.LogWarning($"No value found for rare level: {selectedRare}");
-        }
+       
+        Debug.Log($"Applied {selectedRare} {this.GetType().Name} Upgrade: +{rareValue.value}%");
+        
+        hero.HeroAttackSpeedActiveUpgrade(rareValue.value); 
+        
     }
 }

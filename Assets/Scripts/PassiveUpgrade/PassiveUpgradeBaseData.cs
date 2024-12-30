@@ -14,9 +14,7 @@ public abstract class PassiveUpgradeBaseData : ScriptableObject,IUpgradeIdentifi
     public const string PassiveUpgradePrefix = "PassiveUpgrade";
     public string Identifier => $"{PassiveUpgradePrefix}";
     public string LevelPropery => "Level";
-
-    // Bi ara lütfen üşenme ve şu HideInInspector kaldır balım :)
-   [HideInInspector] public string Prefix = "_";
+    public string Prefix => "_";
     public abstract void ApplyUpgrade(HeroBaseData hero);
 
 }
@@ -32,10 +30,11 @@ public interface IUpgradeIdentifiable
 {
     string Identifier { get; }
     string LevelPropery{ get; }
+    string Prefix { get; }
 
     /*
      * Identifier = istediğimiz başlangıç adı
      * diğerleri de istediğimiz string (elle vermemiz gerekiyor)
      */
-    
+
 }

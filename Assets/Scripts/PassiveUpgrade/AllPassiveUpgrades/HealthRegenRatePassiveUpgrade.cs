@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using UnityEngine;
 [CreateAssetMenu(fileName = "HealthRegenRatePassiveUpgrade", menuName = "Passive Upgrade System/HealthRegenRatePassiveUpgrade")]
 

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
 [CreateAssetMenu(fileName = "AttackAmountPassiveUpgrade", menuName = "Passive Upgrade System/AttackAmountPassiveUpgrade")]
 public class AttackAmountPassiveUpgrade : PassiveUpgradeBaseData
 {

@@ -18,7 +18,7 @@ public class ActiveUpgradeBaseDataPostprocessor : AssetPostprocessor
                     // Değişiklikleri kaydet
                     EditorUtility.SetDirty(obj);
                     AssetDatabase.SaveAssets();
-                    AssetDatabase.Refresh();
+                    //AssetDatabase.Refresh(); lazım olursa açarsın
                 }
             }
         }

@@ -19,20 +19,20 @@ public class PassiveUpgradeManager : MonoBehaviourSingleton<PassiveUpgradeManage
     //private Dictionary<string, int> upgradeLevels = new Dictionary<string, int>(); // Yükseltme seviyeleri
     private List<PassiveUpgradeUI> upgradeUIs = new List<PassiveUpgradeUI>(); // Yükseltme UI bileşenleri
     
-    public static event UnityAction<PassiveUpgradeBaseData> OnUpgradeRequested;
-    public static void RequestUpgrade(PassiveUpgradeBaseData baseData)
+    public static event UnityAction<PassiveUpgradeBaseData> OnPassiveUpgradeRequested;
+    public static void RequestPassiveUpgrade(PassiveUpgradeBaseData baseData)
     {
-        OnUpgradeRequested?.Invoke(baseData);
+        OnPassiveUpgradeRequested?.Invoke(baseData);
     }
     
     private void OnEnable()
     {
-        OnUpgradeRequested += Upgrade;
+        OnPassiveUpgradeRequested += PassiveUpgrade;
     }
 
     private void OnDisable()
     {
-        OnUpgradeRequested -= Upgrade;
+        OnPassiveUpgradeRequested -= PassiveUpgrade;
     }
     private void Start()
     {
@@ -77,7 +77,6 @@ public class PassiveUpgradeManager : MonoBehaviourSingleton<PassiveUpgradeManage
     private void LoadUpgrade(PassiveUpgradeBaseData passiveUpgradeBase)
     {
         int savedLevel = FileSaveLoadManager.Instance.GetLevelDataFromFile(passiveUpgradeBase);
-        float savedValue = passiveUpgradeBase.upgradeLevels[savedLevel].value;
 
         if (savedLevel == 0 && !PlayerPrefs.HasKey(passiveUpgradeBase.Identifier+ passiveUpgradeBase.Prefix+
                                                    passiveUpgradeBase.name + passiveUpgradeBase.Prefix+
@@ -100,11 +99,11 @@ public class PassiveUpgradeManager : MonoBehaviourSingleton<PassiveUpgradeManage
         GameObject uiObject = Instantiate(PassiveUpgradeUIPrefab, PassiveUpgradeUIParent);
 
         PassiveUpgradeUI ui = uiObject.GetComponent<PassiveUpgradeUI>();
-        ui.SetUpgrade(passiveUpgradeBase, Upgrade); // UpgradeUI'ı ayarla
+        ui.SetUpgrade(passiveUpgradeBase, PassiveUpgrade); // UpgradeUI'ı ayarla
         upgradeUIs.Add(ui); // UI objesini listeye ekle
     }
 
-    public void Upgrade(PassiveUpgradeBaseData passiveUpgradeBase)
+    public void PassiveUpgrade(PassiveUpgradeBaseData passiveUpgradeBase)
     {
         //int currentLevel = upgradeLevels[passiveUpgrade.upgradeName];
         int currentLevel = FileSaveLoadManager.Instance.GetLevelDataFromFile(passiveUpgradeBase);

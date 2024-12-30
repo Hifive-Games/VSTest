@@ -37,7 +37,7 @@ public class TheHeroMovementNewInput : MonoBehaviour
 
     public void AddMoveSpeed(float value)
     {
-        moveSpeed =moveSpeed+ value;
+        moveSpeed =value+moveSpeed;
     }
     public void SetMoveSpeed(float value)
     {

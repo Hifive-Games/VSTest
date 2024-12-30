@@ -260,6 +260,11 @@ public class HeroBaseData : ScriptableObject
         RareLevel selectedRare = appliedActiveUpgrades[0].GetRandomRareLevel(TheHero.Instance.GetLuck()); // burada getluck değerini bu şekilde almamız doğru mu çok emin değilim aslında
         appliedActiveUpgrades[0].ApplyUpgrade(selectedRare,this);
     }
+
+    public List<ActiveUpgradeBaseData> GetAppliedActiveUpgrades()
+    {
+        return appliedActiveUpgrades;
+    }
     public virtual void HeroAttackSpeedActiveUpgrade(float value)
     {
         TheHero.Instance.AddAttackSpeed(value);

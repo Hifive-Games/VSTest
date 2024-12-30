@@ -9,7 +9,7 @@ public class AttackAmountActiveUpgrade : ActiveUpgradeBaseData
     {
         var rareValue = rareValues.Find(r => r.rareLevel == selectedRare);
        
-        Debug.Log($"Applied {selectedRare} {this.GetType().Name} Upgrade: +{rareValue.value}%");
+        Debug.Log($"Applied {selectedRare} {this.GetType().Name} Upgrade: +{rareValue.value}");
         
         hero.HeroAttackAmountActiveUpgrade(rareValue.value); 
         

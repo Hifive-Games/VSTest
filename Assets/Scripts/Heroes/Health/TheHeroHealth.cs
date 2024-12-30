@@ -51,8 +51,8 @@ public class TheHeroHealth : MonoBehaviour
     
     public void AddMaximumHealth(float health)
     {
-        currentHealth = currentHealth + health;
-        maxHealth = maxHealth + health;
+        currentHealth = health+currentHealth;
+        maxHealth = currentHealth+ health;
     }
     
     // bi yerde lazım olur belki

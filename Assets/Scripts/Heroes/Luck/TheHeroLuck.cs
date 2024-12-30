@@ -16,7 +16,9 @@ public class TheHeroLuck : MonoBehaviour
     }
     public void AddLuck(float value)
     {
-        luck =+ value;
+        Debug.LogError("Gelen değer: "+value);
+        luck = value+luck;
+        Debug.LogError("Son değer: "+luck);
     }
     public void ReduceLuck(float value)
     {

@@ -42,14 +42,6 @@ public class TheHeroSpawner : MonoBehaviour
         }
         return null; // Hiçbir karakter seçilmemişse null döndürüyoruz
     }
-
-
-
-    [Button()]
-    public void TestActiveUpdate()
-    {
-        selectedHero.TestActiveUpdate();
-    }
     
     
 }

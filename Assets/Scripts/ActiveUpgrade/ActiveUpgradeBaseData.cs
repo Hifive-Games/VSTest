@@ -28,6 +28,7 @@ public class RareValue
 
 public abstract class ActiveUpgradeBaseData : ScriptableObject
 {
+    public string upgradeName;
     public string description ="Description";
     
     public List<RareValue> rareValues;

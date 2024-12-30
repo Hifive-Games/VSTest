@@ -13,7 +13,7 @@ public class PassiveUpgradeUI : MonoBehaviour
 
 
     private PassiveUpgradeBaseData m_PassiveUpgradeBaseData; // UpgradeData referansı
-    private System.Action<PassiveUpgradeBaseData> _onUpgradeClicked; // Yükseltme butonuna tıklama olayını temsil eder
+    private System.Action<PassiveUpgradeBaseData> _onPassiveUpgradeClicked; // Yükseltme butonuna tıklama olayını temsil eder
     
     [SerializeField] private Button upgradeButton;
     private void OnEnable()
@@ -29,14 +29,14 @@ public class PassiveUpgradeUI : MonoBehaviour
     private void UpgradeButtonOnClick()
     {
         // Event'i tetikliyoruz
-        PassiveUpgradeManager.RequestUpgrade(m_PassiveUpgradeBaseData);
+        PassiveUpgradeManager.RequestPassiveUpgrade(m_PassiveUpgradeBaseData);
     }
     
     
     public void SetUpgrade(PassiveUpgradeBaseData passiveUpgradeBaseData, System.Action<PassiveUpgradeBaseData> onUpgradeClicked)
     {
         m_PassiveUpgradeBaseData = passiveUpgradeBaseData;
-        _onUpgradeClicked = onUpgradeClicked;
+        _onPassiveUpgradeClicked = onUpgradeClicked;
 
         UpdateUI(); // UI'yi güncelle
     }

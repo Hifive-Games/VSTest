@@ -12,10 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ab4428ba66ee4a4aac74edd15599f4c, type: 3}
   m_Name: AttackAmountActiveUpgrade
   m_EditorClassIdentifier: 
-  description: Description
+  upgradeName: Attack Amount
+  description: add amount
   rareValues:
   - rareLevel: 0
-    value: 0
+    value: 1
     baseProbability: 0
     luckFactor: 0
   - rareLevel: 1

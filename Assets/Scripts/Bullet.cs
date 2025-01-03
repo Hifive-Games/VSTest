@@ -43,6 +43,6 @@ public class Bullet : MonoBehaviour
 
     private void Die()
     {
-        ObjectPooler.Instance.ReturnObject(gameObject, gameObject);
+        ObjectPooler.Instance.ReturnObject(gameObject);
     }
 }

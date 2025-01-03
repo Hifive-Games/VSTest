@@ -8,9 +8,6 @@ public class Player : MonoBehaviour
     public int Health { get; set; }
     private List<Upgrade> appliedUpgrades;
 
-    public List<IWeapon> EquippedWeapons { get; private set; }
-    public List<ISpell> EquippedSpells { get; private set; }
-
     public int ExperienceToNextLevel { get; private set; }
 
     private void Awake()
@@ -20,38 +17,11 @@ public class Player : MonoBehaviour
             Instance = this;
             BaseHealth = 100;
             Health = BaseHealth;
-            appliedUpgrades = new List<Upgrade>();
         }
         else
         {
             Destroy(gameObject);
         }
-    }
-
-    public void ApplyUpgrade(Upgrade upgrade)
-    {
-        if (upgrade.Type != UpgradeType.Player) return;
-
-        switch (upgrade.Target)
-        {
-            case UpgradeTarget.PlayerHealth:
-                Health += (int)upgrade.Value;
-                break;
-            // Handle other targets if needed
-        }
-
-        appliedUpgrades.Add(upgrade);
-    }
-
-    public List<Upgrade> GetAppliedUpgrades()
-    {
-        return new List<Upgrade>(appliedUpgrades);
-    }
-
-    public void ResetPlayerStats()
-    {
-        Health = BaseHealth;
-        appliedUpgrades.Clear();
     }
 
     public void AddExperience(int experience)

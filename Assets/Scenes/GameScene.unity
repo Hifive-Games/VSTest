@@ -427,10 +427,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: 1768682202644973221, guid: 838dae4985bd3e7408c316aaf9de1ab3,
     type: 3}
-  minSpawnRadius: 50
+  minSpawnRadius: 60
   maxSpawnRadius: 100
-  spawnRate: 1
-  maxEnemies: 50
+  minClusterSize: 1
+  maxClusterSize: 4
+  spawnRate: 0.5
+  maxEnemies: 300
 --- !u!1 &268313471
 GameObject:
   m_ObjectHideFlags: 0
@@ -1171,14 +1173,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a0a92f7039b8ef4e82c5801064967bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletPoolHolder: {fileID: 793860770}
-  enemyPoolHolder: {fileID: 489557467}
-  bulletPrefab: {fileID: 1912128611643398632, guid: 5aaecec64d2a258418ebc6ec6db7ffe2,
-    type: 3}
-  enemyPrefab: {fileID: 1768682202644973221, guid: 838dae4985bd3e7408c316aaf9de1ab3,
-    type: 3}
-  experiancePrefab: {fileID: 7642634975434891464, guid: b6eb006e0faad0d4b8de30ddadf3edf5,
-    type: 3}
+  itemsToPool:
+  - prefab: {fileID: 1768682202644973221, guid: 838dae4985bd3e7408c316aaf9de1ab3,
+      type: 3}
+    parent: {fileID: 489557468}
+    size: 50
+  - prefab: {fileID: 7642634975434891464, guid: b6eb006e0faad0d4b8de30ddadf3edf5,
+      type: 3}
+    parent: {fileID: 489557468}
+    size: 50
+  - prefab: {fileID: 7841418584543471215, guid: 6b1ce224918c1214c8797a554a99e8d3,
+      type: 3}
+    parent: {fileID: 793860771}
+    size: 10
+  - prefab: {fileID: 8117586583825796430, guid: 29145532273c6a74599c2595f995aea7,
+      type: 3}
+    parent: {fileID: 793860771}
+    size: 2
+  - prefab: {fileID: 5158311172378158182, guid: 6ed4c3455eed5e34abcc7c10f88ef52b,
+      type: 3}
+    parent: {fileID: 793860771}
+    size: 5
+  - prefab: {fileID: 7873682740830455640, guid: de3fbae74acd8c04380642463ff5aec6,
+      type: 3}
+    parent: {fileID: 793860771}
+    size: 10
+  - prefab: {fileID: 7629484514301876640, guid: be40c17b019ed904886fb163c64ce360,
+      type: 3}
+    parent: {fileID: 793860771}
+    size: 30
 --- !u!4 &555173018
 Transform:
   m_ObjectHideFlags: 0
@@ -1827,9 +1850,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1222135124}
   - component: {fileID: 1222135125}
-  - component: {fileID: 1222135127}
   - component: {fileID: 1222135126}
-  - component: {fileID: 1222135128}
+  - component: {fileID: 1222135127}
   m_Layer: 0
   m_Name: Managers
   m_TagString: Untagged
@@ -1878,6 +1900,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8690c51e3f70e7847b46bac528ddfbd2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  EquippedSpells: []
+  spellCooldowns: []
 --- !u!114 &1222135127
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1887,21 +1911,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1222135123}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fcfbdb912ff505545ac733236ee9f696, type: 3}
+  m_Script: {fileID: 11500000, guid: e107269e7f7f3234aa7f0802be975429, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1222135128
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1222135123}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5c21678cabb9fa443bb2dc3f8a5824fc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  Spells:
+  - {fileID: 3921368058347473932, guid: 6b1ce224918c1214c8797a554a99e8d3, type: 3}
+  - {fileID: 3847176866704832493, guid: 29145532273c6a74599c2595f995aea7, type: 3}
+  - {fileID: 1192349317608148324, guid: de3fbae74acd8c04380642463ff5aec6, type: 3}
 --- !u!1 &1245271999
 GameObject:
   m_ObjectHideFlags: 0

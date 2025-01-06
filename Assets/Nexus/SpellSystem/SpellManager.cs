@@ -23,9 +23,6 @@ public class SpellManager : MonoBehaviour
 
     private void Start()
     {
-        EquipSpell(SpellDatabase.Instance.GetSpell(0));
-        EquipSpell(SpellDatabase.Instance.GetSpell(1));
-        EquipSpell(SpellDatabase.Instance.GetSpell(2));
     }
 
     public void ApplyUpgrade(Upgrade upgrade)

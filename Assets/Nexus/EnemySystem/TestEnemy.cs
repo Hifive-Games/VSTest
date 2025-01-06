@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : Enemies
+public class TestEnemy : Enemy
 {
     //this will be the enemy class, it will inherit from the Enemies class and if the enemy gameobject is active it will move towards the player
 
@@ -22,13 +22,5 @@ public class Enemy : Enemies
     private new void  OnDisable()
     {
         base.OnDisable();
-    }
-    private void Update()
-    {
-        if (gameObject.activeSelf)
-        {
-            transform.position = Vector3.MoveTowards(transform.position, player.transform.position, speed * Time.deltaTime);
-            transform.LookAt(player.transform);
-        }
     }
 }

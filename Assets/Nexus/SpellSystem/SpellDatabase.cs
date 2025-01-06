@@ -24,4 +24,9 @@ public class SpellDatabase : MonoBehaviour
         if (id < 0 || id >= Spells.Count) return null;
         else return Spells.Find(spell => spell.SpellID == id);
     }
+
+    public void RemoveSpell(Spell spell)
+    {
+        Spells.Remove(spell);
+    }
 }

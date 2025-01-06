@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class Fireball : Spell
@@ -15,17 +16,7 @@ public class Fireball : Spell
 
     public void Explode()
     {
-        Collider[] colliders = Physics.OverlapSphere(transform.position, explosionRadius);
-
-        foreach (Collider collider in colliders)
-        {
-            if (collider.TryGetComponent(out Enemy enemy))
-            {
-                enemy.TakeDamage(damage);
-            }
-        }
-
-        GameObject explosion = ObjectPooler.Instance.SpawnFromPool(ExplosionEffect, transform.position, ExplosionEffect.transform.rotation);
+        ObjectPooler.Instance.SpawnFromPool(ExplosionEffect, transform.position, Quaternion.identity);
     }
     public override void CollisionEffect(Enemy enemy)
     {

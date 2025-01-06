@@ -31,10 +31,11 @@ public class Player : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
+        print("Player took " + damage + " damage");
         Health -= damage;
         if (Health <= 0)
         {
-            // Handle player death
+            print("Player died");
         }
     }
 }

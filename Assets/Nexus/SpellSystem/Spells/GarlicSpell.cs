@@ -5,8 +5,11 @@ public class GarlicSpell : Spell
 
     float tickTimer;
 
+    float _duration = 5f;
+
     public override void OnEnable()
     {
+        _duration = duration;
     }
 
     public override void OnDisable()
@@ -15,9 +18,9 @@ public class GarlicSpell : Spell
 
     private void Update()
     {
-        if (duration > 0)
+        if (_duration > 0)
         {
-            duration -= Time.deltaTime;
+            _duration -= Time.deltaTime;
             tickTimer -= Time.deltaTime;
             if (tickTimer <= 0)
             {
@@ -48,7 +51,7 @@ public class GarlicSpell : Spell
         }
     }
 
-    public override void CollisionEffect(Enemy enemy)
+    public override void OnTriggerEnter(Collider other)
     {
     }
 }

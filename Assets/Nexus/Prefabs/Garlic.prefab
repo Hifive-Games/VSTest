@@ -127,14 +127,14 @@ MonoBehaviour:
   Icon: {fileID: 0}
   level: 1
   speed: 0
-  damage: 5
+  damage: 1
   duration: 5
   range: 0
   cooldown: 10
   explosionRadius: 5
   projectileCount: 1
   radius: 5
-  tickInterval: 0.5
+  tickInterval: 1
 --- !u!54 &7414985338347674824
 Rigidbody:
   m_ObjectHideFlags: 0

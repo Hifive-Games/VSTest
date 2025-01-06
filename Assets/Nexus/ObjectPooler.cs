@@ -90,7 +90,7 @@ public class ObjectPooler
                 data.queue.Enqueue(newObject);
             }
             GameObject objectToSpawn = data.queue.Dequeue();
-            objectToSpawn.SetActive(true);
+
             poolInfo[poolKey] = data;
             return objectToSpawn;
         }
@@ -99,6 +99,7 @@ public class ObjectPooler
 
     public void ReturnObject(GameObject objectToReturn)
     {
+        objectToReturn.SetActive(false);
         PooledObject pooledObject = objectToReturn.GetComponent<PooledObject>();
         if (pooledObject != null)
         {
@@ -106,7 +107,6 @@ public class ObjectPooler
             int poolKey = GetPrefabId(prefab);
             if (poolInfo.TryGetValue(poolKey, out PoolData data))
             {
-                objectToReturn.SetActive(false);
                 data.queue.Enqueue(objectToReturn);
                 poolInfo[poolKey] = data;
             }
@@ -148,6 +148,7 @@ public class ObjectPooler
         {
             objectToSpawn.transform.position = position;
             objectToSpawn.transform.rotation = rotation;
+            objectToSpawn.SetActive(true);
         }
         return objectToSpawn;
     }

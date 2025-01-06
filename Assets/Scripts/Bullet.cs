@@ -34,7 +34,7 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.TryGetComponent(out Enemies enemy))
+        if (other.TryGetComponent(out Enemy enemy))
         {
             enemy.TakeDamage(damage);
             Die();

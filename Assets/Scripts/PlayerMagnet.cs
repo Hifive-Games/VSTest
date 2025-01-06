@@ -79,7 +79,7 @@ public class PlayerMagnet : MonoBehaviour
         experiance.transform.position = Vector3.MoveTowards(experiance.transform.position, transform.position, math.max(minPullSpeed, Vector3.Distance(experiance.transform.position, transform.position)) * Time.deltaTime);
     }
 
-    private void OnDrawGizmos()
+    private void  OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, magnetRange);

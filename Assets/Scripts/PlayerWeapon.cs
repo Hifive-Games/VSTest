@@ -94,7 +94,7 @@ public class PlayerWeapon : MonoBehaviour
 
         foreach (Collider collider in colliders)
         {
-            if (collider.TryGetComponent(out Enemies enemy) && enemy.gameObject.activeSelf)
+            if (collider.TryGetComponent(out Enemy enemy) && enemy.gameObject.activeSelf)
             {
                 enemies.Add(collider);
             }
@@ -120,7 +120,7 @@ public class PlayerWeapon : MonoBehaviour
         }
                 
         bullet.TryGetComponent(out Bullet bulletScript);
-        bulletScript.SetBullet(damage, bulletSpeed, bulletLifeTime);
+        bulletScript.Initialize(damage, bulletSpeed, bulletLifeTime);
 
     }
 }

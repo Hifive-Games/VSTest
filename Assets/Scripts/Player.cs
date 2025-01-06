@@ -1,23 +1,22 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 public class Player : MonoBehaviour
 {
     public static Player Instance;
-    public int level = 1;
-    public int experience = 0;
-    public int experienceToNextLevel = 100;
-    public XPBar xpBar;
 
-    public bool isInvincible = false;
+    public int BaseHealth { get; private set; }
+    public int Health { get; set; }
+    private List<Upgrade> appliedUpgrades;
+
+    public int ExperienceToNextLevel { get; private set; }
 
     private void Awake()
     {
         if (Instance == null)
         {
             Instance = this;
+            BaseHealth = 100;
+            Health = BaseHealth;
         }
         else
         {
@@ -25,37 +24,18 @@ public class Player : MonoBehaviour
         }
     }
 
-    private void Start()
+    public void AddExperience(int experience)
     {
+        // Add experience logic here
     }
 
-    //we will add experience to the player until the experience is NOT enough to level up, then we will set xpBar and other things.
-
-    public void AddExperience(int xp)
+    public void TakeDamage(int damage)
     {
-        experience += xp;
-        xpBar.AddXP(experience);
-        if(StillNeedToLevelUp())
+        print("Player took " + damage + " damage");
+        Health -= damage;
+        if (Health <= 0)
         {
-            LevelUp();
+            print("Player died");
         }
-    }
-
-    public void LevelUp()
-    {
-        level++;
-        experience -= experienceToNextLevel;
-        experienceToNextLevel = (int)(experienceToNextLevel * 1.1f);
-        
-        GameManager.Instance.LevelUp();
-
-        xpBar.SetLevel(level);
-        xpBar.SetMaxXP(experienceToNextLevel);
-        xpBar.ResetXP();
-    }
-
-    public bool StillNeedToLevelUp()
-    {
-        return experience >= experienceToNextLevel;
     }
 }

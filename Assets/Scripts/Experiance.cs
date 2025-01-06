@@ -12,7 +12,7 @@ public class Experiance : MonoBehaviour
         {
             player.AddExperience(experience);
             PlayerMagnet.Instance.audioSource.PlayOneShot(PlayerMagnet.Instance.expSfx);
-            ObjectPooler.Instance.ReturnObject(gameObject, gameObject);
+            ObjectPooler.Instance.ReturnObject(gameObject);
         }
     }
 }

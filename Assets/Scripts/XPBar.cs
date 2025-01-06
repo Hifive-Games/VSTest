@@ -19,7 +19,7 @@ public class XPBar : MonoBehaviour
     private void Start()
     {
         currentXP = 0;
-        maxXp = Player.Instance.experienceToNextLevel;
+        maxXp = Player.Instance.ExperienceToNextLevel;
     }
 
     public void AddXP(float xp)

@@ -8,7 +8,7 @@ public class Bullet : MonoBehaviour
     public int damage;
     public float lifeTime;
 
-    public void SetBullet(int damage, float speed, float lifeTime)
+    public void Initialize(int damage, float speed, float lifeTime)
     {
         this.damage = damage;
         this.speed = speed;
@@ -34,7 +34,7 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.TryGetComponent(out Enemies enemy))
+        if (other.TryGetComponent(out Enemy enemy))
         {
             enemy.TakeDamage(damage);
             Die();
@@ -43,6 +43,6 @@ public class Bullet : MonoBehaviour
 
     private void Die()
     {
-        ObjectPooler.Instance.ReturnObject(gameObject, gameObject);
+        ObjectPooler.Instance.ReturnObject(gameObject);
     }
 }

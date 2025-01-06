@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95d0c2cf037e1884094ae42ac42ff7d0, type: 3}
   m_Name: LuckActiveUpgrade
   m_EditorClassIdentifier: 
-  description: Luck
+  upgradeName: Luck
+  description: 2 zara milyonluk olduk
   rareValues:
   - rareLevel: 0
     value: 10

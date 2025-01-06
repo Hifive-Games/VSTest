@@ -12,25 +12,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8c45401ed2b6164c925ee783542897d, type: 3}
   m_Name: AttackSizeActiveUpgrade
   m_EditorClassIdentifier: 
-  description: Description
+  upgradeName: Attack size
+  description: Transfrm.size
   rareValues:
   - rareLevel: 0
-    value: 0
-    baseProbability: 0
-    luckFactor: 0
+    value: 1
+    baseProbability: 50
+    luckFactor: 1
   - rareLevel: 1
-    value: 0
-    baseProbability: 0
-    luckFactor: 0
+    value: 2
+    baseProbability: 30
+    luckFactor: 1
   - rareLevel: 2
-    value: 0
-    baseProbability: 0
-    luckFactor: 0
+    value: 3
+    baseProbability: 10
+    luckFactor: 1
   - rareLevel: 3
-    value: 0
-    baseProbability: 0
-    luckFactor: 0
+    value: 4
+    baseProbability: 8
+    luckFactor: 1
   - rareLevel: 4
-    value: 0
-    baseProbability: 0
-    luckFactor: 0
+    value: 5
+    baseProbability: 2
+    luckFactor: 1

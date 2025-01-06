@@ -17,21 +17,21 @@ MonoBehaviour:
   rareValues:
   - rareLevel: 0
     value: 1
-    baseProbability: 0
+    baseProbability: 50
     luckFactor: 0
   - rareLevel: 1
-    value: 0
-    baseProbability: 0
+    value: 2
+    baseProbability: 30
     luckFactor: 0
   - rareLevel: 2
-    value: 0
-    baseProbability: 0
+    value: 3
+    baseProbability: 10
     luckFactor: 0
   - rareLevel: 3
-    value: 0
-    baseProbability: 0
+    value: 4
+    baseProbability: 8
     luckFactor: 0
   - rareLevel: 4
-    value: 0
-    baseProbability: 0
+    value: 5
+    baseProbability: 2
     luckFactor: 0

@@ -7,13 +7,13 @@ using Zenject;
 
 public class PassiveUpgradeReverse : MonoBehaviour
 {
-    private List<PassiveUpgradeData> upgrades;
+    private List<PassiveUpgradeBaseData> upgrades;
 
     [Inject] private PassiveUpgradeManager passiveUpgradeManager;
     private void Start()
     {
         // Tüm PassiveUpgradeData nesnelerini yüklüyoruz
-        upgrades = new List<PassiveUpgradeData>(Resources.LoadAll<PassiveUpgradeData>(ResourcePathManager.Instance.GetPassiveUpgradeDataPath()));
+        upgrades = new List<PassiveUpgradeBaseData>(Resources.LoadAll<PassiveUpgradeBaseData>(ResourcePathManager.Instance.GetPassiveUpgradeDataPath()));
         GetComponent<Button>().onClick.AddListener(ReverseAllPassiveUpgradeDatas);
     }
 

@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class CharacterSelector : MonoBehaviour
 {
-    [SerializeField] private PlayerSO[] playerCharacters;
+    [SerializeField] private HeroBaseData[] playerCharacters;
     [SerializeField] private Image characterDisplayImage; // Karakter görselini gösterecek UI Image
 
     private int currentIndex = 0;
@@ -18,7 +18,7 @@ public class CharacterSelector : MonoBehaviour
 
     private void GetPlayerCharacters()
     {
-       playerCharacters=Resources.LoadAll<PlayerSO>(ResourcePathManager.Instance.GetPlayerSOPath());
+       playerCharacters=Resources.LoadAll<HeroBaseData>(ResourcePathManager.Instance.GetHeroSOPath());
     }
 
     public void NextCharacter()

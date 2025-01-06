@@ -15,9 +15,9 @@ public class PlayerStats : MonoBehaviourSingleton<PlayerStats>
         InitializePlayer();
     }
 
-    public void InitializePlayer(PlayerSO playerSO = null)
+    public void InitializePlayer(HeroBaseData heroBaseData = null)
     {
-        if (playerSO != null)
+        if (heroBaseData != null)
         {
             /*
             maxHealth = playerSO.maxHealth;

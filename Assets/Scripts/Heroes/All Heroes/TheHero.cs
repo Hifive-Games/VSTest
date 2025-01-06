@@ -77,6 +77,6 @@ public abstract class TheHero : MonoBehaviourSingleton<TheHero>
     public abstract void AddAttackRange(float newRate);
     public abstract void AddAttackSize(float newRate);
     public abstract void AddAttackAmount(float newRate);
-   
-
+    
+    
 }

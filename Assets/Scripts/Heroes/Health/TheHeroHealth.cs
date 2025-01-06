@@ -125,5 +125,6 @@ public class TheHeroHealth : MonoBehaviour
             OnHealthDepleted?.Invoke(); // Can 0 olduğunda Action tetiklenir
         }
     }
+    
 }
 

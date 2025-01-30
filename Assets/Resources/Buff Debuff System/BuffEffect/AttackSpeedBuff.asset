@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3eb4bf0f071bbd340938f4ba4776ee0a, type: 3}
+  m_Name: AttackSpeedBuff
+  m_EditorClassIdentifier: 
+  effectName: Attack Speed Buff
+  description: "Sald\u0131r\u0131 h\u0131z\u0131 veriyo"
+  valueOfBuffOrDebuff: 2
+  HeroBuffEffectScaler: 1
+  HeroDebuffEffectScaler: 1

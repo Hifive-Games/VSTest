@@ -6,8 +6,9 @@ using UnityEngine;
 [RequireComponent(typeof(TheHeroMovementNewInput))]
 [RequireComponent(typeof(TheHeroHealth))]
 [RequireComponent(typeof(TheHeroLuck))]
-
-
+[RequireComponent(typeof(TheHeroDamageManager))]
+[RequireComponent(typeof(TheHeroArmor))]
+[RequireComponent(typeof(TheHeroInteraction))]
 public abstract class TheHero : MonoBehaviourSingleton<TheHero>
 {
     //HeroStats
@@ -35,13 +36,24 @@ public abstract class TheHero : MonoBehaviourSingleton<TheHero>
     {
         GetComponent<TheHeroLuck>().SetLuck(newRate);
     }
+    public virtual void SetArmor(float newRate)
+    {
+        GetComponent<TheHeroArmor>().SetArmor(newRate);
+    }
+    public virtual void SetBuffEffectScaler(float newRate)
+    {
+       GetComponent<TheHeroInteraction>().SetBuffEffectScaler(newRate);
+    }
+    public virtual void SetDeBuffEffectScaler(float newRate)
+    {
+        GetComponent<TheHeroInteraction>().SetDeBuffEffectScaler(newRate);
+    }
 
-  
     public abstract void SetAttackSpeed(float newRate);
     public abstract void SetAttackRange(float newRate);
     public abstract void SetAttackSize(float newRate);
     public abstract void SetAttackAmount(float newRate);
-    
+
     
     // Diğer Upgradeler
     public virtual void AddMovementSpeed(float value)
@@ -68,10 +80,35 @@ public abstract class TheHero : MonoBehaviourSingleton<TheHero>
     {
         GetComponent<TheHeroLuck>().AddLuck(newRate);
     }
+    public virtual void AddArmor(float newRate)
+    {
+        GetComponent<TheHeroArmor>().AddArmor(newRate);
+    }
+    public virtual void AddBuffEffectScaler(float newRate)
+    {
+        GetComponent<TheHeroInteraction>().AddBuffEffectScaler(newRate);
+    }
+    public virtual void AddDeBuffEffectScaler(float newRate)
+    {
+        GetComponent<TheHeroInteraction>().AddDeBuffEffectScaler(newRate);
+    }
+    
+    //Getler
     public virtual float GetLuck()
     {
         return GetComponent<TheHeroLuck>().GetLuck();
     }
+    public virtual float GetArmor()
+    {
+        return GetComponent<TheHeroArmor>().GetArmor();
+    }
+    
+    //Increase
+    public virtual void IncreaseHealth(float newRate)
+    {
+        GetComponent<TheHeroHealth>().IncreaseHealth(newRate);
+    }
+    
     // Upgradeler
     public abstract void AddAttackSpeed(float newRate);
     public abstract void AddAttackRange(float newRate);

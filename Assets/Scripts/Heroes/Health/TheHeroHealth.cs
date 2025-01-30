@@ -23,7 +23,7 @@ public class TheHeroHealth : MonoBehaviour
     }
 
 
-    public void TakeDamage(float damage)
+    public void IncreaseHealth(float damage)
     {
         currentHealth -= damage;
         if (currentHealth <= 0)
@@ -114,16 +114,6 @@ public class TheHeroHealth : MonoBehaviour
         Debug.LogError(" HealthRegenAmount : "+healthRegenAmount);
         Debug.LogError(" HealthRegenRate : "+healthRegenRate);
     }
-
-    [Button()]
-    public void TestTakeDamage()
-    {
-        currentHealth -= 30;
-        if (currentHealth <= 0)
-        {
-            currentHealth = 0;
-            OnHealthDepleted?.Invoke(); // Can 0 olduğunda Action tetiklenir
-        }
-    }
+    
 }
 

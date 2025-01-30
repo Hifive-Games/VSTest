@@ -17,7 +17,7 @@ public class HeroBaseData : ScriptableObject
     public GameObject prefab;
     public Sprite characterImage;
     public bool isSelected = false;
-
+    
     [SerializeField] public List<HeroStat> heroStatsBaseDatas;  // Her bir öğeyi tutmak için dizi kullanıyoruz
     [SerializeField] private List<PassiveUpgradeBaseData> appliedPassiveUpgrades;
     [SerializeField] private List<ActiveUpgradeBaseData>  appliedActiveUpgrades;
@@ -198,9 +198,21 @@ public class HeroBaseData : ScriptableObject
     {
         TheHero.Instance.SetAttackAmount(value);
     }
+    public void HeroSetArmor(float value)
+    {
+        TheHero.Instance.SetArmor(value);
+    }
     public void HeroSetLuck(float value)
     {
         TheHero.Instance.SetLuck(value);
+    }
+    public virtual void HeroSetBuffEffectScaler( float heroBuffEffectScaler)
+    {
+        TheHero.Instance.SetBuffEffectScaler(heroBuffEffectScaler);
+    }
+    public virtual void HeroSetDeBuffEffectScaler(float heroDebuffEffectScaler)
+    {
+        TheHero.Instance.SetDeBuffEffectScaler(heroDebuffEffectScaler);
     }
     
     public void RunAllPassiveUpgrades()
@@ -250,17 +262,23 @@ public class HeroBaseData : ScriptableObject
     {
         TheHero.Instance.AddLuck(value);
     }
+    public virtual void HeroArmorPassiveUpgrade(float value)
+    {
+        TheHero.Instance.AddArmor(value);
+    }
+    public virtual void HeroBuffEffectScalerPassiveUpgrade(float value)
+    {
+        TheHero.Instance.AddBuffEffectScaler(value);
+    }
+    public virtual void HeroDeBuffEffectScalerPassiveUpgrade(float value)
+    {
+        TheHero.Instance.AddDeBuffEffectScaler(value);
+    }
     
     /*
      * Burası (aşağısı) Active Upgradeler içim
      */
-
-    public void TestActiveUpdate()
-    {
-        RareLevel selectedRare = appliedActiveUpgrades[0].GetRandomRareLevel(TheHero.Instance.GetLuck()); // burada getluck değerini bu şekilde almamız doğru mu çok emin değilim aslında
-        appliedActiveUpgrades[0].ApplyUpgrade(selectedRare,this);
-    }
-
+    
     public List<ActiveUpgradeBaseData> GetAppliedActiveUpgrades()
     {
         return appliedActiveUpgrades;
@@ -305,6 +323,19 @@ public class HeroBaseData : ScriptableObject
     {
         TheHero.Instance.AddLuck(value);
     }
+    public virtual void HeroArmorActiveUpgrade(float value)
+    {
+        TheHero.Instance.AddArmor(value);
+    }
+    public virtual void HeroBuffEffectScalerActiveUpgrade(float value)
+    {
+        TheHero.Instance.AddBuffEffectScaler(value);
+    }
+    public virtual void HeroDeBuffEffectScalerActiveUpgrade(float value)
+    {
+        TheHero.Instance.AddDeBuffEffectScaler(value);
+    }
+    
 }
 /*
  public class ActiveUpgradeManager : MonoBehaviour

@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 777604518216921086}
   - component: {fileID: 1003326720520514771}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crystal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -65,7 +65,7 @@ GameObject:
   - component: {fileID: 2589987273729362546}
   - component: {fileID: 3399411508416905387}
   - component: {fileID: 2635835487067908307}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}

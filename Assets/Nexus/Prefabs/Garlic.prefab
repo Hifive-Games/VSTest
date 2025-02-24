@@ -135,6 +135,7 @@ MonoBehaviour:
   projectileCount: 1
   radius: 5
   tickInterval: 1
+  Caster: 0
 --- !u!54 &7414985338347674824
 Rigidbody:
   m_ObjectHideFlags: 0

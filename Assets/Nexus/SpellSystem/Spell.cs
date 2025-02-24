@@ -19,10 +19,11 @@ public abstract class Spell : MonoBehaviour
     public float radius = 3f;
     public float tickInterval = 0.5f;
 
+    public Caster Caster;
+
     public virtual void OnEnable()
     {
-        Seek(FindClosestEnemy());
-        Release();
+        target = null;
     }
 
     public virtual void OnDisable()
@@ -32,32 +33,34 @@ public abstract class Spell : MonoBehaviour
 
     public virtual Transform FindClosestEnemy()
     {
-        Enemy[] enemies = FindObjectsOfType<Enemy>();
-        float closestDistance = Mathf.Min(range, float.MaxValue);
-        GameObject closestEnemy = null;
-        foreach (Enemy enemy in enemies)
+        LayerMask mask = LayerMask.GetMask("Enemy");
+        Collider[] hits = Physics.OverlapSphere(transform.position, range, mask);
+
+        Transform closest = null;
+        float closestDistance = range;
+        foreach (var hit in hits)
         {
-            float distance = Vector3.Distance(transform.position, enemy.transform.position);
+            float distance = Vector3.Distance(transform.position, hit.transform.position);
             if (distance < closestDistance)
             {
                 closestDistance = distance;
-                closestEnemy = enemy.gameObject;
+                closest = hit.transform;
             }
         }
 
-        if (closestEnemy != null)
+        return closest;
+    }
+
+    public virtual void Seek(Transform target = null)
+    {
+        if (target == null)
         {
-            return closestEnemy.transform;
+            this.target = FindClosestEnemy();
         }
         else
         {
-            return null;
+            this.target = target;
         }
-    }
-
-    public void Seek(Transform target)
-    {
-        this.target = target;
     }
 
 
@@ -66,7 +69,7 @@ public abstract class Spell : MonoBehaviour
     {
         if (target == null || !target.gameObject.activeInHierarchy)
         {
-            FindClosestEnemy();
+            target = FindClosestEnemy();
         }
         StartCoroutine(MoveTowardsTarget());
     }
@@ -75,51 +78,74 @@ public abstract class Spell : MonoBehaviour
 
     public IEnumerator MoveTowardsTarget()
     {
-        if (target == null)
-        {
-            float _duration = duration;
-            Vector3 randomDirection;
-            randomDirection = new Vector3(Random.Range(-1f, 1f), 0, Random.Range(-1f, 1f));
 
-            transform.LookAt(transform.position + randomDirection);
-            while (_duration > 0)
+        float radius = 1.5f; // Orbit radius around caster
+        float angle = 0f;
+        while (duration > 0)
+        {
+            if (target == null || !target.gameObject.activeInHierarchy)
             {
-                transform.Translate(randomDirection.normalized * speed * Time.deltaTime, Space.World);
-                _duration -= Time.deltaTime;
+                Transform casterTransform = Caster == Caster.Player ? Player.Instance.transform : ExampleBoss.Instance.transform;
+                if (casterTransform == null)
+                    yield break;
+
+                angle += Time.deltaTime * 20; // Rotate speed
+
+                float x = Mathf.Cos(angle) * radius;
+                float z = Mathf.Sin(angle) * radius;
+
+                Vector3 offset = new Vector3(x, 0, z);
+                transform.position = casterTransform.position + offset;
+
+                duration -= Time.deltaTime;
+                Seek();
                 yield return null;
             }
-
-            CollisionEffect(null);
-        }
-        else
-        {
-            while (target != null)
+            else
             {
                 Vector3 direction = target.position - transform.position;
                 float distanceThisFrame = speed * Time.deltaTime;
 
                 if (direction.magnitude <= distanceThisFrame)
                 {
-                    CollisionEffect(target.GetComponent<Enemy>());
-                    break;
+                    print("Hit target");
+                    yield break;
                 }
 
                 transform.Translate(direction.normalized * distanceThisFrame, Space.World);
                 transform.LookAt(transform.position + direction);
-                yield return null;
             }
+
+            duration -= Time.deltaTime;
+            yield return null;
         }
+
+        ObjectPooler.Instance.ReturnObject(gameObject);
     }
 
     public virtual void OnTriggerEnter(Collider other)
     {
-        if (other.TryGetComponent(out Enemy enemy))
+        if (other.TryGetComponent(out Enemy enemy) && Caster == Caster.Player)
         {
             CollisionEffect(enemy);
+
+            print($"Cast by {Caster} collided with {enemy.name}");
+        }
+
+        if (other.TryGetComponent(out Player player) && Caster == Caster.Boss)
+        {
+            CollisionEffect(player);
+
+            print($"Cast by {Caster} collided with {player.name}");
         }
     }
 
-    public virtual void CollisionEffect(Enemy enemy)
+    public virtual void CollisionEffect(Enemy enemy = null)
+    {
+        ObjectPooler.Instance.ReturnObject(gameObject);
+    }
+
+    public virtual void CollisionEffect(Player player)
     {
         ObjectPooler.Instance.ReturnObject(gameObject);
     }
@@ -152,3 +178,7 @@ public abstract class Spell : MonoBehaviour
         }
     }
 }
+
+
+
+public enum Caster { Player, Boss, Enemy }

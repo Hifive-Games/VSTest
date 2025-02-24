@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6327207087564404048}
   - component: {fileID: 5318406789184399443}
   - component: {fileID: 5888776863841827465}
-  - component: {fileID: 3824626486662985031}
+  - component: {fileID: 3491277849641313197}
   m_Layer: 0
   m_Name: ArcaneMissileChild
   m_TagString: Untagged
@@ -134,7 +134,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &3824626486662985031
+--- !u!114 &3491277849641313197
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -143,22 +143,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 7629484514301876640}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 896bc350a9a4010468853063294c3c61, type: 3}
+  m_Script: {fileID: 11500000, guid: dfd9ea482790efd42906e8ef232fb2a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SpellID: 0
-  Name: ArcaneMissile
-  Description: Hits and splits
-  Icon: {fileID: 0}
-  level: 1
-  speed: 55
-  damage: 5
-  duration: 5
-  range: 40
-  cooldown: 5
-  explosionRadius: 0
-  projectileCount: 1
-  radius: 3
-  tickInterval: 0.5
-  child: {fileID: 0}
-  childCount: 0

@@ -10,6 +10,15 @@ public class GarlicSpell : Spell
     public override void OnEnable()
     {
         _duration = duration;
+        StopAllCoroutines();
+    }
+
+    public override void Release()
+    {
+    }
+
+    public override void Seek(Transform target = null)
+    {
     }
 
     public override void OnDisable()
@@ -34,20 +43,26 @@ public class GarlicSpell : Spell
         }
 
 
-        transform.position = Player.Instance.transform.position;
+        transform.position = FollowCasterTransform().position;
 
         //rotate the garlic
         transform.Rotate(Vector3.up, 360 * Time.deltaTime);
     }
 
+    public Transform FollowCasterTransform()
+    {
+        return Caster == Caster.Player ? Player.Instance.transform : ExampleBoss.Instance.transform;
+    }
+
     void DamageNearbyEnemies()
     {
         Collider[] colliders = Physics.OverlapSphere(transform.position, radius);
-        if (colliders.Length == 0) return;
         foreach (Collider c in colliders)
         {
-            if (c.TryGetComponent(out Enemy e))
+            if (c.TryGetComponent(out Enemy e) && Caster == Caster.Player)
                 e.TakeDamage(damage);
+            if (c.TryGetComponent(out Player p) && Caster == Caster.Boss)
+                p.TakeDamage(damage);
         }
     }
 

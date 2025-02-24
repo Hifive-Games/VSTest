@@ -8,11 +8,11 @@ public class Experiance : MonoBehaviour
 
     public void OnTriggerEnter(Collider other)
     {
-        if (other.TryGetComponent(out Player player))
+        if (other.TryGetComponent(out Player _))
         {
-            player.AddExperience(experience);
-            PlayerMagnet.Instance.audioSource.PlayOneShot(PlayerMagnet.Instance.expSfx);
             ObjectPooler.Instance.ReturnObject(gameObject);
+
+            GlobalGameEventManager.Instance.Notify("PlayerGetExperiance", experience);
         }
     }
 }

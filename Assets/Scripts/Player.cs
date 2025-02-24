@@ -8,7 +8,10 @@ public class Player : MonoBehaviour
     public int Health { get; set; }
     private List<Upgrade> appliedUpgrades;
 
-    public int ExperienceToNextLevel { get; private set; }
+    public int ExperienceToNextLevel;
+
+    public int Level { get; private set; }
+    public int Experience { get; private set; }
 
     private void Awake()
     {
@@ -26,7 +29,20 @@ public class Player : MonoBehaviour
 
     public void AddExperience(int experience)
     {
-        // Add experience logic here
+        Experience += experience;
+        if (Experience >= ExperienceToNextLevel)
+        {
+            LevelUp();
+        }
+    }
+
+    private void LevelUp()
+    {
+        Level++;
+        Experience -= ExperienceToNextLevel;
+        ExperienceToNextLevel = Level * 100;
+        BaseHealth += 10;
+        Health = BaseHealth;
     }
 
     public void TakeDamage(int damage)
@@ -37,5 +53,10 @@ public class Player : MonoBehaviour
         {
             print("Player died");
         }
+    }
+
+    void OnGUI()
+    {
+        GUI.Label(new Rect(70, 70, 500, 50), "Player HP: " + Health + "/" + BaseHealth);
     }
 }

@@ -160,5 +160,6 @@ MonoBehaviour:
   projectileCount: 1
   radius: 3
   tickInterval: 0.5
+  Caster: 0
   child: {fileID: 7629484514301876640, guid: be40c17b019ed904886fb163c64ce360, type: 3}
   childCount: 3

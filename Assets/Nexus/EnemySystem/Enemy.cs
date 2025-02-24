@@ -1,12 +1,15 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class Enemy : MonoBehaviour
 {
-    [SerializeField] private EnemyDataSO enemySO;
+    public EnemyDataSO enemySO;
     public int maxHealth;
     public int damage;
     public float speed;
     public int currentHealth;
+    public int Armor;
     public int score;
     public int experience;
     public bool hitBySpell = false;
@@ -20,6 +23,7 @@ public abstract class Enemy : MonoBehaviour
     protected bool isPlayerInRange;
     private int randomFactor;
 
+    public List<Debuff> Debuffs { get; private set; } = new List<Debuff>();
     public void Initialize(EnemyDataSO enemySO)
     {
         maxHealth = enemySO.maxHealth;
@@ -30,9 +34,10 @@ public abstract class Enemy : MonoBehaviour
         experience = enemySO.experience;
         attackRange = enemySO.attackRange;
         attackSpeed = enemySO.attackSpeed;
+        expPrefab = enemySO.deathEffect;
     }
 
-    protected void OnEnable()
+    public virtual void OnEnable()
     {
         if (player == null)
         {
@@ -44,7 +49,7 @@ public abstract class Enemy : MonoBehaviour
         currentHealth = maxHealth;
     }
 
-    protected void OnDisable()
+    public virtual void OnDisable()
     {
         EnemySpawner.Instance.RemoveEnemy(gameObject);
         player = null;
@@ -57,7 +62,7 @@ public abstract class Enemy : MonoBehaviour
         hitBySpell = false;
     }
 
-    public void Update()
+    public virtual void Update()
     {
         HostileAction();
     }
@@ -82,6 +87,10 @@ public abstract class Enemy : MonoBehaviour
         ObjectPooler.Instance.ReturnObject(gameObject);
 
         Debug.Log("Enemy died");
+
+        GlobalGameEventManager.Instance.Notify("EnemyDied", experience, transform.position, expPrefab);
+
+        Debuffs.Clear();
     }
 
     public void TryToHitPlayer()
@@ -136,5 +145,47 @@ public abstract class Enemy : MonoBehaviour
             IsPlayerInRange();
             MoveTowardsPlayer();
         }
+    }
+
+    public void ApplyDebuff(Debuff debuff)
+    {
+        if (!gameObject.activeInHierarchy)
+        {
+            return;
+        }
+        switch (debuff.Type)
+        {
+            case DebuffType.ArmorReduction:
+                StartCoroutine(ApplyArmorReduction(debuff));
+                break;
+                // Add other debuff types as needed
+        }
+    }
+
+    public bool HasDebuff(DebuffType debuffType)
+    {
+        if (Debuffs.Exists(debuff => debuff.Type == debuffType))
+        {
+            return true;
+        }
+        return false;
+    }
+
+    public void RemoveDebuff(DebuffType debuffType)
+    {
+        Debuff debuff = Debuffs.Find(d => d.Type == debuffType);
+        if (debuff.Type == debuffType)
+        {
+            Debuffs.Remove(debuff);
+        }
+    }
+
+    private IEnumerator ApplyArmorReduction(Debuff debuff)
+    {
+        Debuffs.Add(debuff);
+        Armor -= debuff.Value;
+        yield return new WaitForSeconds(debuff.Duration);
+        Armor += debuff.Value; // Restore armor after debuff expire
+        Debuffs.Remove(debuff);
     }
 }

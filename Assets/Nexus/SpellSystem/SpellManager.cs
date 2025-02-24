@@ -60,10 +60,13 @@ public class SpellManager : MonoBehaviour
     public IEnumerator CastSpell(int index)
     {
         Spell spell = EquippedSpells[index];
+        spell.Caster = Caster.Player;
         for (int i = 0; i < spell.projectileCount; i++)
         {
-            GameObject spellObject = ObjectPooler.Instance.SpawnFromPool(spell.gameObject, Player.Instance.gameObject.transform.position, Quaternion.identity);
+            GameObject spellObject = ObjectPooler.Instance.SpawnFromPool(spell.gameObject, Player.Instance.transform.position, Quaternion.identity);
             spellObject.transform.position = new Vector3(spellObject.transform.position.x, 1f, spellObject.transform.position.z);
+            spellObject.GetComponent<Spell>().Seek();
+            spellObject.GetComponent<Spell>().Release();
             yield return new WaitForSeconds(spell.tickInterval);
         }
     }

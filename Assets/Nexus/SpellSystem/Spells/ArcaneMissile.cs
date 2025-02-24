@@ -14,20 +14,6 @@ public class ArcaneMissile : Spell
         base.OnDisable();
     }
 
-    public override void OnTriggerEnter(Collider other)
-    {
-        if (other.TryGetComponent(out Enemy enemy))
-        {
-            if (enemy.hitBySpell) Seek(FindClosestEnemy());
-            else
-            {
-                enemy.TakeDamage(damage);
-                enemy.hitBySpell = true;
-                Split();
-            }
-        }
-    }
-
     public void Split()
     {
         //split into multiple projectiles
@@ -35,44 +21,53 @@ public class ArcaneMissile : Spell
         {
             GameObject _child = ObjectPooler.Instance.SpawnFromPool(child, transform.position, Quaternion.identity);
 
-            ArcaneMissile childMissile = _child.GetComponent<ArcaneMissile>();
-            childMissile.childCount = 0;
-
-            //make the child missile color different
-            _child.GetComponent<Renderer>().material.color = Color.blue;
+            ArcaneMissileChild missile = _child.GetComponent<ArcaneMissileChild>();
+            missile.Initialize(Player.Instance.transform, damage / childCount);
         }
 
 
-        base.CollisionEffect(null);
+        base.CollisionEffect();
+    }
+
+    public override void CollisionEffect(Enemy enemy)
+    {
+        if (enemy.hitBySpell) Seek(FindClosestEnemy());
+        else
+        {
+            enemy.TakeDamage(damage);
+            enemy.hitBySpell = true;
+            Split();
+        }
+    }
+
+    public override void CollisionEffect(Player player)
+    {
+        if (player != null) player.TakeDamage(damage);
+        base.CollisionEffect(player);
     }
 
     public override Transform FindClosestEnemy()
     {
-        Enemy[] enemies = FindObjectsOfType<Enemy>();
-        float closestDistance = Mathf.Min(range, float.MaxValue);
-        GameObject closestEnemy = null;
-        foreach (Enemy enemy in enemies)
-        {
-            if (enemy.hitBySpell)
-            {
-                continue;
-            }
 
-            float distance = Vector3.Distance(transform.position, enemy.transform.position);
+        LayerMask mask = LayerMask.GetMask("Enemy");
+        Collider[] hits = Physics.OverlapSphere(transform.position, range, mask);
+
+        Transform closest = null;
+        float closestDistance = range;
+        foreach (var hit in hits)
+        {
+            if (hit.TryGetComponent(out Enemy enemy) && enemy.hitBySpell)
+                continue;
+
+            float distance = Vector3.Distance(transform.position, hit.transform.position);
             if (distance < closestDistance)
             {
                 closestDistance = distance;
-                closestEnemy = enemy.gameObject;
+                closest = hit.transform;
             }
         }
 
-        if (closestEnemy != null)
-        {
-            return closestEnemy.transform;
-        }
-        else
-        {
-            return null;
-        }
+
+        return closest;
     }
 }

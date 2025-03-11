@@ -4,6 +4,13 @@ using NaughtyAttributes;
 
 public class TheHeroHealth : MonoBehaviour
 {
+    /*
+     * MAXİMUM CAN VE REDUCE MAX CAN FALAN OLAYLARINA Bİ BAK
+     * ÇOK GARİP GELDİ ANLAMADIM. TAM OLARAK NASIL OLMASI GEREKİYOR
+     * MAX CAN ALINDIĞINDA CURRENT ARTACAK MI?
+     * ARTACAKSA HER ZAMAN MI YOKSA SADECE CAN FULL OLDUĞUNDA MI
+     */
+    
     
     private float currentHealth;
     private float maxHealth;
@@ -51,8 +58,14 @@ public class TheHeroHealth : MonoBehaviour
     
     public void AddMaximumHealth(float health)
     {
-        currentHealth = health+currentHealth;
-        maxHealth = currentHealth+ health;
+        // Önce maxHealth'i artır
+        maxHealth += health;
+
+        // Eğer currentHealth zaten full ise, onu da artır
+        if (currentHealth == maxHealth - health)
+        {
+            currentHealth = maxHealth;
+        }
     }
     
     // bi yerde lazım olur belki
@@ -78,6 +91,22 @@ public class TheHeroHealth : MonoBehaviour
     {
         currentHealth = Mathf.Clamp(currentHealth + health, 0, maxHealth);
     }
+    
+    // Reducelar
+    public void ReduceCurrentHealth(float health)
+    {
+        currentHealth = Mathf.Clamp(currentHealth - health, 0, maxHealth);
+    }
+    
+    public void ReduceMaximumHealth(float health)
+    {
+        // Max health azalt
+        maxHealth = Mathf.Max(0, maxHealth - health);
+
+        // Eğer currentHealth yeni maxHealth'ten büyükse, onu maxHealth'e ayarla
+        currentHealth = Mathf.Min(currentHealth, maxHealth);
+    }
+    
     
     // Setter Fonksiyonları - HeroStats altında
 

@@ -1,13 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-[CreateAssetMenu(fileName = "AttackSpeedDebuff", menuName = "BuffDebuffSystem/Debuff/AttackSpeedDebuff")]
+[CreateAssetMenu(fileName = "AttackSpeedDebuff", menuName = "BuffDeBuffSystem/DeBuff/AttackSpeedDebuff")]
 
 public class AttackSpeedDebuff : BuffDebuffSystemBaseData
 {
     // BUFF MI YOKSA DEBUFF MI OLDUĞUNU KONTROL EDİP FONKSİYONA DOĞRU OLANI GÖNDERMEN GEREKİYOR
-    public override void ApplyBuffDebuffSystem()
+    public override void ApplyBuffDeBuffSystem()
     {
-        TheHero.Instance.AddAttackSpeed(GetDebuffValue());
+        TheHero.Instance.ReduceAttackSpeed(GetDeBuffValue());
     }
 }

@@ -1,0 +1,50 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad0e0ed27b65bf0458915d79091bbaee, type: 3}
+  m_Name: TechHero
+  m_EditorClassIdentifier: 
+  id: 1
+  characterName: Hacker Girl
+  prefab: {fileID: 2601982612372334620, guid: 7d50f828c026d6349b04f5e4a09fe93a, type: 3}
+  characterImage: {fileID: 21300000, guid: 9965c3a185f94e0488929335b79a829f, type: 3}
+  isSelected: 0
+  heroStatsBaseDatas:
+  - heroStatsBaseData: {fileID: 11400000, guid: 742468b287bc6e4449763e41e5e7a569,
+      type: 2}
+    value: 11
+  appliedPassiveUpgrades:
+  - {fileID: 11400000, guid: 337825ec2c59b7549a1d8b60f6be57ab, type: 2}
+  - {fileID: 11400000, guid: e5e327a7caab44e4a83ad80e1775f8e1, type: 2}
+  - {fileID: 11400000, guid: c9edd13c8e7425d4c836bd53157a9056, type: 2}
+  - {fileID: 11400000, guid: 0b0e9ef5058dcd24ead62454d26a6dff, type: 2}
+  - {fileID: 11400000, guid: edab2d8fa536ae245b680d1c3c26970c, type: 2}
+  - {fileID: 11400000, guid: 66471ba0235a6de47ae86eb3175cf27a, type: 2}
+  - {fileID: 11400000, guid: 992ceebeaf6fc684bb1e250f79e2e682, type: 2}
+  - {fileID: 11400000, guid: b2558adcadc2ff54080c059ac6fb76c9, type: 2}
+  - {fileID: 11400000, guid: 1181b6580304ae64b811cfbf3d35e445, type: 2}
+  - {fileID: 11400000, guid: bcb7d7cd0655dcc4fb3bf070a3b8a0b2, type: 2}
+  - {fileID: 11400000, guid: 1c0a674e19d5de74a9fb514de797eb41, type: 2}
+  - {fileID: 11400000, guid: 6d35326d412e744428118318101ff079, type: 2}
+  appliedActiveUpgrades:
+  - {fileID: 11400000, guid: b95c73d7ccd7fe943b3afc0621087528, type: 2}
+  - {fileID: 11400000, guid: 0f3e9160e8e9162488682655c9f3671e, type: 2}
+  - {fileID: 11400000, guid: fc1b1f86c73e3f74081d62f18dffb8fd, type: 2}
+  - {fileID: 11400000, guid: 08ffd1dcd158d2b458796b4194476604, type: 2}
+  - {fileID: 11400000, guid: 5385984ed1743ad4b80cc3e4f639c37b, type: 2}
+  - {fileID: 11400000, guid: 0f2a6ace0bc838444848ba94d2b4793f, type: 2}
+  - {fileID: 11400000, guid: 788403802c7b70c4496594d4ede14cb9, type: 2}
+  - {fileID: 11400000, guid: a73c2d3259b9c7b428b69a3b15292121, type: 2}
+  - {fileID: 11400000, guid: a3262399006613040beacafcbebdaf7f, type: 2}
+  - {fileID: 11400000, guid: 42e0792b70b99414ba274ecc7ab3aa5b, type: 2}
+  - {fileID: 11400000, guid: 1086db7d920c1f64abf72f9fca447eaf, type: 2}
+  - {fileID: 11400000, guid: 039e338e46968ae43abe5dce4e82ba09, type: 2}
+  - {fileID: 11400000, guid: dabd21aee09d3a241b80bfab66405f7e, type: 2}

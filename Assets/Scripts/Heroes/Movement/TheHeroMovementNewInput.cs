@@ -98,4 +98,10 @@ public class TheHeroMovementNewInput : MonoBehaviour
 
         return nearestEnemy;
     }
+    
+    //Reducelar
+    public void ReduceMoveSpeed(float value)
+    {
+        moveSpeed =value-moveSpeed;
+    }
 }

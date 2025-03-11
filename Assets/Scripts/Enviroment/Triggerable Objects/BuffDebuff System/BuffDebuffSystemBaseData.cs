@@ -7,32 +7,32 @@ public abstract class BuffDebuffSystemBaseData : ScriptableObject
 {
     public string effectName;
     public string description;
-    public float valueOfBuffOrDebuff;
+    public float valueOfBuffOrDeBuff;
 
-    public float HeroBuffEffectScaler = 1;
-    public float HeroDebuffEffectScaler = 1;
+    private float HeroBuffEffectScaler = 1;
+    private float HeroDeBuffEffectScaler = 1;
 
     private float BuffEffectScaler = 1;
-    private float DebuffEffectScaler = 1;
+    private float DeBuffEffectScaler = 1;
 
     public void SetHeroBuffEffectScaler( float value)
     {
         Debug.LogError("HeroBuffEffectScaler:"+HeroBuffEffectScaler);
         HeroBuffEffectScaler = value;
     }
-    public void SetHeroDebuffEffectScaler( float value)
+    public void SetHeroDeBuffEffectScaler( float value)
     {
-        HeroDebuffEffectScaler = value;
-        Debug.LogError("HeroDebuffEffectScaler:"+HeroDebuffEffectScaler);
+        HeroDeBuffEffectScaler = value;
+        Debug.LogError("HeroDebuffEffectScaler:"+HeroDeBuffEffectScaler);
     }
 
     protected float GetBuffValue()
     {
-        return HeroBuffEffectScaler * BuffEffectScaler * valueOfBuffOrDebuff;
+        return HeroBuffEffectScaler * BuffEffectScaler * valueOfBuffOrDeBuff;
     }
-    protected float GetDebuffValue()
+    protected float GetDeBuffValue()
     {
-        return HeroDebuffEffectScaler * DebuffEffectScaler * valueOfBuffOrDebuff;
+        return HeroDeBuffEffectScaler * DeBuffEffectScaler * valueOfBuffOrDeBuff;
     }
-    public abstract void ApplyBuffDebuffSystem();
+    public abstract void ApplyBuffDeBuffSystem();
 }

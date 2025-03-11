@@ -93,6 +93,24 @@ public abstract class TheHero : MonoBehaviourSingleton<TheHero>
         GetComponent<TheHeroInteraction>().AddDeBuffEffectScaler(newRate);
     }
     
+    //Reducelar
+    public virtual void ReduceCurrentHealth(float newRate)
+    {
+        GetComponent<TheHeroHealth>().ReduceCurrentHealth(newRate);
+    }
+    public virtual void ReduceLuck(float newRate)
+    {
+        GetComponent<TheHeroLuck>().ReduceLuck(newRate);
+    }
+    public virtual void ReduceMaximumHealth(float newRate)
+    {
+        GetComponent<TheHeroHealth>().ReduceMaximumHealth(newRate); // Max can artınca current can da artıyo (?)
+    }
+    public virtual void ReduceMovementSpeed(float value)
+    {
+        GetComponent<TheHeroMovementNewInput>().ReduceMoveSpeed(value);
+    }
+    
     //Getler
     public virtual float GetLuck()
     {
@@ -109,11 +127,14 @@ public abstract class TheHero : MonoBehaviourSingleton<TheHero>
         GetComponent<TheHeroHealth>().IncreaseHealth(newRate);
     }
     
-    // Upgradeler
+    // Add Hero Upgradeler
     public abstract void AddAttackSpeed(float newRate);
     public abstract void AddAttackRange(float newRate);
     public abstract void AddAttackSize(float newRate);
     public abstract void AddAttackAmount(float newRate);
    
+    // Reduce Hero Upgradeler
+    public abstract void ReduceAttackSpeed(float newRate);
+
 
 }

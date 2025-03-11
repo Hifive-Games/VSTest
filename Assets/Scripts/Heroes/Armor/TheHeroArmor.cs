@@ -20,4 +20,8 @@ public class TheHeroArmor : MonoBehaviour
     {
         armor = newRate + armor;
     }
+    public void ReduceArmor(float newRate)
+    {
+        armor = newRate - armor;
+    }
 }

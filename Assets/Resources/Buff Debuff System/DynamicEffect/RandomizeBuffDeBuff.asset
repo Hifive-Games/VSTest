@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 821e1544206e55c4eb03216c01c504e8, type: 3}
+  m_Name: RandomizeBuffDeBuff
+  m_EditorClassIdentifier: 
+  effectName: Random geliyo
+  description: "ko\u015Fu h\u0131z\u0131"
+  valueOfBuffOrDeBuff: 1
+  randomizeBuffDebuff:
+  - {fileID: 11400000, guid: dcaf34e1735e5d44b9ce2fd7b59738e7, type: 2}
+  - {fileID: 11400000, guid: 87795eeba6195c2418c6b5871af1119e, type: 2}
+  - {fileID: 11400000, guid: 27a982c8770f13a40bcda7fd3805a481, type: 2}
+  randomCount: 1

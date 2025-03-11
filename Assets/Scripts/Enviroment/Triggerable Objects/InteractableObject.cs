@@ -39,10 +39,12 @@ public class InteractableObject : TriggerableObject
         if (effect != null && CanInteract())
         {
             effect.SetHeroBuffEffectScaler(BuffEffectScaler);
-            effect.SetHeroDebuffEffectScaler(DeBuffEffectScaler);
-            effect.ApplyBuffDebuffSystem();
+            effect.SetHeroDeBuffEffectScaler(DeBuffEffectScaler);
+            effect.ApplyBuffDeBuffSystem();
             isInteracted = true; // Etkileşim tamamlandı
-            Debug.Log($"Effect Applied: {effect.name}");
+            Debug.Log($"Effect Applied: {effect.effectName}");
+            Debug.Log($"Effect Applied: {effect.description}");
+
         }
     }
 

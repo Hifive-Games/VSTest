@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9ffd2fbbdb67304cb27b12c416a987c, type: 3}
   m_Name: AttackRangeActiveUpgrade
   m_EditorClassIdentifier: 
-  description: Description
+  upgradeName: Attack RAnge
+  description: "sald\u0131r\u0131 boyutu"
   rareValues:
   - rareLevel: 0
     value: 0

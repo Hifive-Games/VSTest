@@ -845,6 +845,10 @@ GameObject:
   - component: {fileID: 8638328655634027485}
   - component: {fileID: 2268261746450309607}
   - component: {fileID: 4267879460854914407}
+  - component: {fileID: 8161265932266208200}
+  - component: {fileID: 2456267131842952038}
+  - component: {fileID: 1391536779622871428}
+  - component: {fileID: 4538479283227469523}
   m_Layer: 10
   m_Name: ShinobiHero
   m_TagString: Player
@@ -961,10 +965,58 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e657e2bd5c079642a5ad51d05255d7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentHealth: 0
-  maxHealth: 0
-  healthRegenAmount: 0
-  healthRegenRate: 0
+--- !u!114 &8161265932266208200
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3396665030701579226}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fcd91026bf4cbf40a26248517e07b26, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  luck: 0
+--- !u!114 &2456267131842952038
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3396665030701579226}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61f8ad93fa44d494786997d6ffae42b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1391536779622871428
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3396665030701579226}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee06c65e145c2cf4596364f4e800b467, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &4538479283227469523
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3396665030701579226}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64cdf137bea0bd8498f7576130a8799e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  progressBar: {fileID: 0}
+  BuffDebuffSystemBaseData: {fileID: 11400000, guid: ba120a2249055de46899c1939149aa2b,
+    type: 2}
 --- !u!1 &3899358083024401084
 GameObject:
   m_ObjectHideFlags: 0

@@ -43,6 +43,16 @@ public class ChunkManager : MonoBehaviour
 
     void Start()
     {
+        Invoke(nameof(Initialize), 0.1f);
+    }
+
+    public void Initialize()
+    {
+        player = FindAnyObjectByType<CharacterController>().transform;
+
+        //load objects from a file
+        objectPrefabs = Resources.LoadAll<GameObject>("Objects");
+
         if (useSeed)
         {
             Random.InitState(seed);
@@ -53,6 +63,10 @@ public class ChunkManager : MonoBehaviour
 
     void Update()
     {
+        if (player == null)
+        {
+            return;
+        }
         Vector2Int newChunk = GetChunkCoord(player.position);
         if (newChunk != currentChunk)
         {
@@ -68,6 +82,7 @@ public class ChunkManager : MonoBehaviour
 
     void GenerateInitialChunks()
     {
+        Debug.Log("Generating initial chunks...");
         for (int x = -1; x <= 1; x++)
         {
             for (int y = -1; y <= 1; y++)
@@ -202,8 +217,8 @@ public class ChunkManager : MonoBehaviour
                 occupiedPositions.Add(randomPos);
 
                 GameObject prefab = objectPrefabs[UnityEngine.Random.Range(0, objectPrefabs.Length)];
-                Quaternion rot = Quaternion.Euler(0, UnityEngine.Random.Range(0, 360), 0);
-                Vector3 pos = chunkOrigin + new Vector3(randomPos.x, 1, randomPos.y);
+                Quaternion rot = Quaternion.Euler(-90, UnityEngine.Random.Range(0, 360), 0);
+                Vector3 pos = chunkOrigin + new Vector3(randomPos.x, 0, randomPos.y);
 
                 list.Add((prefab, pos, rot));
             }

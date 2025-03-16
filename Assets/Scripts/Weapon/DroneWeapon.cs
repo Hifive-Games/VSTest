@@ -12,7 +12,7 @@ public class DroneWeapon : MonoBehaviour
 
     private float searchInterval = 0.2f;
     private float searchTimer = 0f;
-    private TestEnemyDed currentTarget;
+    private Enemy currentTarget;
 
     public Transform shooterParent;
 
@@ -47,14 +47,14 @@ public class DroneWeapon : MonoBehaviour
         }
     }
 
-    private TestEnemyDed FindClosestEnemy()
+    private Enemy FindClosestEnemy()
     {
-        TestEnemyDed[] enemies = FindObjectsOfType<TestEnemyDed>();
-        TestEnemyDed nearest = null;
+        Enemy[] enemies = FindObjectsOfType<Enemy>();
+        Enemy nearest = null;
         float minDist = Mathf.Infinity;
         Vector3 currentPos = transform.position;
 
-        foreach (TestEnemyDed enemy in enemies)
+        foreach (Enemy enemy in enemies)
         {
             float dist = Vector3.Distance(currentPos, enemy.transform.position);
             if (dist < minDist)

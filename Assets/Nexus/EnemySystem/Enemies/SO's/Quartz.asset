@@ -16,9 +16,9 @@ MonoBehaviour:
   ID: 1004
   enemyName: Quartz
   enemySprite: {fileID: 0}
-  enemyPrefab: {fileID: 1768682202644973221, guid: 838dae4985bd3e7408c316aaf9de1ab3,
+  enemyPrefab: {fileID: 4304281364575161984, guid: 14f1cd6ae06b7404bb4d45f4d899ed7d,
     type: 3}
-  maxHealth: 100
+  maxHealth: 5
   damage: 20
   speed: 1
   score: 7

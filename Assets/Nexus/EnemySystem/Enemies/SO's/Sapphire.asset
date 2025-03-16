@@ -16,13 +16,13 @@ MonoBehaviour:
   ID: 1003
   enemyName: Sapphire
   enemySprite: {fileID: 0}
-  enemyPrefab: {fileID: 1768682202644973221, guid: 838dae4985bd3e7408c316aaf9de1ab3,
+  enemyPrefab: {fileID: 38425708285727113, guid: ddf62b28df0e5134eae644c4ec3801c6,
     type: 3}
-  maxHealth: 5
+  maxHealth: 1
   damage: 5
   speed: 10
   score: 5
-  attackRange: 3
+  attackRange: 2.5
   attackSpeed: 0.5
   experience: 5
   deathEffect: {fileID: 7642634975434891464, guid: b6eb006e0faad0d4b8de30ddadf3edf5,

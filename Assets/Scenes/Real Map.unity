@@ -216,6 +216,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 138079792}
+  - component: {fileID: 138079793}
   m_Layer: 0
   m_Name: EnemySpawnManager
   m_TagString: Untagged
@@ -238,6 +239,52 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1485717061}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &138079793
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 138079791}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8439225cc787fa74fb4bdcb689c4125e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnPhases:
+  - startTime: 5
+    endTime: 200
+    spawnInterval: 0.5
+    maxClusterGroupLimit: 250
+    enemyGroups:
+    - enemyData: {fileID: 11400000, guid: 8152467218c8a1242995c124adf84141, type: 2}
+      amount: 3
+      minSpwanRadius: 1.5
+      maxSpawnRadius: 3
+    - enemyData: {fileID: 11400000, guid: 4049b9c30bd94df4c979b020e41738d4, type: 2}
+      amount: 2
+      minSpwanRadius: 1.5
+      maxSpawnRadius: 3
+  - startTime: 55
+    endTime: 100
+    spawnInterval: 1
+    maxClusterGroupLimit: 10
+    enemyGroups:
+    - enemyData: {fileID: 11400000, guid: 5f1bc4fce1b087041b22b852c432c4e6, type: 2}
+      amount: 5
+      minSpwanRadius: 1
+      maxSpawnRadius: 2
+    - enemyData: {fileID: 11400000, guid: 8a468ad0bad7212489b164ba04fd8055, type: 2}
+      amount: 1
+      minSpwanRadius: 3
+      maxSpawnRadius: 10
+  timer: 0
+  groupsSpawned: 0
+  enemiesSpawned: 0
+  maxEnemies: 100
+  endPhase: 0
+  gatheringDistance: 30
+  activeEnemies: []
 --- !u!1001 &269449110
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -590,6 +637,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: TurtleShellPolyart
       objectReference: {fileID: 0}
+    - target: {fileID: 6753617674297473082, guid: 24a0663f813d4beb91fc0c6b1e8fef36,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -642,6 +694,7 @@ GameObject:
   - component: {fileID: 609416272}
   - component: {fileID: 609416271}
   - component: {fileID: 609416270}
+  - component: {fileID: 609416273}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -699,6 +752,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &609416273
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 609416269}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 200f1ce89746a844594f319510b83fe3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &784085056
 GameObject:
   m_ObjectHideFlags: 0
@@ -1533,6 +1598,37 @@ MonoBehaviour:
   - prefab: {fileID: 309624559866207983, guid: 8fed0f4abf12c4241a565f0e55381a39, type: 3}
     parent: {fileID: 338254509}
     size: 3
+  - prefab: {fileID: 7642634975434891464, guid: b6eb006e0faad0d4b8de30ddadf3edf5,
+      type: 3}
+    parent: {fileID: 2015888892}
+    size: 200
+  - prefab: {fileID: 38425708285727113, guid: ddf62b28df0e5134eae644c4ec3801c6, type: 3}
+    parent: {fileID: 2015888892}
+    size: 50
+  - prefab: {fileID: 8755793352199167666, guid: c31a306a30c468143976f95d586106e9,
+      type: 3}
+    parent: {fileID: 2015888892}
+    size: 50
+  - prefab: {fileID: 6094194146027832427, guid: dff14d340cb6c2e40a5c9092f2895779,
+      type: 3}
+    parent: {fileID: 2015888892}
+    size: 50
+  - prefab: {fileID: 5551546460413965189, guid: e35e7dc459bc63248b36e87956c38882,
+      type: 3}
+    parent: {fileID: 2015888892}
+    size: 50
+  - prefab: {fileID: 6663469810274531789, guid: afa137ad9ee30e24bbd630da97dc86ab,
+      type: 3}
+    parent: {fileID: 2015888892}
+    size: 50
+  - prefab: {fileID: 4304281364575161984, guid: 14f1cd6ae06b7404bb4d45f4d899ed7d,
+      type: 3}
+    parent: {fileID: 2015888892}
+    size: 50
+  - prefab: {fileID: 4931189449719189813, guid: 0d6279c001f2f6143bca0487e22a7b1c,
+      type: 3}
+    parent: {fileID: 2015888892}
+    size: 50
 --- !u!4 &1520455485
 Transform:
   m_ObjectHideFlags: 0
@@ -1547,6 +1643,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 338254509}
+  - {fileID: 2015888892}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1731513139
@@ -1762,6 +1859,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: SlimePolyart
       objectReference: {fileID: 0}
+    - target: {fileID: 7153141402127884706, guid: a4ec793513574cd49719c4055b630e2b,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7498142190150400792, guid: a4ec793513574cd49719c4055b630e2b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1817,6 +1919,37 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a4ec793513574cd49719c4055b630e2b, type: 3}
+--- !u!1 &2015888891
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2015888892}
+  m_Layer: 0
+  m_Name: Enemies
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2015888892
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2015888891}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1520455485}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2075531682
 GameObject:
   m_ObjectHideFlags: 0

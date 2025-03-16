@@ -38,7 +38,7 @@ public static class EnemyFactory
 
 
         enemyObj.GetComponent<Enemy>().Initialize(data);
-        enemyObj.GetComponentInChildren<Renderer>().material.color = color;
+        //enemyObj.GetComponentInChildren<Renderer>().material.color = color;
 
         return enemyObj;
     }

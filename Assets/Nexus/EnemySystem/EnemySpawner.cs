@@ -16,7 +16,7 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private float gatheringDistance;
 
     public List<GameObject> activeEnemies = new List<GameObject>();
-    private Player player;
+    private GameObject player;
     private Camera mainCamera;
 
     private void Awake()
@@ -34,7 +34,7 @@ public class EnemySpawner : MonoBehaviour
     private void Start()
     {
         mainCamera = Camera.main;
-        player = Player.Instance;
+        player = FindAnyObjectByType<CharacterController>().gameObject;
         StartCoroutine(SpawnEnemies());
         StartCoroutine(GatherEnemies());
     }

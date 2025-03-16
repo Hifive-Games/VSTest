@@ -35,5 +35,21 @@ public class BulletWeapon : MonoBehaviour
         Destroy(gameObject);
     }
 
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.TryGetComponent(out Enemy enemy))
+        {
+            enemy.TakeDamage(1);
+        }
+
+        if (explosionPrefab != null)
+        {
+            GameObject explosion = Instantiate(explosionPrefab, transform.position, Quaternion.identity);
+            Destroy(explosion, explosionDuration);
+        }
+
+        Destroy(gameObject);
+    }
     
 }

@@ -16,9 +16,9 @@ MonoBehaviour:
   ID: 1001
   enemyName: Amethis
   enemySprite: {fileID: 0}
-  enemyPrefab: {fileID: 1768682202644973221, guid: 838dae4985bd3e7408c316aaf9de1ab3,
+  enemyPrefab: {fileID: 5551546460413965189, guid: e35e7dc459bc63248b36e87956c38882,
     type: 3}
-  maxHealth: 50
+  maxHealth: 2
   damage: 3
   speed: 2
   score: 5

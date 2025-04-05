@@ -4,14 +4,15 @@ using UnityEngine;
 public class TheHeroInteraction : MonoBehaviourSingleton<TheHeroInteraction>
 {
     private TriggerableObject currentObject;
-    public InteractionProgressBar progressBar; // Progress bar referansı
+    private InteractionProgressBar progressBar; // Progress bar referansı
 
     private float BuffEffectScaler;
     private float DeBuffEffectScaler;
 
     private void Awake()
     {
-        progressBar = FindObjectOfType<InteractionProgressBar>();
+        MainGamePanelManager mainGamePanelManager = FindObjectOfType<MainGamePanelManager>();
+        progressBar = mainGamePanelManager.GetProgressBar();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -20,7 +21,7 @@ public class TheHeroInteraction : MonoBehaviourSingleton<TheHeroInteraction>
         if (triggerable != null && triggerable.CanInteract())
         {
             currentObject = triggerable;
-            Debug.Log(triggerable.GetInteractionText());
+            Debug.LogError(triggerable.GetInteractionText());
         }
     }
 

@@ -67,16 +67,16 @@ public class PlayerMagnet : MonoBehaviour
         Collider[] colliders = Physics.OverlapSphere(transform.position, magnetRange);
         foreach (Collider collider in colliders)
         {
-            if (collider.TryGetComponent(out Experiance experiance))
+            if (collider.TryGetComponent(out ExperienceParticle experiance))
             {
                 MoveExperiance(experiance);
             }
         }
     }
 
-    private void MoveExperiance(Experiance experiance)
+    private void MoveExperiance(ExperienceParticle experienceParticle)
     {
-        experiance.transform.position = Vector3.MoveTowards(experiance.transform.position, transform.position, math.max(minPullSpeed, Vector3.Distance(experiance.transform.position, transform.position)) * Time.deltaTime);
+        experienceParticle.transform.position = Vector3.MoveTowards(experienceParticle.transform.position, transform.position, math.max(minPullSpeed, Vector3.Distance(experienceParticle.transform.position, transform.position)) * Time.deltaTime);
     }
 
     private void  OnDrawGizmosSelected()

@@ -27,6 +27,13 @@ public class InteractableObject : TriggerableObject
             sphereCollider.radius = gizmoSize.x / 2; // X boyutunu yarıçap olarak kullan
             sphereCollider.isTrigger = true; // Etkileşim için trigger yap
         }
+
+        SetLayer();
+    }
+
+    private void SetLayer()
+    {
+        gameObject.layer = LayerMask.NameToLayer("Colliders");
     }
 
     public override string GetInteractionText()

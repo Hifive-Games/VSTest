@@ -149,6 +149,34 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": true
                 }
             ]
+        },
+        {
+            ""name"": ""PlayerHUD"",
+            ""id"": ""9c146acb-9aee-42d5-9e23-f3979ccb1664"",
+            ""actions"": [
+                {
+                    ""name"": ""StopGame"",
+                    ""type"": ""Button"",
+                    ""id"": ""be41e319-4ffc-4a7b-b398-505d057bbbdf"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""2e2e337a-b1dc-4a9b-8fb7-fcb13fb3f14b"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""StopGame"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -168,6 +196,9 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
         // PlayerMovement
         m_PlayerMovement = asset.FindActionMap("PlayerMovement", throwIfNotFound: true);
         m_PlayerMovement_Move = m_PlayerMovement.FindAction("Move", throwIfNotFound: true);
+        // PlayerHUD
+        m_PlayerHUD = asset.FindActionMap("PlayerHUD", throwIfNotFound: true);
+        m_PlayerHUD_StopGame = m_PlayerHUD.FindAction("StopGame", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -271,6 +302,52 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
         }
     }
     public PlayerMovementActions @PlayerMovement => new PlayerMovementActions(this);
+
+    // PlayerHUD
+    private readonly InputActionMap m_PlayerHUD;
+    private List<IPlayerHUDActions> m_PlayerHUDActionsCallbackInterfaces = new List<IPlayerHUDActions>();
+    private readonly InputAction m_PlayerHUD_StopGame;
+    public struct PlayerHUDActions
+    {
+        private @PlayerInputs m_Wrapper;
+        public PlayerHUDActions(@PlayerInputs wrapper) { m_Wrapper = wrapper; }
+        public InputAction @StopGame => m_Wrapper.m_PlayerHUD_StopGame;
+        public InputActionMap Get() { return m_Wrapper.m_PlayerHUD; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(PlayerHUDActions set) { return set.Get(); }
+        public void AddCallbacks(IPlayerHUDActions instance)
+        {
+            if (instance == null || m_Wrapper.m_PlayerHUDActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_PlayerHUDActionsCallbackInterfaces.Add(instance);
+            @StopGame.started += instance.OnStopGame;
+            @StopGame.performed += instance.OnStopGame;
+            @StopGame.canceled += instance.OnStopGame;
+        }
+
+        private void UnregisterCallbacks(IPlayerHUDActions instance)
+        {
+            @StopGame.started -= instance.OnStopGame;
+            @StopGame.performed -= instance.OnStopGame;
+            @StopGame.canceled -= instance.OnStopGame;
+        }
+
+        public void RemoveCallbacks(IPlayerHUDActions instance)
+        {
+            if (m_Wrapper.m_PlayerHUDActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(IPlayerHUDActions instance)
+        {
+            foreach (var item in m_Wrapper.m_PlayerHUDActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_PlayerHUDActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public PlayerHUDActions @PlayerHUD => new PlayerHUDActions(this);
     private int m_KeyboardSchemeIndex = -1;
     public InputControlScheme KeyboardScheme
     {
@@ -283,5 +360,9 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
     public interface IPlayerMovementActions
     {
         void OnMove(InputAction.CallbackContext context);
+    }
+    public interface IPlayerHUDActions
+    {
+        void OnStopGame(InputAction.CallbackContext context);
     }
 }

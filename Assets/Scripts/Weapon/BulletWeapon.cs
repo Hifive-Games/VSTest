@@ -8,6 +8,8 @@ public class BulletWeapon : MonoBehaviour
     [SerializeField] private float explosionDuration = 2f; // Patlama efektinin süresi
 
     private Rigidbody rb;
+    
+    [SerializeField] private LayerMask affectedLayers;
 
     private void Awake()
     {
@@ -20,36 +22,27 @@ public class BulletWeapon : MonoBehaviour
         // Mermiyi ileriye doğru sürekli hareket ettir
         rb.velocity = transform.forward * bulletSpeed;
     }
-
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        // Çarptığında patlama efekti oluştur
-        if (explosionPrefab != null)
+        // Collision durumunu kontrol et (Layer'a göre)
+        if ((affectedLayers.value & (1 << other.gameObject.layer)) != 0)
         {
-            GameObject explosion = Instantiate(explosionPrefab, transform.position, Quaternion.identity);
+            // Eğer layer uyuyorsa, patlama efekti oluştur
+            if (explosionPrefab != null)
+            {
+                GameObject explosion = Instantiate(explosionPrefab, transform.position, Quaternion.identity);
+                Destroy(explosion, explosionDuration);
+            }
 
-            // Patlama efektini belirli bir süre sonra yok et
-            Destroy(explosion, explosionDuration);
+            Destroy(gameObject);
         }
 
-        Destroy(gameObject);
-    }
-
-
-    void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.TryGetComponent(out Enemy enemy))
+        // Eğer bir Enemy objesine çarptıysa, hasar ver
+        if (other.TryGetComponent(out Enemy enemy))
         {
             enemy.TakeDamage(1);
         }
-
-        if (explosionPrefab != null)
-        {
-            GameObject explosion = Instantiate(explosionPrefab, transform.position, Quaternion.identity);
-            Destroy(explosion, explosionDuration);
-        }
-
-        Destroy(gameObject);
     }
+
     
 }

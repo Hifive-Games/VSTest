@@ -1014,9 +1014,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64cdf137bea0bd8498f7576130a8799e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  progressBar: {fileID: 0}
-  BuffDebuffSystemBaseData: {fileID: 11400000, guid: ba120a2249055de46899c1939149aa2b,
-    type: 2}
 --- !u!1 &3899358083024401084
 GameObject:
   m_ObjectHideFlags: 0

@@ -126,6 +126,11 @@ PrefabInstance:
       objectReference: {fileID: 9100000, guid: 1054347987692c64898e0cd78b60295c, type: 2}
     - target: {fileID: 5866666021909216657, guid: 1d7732c4b63e55e468a78e3d8f144c7c,
         type: 3}
+      propertyPath: m_UpdateMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5866666021909216657, guid: 1d7732c4b63e55e468a78e3d8f144c7c,
+        type: 3}
       propertyPath: m_ApplyRootMotion
       value: 0
       objectReference: {fileID: 0}
@@ -169,6 +174,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 1835518847874016952}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 1d7732c4b63e55e468a78e3d8f144c7c,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 834080818833918391}
   m_SourcePrefab: {fileID: 100100000, guid: 1d7732c4b63e55e468a78e3d8f144c7c, type: 3}
 --- !u!1 &2731352494871173876 stripped
 GameObject:
@@ -277,7 +286,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64cdf137bea0bd8498f7576130a8799e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  progressBar: {fileID: 0}
 --- !u!114 &1835518847874016952
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -297,6 +305,20 @@ MonoBehaviour:
   selfDestructTime: 0.5
   shurikenCount: 1
   defaultScale: {x: 5, y: 5, z: 5}
+--- !u!114 &834080818833918391
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2731352494871173876}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 361ce19beff83b84ca1a6f3fc47510d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  initialRadius: 3
+  experienceData: {fileID: 11400000, guid: 8b3ba28ce9c9bcc4ab07eb8524196559, type: 2}
 --- !u!4 &3363175395122479182 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 1d7732c4b63e55e468a78e3d8f144c7c,

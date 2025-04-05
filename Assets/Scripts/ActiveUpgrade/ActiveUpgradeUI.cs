@@ -31,7 +31,7 @@ public class ActiveUpgradeUI : MonoBehaviour
     private void UpgradeButtonOnClick()
     {
         // Event'i tetikliyoruz
-        LevelManager.RequestActiveUpgrade(m_ActiveUpgradeBaseData, rareLevel);
+        ActiveUpgradeManager.RequestActiveUpgrade(m_ActiveUpgradeBaseData, rareLevel);
     }
 
     public void SetUpgrade(HeroBaseData heroBaseData, ActiveUpgradeBaseData activeUpgradeBaseData, RareLevel rareLevel, System.Action<ActiveUpgradeBaseData, RareLevel> onUpgradeClicked)

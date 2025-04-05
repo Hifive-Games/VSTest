@@ -6,12 +6,12 @@ public class PanelController : MonoBehaviour
     /*
         bir panel açıldığında belirli işlemler yaptırmak istersek, buradan miras almasını sağlayabiliriz. ileri de gerekli olabilir...
     */
-    public void OpenPanel()
+    public virtual void OpenPanel()
     {
         gameObject.SetActive(true);
     }
     
-    public void ClosePanel()
+    public virtual void ClosePanel()
     {
         gameObject.SetActive(false);
     }

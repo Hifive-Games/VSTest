@@ -127,6 +127,34 @@
                     "isPartOfComposite": true
                 }
             ]
+        },
+        {
+            "name": "PlayerHUD",
+            "id": "9c146acb-9aee-42d5-9e23-f3979ccb1664",
+            "actions": [
+                {
+                    "name": "StopGame",
+                    "type": "Button",
+                    "id": "be41e319-4ffc-4a7b-b398-505d057bbbdf",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "2e2e337a-b1dc-4a9b-8fb7-fcb13fb3f14b",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "StopGame",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": [

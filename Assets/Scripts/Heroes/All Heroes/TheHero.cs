@@ -9,6 +9,8 @@ using UnityEngine;
 [RequireComponent(typeof(TheHeroDamageManager))]
 [RequireComponent(typeof(TheHeroArmor))]
 [RequireComponent(typeof(TheHeroInteraction))]
+[RequireComponent(typeof(TheHeroExperienceManager))]
+
 public abstract class TheHero : MonoBehaviourSingleton<TheHero>
 {
     //HeroStats

@@ -4,7 +4,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class LevelManager : MonoBehaviourSingleton<LevelManager>
+public class ActiveUpgradeManager : MonoBehaviourSingleton<ActiveUpgradeManager>
 {
     [SerializeField] private HeroBaseData[] Heroes;  // Karakter SO'larını dizi olarak alıyoruz
     private HeroBaseData selectedHero;
@@ -12,7 +12,7 @@ public class LevelManager : MonoBehaviourSingleton<LevelManager>
     [SerializeField] private List<ActiveUpgradeBaseData> appliedActiveUpgrades;
     
     [SerializeField] private GameObject heroActiveUpgradePrefab; // UI prefab referansı
-    [SerializeField] private Transform heroActiveUpgradeParent; // UI prefab parent
+    [SerializeField] private PanelController heroActiveUpgradeParent; // UI prefab parent
     
     public static event UnityAction<ActiveUpgradeBaseData, RareLevel> OnActiveUpgradeRequested;
 
@@ -21,22 +21,28 @@ public class LevelManager : MonoBehaviourSingleton<LevelManager>
         OnActiveUpgradeRequested?.Invoke(baseData, rareLevel);
     }
 
-    private void OnDisable()
-    {
-        OnActiveUpgradeRequested -= ActiveUpgrade;
-    }
-
     private void OnEnable()
     {
         OnActiveUpgradeRequested += ActiveUpgrade;
+        GameEvents.OnLevelUp += LevelUp;
         GetActiveHero();
         InitializeAppliedActiveUpgrades();
     }
+
+    private void OnDisable()
+    {
+        OnActiveUpgradeRequested -= ActiveUpgrade;
+        GameEvents.OnLevelUp -= LevelUp;
+
+    }
+
 
     private void ActiveUpgrade(ActiveUpgradeBaseData activeUpgrade, RareLevel rareLevel)
     {
         // Belirlenen RareLevel ile yükseltmeyi uygula
         activeUpgrade.ApplyUpgrade(rareLevel, selectedHero);
+        
+        CloseActiveUpgradeUI();
     }
 
     private void InitializeAppliedActiveUpgrades()
@@ -69,18 +75,21 @@ public class LevelManager : MonoBehaviourSingleton<LevelManager>
         return null; // Hiçbir karakter seçilmemişse null döndürüyoruz
     }
 
-    [Button()]
     public void LevelUp()
     {
         if (appliedActiveUpgrades == null || appliedActiveUpgrades.Count == 0)
         {
-            Debug.LogWarning("No upgrades available for this hero.");
+            Debug.LogError("No upgrades available for this hero.");
             return;
         }
 
+        OpenActiveUpgradeUI();
+
+        ClearAllChildInActiveUpgrade();
+        
         // Rastgele 3 yükseltme seç
         var selectedUpgrades = appliedActiveUpgrades.OrderBy(_ => Random.value).Take(2).ToList();
-
+        
         foreach (var upgrade in selectedUpgrades)
         {
             // Rastgele RareLevel seçimi
@@ -91,12 +100,34 @@ public class LevelManager : MonoBehaviourSingleton<LevelManager>
         }
     }
 
+    private void ClearAllChildInActiveUpgrade()
+    {
+        // Var olan tüm child objeleri temizle
+        foreach (Transform child in heroActiveUpgradeParent.transform)
+        {
+            Destroy(child.gameObject);
+        }
+    }
+
     private void CreateHeroActiveUpgradeUI(ActiveUpgradeBaseData activeUpgradeBase, RareLevel randomRareLevel)
     {
-        GameObject uiObject = Instantiate(heroActiveUpgradePrefab, heroActiveUpgradeParent);
+        // Yeni UI objesini oluştur
+        GameObject uiObject = Instantiate(heroActiveUpgradePrefab, heroActiveUpgradeParent.gameObject.transform);
         ActiveUpgradeUI ui = uiObject.GetComponent<ActiveUpgradeUI>();
 
-        // UI objesine rastgele RareLevel ile ayar yap
+        // UI objesine gerekli verileri ata
         ui.SetUpgrade(selectedHero, activeUpgradeBase, randomRareLevel, ActiveUpgrade);
     }
+
+
+    private void OpenActiveUpgradeUI()
+    {
+        // UI ekrana getir
+        PanelManager.Instance.OpenPanel(heroActiveUpgradeParent);
+    }
+    private void CloseActiveUpgradeUI()
+    {
+        PanelManager.Instance.GoBack();
+    }
+    
 }

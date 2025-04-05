@@ -40,4 +40,5 @@ public class PanelManager : MonoBehaviourSingleton<PanelManager>
             Debug.LogWarning("Ana panele geri dönülemez.");
         }
     }
+
 }

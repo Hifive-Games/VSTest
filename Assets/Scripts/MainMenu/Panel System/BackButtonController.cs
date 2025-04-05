@@ -12,7 +12,7 @@ public class BackButtonController : MonoBehaviour
         }
     }
 
-    private void OnBackButtonClick()
+    public virtual void OnBackButtonClick()
     {
         PanelManager.Instance.GoBack();
     }

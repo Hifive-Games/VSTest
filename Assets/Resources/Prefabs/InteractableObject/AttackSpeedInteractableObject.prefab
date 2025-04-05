@@ -201,7 +201,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactionDuration: 5
-  interactionText: Interact with this object
+  interactionText: SEMA HANIM <3
   effect: {fileID: 11400000, guid: ba120a2249055de46899c1939149aa2b, type: 2}
   gizmoSize: {x: 5, y: 5, z: 5}
   gizmoColor: {r: 0, g: 0, b: 1, a: 1}
+  textOffset: {x: 0, y: 1.5, z: 0}

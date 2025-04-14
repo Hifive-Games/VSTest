@@ -1,85 +1,99 @@
-using System.Collections;
-using System.Net;
 using Unity.Mathematics;
 using UnityEngine;
-/// <summary>
-/// Will change when DOTWEEN is implemented
-/// </summary>
-public class PlayerMagnet : MonoBehaviour
+using DG.Tweening;
+
+[RequireComponent(typeof(Collider))]
+[RequireComponent(typeof(Rigidbody))]
+public class PlayerMagnet : MonoBehaviourSingleton<PlayerMagnet>
 {
     public float magnetRange;
     public float superMagnetRange = 10000f;
-    public float normalMagnetRange = 8f;
+    public float normalMagnetRange = 2f;
     public float collectableTime = 30f;
-    public static PlayerMagnet Instance;
 
-    public bool test = false;
+    public bool SuperMagnet = false;
 
     public float minPullSpeed = 10f;
 
-    public AudioSource audioSource;
-    public AudioClip expSfx;
-    public AudioClip killSfx;
+    private Collider magnetCollider;
+    private Rigidbody magnetRigidbody;
 
-    private void Awake()
+    public void OnEnable()
     {
-        if (Instance == null)
-        {
-            Instance = this;
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
+        Set();
+    }
+    public void Set()
+    {
+        gameObject.transform.SetParent(TheHero.Instance.transform);
 
         magnetRange = normalMagnetRange;
+
+        magnetCollider = GetComponent<Collider>();
+        magnetCollider.isTrigger = true;
+
+        magnetRigidbody = GetComponent<Rigidbody>();
+        magnetRigidbody.isKinematic = true;
+
+        SetMagnetRange(magnetRange);
     }
 
     public void SetMagnetRange(float range)
     {
-        normalMagnetRange += range;
-        magnetRange = normalMagnetRange;
+        gameObject.transform.localScale = new Vector3(range, range, range);
     }
 
-    private void Update()
+    void Update()
     {
-        if (test)
+        if (SuperMagnet)
         {
-            test = false;
+            SuperMagnet = false;
             SetSuperMagnet();
         }
-        CheckForExperiance();
     }
 
     public void SetSuperMagnet()
     {
-        magnetRange = superMagnetRange;
+        SetMagnetRange(superMagnetRange);
+
         Invoke("SetNormalMagnet", collectableTime);
     }
 
     private void SetNormalMagnet()
     {
-        magnetRange = normalMagnetRange;
+        SetMagnetRange(normalMagnetRange);
     }
 
-    public void CheckForExperiance()
+    private void OnTriggerEnter(Collider other)
     {
-        Collider[] colliders = Physics.OverlapSphere(transform.position, magnetRange);
-        foreach (Collider collider in colliders)
+        if (other.TryGetComponent(out ExperienceParticle experiance))
         {
-            if (collider.TryGetComponent(out ExperienceParticle experiance))
-            {
-                MoveExperiance(experiance);
-            }
+            MoveExperiance(experiance);
         }
     }
 
     private void MoveExperiance(ExperienceParticle experienceParticle)
     {
-        experienceParticle.transform.position = Vector3.MoveTowards(experienceParticle.transform.position, transform.position, math.max(minPullSpeed, Vector3.Distance(experienceParticle.transform.position, transform.position)) * Time.deltaTime);
+        if (!experienceParticle.isTweening)
+        {
+            experienceParticle.isTweening = true;
+            Vector3 targetPosition = transform.position;
+            float distance = Vector3.Distance(experienceParticle.transform.position, targetPosition);
+            float time = distance / minPullSpeed;
+            experienceParticle.transform.DOMove(
+                targetPosition,
+                time
+            ).SetEase(Ease.OutExpo).OnComplete(() =>
+            {
+                experienceParticle.isTweening = false;
+                
+                ObjectPooler.Instance.ReturnObject(experienceParticle.gameObject);
+
+                GlobalGameEventManager.Instance.Notify("PlayerGetExperiance", experienceParticle.experience);
+            });
+        }
     }
 
-    private void  OnDrawGizmosSelected()
+    private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, magnetRange);

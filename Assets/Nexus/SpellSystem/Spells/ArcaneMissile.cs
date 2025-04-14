@@ -22,7 +22,7 @@ public class ArcaneMissile : Spell
             GameObject _child = ObjectPooler.Instance.SpawnFromPool(child, transform.position, Quaternion.identity);
 
             ArcaneMissileChild missile = _child.GetComponent<ArcaneMissileChild>();
-            missile.Initialize(Player.Instance.transform, damage / childCount);
+            missile.Initialize(TheHero.Instance.transform, damage / childCount);
         }
 
 

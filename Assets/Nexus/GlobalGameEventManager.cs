@@ -1,9 +1,8 @@
 
 using UnityEngine;
 
-public class GlobalGameEventManager : MonoBehaviour
+public class GlobalGameEventManager : MonoBehaviourSingleton<GlobalGameEventManager>
 {
-    public static GlobalGameEventManager Instance { get; private set; }
     private GameEventSubject subject = new GameEventSubject();
 
     [SerializeField]
@@ -11,16 +10,8 @@ public class GlobalGameEventManager : MonoBehaviour
 
     private void Awake()
     {
-        if (Instance == null)
-        {
-            Instance = this;
-            shardManager = new ExperienceShardManager();
-            subject.Attach(shardManager);
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
+        shardManager = new ExperienceShardManager();
+        subject.Attach(shardManager);
     }
 
     public void Notify(string eventType, int value, Vector3 position, GameObject gameObject)

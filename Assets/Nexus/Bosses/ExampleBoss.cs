@@ -11,6 +11,9 @@ public class ExampleBoss : Enemy
 
     public Transform randomPoint;
 
+    public GameObject Chest;
+    public GameObject ChestUI;
+
     void Awake()
     {
         if (Instance == null)
@@ -30,7 +33,8 @@ public class ExampleBoss : Enemy
 
     public override void OnDisable()
     {
-        
+        EnemySpawner.Instance.RemoveEnemy(gameObject);
+        player = null;
     }
 
     void Start()
@@ -62,6 +66,18 @@ public class ExampleBoss : Enemy
         if (_boss.CurrentHP > 0 && _boss.CurrentState.StateType == BossSystem.BossStateType.Fighting)
         {
 
+        }
+        else if (_boss.CurrentHP <= 0 && _boss.CurrentState.StateType == BossSystem.BossStateType.Fighting)
+        {
+            _boss.ChangeState(new BossSystem.DyingState());
+        }
+        else if (_boss.CurrentHP <= 0 && _boss.CurrentState.StateType == BossSystem.BossStateType.Dying)
+        {
+
+            // Handle boss death
+            ObjectPooler.Instance.ReturnObject(gameObject);
+            Debug.LogWarning("Boss is dead!\nSpawning Chest!");
+            ObjectPooler.Instance.SpawnFromPool(Chest, transform.position, Quaternion.identity);
         }
     }
 

@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Unity.Jobs;
+using Unity.Collections;
 
 public class EnemySpawner : MonoBehaviour
 {
@@ -81,6 +83,10 @@ public class EnemySpawner : MonoBehaviour
                 {
                     for (int i = activeEnemies.Count - 1; i >= 0; i--)
                     {
+                        if (activeEnemies[i].TryGetComponent<BossActionSystem>(out _))
+                        {
+                            continue;
+                        }
                         GameObject enemy = activeEnemies[i];
                         if (!IsInCullingArea(mainCamera, enemy.transform.position))
                         {

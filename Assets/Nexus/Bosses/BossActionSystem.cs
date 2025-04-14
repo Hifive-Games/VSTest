@@ -20,13 +20,24 @@ public class BossActionSystem : MonoBehaviour
 
     private BossActionState currentState;
     private float timer;
-    private Player player;
+    private GameObject player;
 
     void Start()
     {
-        player = Player.Instance;
+        
+    }
+
+    private void OnEnable()
+    {
+        player = GameObject.FindAnyObjectByType<CharacterController>().gameObject;
+        if (player == null)
+        {
+            Debug.LogError("Player not found in the scene.");
+            return;
+        }
         currentState = BossActionState.MoveToPlayer;
         randomPoint = new GameObject().transform;
+        timer = 0f;
     }
 
     void Update()

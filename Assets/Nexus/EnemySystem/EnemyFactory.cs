@@ -16,6 +16,11 @@ public static class EnemyFactory
 
 
         Debug.Log("EnemyFactory.CreateEnemy: " + data.enemyType);
+
+        if (enemyObj.TryGetComponent<BossActionSystem>(out _))
+        {
+            return enemyObj; // If it's a boss, return it immediately
+        }
         switch (data.enemyType)
         {
             case EnemyType.BasicMelee:

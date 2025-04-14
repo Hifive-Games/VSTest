@@ -41,6 +41,7 @@ public class BulletWeapon : MonoBehaviour
         if (other.TryGetComponent(out Enemy enemy))
         {
             enemy.TakeDamage(1);
+            Destroy(gameObject);
         }
     }
 

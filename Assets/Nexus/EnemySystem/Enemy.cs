@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Xml.Schema;
+using Unity.Mathematics;
 using UnityEngine;
 
 public abstract class Enemy : MonoBehaviour
@@ -36,6 +38,10 @@ public abstract class Enemy : MonoBehaviour
     public float detectionAngle = 45f; // cone half-angle in degrees
     // Preallocate a collider array for Physics.OverlapSphereNonAlloc.
     private Collider[] overlapResults = new Collider[10];
+
+    public float physicsCheckInterval = 0.2f; // update physics check every 0.2 seconds
+    private float physicsCheckTimer = 0f;
+    private Vector3 cachedDirection = Vector3.zero;
 
     public void Initialize(EnemyDataSO enemySO)
     {
@@ -102,6 +108,42 @@ public abstract class Enemy : MonoBehaviour
         }
     }
 
+    public void MoveTowardsPlayer()
+    {
+        Vector3 targetPosition = new Vector3(player.transform.position.x, 0, player.transform.position.z);
+        Vector3 currentPosition = new Vector3(transform.position.x, 0, transform.position.z);
+        Vector3 idealDirection = (targetPosition - currentPosition).normalized;
+
+        // Update the cached adjusted direction only at set intervals.
+        physicsCheckTimer += Time.deltaTime;
+        if (physicsCheckTimer >= physicsCheckInterval)
+        {
+            cachedDirection = GetAdjustedDirection(idealDirection);
+            physicsCheckTimer = 0f;
+        }
+
+        // Early return if there's no clear direction.
+        if (cachedDirection == Vector3.zero)
+        {
+            return;
+        }
+
+        // Smooth out direction transitions.
+        currentMoveDirection = Vector3.SmoothDamp(
+            currentMoveDirection,
+            cachedDirection,
+            ref smoothVelocity,
+            smoothTime);
+
+        transform.position += currentMoveDirection * speed * Time.deltaTime;
+        transform.position = new Vector3(transform.position.x, 0, transform.position.z);
+
+        if (currentMoveDirection != Vector3.zero)
+        {
+            transform.rotation = Quaternion.LookRotation(currentMoveDirection);
+        }
+    }
+
     private void AttackPlayer()
     {
         Debug.Log($"Enemy {name} tries to attack player(Damage: {damage}).");
@@ -136,36 +178,36 @@ public abstract class Enemy : MonoBehaviour
         ObjectPooler.Instance.ReturnObject(gameObject);
         Debug.Log("Enemy died");
         Vector3 position = new Vector3(transform.position.x, .5f, transform.position.z);
-        GlobalGameEventManager.Instance.Notify("EnemyDied", experience, position, expPrefab);
+        CheckExperienceInVicinity(position);
         Debuffs.Clear();
     }
 
-    public void MoveTowardsPlayer()
+    //check how many experiance in the vicinty of the enemy
+    public void CheckExperienceInVicinity(Vector3 position)
     {
-        Vector3 targetPosition = new Vector3(player.transform.position.x, 0, player.transform.position.z);
-        Vector3 currentPosition = new Vector3(transform.position.x, 0, transform.position.z);
-        Vector3 idealDirection = (targetPosition - currentPosition).normalized;
-        Vector3 targetDirection = GetAdjustedDirection(idealDirection);
+        GlobalGameEventManager.Instance.Notify("EnemyDied", experience, position, expPrefab);
+    }
 
-        if (targetDirection == Vector3.zero)
+    public void TestVicinity()
+    {
+        Collider[] colliders = Physics.OverlapSphere(transform.position, 5);
+        int experienceCount = 0;
+        foreach (Collider collider in colliders)
         {
-            // If no clear direction, do not move.
-            return;
+            if (collider.TryGetComponent(out ExperienceParticle experienceParticle))
+            {
+                ObjectPooler.Instance.ReturnObject(collider.gameObject);
+                experienceCount += experienceParticle.experience;
+            }
         }
 
-        // Smooth out direction transitions.
-        currentMoveDirection = Vector3.SmoothDamp(
-            currentMoveDirection,
-            targetDirection,
-            ref smoothVelocity,
-            smoothTime);
-
-        transform.position += currentMoveDirection * speed * Time.deltaTime;
-        transform.position = new Vector3(transform.position.x, 0, transform.position.z);
-
-        if (currentMoveDirection != Vector3.zero)
+        switch (experienceCount)
         {
-            transform.rotation = Quaternion.LookRotation(currentMoveDirection);
+            case <= 10:
+                break;
+            case > 10:
+                experience = experienceCount;
+                break;
         }
     }
 

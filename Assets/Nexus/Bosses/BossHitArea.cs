@@ -5,7 +5,7 @@ public class BossHitArea : MonoBehaviour
 {
     private Color color;
     private SpriteRenderer spriteRenderer;
-    private Player player;
+    private GameObject player;
 
     public float warningDuration = 1f;
     public float fadeDuration = 10f;
@@ -17,7 +17,7 @@ public class BossHitArea : MonoBehaviour
         color = spriteRenderer.color;
         gameObject.SetActive(false);
 
-        player = FindObjectOfType<Player>();
+        player = FindObjectOfType<CharacterController>().gameObject;
     }
 
     void OnEnable()
@@ -36,7 +36,7 @@ public class BossHitArea : MonoBehaviour
         {
             if(color.a < 0.5f)
             {
-                gameObject.transform.position = new Vector3(player.transform.position.x, player.transform.position.y - 1, player.transform.position.z);
+                gameObject.transform.position = new Vector3(player.transform.position.x, player.transform.position.y, player.transform.position.z);
                 gameObject.transform.localScale += new Vector3(0.1f, 0.1f, 0.1f);
             }
             // Gradually fade in the warning area
@@ -60,7 +60,11 @@ public class BossHitArea : MonoBehaviour
         // Deal damage to player if in the area
         if (player != null && collider.bounds.Contains(player.transform.position))
         {
-            player.TakeDamage(damage);
+            TheHeroDamageManager playerDamageManager = player.GetComponent<TheHeroDamageManager>();
+            if (playerDamageManager != null)
+            {
+                //playerDamageManager.TakeDamage(damage);
+            }
         }
 
         // Disable the collider after the hit

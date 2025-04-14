@@ -25,6 +25,11 @@ public class SpellManager : MonoBehaviour
     {
     }
 
+    public List<Spell> GetEquippedSpells()
+    {
+        return EquippedSpells;
+    }
+
     public void ApplyUpgrade(Upgrade upgrade)
     {
         foreach (Spell spell in EquippedSpells)
@@ -63,7 +68,7 @@ public class SpellManager : MonoBehaviour
         spell.Caster = Caster.Player;
         for (int i = 0; i < spell.projectileCount; i++)
         {
-            GameObject spellObject = ObjectPooler.Instance.SpawnFromPool(spell.gameObject, Player.Instance.transform.position, Quaternion.identity);
+            GameObject spellObject = ObjectPooler.Instance.SpawnFromPool(spell.gameObject, TheHero.Instance.transform.position, Quaternion.identity);
             spellObject.transform.position = new Vector3(spellObject.transform.position.x, 1f, spellObject.transform.position.z);
             spellObject.GetComponent<Spell>().Seek();
             spellObject.GetComponent<Spell>().Release();

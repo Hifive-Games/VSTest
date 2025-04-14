@@ -33,7 +33,7 @@ public class TechHero : TheHero
     {
         numberOfDrones++;
         float angle = (numberOfDrones - 1) * Mathf.PI * 2f / numberOfDrones;
-        Vector3 offset = new Vector3(Mathf.Cos(angle), 0f, Mathf.Sin(angle)) * radius;
+        Vector3 offset = new Vector3(Mathf.Cos(angle), 1f, Mathf.Sin(angle)) * radius;
         GameObject newDrone = Instantiate(dronePrefab, transform.position + offset, Quaternion.identity, transform);
 
         drones.Add(newDrone);
@@ -42,7 +42,7 @@ public class TechHero : TheHero
         for (int i = 0; i < drones.Count; i++)
         {
             float newAngle = i * Mathf.PI * 2f / numberOfDrones;
-            initialOffsets[i] = new Vector3(Mathf.Cos(newAngle), 0f, Mathf.Sin(newAngle)) * radius;
+            initialOffsets[i] = new Vector3(Mathf.Cos(newAngle), 1f, Mathf.Sin(newAngle)) * radius;
         }
     }
 

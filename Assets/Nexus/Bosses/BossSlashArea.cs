@@ -31,7 +31,7 @@ public class BossSlashArea : MonoBehaviour
         }
     }
 
-    public bool PlayerInSlashArea(Player player)
+    public bool PlayerInSlashArea(GameObject player)
     {
         // Check if player is within the bounds of the slash area
         Collider playerCollider = player.GetComponent<Collider>();
@@ -55,9 +55,13 @@ public class BossSlashArea : MonoBehaviour
             yield return null;
         }
 
-        if (PlayerInSlashArea(Player.Instance))
+        if (PlayerInSlashArea(FindFirstObjectByType<CharacterController>().gameObject))
         {
-            Player.Instance.TakeDamage(damage);
+            TheHeroDamageManager playerDamageManager = FindFirstObjectByType<TheHeroDamageManager>();
+            if (playerDamageManager != null)
+            {
+                //playerDamageManager.TakeDamage(damage); // Apply damage to the player
+            }
         }
         gameObject.SetActive(false);
     }

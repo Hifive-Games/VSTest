@@ -85,7 +85,7 @@ public abstract class Spell : MonoBehaviour
         {
             if (target == null || !target.gameObject.activeInHierarchy)
             {
-                Transform casterTransform = Caster == Caster.Player ? Player.Instance.transform : ExampleBoss.Instance.transform;
+                Transform casterTransform = Caster == Caster.Player ? TheHero.Instance.transform : ExampleBoss.Instance.transform;
                 if (casterTransform == null)
                     yield break;
 

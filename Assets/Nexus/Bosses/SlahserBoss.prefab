@@ -128,10 +128,16 @@ MonoBehaviour:
   Armor: 0
   score: 0
   experience: 0
-  hitBySpell: 0
   expPrefab: {fileID: 0}
+  smoothTime: 0.1
+  detectionRange: 1.5
+  detectionAngle: 45
+  physicsCheckInterval: 0.2
+  hitBySpell: 0
   actionTimer: 5
   randomPoint: {fileID: 0}
+  Chest: {fileID: 5768510730815123354, guid: 7f9a8e076af6e6546a664b745031385e, type: 3}
+  ChestUI: {fileID: 6855720103330364337, guid: 8a90228b6b5ddb94482767ace0438adc, type: 3}
 --- !u!114 &1052371413549342641
 MonoBehaviour:
   m_ObjectHideFlags: 0

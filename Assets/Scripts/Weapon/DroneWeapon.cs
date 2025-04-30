@@ -5,26 +5,27 @@ using UnityEngine.Serialization;
 
 public class DroneWeapon : MonoBehaviour
 {
+    [SerializeField] private GameObject bullet;
+    [SerializeField] private Transform shooterParent;
+
     public float detectionRange = 15f;
-    public float shootCooldown = 1f;
+    public float attackSpeed = 1f; // saniyede kaç atış yapılır
+    public float attackSize = 1f;
+    public int attackAmount = 1;
+
     private float shootTimer = 0f;
-    public GameObject bullet;
 
     private float searchInterval = 0.2f;
     private float searchTimer = 0f;
+
     private Enemy currentTarget;
 
-    public Transform shooterParent;
-
-    public void Shoot()
-    {
-        Instantiate(bullet, shooterParent.position, transform.rotation);
-    }
-
+  
     private void Update()
     {
         shootTimer -= Time.deltaTime;
         searchTimer -= Time.deltaTime;
+
         if (searchTimer <= 0f)
         {
             currentTarget = FindClosestEnemy();
@@ -41,9 +42,18 @@ public class DroneWeapon : MonoBehaviour
                 if (shootTimer <= 0f)
                 {
                     Shoot();
-                    shootTimer = shootCooldown;
+                    shootTimer = 1f / Mathf.Max(attackSpeed, 0.01f); // 0'a bölünme hatasını önler
                 }
             }
+        }
+    }
+
+    private void Shoot()
+    {
+        for (int i = 0; i < attackAmount; i++)
+        {
+            GameObject bulletObj = Instantiate(bullet, shooterParent.position, transform.rotation);
+            bulletObj.transform.localScale = Vector3.one * attackSize;
         }
     }
 

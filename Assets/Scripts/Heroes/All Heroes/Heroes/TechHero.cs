@@ -76,48 +76,114 @@ public class TechHero : TheHero
         }
     }
 
-    public override void SetAttackSpeed(float newRate)
+   public override void SetAttackSpeed(float newRate)
+{
+    foreach (var drone in drones)
     {
-        throw new System.NotImplementedException();
+        var weapon = drone.GetComponent<DroneWeapon>();
+        if (weapon != null)
+        {
+            weapon.attackSpeed = Mathf.Max(0.01f, newRate);
+        }
     }
+}
 
-    public override void SetAttackRange(float newRate)
+public override void AddAttackSpeed(float newRate)
+{
+    foreach (var drone in drones)
     {
-        throw new System.NotImplementedException();
+        var weapon = drone.GetComponent<DroneWeapon>();
+        if (weapon != null)
+        {
+            weapon.attackSpeed *= (1f + newRate / 100f);
+            weapon.attackSpeed = Mathf.Max(0.01f, weapon.attackSpeed);
+        }
     }
+}
 
-    public override void SetAttackSize(float newRate)
+public override void ReduceAttackSpeed(float newRate)
+{
+    foreach (var drone in drones)
     {
-        throw new System.NotImplementedException();
+        var weapon = drone.GetComponent<DroneWeapon>();
+        if (weapon != null)
+        {
+            weapon.attackSpeed *= (1f - newRate / 100f);
+            weapon.attackSpeed = Mathf.Max(0.01f, weapon.attackSpeed);
+        }
     }
+}
 
-    public override void SetAttackAmount(float newRate)
+public override void SetAttackRange(float newRate)
+{
+    foreach (var drone in drones)
     {
-        throw new System.NotImplementedException();
+        var weapon = drone.GetComponent<DroneWeapon>();
+        if (weapon != null)
+        {
+            weapon.detectionRange = Mathf.Max(0f, newRate);
+        }
     }
+}
 
-    public override void AddAttackSpeed(float newRate)
+public override void AddAttackRange(float newRate)
+{
+    foreach (var drone in drones)
     {
-        throw new System.NotImplementedException();
+        var weapon = drone.GetComponent<DroneWeapon>();
+        if (weapon != null)
+        {
+            weapon.detectionRange *= (1f + newRate / 100f);
+        }
     }
+}
 
-    public override void AddAttackRange(float newRate)
+public override void SetAttackSize(float newRate)
+{
+    foreach (var drone in drones)
     {
-        throw new System.NotImplementedException();
+        var weapon = drone.GetComponent<DroneWeapon>();
+        if (weapon != null)
+        {
+            weapon.attackSize = Mathf.Max(0.1f, newRate);
+        }
     }
+}
 
-    public override void AddAttackSize(float newRate)
+public override void AddAttackSize(float newRate)
+{
+    foreach (var drone in drones)
     {
-        throw new System.NotImplementedException();
+        var weapon = drone.GetComponent<DroneWeapon>();
+        if (weapon != null)
+        {
+            weapon.attackSize *= (1f + newRate / 100f);
+        }
     }
+}
 
-    public override void AddAttackAmount(float newRate)
+public override void SetAttackAmount(float newRate)
+{
+    foreach (var drone in drones)
     {
-        throw new System.NotImplementedException();
+        var weapon = drone.GetComponent<DroneWeapon>();
+        if (weapon != null)
+        {
+            weapon.attackAmount = Mathf.Max(1, Mathf.RoundToInt(newRate));
+        }
     }
+}
 
-    public override void ReduceAttackSpeed(float newRate)
+public override void AddAttackAmount(float newRate)
+{
+    foreach (var drone in drones)
     {
-        throw new System.NotImplementedException();
+        var weapon = drone.GetComponent<DroneWeapon>();
+        if (weapon != null)
+        {
+            weapon.attackAmount += Mathf.RoundToInt(newRate);
+            weapon.attackAmount = Mathf.Max(1, weapon.attackAmount);
+        }
     }
+}
 }

@@ -5,24 +5,30 @@ using UnityEngine.Serialization;
 
 public class DroneWeapon : MonoBehaviour
 {
-    public float detectionRange = 15f;
-    public float shootCooldown = 1f;
+    [Header("Weapon Settings")]
+    [SerializeField] private GameObject bullet;
+    [SerializeField] private Transform shooterParent;
+
+    [SerializeField] public float detectionRange = 15f;
+    [SerializeField] public float attackSpeed = 1f; // saniyede kaç atış yapılır
+    [SerializeField] public float attackSize = 1f;
+    [SerializeField] public int attackAmount = 1;
+
     private float shootTimer = 0f;
-    public GameObject bullet;
 
     private float searchInterval = 0.2f;
     private float searchTimer = 0f;
-    private TestEnemyDed currentTarget;
 
-    public Transform shooterParent;
+    private Enemy currentTarget;
     
     private void Update()
     {
         shootTimer -= Time.deltaTime;
         searchTimer -= Time.deltaTime;
+
         if (searchTimer <= 0f)
         {
-            currentTarget = FindClosestEnemy();
+            currentTarget =FindClosestEnemy();
             searchTimer = searchInterval;
         }
 
@@ -36,29 +42,29 @@ public class DroneWeapon : MonoBehaviour
                 if (shootTimer <= 0f)
                 {
                     Shoot();
-                    shootTimer = shootCooldown;
+                    shootTimer = 1f / Mathf.Max(attackSpeed, 0.01f); // 0'a bölünme hatasını önler
                 }
             }
         }
     }
 
-<<<<<<< Updated upstream
-    private TestEnemyDed FindClosestEnemy()
-=======
-    public void Shoot()
+    private void Shoot()
     {
-        Instantiate(bullet, shooterParent.position, transform.rotation);
+        for (int i = 0; i < attackAmount; i++)
+        {
+            GameObject bulletObj = Instantiate(bullet, shooterParent.position, transform.rotation);
+            bulletObj.transform.localScale = Vector3.one * attackSize;
+        }
     }
     
     private Enemy FindClosestEnemy()
->>>>>>> Stashed changes
     {
-        TestEnemyDed[] enemies = FindObjectsOfType<TestEnemyDed>();
-        TestEnemyDed nearest = null;
+        Enemy[] enemies = FindObjectsOfType<Enemy>();
+        Enemy nearest = null;
         float minDist = Mathf.Infinity;
         Vector3 currentPos = transform.position;
 
-        foreach (TestEnemyDed enemy in enemies)
+        foreach (Enemy enemy in enemies)
         {
             float dist = Vector3.Distance(currentPos, enemy.transform.position);
             if (dist < minDist)

@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c7892da95d18d249a7b55e7526e9096, type: 3}
   m_Name: MaximumHealthActiveUpgrade
   m_EditorClassIdentifier: 
-  description: Description
+  upgradeName: Maximum can
+  description: max can
   rareValues:
   - rareLevel: 0
     value: 0

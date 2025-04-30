@@ -51,8 +51,8 @@ public class TheHeroMovementNewInput : MonoBehaviour
 
     private void Update()
     {
-        MovePlayer();
         FaceNearestEnemy(); // En yakın düşmana yüzünü döndür
+        MovePlayer();
     }
 
     private void MovePlayer()

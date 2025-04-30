@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e3a9d53451798d45ac8b45b7cb63eba, type: 3}
   m_Name: CurrentHealthActiveUpgrade
   m_EditorClassIdentifier: 
-  description: Description
+  upgradeName: Current Health Active
+  description: "CAn art\u0131yo"
   rareValues:
   - rareLevel: 0
     value: 0

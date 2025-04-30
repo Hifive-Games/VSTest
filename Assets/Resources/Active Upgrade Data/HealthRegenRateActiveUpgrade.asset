@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a4bc9d8206ea6f428e6e0b5a4df9441, type: 3}
   m_Name: HealthRegenRateActiveUpgrade
   m_EditorClassIdentifier: 
-  description: Description
+  upgradeName: Health Regen Rate
+  description: "Can yineleme miktar\u0131"
   rareValues:
   - rareLevel: 0
     value: 0

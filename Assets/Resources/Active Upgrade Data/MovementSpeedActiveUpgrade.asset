@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 229cac79f4efcec4ba998339a61577f5, type: 3}
   m_Name: MovementSpeedActiveUpgrade
   m_EditorClassIdentifier: 
-  description: Description
+  upgradeName: movement speed
+  description: "hareket h\u0131z\u0131"
   rareValues:
   - rareLevel: 0
     value: 0

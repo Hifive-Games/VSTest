@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 1052371413549342641}
   m_Layer: 6
   m_Name: SlahserBoss
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -137,7 +137,6 @@ MonoBehaviour:
   actionTimer: 5
   randomPoint: {fileID: 0}
   Chest: {fileID: 5768510730815123354, guid: 7f9a8e076af6e6546a664b745031385e, type: 3}
-  ChestUI: {fileID: 6855720103330364337, guid: 8a90228b6b5ddb94482767ace0438adc, type: 3}
 --- !u!114 &1052371413549342641
 MonoBehaviour:
   m_ObjectHideFlags: 0

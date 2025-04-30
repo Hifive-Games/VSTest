@@ -15,12 +15,7 @@ public class DroneWeapon : MonoBehaviour
     private TestEnemyDed currentTarget;
 
     public Transform shooterParent;
-
-    public void Shoot()
-    {
-        Instantiate(bullet, shooterParent.position, transform.rotation);
-    }
-
+    
     private void Update()
     {
         shootTimer -= Time.deltaTime;
@@ -47,7 +42,16 @@ public class DroneWeapon : MonoBehaviour
         }
     }
 
+<<<<<<< Updated upstream
     private TestEnemyDed FindClosestEnemy()
+=======
+    public void Shoot()
+    {
+        Instantiate(bullet, shooterParent.position, transform.rotation);
+    }
+    
+    private Enemy FindClosestEnemy()
+>>>>>>> Stashed changes
     {
         TestEnemyDed[] enemies = FindObjectsOfType<TestEnemyDed>();
         TestEnemyDed nearest = null;

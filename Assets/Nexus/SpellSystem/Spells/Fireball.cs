@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using Zenject.SpaceFighter;
 
 public class Fireball : Spell
 {
@@ -26,9 +27,10 @@ public class Fireball : Spell
             {
                 enemy.TakeDamage(damage);
             }
-            if (collider.TryGetComponent(out Player player) && (Caster == Caster.Enemy || Caster == Caster.Boss))
+            if (collider.TryGetComponent(out CharacterController player) && (Caster == Caster.Enemy || Caster == Caster.Boss))
             {
-                player.TakeDamage(damage);
+                //Damage
+                Debug.Log($"Player hit by {Name} spell!\nDamage: {damage}");
             }
         }
     }
@@ -39,7 +41,7 @@ public class Fireball : Spell
         base.CollisionEffect(enemy);
     }
 
-    public override void CollisionEffect(Player player)
+    public override void CollisionEffect(CharacterController player)
     {
         if (player != null) Explode();
         base.CollisionEffect(player);

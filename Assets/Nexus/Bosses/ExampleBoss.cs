@@ -12,7 +12,6 @@ public class ExampleBoss : Enemy
     public Transform randomPoint;
 
     public GameObject Chest;
-    public GameObject ChestUI;
 
     void Awake()
     {
@@ -51,6 +50,15 @@ public class ExampleBoss : Enemy
 
     }
 
+    public override void Die()
+    {
+        // Handle boss death
+        ObjectPooler.Instance.ReturnObject(gameObject);
+        Debug.LogWarning("Boss is dead!\nSpawning Chest!");
+        GameObject chest = ObjectPooler.Instance.SpawnFromPool(Chest, transform.position, Quaternion.identity);
+        chest.transform.position = new Vector3(transform.position.x, 0, transform.position.z);
+    }
+
     public override void Update()
     {
         // Each frame, update both the current State and Phase
@@ -75,15 +83,8 @@ public class ExampleBoss : Enemy
         {
 
             // Handle boss death
-            ObjectPooler.Instance.ReturnObject(gameObject);
-            Debug.LogWarning("Boss is dead!\nSpawning Chest!");
-            ObjectPooler.Instance.SpawnFromPool(Chest, transform.position, Quaternion.identity);
+            Die();
         }
-    }
-
-    public void TakeDamage(float damage)
-    {
-        currentHealth -= (int)damage;
     }
 
     void OnDestroy()

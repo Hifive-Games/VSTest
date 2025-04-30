@@ -17,7 +17,7 @@ public class SpellDrop : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.TryGetComponent(out Player _))
+        if (other.TryGetComponent(out CharacterController _))
         {
             SpellManager.Instance.EquipSpell(spell);
             SpellDatabase.Instance.RemoveSpell(spell);

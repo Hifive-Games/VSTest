@@ -40,9 +40,10 @@ public class ArcaneMissile : Spell
         }
     }
 
-    public override void CollisionEffect(Player player)
+    public override void CollisionEffect(CharacterController player)
     {
-        if (player != null) player.TakeDamage(damage);
+        if (player != null) //player.TakeDamage(damage);
+        Debug.Log($"Player hit by {Name} spell!\nDamage: {damage}");
         base.CollisionEffect(player);
     }
 

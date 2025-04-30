@@ -7,7 +7,9 @@ public class SpellManager : MonoBehaviour
     public static SpellManager Instance;
 
     public List<Spell> EquippedSpells = new List<Spell>();
-    [SerializeField] private List<float> spellCooldowns = new List<float>();
+    public List<float> spellCooldowns = new List<float>();
+
+    [SerializeField] List<SpellData> spellDataList = new List<SpellData>();
 
     private void Awake()
     {
@@ -30,23 +32,69 @@ public class SpellManager : MonoBehaviour
         return EquippedSpells;
     }
 
-    public void ApplyUpgrade(Upgrade upgrade)
+    public SpellData GetSpellInfo(SpellUpgrade spellUpgrade)
     {
-        foreach (Spell spell in EquippedSpells)
+        foreach (SpellData spell in spellDataList)
+        {
+            if (spell.SpellID == spellUpgrade.TargetID)
+            {
+                return spell;
+            }
+        }
+        return null;
+    }
+
+    public void ApplyUpgrade(SpellUpgrade upgrade)
+    {
+        foreach (SpellData spell in spellDataList)
         {
             if (spell.SpellID == upgrade.TargetID)
             {
+                // Apply the upgrade to the spell data
                 spell.Upgrade(upgrade);
             }
         }
     }
-    public void EquipSpell(Spell spell)
+
+    //create an empty spelldata object and add it to the list of spell data
+    public void CreateSpellData(Spell spell)
+    {
+        SpellData spellData = ScriptableObject.CreateInstance<SpellData>();
+        spellData.SpellID = spell.SpellID;
+        spellData.Name = spell.Name;
+        spellData.Description = spell.Description;
+        spellData.Icon = spell.Icon;
+        spellData.Speed = spell.speed;
+        spellData.Damage = spell.damage;
+        spellData.Duration = spell.duration;
+        spellData.Range = spell.range;
+        spellData.Cooldown = spell.cooldown;
+        spellData.ExplosionRadius = spell.explosionRadius;
+        spellData.ProjectileCount = spell.projectileCount;
+        spellData.Radius = spell.radius;
+        spellData.TickInterval = spell.tickInterval;
+
+        // Add the new SpellData to the list
+        if (!spellDataList.Contains(spellData))
+            spellDataList.Add(spellData);
+    }
+
+    public void EquipSpell(Spell spell, bool isDisposable = false)
     {
         if (!EquippedSpells.Contains(spell))
         {
             EquippedSpells.Add(spell);
             spellCooldowns.Add(spell.cooldown);
+
+            CreateSpellData(spell);
         }
+
+        if (!isDisposable)
+        {
+            SpellUpgradePanelManager.Instance.AddEquippedSpellUpgrades(spell);
+        }
+
+        //TODO: Later on we will add a check for disposable spells
     }
 
     private void Update()
@@ -65,14 +113,33 @@ public class SpellManager : MonoBehaviour
     public IEnumerator CastSpell(int index)
     {
         Spell spell = EquippedSpells[index];
+        SpellData _spellData = spellDataList.Find(x => x.SpellID == spell.SpellID);
         spell.Caster = Caster.Player;
-        for (int i = 0; i < spell.projectileCount; i++)
+
+        for (int i = 0; i < _spellData.ProjectileCount; i++)
         {
             GameObject spellObject = ObjectPooler.Instance.SpawnFromPool(spell.gameObject, TheHero.Instance.transform.position, Quaternion.identity);
+            Spell spellComponent = spellObject.GetComponent<Spell>();
+
+            ApplyData(spellComponent, _spellData);
+
             spellObject.transform.position = new Vector3(spellObject.transform.position.x, 1f, spellObject.transform.position.z);
-            spellObject.GetComponent<Spell>().Seek();
-            spellObject.GetComponent<Spell>().Release();
-            yield return new WaitForSeconds(spell.tickInterval);
+            spellComponent.Seek();
+            spellComponent.Release();
+            yield return new WaitForSeconds(_spellData.TickInterval);
         }
+    }
+
+    public void ApplyData(Spell spell, SpellData spellData)
+    {
+        spell.speed = spellData.Speed;
+        spell.damage = spellData.Damage;
+        spell.duration = spellData.Duration;
+        spell.range = spellData.Range;
+        spell.cooldown = spellData.Cooldown;
+        spell.explosionRadius = spellData.ExplosionRadius;
+        spell.projectileCount = spellData.ProjectileCount;
+        spell.radius = spellData.Radius;
+        spell.tickInterval = spellData.TickInterval;
     }
 }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -7,7 +8,6 @@ public abstract class Spell : MonoBehaviour
     public string Name;
     public string Description;
     public Sprite Icon;
-    public int level = 1;
     public float speed = 10f;
     public int damage = 50;
     public float duration = 2f;
@@ -132,7 +132,7 @@ public abstract class Spell : MonoBehaviour
             print($"Cast by {Caster} collided with {enemy.name}");
         }
 
-        if (other.TryGetComponent(out Player player) && Caster == Caster.Boss)
+        if (other.TryGetComponent(out CharacterController player) && Caster == Caster.Boss)
         {
             CollisionEffect(player);
 
@@ -145,40 +145,9 @@ public abstract class Spell : MonoBehaviour
         ObjectPooler.Instance.ReturnObject(gameObject);
     }
 
-    public virtual void CollisionEffect(Player player)
+    public virtual void CollisionEffect(CharacterController player)
     {
         ObjectPooler.Instance.ReturnObject(gameObject);
     }
-
-    public void Upgrade(Upgrade upgrade)
-    {
-        switch (upgrade.Target)
-        {
-            case UpgradeTarget.Damage:
-                damage += (int)upgrade.GetValue(level);
-                break;
-            case UpgradeTarget.Cooldown:
-                cooldown -= upgrade.GetValue(level);
-                break;
-            case UpgradeTarget.Range:
-                range += upgrade.GetValue(level);
-                break;
-            case UpgradeTarget.Duration:
-                duration += upgrade.GetValue(level);
-                break;
-            case UpgradeTarget.Speed:
-                speed += upgrade.GetValue(level);
-                break;
-            case UpgradeTarget.Radius:
-                radius += upgrade.GetValue(level);
-                break;
-            case UpgradeTarget.TickInterval:
-                tickInterval += upgrade.GetValue(level);
-                break;
-        }
-    }
 }
 
-
-
-public enum Caster { Player, Boss, Enemy }

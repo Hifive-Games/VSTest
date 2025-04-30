@@ -11,6 +11,7 @@ public class BulletWeapon : MonoBehaviour
     
     [SerializeField] private LayerMask affectedLayers;
 
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();

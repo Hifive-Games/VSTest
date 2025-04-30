@@ -6,7 +6,7 @@ public class Player : MonoBehaviour
 
     public int BaseHealth { get; private set; }
     public int Health { get; set; }
-    private List<Upgrade> appliedUpgrades;
+    private List<SpellUpgrade> appliedUpgrades;
 
     public int ExperienceToNextLevel;
 

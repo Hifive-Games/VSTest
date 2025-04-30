@@ -613,7 +613,7 @@ GameObject:
   - component: {fileID: 8246166531457452292}
   - component: {fileID: 3096113514541116077}
   m_Layer: 5
-  m_Name: SpellUIPanel
+  m_Name: SpellSelectionPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

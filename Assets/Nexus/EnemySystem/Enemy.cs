@@ -173,10 +173,9 @@ public abstract class Enemy : MonoBehaviour
         hitBySpell = false;
     }
 
-    public void Die()
+    public virtual void Die()
     {
         ObjectPooler.Instance.ReturnObject(gameObject);
-        Debug.Log("Enemy died");
         Vector3 position = new Vector3(transform.position.x, .5f, transform.position.z);
         CheckExperienceInVicinity(position);
         Debuffs.Clear();

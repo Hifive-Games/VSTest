@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -151,6 +152,33 @@ public class ObjectPooler
             objectToSpawn.SetActive(true);
         }
         return objectToSpawn;
+    }
+
+    public GameObject SpawnFromPool(string prefabName, Vector3 position, Quaternion rotation)
+    {
+        GameObject prefab = Resources.Load<GameObject>(prefabName);
+        if (prefab != null)
+        {
+            return SpawnFromPool(prefab, position, rotation);
+        }
+        Debug.LogError($"Prefab {prefabName} not found in Resources folder.");
+        return null;
+    }
+
+    public GameObject SpawnFromPool(string prefabName, Vector3 position, Quaternion rotation, Transform parent)
+    {
+        GameObject prefab = Resources.Load<GameObject>(prefabName);
+        if (prefab != null)
+        {
+            GameObject objectToSpawn = SpawnFromPool(prefab, position, rotation);
+            if (objectToSpawn != null && parent != null)
+            {
+                objectToSpawn.transform.SetParent(parent);
+            }
+            return objectToSpawn;
+        }
+        Debug.LogError($"Prefab {prefabName} not found in Resources folder.");
+        return null;
     }
 }
 public class PooledObject : MonoBehaviour

@@ -6,11 +6,11 @@ public class GenericSpellPhase : IBossPhase
 {
     public BossPhaseType PhaseType => BossPhaseType.Spell;
     BossSpellManager bossSpellManager;
-    Player player;
+    GameObject player;
     public void EnterPhase(BossController controller)
     {
         
-        player = GameObject.FindObjectOfType<Player>();
+        player = GameObject.FindObjectOfType<TheHero>().gameObject;
         bossSpellManager = new BossSpellManager(player);
         //pick 3 random spells from SpellDatabase
         for (int i = 0; i < 4; i++)
@@ -35,8 +35,8 @@ public class BossSpellManager
     public List<Spell> EquippedSpells = new List<Spell>();
     [SerializeField] private List<float> spellCooldowns = new List<float>();
 
-    private Player player;
-    public BossSpellManager(Player player)
+    private GameObject player;
+    public BossSpellManager(GameObject player)
     {
         this.player = player;
     }

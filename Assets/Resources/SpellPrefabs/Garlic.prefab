@@ -125,7 +125,6 @@ MonoBehaviour:
   Name: Garlic
   Description: Damages Nearby
   Icon: {fileID: 0}
-  level: 1
   speed: 0
   damage: 5
   duration: 5
@@ -134,7 +133,8 @@ MonoBehaviour:
   explosionRadius: 5
   projectileCount: 1
   radius: 5
-  tickInterval: 0.5
+  tickInterval: 1
+  Caster: 0
 --- !u!54 &7414985338347674824
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -361,7 +361,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.5
+      scalar: 5
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -414,7 +414,7 @@ ParticleSystem:
     startSizeY:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1
+      scalar: 0.1
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -467,7 +467,7 @@ ParticleSystem:
     startSizeZ:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1
+      scalar: 0.1
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -678,7 +678,7 @@ ParticleSystem:
         m_RotationOrder: 4
     randomizeRotationDirection: 0
     gravitySource: 1
-    maxNumParticles: 100
+    maxNumParticles: 500
     customEmitterVelocity: {x: 0, y: 0, z: 0}
     size3D: 0
     rotation3D: 0
@@ -4861,7 +4861,7 @@ Transform:
   m_GameObject: {fileID: 7841418584543471215}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.34, y: -0, z: 0.18}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -4982,15 +4982,14 @@ MonoBehaviour:
   Name: FireBall
   Description: Ball of Fire
   Icon: {fileID: 0}
-  level: 1
   speed: 10
   damage: 50
   duration: 2
   range: 10
-  cooldown: 4.5
+  cooldown: 4
   explosionRadius: 2.5
-  projectileCount: 2
-  radius: 3
+  projectileCount: 1
+  radius: 10
   tickInterval: 0.5
   Caster: 0
   ExplosionEffect: {fileID: 5158311172378158182, guid: 6ed4c3455eed5e34abcc7c10f88ef52b,

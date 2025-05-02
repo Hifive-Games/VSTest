@@ -6,7 +6,7 @@ using UnityEngine.Serialization;
 public class TechHero : TheHero
 {
     public GameObject dronePrefab;
-    public int numberOfDrones = 2;
+    private int numberOfDrones;
     public float radius = 2f;
     public float rotationSpeed = 1f;
     public float floatSpeed = 1f;
@@ -16,18 +16,6 @@ public class TechHero : TheHero
     private float baseAngle = 0f;
     private List<GameObject> drones = new List<GameObject>();
     private List<Vector3> initialOffsets = new List<Vector3>();
-
-    private void Start()
-    {
-        for (int i = 0; i < numberOfDrones; i++)
-        {
-            float angle = i * Mathf.PI * 2f / numberOfDrones;
-            Vector3 offset = new Vector3(Mathf.Cos(angle), 0, Mathf.Sin(angle)) * radius;
-            GameObject drone = Instantiate(dronePrefab, transform.position + offset, Quaternion.identity, transform);
-            drones.Add(drone);
-            initialOffsets.Add(offset);
-        }
-    }
 
     public void AddDrone()
     {
@@ -76,6 +64,10 @@ public class TechHero : TheHero
         }
     }
 
+    
+    // Miras alınanlar
+    
+    
    public override void SetAttackSpeed(float newRate)
 {
     foreach (var drone in drones)
@@ -164,26 +156,25 @@ public override void AddAttackSize(float newRate)
 
 public override void SetAttackAmount(float newRate)
 {
-    foreach (var drone in drones)
+    numberOfDrones = (int)newRate;
+    for (int i = 0; i < numberOfDrones; i++)
     {
-        var weapon = drone.GetComponent<DroneWeapon>();
-        if (weapon != null)
-        {
-            weapon.attackAmount = Mathf.Max(1, Mathf.RoundToInt(newRate));
-        }
+        float angle = i * Mathf.PI * 2f / numberOfDrones;
+        Vector3 offset = new Vector3(Mathf.Cos(angle), 0, Mathf.Sin(angle)) * radius;
+        GameObject drone = Instantiate(dronePrefab, transform.position + offset, Quaternion.identity, transform);
+        drones.Add(drone);
+        initialOffsets.Add(offset);
     }
 }
 
 public override void AddAttackAmount(float newRate)
 {
-    foreach (var drone in drones)
+    int amountToAdd = Mathf.Max(0, Mathf.RoundToInt(newRate));
+    for (int i = 0; i < amountToAdd; i++)
     {
-        var weapon = drone.GetComponent<DroneWeapon>();
-        if (weapon != null)
-        {
-            weapon.attackAmount += Mathf.RoundToInt(newRate);
-            weapon.attackAmount = Mathf.Max(1, weapon.attackAmount);
-        }
+        AddDrone();
     }
 }
+
+
 }

@@ -11,8 +11,6 @@ public class DroneWeapon : MonoBehaviour
     public float detectionRange = 15f;
     public float attackSpeed = 1f; // saniyede kaç atış yapılır
     public float attackSize = 1f;
-    public int attackAmount = 1;
-
     private float shootTimer = 0f;
 
     private float searchInterval = 0.2f;
@@ -50,11 +48,10 @@ public class DroneWeapon : MonoBehaviour
 
     private void Shoot()
     {
-        for (int i = 0; i < attackAmount; i++)
-        {
+        
             GameObject bulletObj = Instantiate(bullet, shooterParent.position, transform.rotation);
             bulletObj.transform.localScale = Vector3.one * attackSize;
-        }
+        
     }
 
     private Enemy FindClosestEnemy()

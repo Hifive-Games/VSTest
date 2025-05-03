@@ -1,3 +1,18 @@
+using UnityEngine;
+
+[CreateAssetMenu(menuName = "Enemy System/Spawn Phase")]
+public class SpawnPhaseData : ScriptableObject
+{
+    [Header("Timing")]
+    public float startTime;
+    public float duration;
+
+    [Header("Spawning")]
+    public float spawnInterval;
+    public int maxClusterGroups;
+    public EnemySpawnGroup[] enemyGroups;
+}
+
 [System.Serializable]
 public struct EnemySpawnGroup
 {
@@ -5,14 +20,4 @@ public struct EnemySpawnGroup
     public int amount;
     public float minSpwanRadius;
     public float maxSpawnRadius;
-}
-
-[System.Serializable]
-public struct SpawnPhase
-{
-    public float startTime;
-    public float endTime;
-    public float spawnInterval;
-    public int maxClusterGroupLimit;
-    public EnemySpawnGroup[] enemyGroups;
 }

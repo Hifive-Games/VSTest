@@ -1,232 +1,207 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using Unity.Jobs;
-using Unity.Collections;
+using System.Collections.Generic;
 
 public class EnemySpawner : MonoBehaviour
 {
     public static EnemySpawner Instance;
-    [Header("Phases")]
-    public SpawnPhase[] spawnPhases;
 
-    [SerializeField] private float timer;
-    [SerializeField] private int groupsSpawned;
-    [SerializeField] private int enemiesSpawned;
-    [SerializeField] private int maxEnemies;
-    [SerializeField] private bool endPhase;
-    [SerializeField] private float gatheringDistance;
+    [Header("Phase Data (ScriptableObjects)")]
+    [SerializeField] private SpawnPhaseData[] phases;
 
-    public List<GameObject> activeEnemies = new List<GameObject>();
-    private GameObject player;
-    private Camera mainCamera;
+    [Header("Gathering / Culling")]
+    [SerializeField] private float gatheringDistance = 30f;
+    [SerializeField] private float gatherCheckInterval = 5f;
+
+    private Camera _cam;
+    private Transform _player;
+    private List<GameObject> _active = new List<GameObject>();
+
+    private int _currentPhase = 0;
+    private float _phaseTimer = 0f;
+    private float _nextSpawnTime = 0f;
+    private int _clustersThisPhase = 0;
+    private float _nextGatherCheck = 0f;
+
+    public TMPro.TMP_Text TimerText;
+    public TMPro.TMP_Text enemyCountText;
+    public TMPro.TMP_Text killsText;
+    public TMPro.TMP_Text phaseText;
 
     private void Awake()
     {
-        if (Instance == null)
-        {
-            Instance = this;
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
+        if (Instance == null) Instance = this;
+        else Destroy(gameObject);
     }
 
     private void Start()
     {
-        mainCamera = Camera.main;
-        player = FindAnyObjectByType<CharacterController>().gameObject;
-        StartCoroutine(SpawnEnemies());
-        StartCoroutine(GatherEnemies());
+        _cam = Camera.main;
+        _player = FindObjectOfType<CharacterController>().transform;
     }
 
     private void Update()
     {
-        timer += Time.deltaTime;
-    }
+        _phaseTimer += Time.deltaTime;
 
-    private IEnumerator SpawnEnemies()
-    {
-        while (true)
+        if (_currentPhase < phases.Length)
         {
-            foreach (var phase in spawnPhases)
+            var phase = phases[_currentPhase];
+
+            // phase hasn't started yet?
+            if (_phaseTimer < phase.startTime) return;
+
+            // spawn clusters while within phase duration
+            if (_phaseTimer <= phase.startTime + phase.duration)
             {
-                if (timer >= phase.startTime && timer <= phase.endTime && !endPhase)
+                if (Time.time >= _nextSpawnTime && _clustersThisPhase < phase.maxClusterGroups)
                 {
-                    if (groupsSpawned < phase.maxClusterGroupLimit)
-                    {
-                        yield return SpawnPhaseGroup(phase);
-                        groupsSpawned++;
-                    }
-                    else if (enemiesSpawned < maxEnemies)
-                    {
-                        SpawnPhase phaseCopy = phase;
-                        yield return SpawnPhaseGroup(phaseCopy);
-                    }
-                    else
-                    {
-                        Debug.Log("Max enemies spawned - waiting for next phase");
-                        yield return new WaitForSeconds(5f);
-                    }
+                    SpawnCluster(phase);
+                    _clustersThisPhase++;
+                    _nextSpawnTime = Time.time + phase.spawnInterval;
                 }
-
-                if (timer >= phase.endTime)
-                {
-                    groupsSpawned = 0;
-                    endPhase = true;
-                    Debug.Log("End of phase - waiting for next phase");
-                    yield return new WaitForSeconds(5f);
-                }
-
-                if (endPhase)
-                {
-                    for (int i = activeEnemies.Count - 1; i >= 0; i--)
-                    {
-                        if (activeEnemies[i].TryGetComponent<BossActionSystem>(out _))
-                        {
-                            continue;
-                        }
-                        GameObject enemy = activeEnemies[i];
-                        if (!IsInCullingArea(mainCamera, enemy.transform.position))
-                        {
-                            ObjectPooler.Instance.ReturnObject(enemy);
-                            RemoveEnemy(enemy);
-                        }
-                    }
-
-                    endPhase = false;
-
-                    Debug.Log("End of phase - Spawning next phase");
-                }
-
-                float waitTime = Mathf.Max(phase.spawnInterval - groupsSpawned * .1f, .05f);
-                yield return new WaitForSeconds(waitTime);
             }
-            yield return null;
-        }
-    }
-
-    private IEnumerator SpawnPhaseGroup(SpawnPhase phase)
-    {
-        foreach (var group in phase.enemyGroups)
-        {
-            Vector3 spawnPos = GetOutsideCameraView();
-            for (int i = 0; i < group.amount; i++)
+            else
             {
-                Vector3 spawnPosCluster;
-                float minDistance = group.minSpwanRadius;
-                do
-                {
-                    spawnPosCluster = spawnPos + (Random.insideUnitSphere * group.maxSpawnRadius);
-                    spawnPosCluster.y = 1.5f;
-                } while (Vector3.Distance(spawnPosCluster, player.transform.position) < minDistance);
-                spawnPosCluster.y = 1.5f;
-                SpawnEnemy(spawnPosCluster, group.enemyData);
-                yield return new WaitForSeconds(.1f);
+                // end current phase
+                EndPhase();
             }
         }
+
+        // periodic gather / cull
+        if (Time.time >= _nextGatherCheck)
+        {
+            GatherAndCull();
+            _nextGatherCheck = Time.time + gatherCheckInterval;
+        }
+
+        // update UI
+        UpdateUI();
     }
 
-    private IEnumerator GatherEnemies()
+    public void UpdateUI()
     {
-        while (true)
+        // update timer text but min:sec format
+        int minutes = (int)(_phaseTimer / 60f);
+        int seconds = (int)(_phaseTimer % 60f);
+        TimerText.text = $"{minutes:D2}:{seconds:D2}";
+        enemyCountText.text = $"Enemies: {_active.Count}";
+
+        // update phase text(phase name)
+        if (_currentPhase < phases.Length)
         {
-            if (GatherTime())
+            phaseText.text = $"Phase: {phases[_currentPhase].name}";
+        }
+        else
+        {
+            phaseText.text = "Phase: None";
+        }
+    }
+
+    public void AddKill()
+    {
+        killsText.text = $"Kills: {int.Parse(killsText.text.Split(':')[1]) + 1}";
+    }
+
+    private void SpawnCluster(SpawnPhaseData phase)
+    {
+        Vector3 center = GetOutsideCameraView();
+        foreach (var grp in phase.enemyGroups)
+        {
+            for (int i = 0; i < grp.amount; i++)
             {
-                TeleportNearestToPlayer();
+                Vector3 pos = center + Random.insideUnitSphere * grp.maxSpawnRadius;
+                pos.y = 1.5f;
+
+                // enforce min distance from player
+                if (Vector3.Distance(pos, _player.position) < grp.minSpwanRadius)
+                {
+                    pos = center + (pos - center).normalized * grp.minSpwanRadius;
+                    pos.y = 1.5f;
+                }
+
+                var go = EnemyFactory.CreateEnemy(grp.enemyData, pos);
+                _active.Add(go);
             }
-            yield return new WaitForSeconds(5f);
         }
     }
 
-    private bool GatherTime()
+    private void EndPhase()
     {
-        Vector2 playerPos = new Vector2(player.transform.position.x, player.transform.position.z);
-        Vector2 enemyVolume = Vector2.zero;
-        List<GameObject> outOfBounds = OutOfBoundsEnemies();
-        foreach (var enemy in outOfBounds)
+        _currentPhase++;
+        _phaseTimer = 0f;
+        _clustersThisPhase = 0;
+    }
+
+    private void GatherAndCull()
+    {
+        // gather: if average out‐of‐bounds cluster too far, teleport them
+        var oob = new List<GameObject>();
+        Vector3 sum = Vector3.zero;
+        foreach (var e in _active)
         {
-            Vector2 enemyPos = new Vector2(enemy.transform.position.x, enemy.transform.position.z);
-            enemyVolume += enemyPos;
+            if (!IsInView(e.transform.position))
+            {
+                oob.Add(e);
+                sum += e.transform.position;
+            }
         }
-        Vector2 averagePos = enemyVolume / outOfBounds.Count;
-        float distance = Vector2.Distance(playerPos, averagePos);
-        return distance > gatheringDistance;
+        if (oob.Count > 0)
+        {
+            var avg = sum / oob.Count;
+            if (Vector3.Distance(avg, _player.position) > gatheringDistance)
+            {
+                foreach (var e in oob)
+                    e.transform.position = GetOutsideCameraView();
+            }
+        }
 
-    }
-
-    private void SpawnEnemy(Vector3 position, EnemyDataSO enemyData)
-    {
-        GameObject enemy = EnemyFactory.CreateEnemy(enemyData, position);
-        activeEnemies.Add(enemy);
-        enemiesSpawned++;
+        // cull any dead/invisible if you want:
+        _active.RemoveAll(e =>
+        {
+            if (e == null) return true;
+            if (!IsInView(e.transform.position) && !e.TryGetComponent<BossActionSystem>(out _))
+            {
+                ObjectPooler.Instance.ReturnObject(e);
+                return true;
+            }
+            return false;
+        });
     }
 
     private Vector3 GetOutsideCameraView()
     {
-        const int maxAttempts = 20;
-        for (int i = 0; i < maxAttempts; i++)
+        for (int i = 0; i < 20; i++)
         {
-            Vector3 randomPos = player.transform.position + (Random.insideUnitSphere * 50f);
-            randomPos.y = 1.5f;
-            if (!IsInCullingArea(mainCamera, randomPos))
-            {
-                return randomPos;
-            }
+            var p = _player.position + Random.insideUnitSphere * 50f;
+            p.y = 1.5f;
+            if (!IsInView(p)) return p;
         }
-        Vector3 emergencyPos = player.transform.position + (Random.insideUnitSphere * 70f);
-        emergencyPos.y = 1.5f;
-        return emergencyPos;
+        var fallback = _player.position + Random.insideUnitSphere * 70f;
+        fallback.y = 1.5f;
+        return fallback;
     }
 
-    private void TeleportNearestToPlayer()
+    private bool IsInView(Vector3 pos)
     {
-        List<GameObject> outOfBounds = OutOfBoundsEnemies();
-        foreach (var enemy in outOfBounds)
-        {
-            Vector3 spawnPos = GetOutsideCameraView();
-            enemy.transform.position = spawnPos;
-        }
-    }
-
-    private List<GameObject> OutOfBoundsEnemies()
-    {
-        List<GameObject> outOfBounds = new List<GameObject>();
-        foreach (var enemy in activeEnemies)
-        {
-            if (!IsInCullingArea(mainCamera, enemy.transform.position))
-            {
-                outOfBounds.Add(enemy);
-            }
-        }
-        return outOfBounds;
-    }
-
-    private List<GameObject> InBoundsEnemies()
-    {
-        List<GameObject> inBounds = new List<GameObject>();
-        foreach (var enemy in activeEnemies)
-        {
-            if (IsInCullingArea(mainCamera, enemy.transform.position))
-            {
-                inBounds.Add(enemy);
-            }
-        }
-        return inBounds;
+        var vp = _cam.WorldToViewportPoint(pos);
+        const float off = .1f;
+        return vp.x > -off && vp.x < 1 + off && vp.y > -off && vp.y < 1 + off;
     }
 
     public void RemoveEnemy(GameObject enemy)
     {
-        activeEnemies.Remove(enemy);
-        enemiesSpawned--;
+        if (_active.Contains(enemy))
+        {
+            _active.Remove(enemy);
+            ObjectPooler.Instance.ReturnObject(enemy);
+        }
     }
-
-    public bool IsInCullingArea(Camera cam, Vector3 position)
+    public void ClearEnemies()
     {
-        Vector3 screenPoint = cam.WorldToViewportPoint(position);
-        float offset = 0.1f;
-        bool isInTheScreen = screenPoint.x > 0 - offset && screenPoint.x < 1 + offset && screenPoint.y > 0 - offset && screenPoint.y < 1 + offset;
-        return isInTheScreen;
+        foreach (var enemy in _active)
+        {
+            if (enemy != null) ObjectPooler.Instance.ReturnObject(enemy);
+        }
+        _active.Clear();
     }
 }

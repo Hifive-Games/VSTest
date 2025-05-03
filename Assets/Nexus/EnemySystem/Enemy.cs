@@ -179,6 +179,8 @@ public abstract class Enemy : MonoBehaviour
         Vector3 position = new Vector3(transform.position.x, .5f, transform.position.z);
         CheckExperienceInVicinity(position);
         Debuffs.Clear();
+
+        EnemySpawner.Instance.AddKill();
     }
 
     //check how many experiance in the vicinty of the enemy

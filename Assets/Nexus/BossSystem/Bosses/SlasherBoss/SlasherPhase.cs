@@ -10,7 +10,7 @@ public class SlasherPhase : ScriptableBossPhase
     public float meleeCooldown = 1f;
     public float roamRadius = 5f;
 
-    [Header("Spell (optional)")]
+    [Header("Attacks/Spells (optional)")]
     public bool enableAttacks = false;
     public List<AttackInfo> attackInfos;
 
@@ -24,7 +24,7 @@ public class SlasherPhase : ScriptableBossPhase
     [Range(100f, 0f)]
     public int healthThreshold = 100;
     public ScriptableBossPhase nextPhase;
-    
+
     private float _currentHealth;
     private float _maxHealth;
 

@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 044abdd9f634d684a91c84d576baba6a, type: 3}
-  m_Name: Phase3
+  m_Name: SlasherPhase2
   m_EditorClassIdentifier: 
-  meleeRange: 3.5
-  meleeCooldown: 3
-  roamRadius: 7.5
+  meleeRange: 4
+  meleeCooldown: 2
+  roamRadius: 10
   enableAttacks: 1
   attackInfos:
   - attackId: 0
@@ -39,8 +39,8 @@ MonoBehaviour:
       type: 3}
     attackPrefab: {fileID: 4124742069615597378, guid: d3c0701348f74b3478ffad177918ec3b,
       type: 3}
-  speedMultiplier: 1.5
-  damageMultiplier: 1.5
-  meleeCooldownMultiplier: 1.5
-  healthThreshold: 0
-  nextPhase: {fileID: 0}
+  speedMultiplier: 1
+  damageMultiplier: 1
+  meleeCooldownMultiplier: 1
+  healthThreshold: 33
+  nextPhase: {fileID: 11400000, guid: 2a85e3f1cec9b3c44bfb242b1b151b9f, type: 2}

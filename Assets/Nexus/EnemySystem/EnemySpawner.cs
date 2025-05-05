@@ -204,4 +204,9 @@ public class EnemySpawner : MonoBehaviour
         }
         _active.Clear();
     }
+    public void SpawnEnemy(EnemyDataSO enemyData, Vector3 position)
+    {
+        var go = EnemyFactory.CreateEnemy(enemyData, position);
+        _active.Add(go);
+    }
 }

@@ -1,0 +1,399 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &275688679753900664
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4557008888326705916}
+  - component: {fileID: 234970762465557147}
+  - component: {fileID: 1101227413562523224}
+  - component: {fileID: 1712046511274230074}
+  m_Layer: 0
+  m_Name: Model
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4557008888326705916
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 275688679753900664}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3113250930787166665}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!33 &234970762465557147
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 275688679753900664}
+  m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!23 &1101227413562523224
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 275688679753900664}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!136 &1712046511274230074
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 275688679753900664}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &3152123726262078546
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3113250930787166665}
+  - component: {fileID: 5613205243095520671}
+  - component: {fileID: 4523007976397140666}
+  - component: {fileID: 1770071946568355054}
+  - component: {fileID: 4311248611201218855}
+  - component: {fileID: 432184997371650458}
+  m_Layer: 0
+  m_Name: CryomancerBoss
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3113250930787166665
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3152123726262078546}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 2, z: 10}
+  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_ConstrainProportionsScale: 1
+  m_Children:
+  - {fileID: 4557008888326705916}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &5613205243095520671
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3152123726262078546}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &4523007976397140666
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3152123726262078546}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4771c2009960b0f49a70d44413c9fe1a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1770071946568355054
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3152123726262078546}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a84b634854ca55488dd6513c3964710, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackInfos:
+  - attackId: 0
+    attackDelay: 0
+    attackDuration: 0
+    attackCount: 0
+    attackDamage: 0
+    attackRange: 0
+    attackArea: 0
+    attackWarningPrefab: {fileID: 0}
+    attackPrefab: {fileID: 0}
+  - attackId: 0
+    attackDelay: 0
+    attackDuration: 0
+    attackCount: 0
+    attackDamage: 0
+    attackRange: 0
+    attackArea: 0
+    attackWarningPrefab: {fileID: 0}
+    attackPrefab: {fileID: 0}
+  - attackId: 0
+    attackDelay: 0
+    attackDuration: 0
+    attackCount: 0
+    attackDamage: 0
+    attackRange: 0
+    attackArea: 0
+    attackWarningPrefab: {fileID: 0}
+    attackPrefab: {fileID: 0}
+  - attackId: 0
+    attackDelay: 0
+    attackDuration: 0
+    attackCount: 0
+    attackDamage: 0
+    attackRange: 0
+    attackArea: 0
+    attackWarningPrefab: {fileID: 0}
+    attackPrefab: {fileID: 0}
+  - attackId: 0
+    attackDelay: 0
+    attackDuration: 0
+    attackCount: 0
+    attackDamage: 0
+    attackRange: 0
+    attackArea: 0
+    attackWarningPrefab: {fileID: 0}
+    attackPrefab: {fileID: 0}
+  - attackId: 0
+    attackDelay: 0
+    attackDuration: 0
+    attackCount: 0
+    attackDamage: 0
+    attackRange: 0
+    attackArea: 0
+    attackWarningPrefab: {fileID: 0}
+    attackPrefab: {fileID: 0}
+  - attackId: 0
+    attackDelay: 0
+    attackDuration: 0
+    attackCount: 0
+    attackDamage: 0
+    attackRange: 0
+    attackArea: 0
+    attackWarningPrefab: {fileID: 0}
+    attackPrefab: {fileID: 0}
+  - attackId: 0
+    attackDelay: 0
+    attackDuration: 0
+    attackCount: 0
+    attackDamage: 0
+    attackRange: 0
+    attackArea: 0
+    attackWarningPrefab: {fileID: 0}
+    attackPrefab: {fileID: 0}
+  - attackId: 0
+    attackDelay: 0
+    attackDuration: 0
+    attackCount: 0
+    attackDamage: 0
+    attackRange: 0
+    attackArea: 0
+    attackWarningPrefab: {fileID: 0}
+    attackPrefab: {fileID: 0}
+  - attackId: 0
+    attackDelay: 0
+    attackDuration: 0
+    attackCount: 0
+    attackDamage: 0
+    attackRange: 0
+    attackArea: 0
+    attackWarningPrefab: {fileID: 0}
+    attackPrefab: {fileID: 0}
+  - attackId: 0
+    attackDelay: 0
+    attackDuration: 0
+    attackCount: 0
+    attackDamage: 0
+    attackRange: 0
+    attackArea: 0
+    attackWarningPrefab: {fileID: 0}
+    attackPrefab: {fileID: 0}
+  - attackId: 0
+    attackDelay: 0
+    attackDuration: 0
+    attackCount: 0
+    attackDamage: 0
+    attackRange: 0
+    attackArea: 0
+    attackWarningPrefab: {fileID: 0}
+    attackPrefab: {fileID: 0}
+  - attackId: 0
+    attackDelay: 0
+    attackDuration: 0
+    attackCount: 0
+    attackDamage: 0
+    attackRange: 0
+    attackArea: 0
+    attackWarningPrefab: {fileID: 0}
+    attackPrefab: {fileID: 0}
+  - attackId: 0
+    attackDelay: 0
+    attackDuration: 0
+    attackCount: 0
+    attackDamage: 0
+    attackRange: 0
+    attackArea: 0
+    attackWarningPrefab: {fileID: 0}
+    attackPrefab: {fileID: 0}
+  - attackId: 0
+    attackDelay: 0
+    attackDuration: 0
+    attackCount: 0
+    attackDamage: 0
+    attackRange: 0
+    attackArea: 0
+    attackWarningPrefab: {fileID: 0}
+    attackPrefab: {fileID: 0}
+  - attackId: 0
+    attackDelay: 0
+    attackDuration: 0
+    attackCount: 0
+    attackDamage: 0
+    attackRange: 0
+    attackArea: 0
+    attackWarningPrefab: {fileID: 0}
+    attackPrefab: {fileID: 0}
+--- !u!114 &4311248611201218855
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3152123726262078546}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80a7e79aace724b48a25342406833ac0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _spells:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  _transform: {fileID: 0}
+--- !u!114 &432184997371650458
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3152123726262078546}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7dd602106133f2468125c035a779689, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemySO: {fileID: 11400000, guid: 6aa80c85b8cba3e459efbd96465ea01c, type: 2}
+  maxHealth: 0
+  damage: 0
+  speed: 0
+  currentHealth: 0
+  Armor: 0
+  score: 0
+  experience: 0
+  expPrefab: {fileID: 0}
+  smoothTime: 0.1
+  detectionRange: 1.5
+  detectionAngle: 45
+  physicsCheckInterval: 0.2
+  hitBySpell: 0
+  spawningState: {fileID: 11400000, guid: 6cf2cca523b7a7a40ae1b019e0cc8dc5, type: 2}
+  fightingState: {fileID: 11400000, guid: 60ddfaa7b38780b43972f7c7e665481c, type: 2}
+  dyingState: {fileID: 11400000, guid: 5000caff46b857043b777def868dee42, type: 2}
+  phases:
+  - {fileID: 11400000, guid: fd52bcdd3baf18146aeaed5054120ec5, type: 2}
+  - {fileID: 11400000, guid: 54b75c5db0f53e647b4341bfb3c75dc9, type: 2}
+  - {fileID: 11400000, guid: bee8234f1d2cdf140883b6971ba1f343, type: 2}

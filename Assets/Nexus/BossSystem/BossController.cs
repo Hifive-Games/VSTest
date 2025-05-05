@@ -5,6 +5,7 @@ using NaughtyAttributes;
 [RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(BossMovement))]
 [RequireComponent(typeof(BossAttack))]
+[RequireComponent(typeof(BossCaster))]
 public class BossController : Enemy
 {
     // --- Core FSM ---
@@ -16,6 +17,7 @@ public class BossController : Enemy
     // --- Movement / Attack services ---
     public IBossMover Mover { get; private set; }
     public IBossAttacker Attacker { get; private set; }
+    public IBossSpellCaster Caster { get; private set; }
 
     // --- Assign these in the Inspector ---
     [Header("Boss States (ScriptableObjects)")]
@@ -39,6 +41,7 @@ public class BossController : Enemy
     {
         Mover = GetComponent<BossMovement>();
         Attacker = GetComponent<BossAttack>();
+        Caster = GetComponent<BossCaster>();
         _anim = GetComponent<Animator>();
         player = GameObject.FindGameObjectWithTag("Player");
         Initialize(enemySO);

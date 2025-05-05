@@ -51,7 +51,7 @@ public class GarlicSpell : Spell
 
     public Transform FollowCasterTransform()
     {
-        return Caster == Caster.Player ? TheHero.Instance.transform : ExampleBoss.Instance.transform;
+        return TheHero.Instance.transform;
     }
 
     void DamageNearbyEnemies()

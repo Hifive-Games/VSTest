@@ -1,0 +1,46 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 044abdd9f634d684a91c84d576baba6a, type: 3}
+  m_Name: Phase2
+  m_EditorClassIdentifier: 
+  meleeRange: 4
+  meleeCooldown: 2
+  roamRadius: 10
+  enableAttacks: 1
+  attackInfos:
+  - attackId: 0
+    attackDelay: 1
+    attackDuration: 1
+    attackCount: 0
+    attackDamage: 10
+    attackRange: 0
+    attackArea: 4
+    attackWarningPrefab: {fileID: 3267069490693012620, guid: dce88d1dd71f3664e85f25a9d2bb1dcd,
+      type: 3}
+    attackPrefab: {fileID: 4485844063612033260, guid: 8777f5fba63de114fa603122654a4a81,
+      type: 3}
+  - attackId: 1
+    attackDelay: 2
+    attackDuration: 3
+    attackCount: 3
+    attackDamage: 20
+    attackRange: 5
+    attackArea: 20
+    attackWarningPrefab: {fileID: 4630068627692092880, guid: 494d9016afd24fc4da65ba92465669e4,
+      type: 3}
+    attackPrefab: {fileID: 4124742069615597378, guid: d3c0701348f74b3478ffad177918ec3b,
+      type: 3}
+  speedMultiplier: 1
+  damageMultiplier: 1
+  meleeCooldownMultiplier: 1
+  healthThreshold: 33
+  nextPhase: {fileID: 11400000, guid: 2a85e3f1cec9b3c44bfb242b1b151b9f, type: 2}

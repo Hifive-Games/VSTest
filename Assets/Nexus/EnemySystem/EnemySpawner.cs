@@ -159,7 +159,7 @@ public class EnemySpawner : MonoBehaviour
         _active.RemoveAll(e =>
         {
             if (e == null) return true;
-            if (!IsInView(e.transform.position) && !e.TryGetComponent<BossActionSystem>(out _))
+            if (!IsInView(e.transform.position) && !e.TryGetComponent<BossController>(out _))
             {
                 ObjectPooler.Instance.ReturnObject(e);
                 return true;

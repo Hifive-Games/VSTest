@@ -16,7 +16,7 @@ MonoBehaviour:
   characterName: Hacker Girl
   prefab: {fileID: 2601982612372334620, guid: 7d50f828c026d6349b04f5e4a09fe93a, type: 3}
   characterImage: {fileID: 21300000, guid: 9965c3a185f94e0488929335b79a829f, type: 3}
-  isSelected: 1
+  isSelected: 0
   heroStatsBaseDatas:
   - heroStatsBaseData: {fileID: 11400000, guid: 742468b287bc6e4449763e41e5e7a569,
       type: 2}

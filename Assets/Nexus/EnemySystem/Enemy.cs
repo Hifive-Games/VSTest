@@ -16,6 +16,7 @@ public abstract class Enemy : MonoBehaviour
     public int experience;
     public GameObject expPrefab;
     protected GameObject player;
+    public GameObject Player => player;
 
     // New properties for attack behavior
     protected float attackRange;

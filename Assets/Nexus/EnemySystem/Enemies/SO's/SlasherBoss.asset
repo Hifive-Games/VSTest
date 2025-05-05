@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 087d57d282b2c764db86741b10528730, type: 3}
+  m_Name: SlasherBoss
+  m_EditorClassIdentifier: 
+  enemyType: 0
+  ID: 3000
+  enemyName: Slasher Boss
+  enemySprite: {fileID: 0}
+  enemyPrefab: {fileID: 309624559866207983, guid: 8fed0f4abf12c4241a565f0e55381a39,
+    type: 3}
+  maxHealth: 100
+  damage: 3
+  speed: 5
+  score: 100
+  attackRange: 4
+  attackSpeed: 2
+  experience: 100
+  deathEffect: {fileID: 7642634975434891464, guid: b6eb006e0faad0d4b8de30ddadf3edf5,
+    type: 3}

@@ -15,3 +15,4 @@ MonoBehaviour:
   effectName: Currnet health DEBUFF
   description: "can azal\u0131yo anl\u0131k"
   valueOfBuffOrDeBuff: 20
+  textColor: 1

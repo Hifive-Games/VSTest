@@ -8,7 +8,7 @@ public class ShinobiHero : TheHero
     [SerializeField] private GameObject objectToSpawn; // Spawn edilecek obje
     [SerializeField] private Transform spawnParent; // Spawn noktası
     [SerializeField] private float spawnRate = 1f; // Saniyede kaç kez spawn yapılacak
-    [SerializeField] private float selfDestructTime = 0.5f; // Obje yok olma süresi
+    [SerializeField] private float selfDestructTime = 0.2f; // Obje yok olma süresi
     [SerializeField] private int shurikenCount = 1; // Üretilecek obje sayısı
     [SerializeField] private Vector3 defaultScale = new Vector3(5f, 5f, 5f); // Obje scale değeri
 

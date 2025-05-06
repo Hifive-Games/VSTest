@@ -1,7 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public abstract class BuffDebuffSystemBaseData : ScriptableObject
 {
@@ -15,24 +13,50 @@ public abstract class BuffDebuffSystemBaseData : ScriptableObject
     private float BuffEffectScaler = 1;
     private float DeBuffEffectScaler = 1;
 
-    public void SetHeroBuffEffectScaler( float value)
+    public enum BuffDebuffTextColor
     {
-        Debug.LogError("HeroBuffEffectScaler:"+HeroBuffEffectScaler);
+        Green,
+        Red
+    }
+
+    [SerializeField] private BuffDebuffTextColor textColor = BuffDebuffTextColor.Green; // Default renk
+
+    public void SetHeroBuffEffectScaler(float value)
+    {
+        Debug.LogError("HeroBuffEffectScaler:" + HeroBuffEffectScaler);
         HeroBuffEffectScaler = value;
     }
-    public void SetHeroDeBuffEffectScaler( float value)
+
+    public void SetHeroDeBuffEffectScaler(float value)
     {
         HeroDeBuffEffectScaler = value;
-        Debug.LogError("HeroDebuffEffectScaler:"+HeroDeBuffEffectScaler);
+        Debug.LogError("HeroDebuffEffectScaler:" + HeroDeBuffEffectScaler);
     }
 
     protected float GetBuffValue()
     {
         return HeroBuffEffectScaler * BuffEffectScaler * valueOfBuffOrDeBuff;
     }
+
     protected float GetDeBuffValue()
     {
         return HeroDeBuffEffectScaler * DeBuffEffectScaler * valueOfBuffOrDeBuff;
     }
+
+    public string GetBuffDebuffText()
+    {
+        // Yüzdeyi renkli yapmak
+        string percentageText = $"%{valueOfBuffOrDeBuff}";
+        
+        // Geri kalan metin
+        string descriptionText = $"{description}";
+
+        // Renk belirleme
+        string colorCode = textColor == BuffDebuffTextColor.Green ? "#00FF00" : "#FF0000";
+
+        // Yüzdeyi renkli yap, geri kalan kısmı beyaz tut
+        return $"<color={colorCode}>{percentageText}</color> {descriptionText}";
+    }
+
     public abstract void ApplyBuffDeBuffSystem();
 }

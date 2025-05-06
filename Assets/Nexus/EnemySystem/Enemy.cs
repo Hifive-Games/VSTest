@@ -8,7 +8,7 @@ public abstract class Enemy : MonoBehaviour
 {
     public EnemyDataSO enemySO;
     public int maxHealth;
-    public int damage;
+    public int damage=10;
     public float speed;
     public int currentHealth;
     public int Armor;
@@ -147,7 +147,7 @@ public abstract class Enemy : MonoBehaviour
     private void AttackPlayer()
     {
         Debug.Log($"Enemy {name} tries to attack player(Damage: {damage}).");
-        //player.GetComponent<TheHeroDamageManager>().TakeDamage(damage);
+        player.GetComponent<TheHeroDamageManager>().TakeDamage(damage);
     }
 
     public void TakeDamage(int damage)

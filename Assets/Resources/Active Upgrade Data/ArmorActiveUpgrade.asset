@@ -12,26 +12,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba187d5c1a7f23a47854342635bc74aa, type: 3}
   m_Name: ArmorActiveUpgrade
   m_EditorClassIdentifier: 
-  upgradeName: Armor
-  description: "z\u0131rh"
+  upgradeName: Armor Upgrade
+  description: Armor will be increased
   rareValues:
   - rareLevel: 0
-    value: 2
-    baseProbability: 50
-    luckFactor: 1.4
-  - rareLevel: 1
-    value: 4
-    baseProbability: 30
-    luckFactor: 10
-  - rareLevel: 2
-    value: 6
-    baseProbability: 10
-    luckFactor: 10
-  - rareLevel: 3
-    value: 8
-    baseProbability: 8
-    luckFactor: 15
-  - rareLevel: 4
     value: 10
-    baseProbability: 2
-    luckFactor: 20
+    baseProbability: 80
+    luckFactor: -0.8
+  - rareLevel: 1
+    value: 15
+    baseProbability: 15
+    luckFactor: 0.5
+  - rareLevel: 2
+    value: 20
+    baseProbability: 4
+    luckFactor: 1.5
+  - rareLevel: 3
+    value: 25
+    baseProbability: 0.9
+    luckFactor: 3
+  - rareLevel: 4
+    value: 30
+    baseProbability: 0.1
+    luckFactor: 5

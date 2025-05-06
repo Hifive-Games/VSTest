@@ -12,26 +12,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 229cac79f4efcec4ba998339a61577f5, type: 3}
   m_Name: MovementSpeedActiveUpgrade
   m_EditorClassIdentifier: 
-  upgradeName: movement speed
-  description: "hareket h\u0131z\u0131"
+  upgradeName: Movement Speed
+  description: Movement Speed will be increased
   rareValues:
   - rareLevel: 0
-    value: 0
-    baseProbability: 0
-    luckFactor: 0
+    value: 0.1
+    baseProbability: 60
+    luckFactor: 0.2
   - rareLevel: 1
-    value: 0
-    baseProbability: 0
-    luckFactor: 0
+    value: 0.5
+    baseProbability: 30
+    luckFactor: 0.5
   - rareLevel: 2
-    value: 0
-    baseProbability: 0
-    luckFactor: 0
+    value: 1
+    baseProbability: 15
+    luckFactor: 2
   - rareLevel: 3
-    value: 0
-    baseProbability: 0
-    luckFactor: 0
+    value: 2
+    baseProbability: 5
+    luckFactor: 2
   - rareLevel: 4
-    value: 0
-    baseProbability: 0
-    luckFactor: 0
+    value: 2.5
+    baseProbability: 1
+    luckFactor: 4

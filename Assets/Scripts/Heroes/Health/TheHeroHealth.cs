@@ -11,7 +11,6 @@ public class TheHeroHealth : MonoBehaviour
      * ARTACAKSA HER ZAMAN MI YOKSA SADECE CAN FULL OLDUĞUNDA MI
      */
     
-    
     private float currentHealth;
     private float maxHealth;
 
@@ -19,25 +18,23 @@ public class TheHeroHealth : MonoBehaviour
     private float healthRegenRate = 1f; // Sağlık yenileme süresi (saniye)
     
     private float timer = 0f; // Sağlık yenileme için zamanlayıcı
-
-
-    // Can 0 olduğunda tetiklenecek Action
-    public event Action OnHealthDepleted;
     
     private void FixedUpdate()
     {
         RegenerateHealthOverTime();
     }
-
-
+    
     public void IncreaseHealth(float damage)
     {
         currentHealth -= damage;
         if (currentHealth <= 0)
         {
             currentHealth = 0;
-            OnHealthDepleted?.Invoke(); // Can 0 olduğunda Action tetiklenir
+            GameEvents.OnZeroHealth?.Invoke(); // Can 0 olduğunda Action tetiklenir
         }
+        GameEvents.OnHealthChanged?.Invoke(Mathf.Max(0, currentHealth), maxHealth);
+        Debug.LogError("IncreaseHealth : " + currentHealth);
+
     }
 
 
@@ -52,7 +49,7 @@ public class TheHeroHealth : MonoBehaviour
         if (timer >= healthRegenRate)
         {
             timer = 0f;
-            AddHealth(healthRegenAmount);
+            AddCurrentHealth(healthRegenAmount);
         }
     }
     
@@ -66,6 +63,7 @@ public class TheHeroHealth : MonoBehaviour
         {
             currentHealth = maxHealth;
         }
+        GameEvents.OnHealthChanged?.Invoke(Mathf.Max(0, currentHealth), maxHealth);
     }
     
     // bi yerde lazım olur belki
@@ -75,27 +73,31 @@ public class TheHeroHealth : MonoBehaviour
     }
     public void AddHealthRegenAmount(float health)
     {
-        healthRegenAmount = Mathf.Clamp(healthRegenAmount+health, 0, maxHealth);
+        //healthRegenAmount = Mathf.Clamp(healthRegenAmount+health, 0, maxHealth);
+        healthRegenAmount = health;
+
     }
 
-    public void AddHealth(float health)
-    {
-        currentHealth = Mathf.Clamp(currentHealth + health, 0, maxHealth);
-    }
-  
     public void AddHealthRegenRate(float newRate)
     {
-        healthRegenRate = Mathf.Clamp(healthRegenRate+newRate, 0, maxHealth);
+        //healthRegenRate = Mathf.Clamp(healthRegenRate+newRate, 0, maxHealth);
+        healthRegenRate=newRate;
     }
     public void AddCurrentHealth(float health)
     {
+        Debug.LogError("AddCurrentHealth 1 : " + health);
+        Debug.LogError("AddCurrentHealth 2 : " + currentHealth);
         currentHealth = Mathf.Clamp(currentHealth + health, 0, maxHealth);
+        Debug.LogError("AddCurrentHealth 3: " + currentHealth);
+        GameEvents.OnHealthChanged?.Invoke(Mathf.Max(0, currentHealth), maxHealth);
     }
     
     // Reducelar
     public void ReduceCurrentHealth(float health)
     {
         currentHealth = Mathf.Clamp(currentHealth - health, 0, maxHealth);
+        Debug.LogError("ReduceCurrentHealth : " + currentHealth);
+        GameEvents.OnHealthChanged?.Invoke(Mathf.Max(0, currentHealth), maxHealth);
     }
     
     public void ReduceMaximumHealth(float health)
@@ -105,6 +107,9 @@ public class TheHeroHealth : MonoBehaviour
 
         // Eğer currentHealth yeni maxHealth'ten büyükse, onu maxHealth'e ayarla
         currentHealth = Mathf.Min(currentHealth, maxHealth);
+        Debug.LogError("ReduceMaximumHealth : " + currentHealth);
+
+        GameEvents.OnHealthChanged?.Invoke(Mathf.Max(0, currentHealth), maxHealth);
     }
     
     
@@ -115,24 +120,34 @@ public class TheHeroHealth : MonoBehaviour
     {
         maxHealth = health;
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
+        GameEvents.OnHealthChanged?.Invoke(Mathf.Max(0, currentHealth), maxHealth);
     }
 
     // Health Regen Amount Setter
     public void SetHealthRegenAmount(float health)
     {
-        healthRegenAmount = Mathf.Clamp(health, 0, maxHealth);
+        //healthRegenAmount = Mathf.Clamp(health, 0, maxHealth);
+        healthRegenAmount = health;
     }
 
     // Health Setter
     public void SetCurrentHealth(float health)
-    {
-        currentHealth = Mathf.Clamp(health, 0, maxHealth);
+    {        
+        Debug.LogError("SetCurrentHealth 1 : " +health );
+        Debug.LogError("SetCurrentHealth 2 : " +currentHealth );
+
+        //currentHealth = Mathf.Clamp(health, 0, maxHealth);
+        currentHealth = health;
+        Debug.LogError("SetCurrentHealth 3 : " +currentHealth );
+        //GameEvents.OnHealthChanged?.Invoke(Mathf.Max(0, currentHealth), maxHealth);
+        GameEvents.OnHealthChanged?.Invoke(currentHealth, maxHealth);
     }
 
     // Health Regen Rate Setter
     public void SetHealthRegenRate(float newRate)
     {
-        healthRegenRate = Mathf.Clamp(newRate, 0, maxHealth);
+        //healthRegenRate = Mathf.Clamp(newRate, 0, maxHealth);
+        healthRegenRate = newRate;
     }
     
     [Button()]

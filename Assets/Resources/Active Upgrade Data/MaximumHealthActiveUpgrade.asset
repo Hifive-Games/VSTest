@@ -12,26 +12,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c7892da95d18d249a7b55e7526e9096, type: 3}
   m_Name: MaximumHealthActiveUpgrade
   m_EditorClassIdentifier: 
-  upgradeName: Maximum can
-  description: max can
+  upgradeName: Max Health
+  description: Max Health will be increased
   rareValues:
   - rareLevel: 0
-    value: 0
-    baseProbability: 0
-    luckFactor: 0
+    value: 10
+    baseProbability: 60
+    luckFactor: 0.2
   - rareLevel: 1
-    value: 0
-    baseProbability: 0
-    luckFactor: 0
+    value: 20
+    baseProbability: 30
+    luckFactor: 0.5
   - rareLevel: 2
-    value: 0
-    baseProbability: 0
-    luckFactor: 0
+    value: 30
+    baseProbability: 15
+    luckFactor: 2
   - rareLevel: 3
-    value: 0
-    baseProbability: 0
-    luckFactor: 0
+    value: 40
+    baseProbability: 5
+    luckFactor: 2
   - rareLevel: 4
-    value: 0
-    baseProbability: 0
-    luckFactor: 0
+    value: 50
+    baseProbability: 1
+    luckFactor: 4

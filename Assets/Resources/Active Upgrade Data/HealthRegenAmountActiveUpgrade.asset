@@ -13,25 +13,25 @@ MonoBehaviour:
   m_Name: HealthRegenAmountActiveUpgrade
   m_EditorClassIdentifier: 
   upgradeName: Health Regen
-  description: can yineleme
+  description: Health Regen will be increased
   rareValues:
   - rareLevel: 0
-    value: 0
-    baseProbability: 0
-    luckFactor: 0
+    value: 1
+    baseProbability: 60
+    luckFactor: 0.2
   - rareLevel: 1
-    value: 0
-    baseProbability: 0
-    luckFactor: 0
+    value: 2
+    baseProbability: 30
+    luckFactor: 0.5
   - rareLevel: 2
-    value: 0
-    baseProbability: 0
-    luckFactor: 0
+    value: 3
+    baseProbability: 15
+    luckFactor: 2
   - rareLevel: 3
-    value: 0
-    baseProbability: 0
-    luckFactor: 0
+    value: 4
+    baseProbability: 5
+    luckFactor: 2
   - rareLevel: 4
-    value: 0
-    baseProbability: 0
-    luckFactor: 0
+    value: 5
+    baseProbability: 1
+    luckFactor: 4

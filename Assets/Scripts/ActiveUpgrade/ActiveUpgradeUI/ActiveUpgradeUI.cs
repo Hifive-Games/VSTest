@@ -18,6 +18,7 @@ public class ActiveUpgradeUI : MonoBehaviour
     
     [SerializeField] private Button upgradeButton;
 
+    [SerializeField] private RareLevelColorData rareLevelColorData;
     private void OnEnable()
     {
         upgradeButton.onClick.AddListener(UpgradeButtonOnClick);
@@ -41,6 +42,9 @@ public class ActiveUpgradeUI : MonoBehaviour
         this.rareLevel = rareLevel;
         _onActiveUpgradeClicked = onUpgradeClicked;
 
+        Color rareColor = rareLevelColorData.GetColor(rareLevel);
+        GetComponent<Image>().color = rareColor;
+        
         UpdateUI(activeUpgradeBaseData, rareLevel); // UI'yi güncelle
     }
 

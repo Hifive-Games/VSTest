@@ -13,25 +13,25 @@ MonoBehaviour:
   m_Name: DeBuffEffectScalerActiveUpgrade
   m_EditorClassIdentifier: 
   upgradeName: Debuff Effect Scaler
-  description: Description
+  description: Debuff Effect Scaler will be increased
   rareValues:
   - rareLevel: 0
     value: 10
-    baseProbability: 1
-    luckFactor: 0
+    baseProbability: 60
+    luckFactor: 0.2
   - rareLevel: 1
     value: 20
-    baseProbability: 1
-    luckFactor: 0
+    baseProbability: 30
+    luckFactor: 0.5
   - rareLevel: 2
     value: 30
-    baseProbability: 1
-    luckFactor: 0
+    baseProbability: 15
+    luckFactor: 2
   - rareLevel: 3
     value: 40
-    baseProbability: 1
-    luckFactor: 0
+    baseProbability: 5
+    luckFactor: 2
   - rareLevel: 4
     value: 50
     baseProbability: 1
-    luckFactor: 0
+    luckFactor: 4

@@ -35,6 +35,46 @@ public abstract class ActiveUpgradeBaseData : ScriptableObject
     
     public RareLevel GetRandomRareLevel(float playerLuck)
     {
+        if (rareValues == null || rareValues.Count == 0)
+        {
+            Debug.LogError("RareValues dizisi boş!");
+            return RareLevel.Common;
+        }
+
+        float totalWeight = 0f;
+        float scaledLuck = Mathf.Max(0f, playerLuck); // Negatif luck değerlerini engelle
+
+        // Toplam ağırlığı hesapla
+        foreach (var rareValue in rareValues)
+        {
+            float luckModifier = 1f + (scaledLuck / 100f * rareValue.luckFactor);
+            float weight = Mathf.Max(0.01f, rareValue.baseProbability * luckModifier);
+            totalWeight += weight;
+        }
+
+        // Rastgele bir değer seç
+        float randomValue = Random.Range(0f, totalWeight);
+        float cumulativeWeight = 0f;
+
+        // Ağırlıklara göre seviyeyi belirle
+        foreach (var rareValue in rareValues)
+        {
+            float luckModifier = 1f + (scaledLuck / 100f * rareValue.luckFactor);
+            float weight = Mathf.Max(0.01f, rareValue.baseProbability * luckModifier);
+            cumulativeWeight += weight;
+            if (randomValue <= cumulativeWeight)
+            {
+                return rareValue.rareLevel;
+            }
+        }
+
+        Debug.LogError("HATA: RareLevel seçilemedi!");
+        return RareLevel.Common;
+    }
+    
+    /* OLD HESAPLAMA KODU
+    public RareLevel GetRandomRareLevel(float playerLuck)
+    {
         float totalWeight = 0f;
 
         // Toplam ağırlıklı olasılığı hesapla
@@ -59,7 +99,7 @@ public abstract class ActiveUpgradeBaseData : ScriptableObject
         Debug.LogError("HATA RARE!");
         return RareLevel.Common;
     }
-
+*/
 
     // Upgrade'i uygula
     public abstract void ApplyUpgrade(RareLevel selectedRare, HeroBaseData hero);

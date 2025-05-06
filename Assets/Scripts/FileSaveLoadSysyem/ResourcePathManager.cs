@@ -7,6 +7,7 @@ public class ResourcePathManager : MonoBehaviourSingletonPersistent<ResourcePath
     [SerializeField] private const string PathActiveUpgradeData="Active Upgrade Data";
     [SerializeField] private const string PathPassiveUpgradeData="Passive Upgrade Data";
     [SerializeField] private const string PathHeroBaseSO="Hero SO";
+    [SerializeField] private const string PathHeroStat="HeroStats";
 
     public string GetActiveUpgradeDataPath()
     {
@@ -16,9 +17,12 @@ public class ResourcePathManager : MonoBehaviourSingletonPersistent<ResourcePath
     {
         return PathPassiveUpgradeData;
     }
-    
     public string GetHeroSOPath()
     {
         return PathHeroBaseSO;
+    }
+    public string GetHeroStatPath()
+    {
+        return PathHeroStat;
     }
 }

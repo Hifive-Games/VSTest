@@ -20,6 +20,9 @@ public class InteractableObject : TriggerableObject
     private Collider interactionCollider;
     private Transform canvasTransform;
 
+    [SerializeField] private GameObject canvasObject; // sahnede bulunan InteractionTextCanvas objesi
+    private TextMeshProUGUI textComponent;
+
     private void Awake()
     {
         interactionCollider = GetComponent<Collider>();
@@ -43,40 +46,52 @@ public class InteractableObject : TriggerableObject
         gameObject.layer = LayerMask.NameToLayer("Colliders");
     }
 
-    private void CreateWorldTextUI()
+    public void CreateWorldTextUI()
     {
-        GameObject canvasObj = new GameObject("InteractionTextCanvas");
-        canvasObj.transform.SetParent(transform);
-        canvasObj.transform.localPosition = textOffset;
+        if (canvasObject == null)
+        {
+            Debug.LogError("Canvas Object is not assigned.");
+            return;
+        }
 
-        Canvas canvas = canvasObj.AddComponent<Canvas>();
-        canvas.renderMode = RenderMode.WorldSpace;
-        canvas.worldCamera = Camera.main;
-        canvas.scaleFactor = 10f;
+        // Canvas objesini bu objenin altına yerleştir ve pozisyonla
+        canvasTransform = canvasObject.transform;
+        canvasTransform.SetParent(transform);
+        canvasTransform.localPosition = textOffset;
 
-        CanvasScaler scaler = canvasObj.AddComponent<UnityEngine.UI.CanvasScaler>();
-        scaler.dynamicPixelsPerUnit = 10f;
+        // Canvas ayarları
+        Canvas canvas = canvasObject.GetComponent<Canvas>();
+        if (canvas != null)
+        {
+            canvas.renderMode = RenderMode.WorldSpace;
+            canvas.worldCamera = Camera.main;
+        }
 
-        canvasObj.AddComponent<UnityEngine.UI.GraphicRaycaster>();
+        // Text bileşenini bul
+        textComponent = canvasObject.GetComponentInChildren<TextMeshProUGUI>();
+        if (textComponent == null)
+        {
+            Debug.LogError("TextMeshProUGUI component not found in children.");
+            return;
+        }
 
-        RectTransform canvasRect = canvasObj.GetComponent<RectTransform>();
-        canvasRect.sizeDelta = new Vector2(2f, 1f);
-        canvasRect.localScale = Vector3.one * 0.01f;
+        // Text ayarları
+        textComponent.text = interactionText;
+        textComponent.enableAutoSizing = true;
+        textComponent.fontSizeMin = 14;
+        textComponent.fontSizeMax = 36;
+        textComponent.color = Color.white;
+        textComponent.outlineWidth = 0.08f;
+        textComponent.outlineColor = Color.black;
+    }
 
-        GameObject textObj = new GameObject("InteractionText");
-        textObj.transform.SetParent(canvasObj.transform, false);
-
-        TextMeshProUGUI text = textObj.AddComponent<TextMeshProUGUI>();
-        text.text = interactionText;
-        text.alignment = TextAlignmentOptions.Center;
-        text.fontSize = 24;
-        text.color = Color.white;
-
-        RectTransform textRect = text.GetComponent<RectTransform>();
-        textRect.sizeDelta = new Vector2(200f, 50f);
-        textRect.anchoredPosition = Vector2.zero;
-
-        canvasTransform = canvasObj.transform;
+    public void UpdateInteractableObjectText(string newText)
+    {
+        interactionText = newText;
+        if (textComponent != null)
+        {
+            textComponent.text = newText;
+        }
     }
 
     private void LateUpdate()
@@ -99,10 +114,12 @@ public class InteractableObject : TriggerableObject
             effect.SetHeroBuffEffectScaler(BuffEffectScaler);
             effect.SetHeroDeBuffEffectScaler(DeBuffEffectScaler);
             effect.ApplyBuffDeBuffSystem();
-            isInteracted = true;
+            
+            SetInteracted();
 
             Debug.Log($"Effect Applied: {effect.effectName}");
             Debug.Log($"Effect Applied: {effect.description}");
+            UpdateInteractableObjectText(effect.GetBuffDebuffText());
         }
     }
 

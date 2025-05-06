@@ -13,25 +13,25 @@ MonoBehaviour:
   m_Name: AttackSizeActiveUpgrade
   m_EditorClassIdentifier: 
   upgradeName: Attack size
-  description: Transfrm.size
+  description: Attack size will be increased
   rareValues:
   - rareLevel: 0
-    value: 1
-    baseProbability: 50
-    luckFactor: 1
+    value: 0.5
+    baseProbability: 60
+    luckFactor: 0.2
   - rareLevel: 1
-    value: 2
+    value: 1
     baseProbability: 30
-    luckFactor: 1
+    luckFactor: 0.5
   - rareLevel: 2
-    value: 3
-    baseProbability: 10
-    luckFactor: 1
+    value: 1.5
+    baseProbability: 15
+    luckFactor: 2
   - rareLevel: 3
-    value: 4
-    baseProbability: 8
-    luckFactor: 1
+    value: 2
+    baseProbability: 5
+    luckFactor: 2
   - rareLevel: 4
-    value: 5
-    baseProbability: 2
-    luckFactor: 1
+    value: 3
+    baseProbability: 1
+    luckFactor: 4

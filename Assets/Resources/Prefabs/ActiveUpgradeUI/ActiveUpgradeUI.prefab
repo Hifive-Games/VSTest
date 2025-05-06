@@ -232,6 +232,7 @@ MonoBehaviour:
   rareText: {fileID: 4137658819092995244}
   valueText: {fileID: 5617799326662290940}
   upgradeButton: {fileID: 4428177086476880544}
+  rareLevelColorData: {fileID: 11400000, guid: d1af82685efc867409e8da9d4be65a02, type: 2}
 --- !u!1 &4995653883402560064
 GameObject:
   m_ObjectHideFlags: 0

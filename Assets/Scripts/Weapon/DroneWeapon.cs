@@ -48,10 +48,8 @@ public class DroneWeapon : MonoBehaviour
 
     private void Shoot()
     {
-        
-            GameObject bulletObj = Instantiate(bullet, shooterParent.position, transform.rotation);
-            bulletObj.transform.localScale = Vector3.one * attackSize;
-        
+        GameObject bulletObj = Instantiate(bullet, shooterParent.position, transform.rotation);
+        bulletObj.transform.localScale = Vector3.one * attackSize;
     }
 
     private Enemy FindClosestEnemy()

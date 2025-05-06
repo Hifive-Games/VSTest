@@ -13,25 +13,25 @@ MonoBehaviour:
   m_Name: LuckActiveUpgrade
   m_EditorClassIdentifier: 
   upgradeName: Luck
-  description: 2 zara milyonluk olduk
+  description: Luck will be increased
   rareValues:
   - rareLevel: 0
     value: 10
-    baseProbability: 60
-    luckFactor: 0.2
+    baseProbability: 80
+    luckFactor: -0.8
   - rareLevel: 1
     value: 15
-    baseProbability: 30
+    baseProbability: 15
     luckFactor: 0.5
   - rareLevel: 2
     value: 20
-    baseProbability: 15
-    luckFactor: 2
+    baseProbability: 4
+    luckFactor: 1.5
   - rareLevel: 3
     value: 25
-    baseProbability: 5
-    luckFactor: 2
+    baseProbability: 0.9
+    luckFactor: 3
   - rareLevel: 4
     value: 30
-    baseProbability: 1
-    luckFactor: 4
+    baseProbability: 0.1
+    luckFactor: 5

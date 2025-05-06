@@ -87,6 +87,37 @@ public class HeroBaseData : ScriptableObject
         #endif
     }
     
+    [Button()]
+    public void AddAllHeroStatsToAppliedPassiveUpgrades()
+    {
+#if UNITY_EDITOR
+        if (!Application.isPlaying)
+        {
+            UnityEditor.EditorUtility.DisplayDialog("Hata", "Bu işlem yalnızca Play Mode sırasında çalıştırılabilir.", "Tamam");
+            return;
+        }
+#endif
+
+        heroStatsBaseDatas.Clear();
+
+        HeroStatsBaseData[] loadedHeroStats = Resources.LoadAll<HeroStatsBaseData>(ResourcePathManager.Instance.GetHeroStatPath());
+
+        foreach (var heroStat in loadedHeroStats)
+        {
+            heroStatsBaseDatas.Add(new HeroStat
+            {
+                heroStatsBaseData = heroStat,
+                value = heroStat.value
+            });
+        }
+
+#if UNITY_EDITOR
+        UnityEditor.EditorUtility.SetDirty(this);
+        UnityEditor.AssetDatabase.SaveAssets();
+        UnityEditor.AssetDatabase.Refresh();
+#endif
+    }
+    
     #if UNITY_EDITOR
     // Burası tamamiyle herostatla ilgili kısım. Yenilemesi gerekiyor bu şekilde yeniliyor onvalidate çok kasıyordu onun yerine yazdım
     private bool isProcessing = false;
@@ -150,6 +181,7 @@ public class HeroBaseData : ScriptableObject
     {
         foreach (var stat in heroStatsBaseDatas)
         {
+            stat.heroStatsBaseData.value = stat.value;
             stat.heroStatsBaseData.ApplyStat(this);
         }
     }

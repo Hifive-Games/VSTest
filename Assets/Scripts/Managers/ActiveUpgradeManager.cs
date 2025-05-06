@@ -74,7 +74,7 @@ public class ActiveUpgradeManager : MonoBehaviourSingleton<ActiveUpgradeManager>
         }
         return null; // Hiçbir karakter seçilmemişse null döndürüyoruz
     }
-
+    [Button]
     public void LevelUp()
     {
         if (appliedActiveUpgrades == null || appliedActiveUpgrades.Count == 0)
@@ -88,7 +88,7 @@ public class ActiveUpgradeManager : MonoBehaviourSingleton<ActiveUpgradeManager>
         ClearAllChildInActiveUpgrade();
         
         // Rastgele 3 yükseltme seç
-        var selectedUpgrades = appliedActiveUpgrades.OrderBy(_ => Random.value).Take(2).ToList();
+        var selectedUpgrades = appliedActiveUpgrades.OrderBy(_ => Random.value).Take(3).ToList();
         
         foreach (var upgrade in selectedUpgrades)
         {

@@ -10,4 +10,8 @@ public static class GameEvents
     public static Action OnLevelUp; // level atlandı
     public static Action<int, int> OnExperienceUpdated; // currentXP, maxXP
 
+    // HEALTH EVENTLERI
+    public static Action<float, float> OnHealthChanged;
+    public static Action OnZeroHealth;
+
 }

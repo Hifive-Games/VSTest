@@ -10,4 +10,20 @@ public class MainGamePanelManager : PanelManager
       return progressBar;
    }
 
+   public PanelController gameOverPanelController;
+   
+   private void OnEnable()
+   {
+      GameEvents.OnZeroHealth += GameOver;
+   }
+   private void OnDisable()
+   {
+      GameEvents.OnZeroHealth -= GameOver;
+
+   }
+   private void GameOver()
+   {
+     OpenPanel(gameOverPanelController);
+   }
+   
 }

@@ -8,6 +8,7 @@ public class CurrentHealthStat : HeroStatsBaseData
 {
     public override void ApplyStat( HeroBaseData hero)
     {
+        Debug.LogError("ApplyStat: " + value);
         hero.HeroSetCurrentHealth(value);
     }
 }

@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
     private void OnEnable()
     {
         GameEvents.OnGamePaused += PauseGame;
+        GameEvents.OnZeroHealth += PauseGame;
         GameEvents.OnGameResumed += ResumeGame;
     }
 
@@ -14,6 +15,8 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
     {
         GameEvents.OnGamePaused -= PauseGame;
         GameEvents.OnGameResumed -= ResumeGame;
+        GameEvents.OnZeroHealth -= PauseGame;
+
     }
 
     private void PauseGame()

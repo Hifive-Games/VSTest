@@ -41,7 +41,7 @@ public class BulletWeapon : MonoBehaviour
         // Eğer bir Enemy objesine çarptıysa, hasar ver
         if (other.TryGetComponent(out Enemy enemy))
         {
-            enemy.TakeDamage(1);
+            enemy.TakeDamage(1); 
             Destroy(gameObject);
         }
     }

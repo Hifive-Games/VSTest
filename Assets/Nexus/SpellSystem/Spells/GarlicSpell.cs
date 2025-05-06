@@ -5,41 +5,42 @@ public class GarlicSpell : Spell
 
     float tickTimer;
 
-    float _duration = 5f;
-
     public override void OnEnable()
     {
-        _duration = duration;
-        StopAllCoroutines();
     }
 
     public override void Release()
     {
+        StopAllCoroutines();
     }
 
     public override void Seek(Transform target = null)
     {
+        //no need to seek, garlic will follow the player
     }
 
     public override void OnDisable()
     {
+        //no need to disable garlic, it will follow the player
     }
 
     private void Update()
     {
-        if (_duration > 0)
+        tickTimer -= Time.deltaTime;
+        if (tickTimer <= 0)
         {
-            _duration -= Time.deltaTime;
-            tickTimer -= Time.deltaTime;
-            if (tickTimer <= 0)
-            {
-                DamageNearbyEnemies();
-                tickTimer = tickInterval;
-            }
+            DamageNearbyEnemies();
+            tickTimer = tickInterval;
         }
-        else
+
+        //return the garlic when duration is over
+        if (duration > 0)
         {
-            ObjectPooler.Instance.ReturnObject(gameObject);
+            duration -= Time.deltaTime;
+            if (duration <= 0)
+            {
+                ObjectPooler.Instance.ReturnObject(gameObject);
+            }
         }
 
 
@@ -51,18 +52,16 @@ public class GarlicSpell : Spell
 
     public Transform FollowCasterTransform()
     {
-        return Caster == Caster.Player ? TheHero.Instance.transform : ExampleBoss.Instance.transform;
+        return TheHero.Instance.transform;
     }
 
     void DamageNearbyEnemies()
     {
-        Collider[] colliders = Physics.OverlapSphere(transform.position, radius);
+        Collider[] colliders = Physics.OverlapSphere(transform.position, radius / 2f);
         foreach (Collider c in colliders)
         {
             if (c.TryGetComponent(out Enemy e) && Caster == Caster.Player)
                 e.TakeDamage(damage);
-            if (c.TryGetComponent(out Player p) && Caster == Caster.Boss)
-                p.TakeDamage(damage);
         }
     }
 

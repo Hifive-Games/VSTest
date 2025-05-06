@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79eed337f34cd104abe89dc9a99df228, type: 3}
+  m_Name: CryomancerPhase2
+  m_EditorClassIdentifier: 
+  enableSpells: 1
+  SpellTimer: 5
+  spells:
+  - {fileID: 11400000, guid: 48608ead24673bc419755ceaa6423d16, type: 2}
+  damageMultiplier: 1
+  healthThreshold: 33
+  nextPhase: {fileID: 11400000, guid: bee8234f1d2cdf140883b6971ba1f343, type: 2}

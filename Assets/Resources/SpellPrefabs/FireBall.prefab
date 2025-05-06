@@ -4982,11 +4982,11 @@ MonoBehaviour:
   Name: FireBall
   Description: Ball of Fire
   Icon: {fileID: 0}
-  speed: 10
-  damage: 50
-  duration: 2
-  range: 10
-  cooldown: 4
+  speed: 3
+  damage: 10
+  duration: 5
+  range: 20
+  cooldown: 5
   explosionRadius: 2.5
   projectileCount: 1
   radius: 10

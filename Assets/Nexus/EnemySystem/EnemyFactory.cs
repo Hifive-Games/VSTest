@@ -17,7 +17,7 @@ public static class EnemyFactory
 
         Debug.Log("EnemyFactory.CreateEnemy: " + data.enemyType);
 
-        if (enemyObj.TryGetComponent<BossActionSystem>(out _))
+        if (enemyObj.TryGetComponent<BossController>(out _))
         {
             return enemyObj; // If it's a boss, return it immediately
         }

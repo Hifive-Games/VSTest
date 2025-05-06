@@ -16,6 +16,7 @@ public abstract class Enemy : MonoBehaviour
     public int experience;
     public GameObject expPrefab;
     protected GameObject player;
+    public GameObject Player => player;
 
     // New properties for attack behavior
     protected float attackRange;
@@ -150,7 +151,7 @@ public abstract class Enemy : MonoBehaviour
         player.GetComponent<TheHeroDamageManager>().TakeDamage(damage);
     }
 
-    public void TakeDamage(int damage)
+    public virtual void TakeDamage(int damage)
     {
         if (hitBySpell)
         {
@@ -179,6 +180,8 @@ public abstract class Enemy : MonoBehaviour
         Vector3 position = new Vector3(transform.position.x, .5f, transform.position.z);
         CheckExperienceInVicinity(position);
         Debuffs.Clear();
+
+        EnemySpawner.Instance.AddKill();
     }
 
     //check how many experiance in the vicinty of the enemy

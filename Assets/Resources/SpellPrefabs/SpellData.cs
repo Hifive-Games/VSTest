@@ -28,7 +28,8 @@ public class SpellData : ScriptableObject
                 break;
             case UpgradeTarget.Cooldown:
                 Cooldown -= upgrade.GetValue();
-                SpellManager.Instance.spellCooldowns[SpellID] = Cooldown;
+                //set spell manager spell cooldowns to the new cooldown value
+                SpellManager.Instance.SetSpellCooldowns(this, Cooldown);
                 break;
             case UpgradeTarget.Range:
                 Range += upgrade.GetValue();

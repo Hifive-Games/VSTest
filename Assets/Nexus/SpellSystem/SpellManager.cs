@@ -32,6 +32,34 @@ public class SpellManager : MonoBehaviour
         return EquippedSpells;
     }
 
+    //helper method for the setting spell cooldowns(take SpellData)
+    public void SetSpellCooldowns(SpellData spell, float cooldown)
+    {
+        for (int i = 0; i < EquippedSpells.Count; i++)
+        {
+            if (EquippedSpells[i].SpellID == spell.SpellID)
+            {
+                spellCooldowns[i] = cooldown;
+                Debug.Log("Setting cooldown for " + EquippedSpells[i].name + " to " + cooldown);
+                break;
+            }
+        }
+    }
+
+    //helper method for the setting spell cooldowns(take Spell)
+    public void SetSpellCooldowns(Spell spell, float cooldown)
+    {
+        for (int i = 0; i < EquippedSpells.Count; i++)
+        {
+            if (EquippedSpells[i].SpellID == spell.SpellID)
+            {
+                spellCooldowns[i] = cooldown;
+                Debug.Log("Setting cooldown for " + EquippedSpells[i].name + " to " + spellCooldowns[i]);
+                break;
+            }
+        }
+    }
+
     public SpellData GetSpellInfo(SpellUpgrade spellUpgrade)
     {
         foreach (SpellData spell in spellDataList)

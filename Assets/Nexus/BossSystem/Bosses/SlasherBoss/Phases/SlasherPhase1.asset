@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 044abdd9f634d684a91c84d576baba6a, type: 3}
+  m_Name: SlasherPhase1
+  m_EditorClassIdentifier: 
+  meleeRange: 5
+  meleeCooldown: 2
+  roamRadius: 15
+  enableAttacks: 1
+  attackInfos:
+  - attackId: 0
+    attackDelay: 1
+    attackDuration: 1
+    attackCount: 0
+    attackDamage: 10
+    attackRange: 2
+    attackArea: 4
+    attackWarningPrefab: {fileID: 3267069490693012620, guid: dce88d1dd71f3664e85f25a9d2bb1dcd,
+      type: 3}
+    attackPrefab: {fileID: 4485844063612033260, guid: 8777f5fba63de114fa603122654a4a81,
+      type: 3}
+  speedMultiplier: 1
+  damageMultiplier: 1
+  meleeCooldownMultiplier: 1
+  healthThreshold: 66
+  nextPhase: {fileID: 11400000, guid: a1ab1f124309c374fbe1aafe89b8beed, type: 2}

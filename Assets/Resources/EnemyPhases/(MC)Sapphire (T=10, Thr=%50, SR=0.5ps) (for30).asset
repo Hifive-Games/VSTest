@@ -10,12 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9338de1d149cce14e8bcaf7de862d145, type: 3}
-  m_Name: 3Sapphire (p1s) (for30)
+  m_Name: (MC)Sapphire (T=10, Thr=%50, SR=0.5ps) (for30)
   m_EditorClassIdentifier: 
+  behavior: 1
   startTime: 0
   duration: 30
-  spawnInterval: 1
-  maxClusterGroups: 100
+  spawnInterval: 0
+  maxClusterGroups: 0
+  targetEnemyCount: 10
+  refillThreshold: 0.5
+  maintainSpawnInterval: 0.5
   enemyGroups:
   - enemyData: {fileID: 11400000, guid: 5f1bc4fce1b087041b22b852c432c4e6, type: 2}
     amount: 3

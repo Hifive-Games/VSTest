@@ -47,42 +47,44 @@ public class EnemySpawner : MonoBehaviour
         {
             var phase = phases[_currentPhase];
 
-            // phase hasn't started yet?
+            // wait until phase.startTime in both modes
             if (_phaseTimer < phase.startTime) return;
 
-            // spawn clusters while within phase duration
+            // still in this phase?
             if (_phaseTimer <= phase.startTime + phase.duration)
             {
-                if (Time.time >= _nextSpawnTime && _clustersThisPhase < phase.maxClusterGroups)
+                switch (phase.behavior)
                 {
-                    SpawnCluster(phase);
-                    _clustersThisPhase++;
-                    _nextSpawnTime = Time.time + phase.spawnInterval;
+                    case SpawnBehavior.Cluster:
+                        TrySpawnCluster(phase);
+                        break;
+
+                    case SpawnBehavior.MaintainCount:
+                        TryMaintainCount(phase);
+                        break;
                 }
             }
             else
             {
-                // end current phase
                 EndPhase();
             }
         }
 
-        // periodic gather / cull
+        // culling/gathering unchanged…
         if (Time.time >= _nextGatherCheck)
         {
             GatherAndCull();
             _nextGatherCheck = Time.time + gatherCheckInterval;
         }
 
-        // update UI
         UpdateUI();
     }
 
     public void UpdateUI()
     {
         // update timer text but min:sec format
-        int minutes = (int)(_phaseTimer / 60f);
-        int seconds = (int)(_phaseTimer % 60f);
+        int minutes = (int)(Time.time / 60f);
+        int seconds = (int)(Time.time % 60f);
         TimerText.text = $"{minutes:D2}:{seconds:D2}";
         enemyCountText.text = $"Enemies: {_active.Count}";
 
@@ -100,6 +102,31 @@ public class EnemySpawner : MonoBehaviour
     public void AddKill()
     {
         killsText.text = $"Kills: {int.Parse(killsText.text.Split(':')[1]) + 1}";
+    }
+    private void TrySpawnCluster(SpawnPhaseData phase)
+    {
+        if (Time.time >= _nextSpawnTime
+            && _clustersThisPhase < phase.maxClusterGroups)
+        {
+            SpawnCluster(phase);
+            _clustersThisPhase++;
+            _nextSpawnTime = Time.time + phase.spawnInterval;
+        }
+    }
+
+    private void TryMaintainCount(SpawnPhaseData phase)
+    {
+        if (Time.time < _nextSpawnTime) return;
+
+        int current = _active.Count;
+        int threshold = Mathf.FloorToInt(phase.targetEnemyCount * (1f - phase.refillThreshold));
+        if (current < threshold)
+        {
+            int missing = phase.targetEnemyCount - current;
+            SpawnMaintain(phase, missing);
+        }
+
+        _nextSpawnTime = Time.time + phase.maintainSpawnInterval;
     }
 
     private void SpawnCluster(SpawnPhaseData phase)
@@ -123,6 +150,33 @@ public class EnemySpawner : MonoBehaviour
                 _active.Add(go);
             }
         }
+    }
+    private void SpawnMaintain(SpawnPhaseData phase, int missing)
+    {
+        for (int i = 0; i < missing; i++)
+        {
+            // pick a random group to spawn one from
+            var grp = phase.enemyGroups[Random.Range(0, phase.enemyGroups.Length)];
+            Vector3 pos = GetSpawnPosition(grp);
+            var go = EnemyFactory.CreateEnemy(grp.enemyData, pos);
+            _active.Add(go);
+        }
+    }
+
+    private Vector3 GetSpawnPosition(EnemySpawnGroup grp)
+    {
+        var center = GetOutsideCameraView();
+        Vector3 pos = center + Random.insideUnitSphere * grp.maxSpawnRadius;
+        pos.y = 1.5f;
+
+        float dist = Vector3.Distance(pos, _player.position);
+        if (dist < grp.minSpwanRadius)
+        {
+            pos = center + (pos - center).normalized * grp.minSpwanRadius;
+            pos.y = 1.5f;
+        }
+
+        return pos;
     }
 
     private void EndPhase()
@@ -195,6 +249,9 @@ public class EnemySpawner : MonoBehaviour
             _active.Remove(enemy);
             ObjectPooler.Instance.ReturnObject(enemy);
         }
+
+        _clustersThisPhase--;
+        if (_clustersThisPhase < 0) _clustersThisPhase = 0;
     }
     public void ClearEnemies()
     {

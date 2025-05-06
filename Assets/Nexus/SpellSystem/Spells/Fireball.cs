@@ -20,7 +20,7 @@ public class Fireball : Spell
     {
         ObjectPooler.Instance.SpawnFromPool(ExplosionEffect, transform.position, Quaternion.identity);
 
-        Collider[] colliders = Physics.OverlapSphere(transform.position, radius);
+        Collider[] colliders = Physics.OverlapSphere(transform.position, radius/2f);
         foreach (Collider collider in colliders)
         {
             if (collider.TryGetComponent(out Enemy enemy) && Caster == Caster.Player)

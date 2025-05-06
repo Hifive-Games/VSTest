@@ -10,8 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9338de1d149cce14e8bcaf7de862d145, type: 3}
-  m_Name: 2Onyx-5Amethis (p1.5s) (for60)
+  m_Name: (C)Onyx-Amethis  (Max=50, A=2-5, SR=1ps) (for60)
   m_EditorClassIdentifier: 
+  behavior: 0
   startTime: 0
   duration: 60
   spawnInterval: 1.5
@@ -25,3 +26,6 @@ MonoBehaviour:
     amount: 5
     minSpwanRadius: 0.5
     maxSpawnRadius: 1.5
+  targetEnemyCount: 0
+  refillThreshold: 0
+  maintainSpawnInterval: 0

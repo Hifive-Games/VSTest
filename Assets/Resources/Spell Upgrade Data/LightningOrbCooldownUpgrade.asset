@@ -10,17 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5b0f6fb4b057bae4da644a8a6873159a, type: 3}
-  m_Name: GarlicRadiusUpgrade
+  m_Name: LightningOrbCooldownUpgrade
   m_EditorClassIdentifier: 
-  TargetID: 1
-  Name: Garlic Radius
+  TargetID: 4
+  Name: Lightning Orb Cooldown
   Description: 
-  Target: 5
+  Target: 1
   Level: 0
   maxUpgrades: 5
   ValuePerLevel:
-  - 1
-  - 2
-  - 2
-  - 3
-  - 3
+  - 0.25
+  - 0.25
+  - 0.25
+  - 0.3
+  - 0.3

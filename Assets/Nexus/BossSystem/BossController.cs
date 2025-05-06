@@ -37,6 +37,11 @@ public class BossController : Enemy
 
     public Animator AnimatorComponent => _anim;
 
+    public void Start()
+    {
+        SetBossUI();
+    }
+
     public override void OnEnable()
     {
         Mover = GetComponent<BossMovement>();
@@ -48,6 +53,19 @@ public class BossController : Enemy
         _stateMachine.Initialize(this, spawningState);
     }
 
+    public override void OnDisable()
+    {
+        BossHealthBarUI.Instance.ActivateHealthBarUI(false);
+        base.OnDisable();
+    }
+
+    public void SetBossUI()
+    {
+        BossHealthBarUI.Instance.ActivateHealthBarUI(true);
+        //boss name but trim Boss in the name
+        BossHealthBarUI.Instance.SetBossName(enemySO.name.Replace("Boss", ""));
+    }
+
     public override void Update()
     {
         _stateMachine.Update();
@@ -56,9 +74,24 @@ public class BossController : Enemy
     [Button("Deal Damage")]
     public void DealDamage(float amount = 10f)
     {
-        if (amount <= 0) return;
-
-        currentHealth -= Mathf.RoundToInt(amount);
-        Debug.Log($"Boss took {amount} damage. Current health: {currentHealth}");
+        //check if the boss is in the fighting state
+        if (ReferenceEquals(_stateMachine.CurrentState, fightingState))
+        {
+            TakeDamage((int)amount);
+        }
+        else
+        {
+            Debug.LogWarning("Boss is not in the fighting state.");
+        }
     }
+
+    public override void TakeDamage(int damage)
+    {
+        base.TakeDamage(damage);
+
+        //Adjust the health bar
+        float healthPercentage = (float)currentHealth / maxHealth;
+        BossHealthBarUI.Instance.SetHealthBar(healthPercentage);
+    }
+
 }

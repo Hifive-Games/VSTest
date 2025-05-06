@@ -37,6 +37,8 @@ public class SlasherPhase : ScriptableBossPhase
 
     public override void Enter(BossController boss)
     {
+        BossPhaseUI(boss);
+
         Debug.Log($"Entering phase: {name}");
         // store & apply buffs
         _origSpeed = boss.speed;
@@ -81,7 +83,6 @@ public class SlasherPhase : ScriptableBossPhase
 
     public override void Tick(BossController boss)
     {
-
         // MELEE CHASE/ROAM
         Vector3 bossPos = new Vector3(boss.transform.position.x, 2, boss.transform.position.z);
         Vector3 playerPos = new Vector3(boss.Player.transform.position.x, 1, boss.Player.transform.position.z);
@@ -152,5 +153,10 @@ public class SlasherPhase : ScriptableBossPhase
         boss.speed = _origSpeed;
         boss.damage = _origDamage;
         meleeCooldown = _origCooldown;
+    }
+
+    public override ScriptableBossPhase GetPhase()
+    {
+        return this;
     }
 }

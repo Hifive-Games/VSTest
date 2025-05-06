@@ -4,9 +4,17 @@ using UnityEngine;
 
 public class SpawnPointFXDestroyer : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public float destroyTime = 1f; // time in seconds before the object is destroyed
+
+    public void SetDestroyTime(float time)
     {
-        Destroy(gameObject, 1f);
+        destroyTime = time;
+        StartCoroutine(DestroyAfterTime());
+    }
+
+    private IEnumerator DestroyAfterTime()
+    {
+        yield return new WaitForSeconds(destroyTime);
+        Destroy(gameObject);
     }
 }

@@ -8,10 +8,10 @@ public class GenericPhase : ScriptableBossPhase
     public float duration = 5f;
     float _timer;
 
-    [Header("Health Threshold")]
-    [Range(0f, 1f)]
-    [Tooltip("HP% at or below which to transition (<=0 to ignore)")]
-    public float healthThreshold = 0f;
+    [Header("Next Phase")]
+    [Tooltip("The health percentage at which to transition to the next phase. 100% = full health, 0% = dead")]
+    [Range(100f, 0f)]
+    public int healthThreshold = 100;
 
     [Header("Movement")]
     [Tooltip("Offset from boss start position; leave zero if you don’t want movement")]
@@ -32,6 +32,7 @@ public class GenericPhase : ScriptableBossPhase
 
     public override void Enter(BossController boss)
     {
+        BossPhaseUI(boss);
         Debug.Log($"Entering phase: {name}");
         _timer = duration;
         _attackTimer = attackInterval;
@@ -76,4 +77,9 @@ public class GenericPhase : ScriptableBossPhase
     }
 
     public override void Exit(BossController boss) { }
+
+    public override ScriptableBossPhase GetPhase()
+    {
+        return this;
+    }
 }

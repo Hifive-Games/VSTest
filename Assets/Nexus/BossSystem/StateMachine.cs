@@ -29,4 +29,9 @@ public class StateMachine<T>
         if (_current != null)
             _current.Tick(_owner);
     }
+
+    public IState<T> CurrentState
+    {
+        get { return _current; }
+    }
 }

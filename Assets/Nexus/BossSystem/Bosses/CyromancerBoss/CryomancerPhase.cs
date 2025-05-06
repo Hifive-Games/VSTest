@@ -11,8 +11,8 @@ public class CryomancerPhase : ScriptableBossPhase
 {
     [Header("Attack/Spell (optional)")]
     public bool enableSpells = false;
-    private float _spellTimer = 0f;
     public float SpellTimer;
+    private float _spellTimer = 1f;
     public List<BossSpell> spells;
 
     [Header("Buffs")]
@@ -31,12 +31,13 @@ public class CryomancerPhase : ScriptableBossPhase
 
     public override void Enter(BossController boss)
     {
+        _spellTimer = SpellTimer;
         Debug.Log($"Entering phase: {name}");
+        BossPhaseUI(boss);
         // store & apply buffs
         _origDamage = boss.damage;
         boss.damage = Mathf.RoundToInt(boss.damage * damageMultiplier);
 
-        SpellTimer = _spellTimer;
 
         // store health
         _currentHealth = boss.currentHealth;
@@ -66,9 +67,9 @@ public class CryomancerPhase : ScriptableBossPhase
             }
         }
     }
+
     public override void Exit(BossController boss)
     {
-
         // remove buffs
         boss.damage = _origDamage;
 
@@ -128,7 +129,7 @@ public class CryomancerPhase : ScriptableBossPhase
     public void CheckSpellCasting(BossController boss)
     {
         // check if the boss is able to cast spells
-        if (enableSpells && SpellTimer <= 0f)
+        if (enableSpells && _spellTimer <= 0f)
         {
             // pick a random spell from the list
             var spell = spells[Random.Range(0, spells.Count)];
@@ -136,12 +137,18 @@ public class CryomancerPhase : ScriptableBossPhase
             {
                 // cast the spell
                 boss.Caster.Cast(spell, boss.Player.transform);
-                SpellTimer = _spellTimer;
+                // reset the spell timer
+                _spellTimer = SpellTimer;
             }
         }
         else
         {
-            SpellTimer -= Time.deltaTime;
+            _spellTimer -= Time.deltaTime;
         }
+    }
+
+    public override ScriptableBossPhase GetPhase()
+    {
+        return this;
     }
 }

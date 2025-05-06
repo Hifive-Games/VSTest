@@ -151,7 +151,7 @@ public abstract class Enemy : MonoBehaviour
         //player.GetComponent<TheHeroDamageManager>().TakeDamage(damage);
     }
 
-    public void TakeDamage(int damage)
+    public virtual void TakeDamage(int damage)
     {
         if (hitBySpell)
         {

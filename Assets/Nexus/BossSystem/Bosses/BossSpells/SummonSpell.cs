@@ -43,8 +43,12 @@ public class SummonSpell : BossSpell
             pos.y = 0.1f;
             spawnPositions.Add(pos);
 
+            GameObject obj = null;
+
             if (bfeoreSpawnFX != null)
-                Instantiate(bfeoreSpawnFX, pos, Quaternion.identity);
+                obj = Instantiate(bfeoreSpawnFX, pos, Quaternion.identity);
+            
+            obj.GetComponent<SpawnPointFXDestroyer>().SetDestroyTime(castTime);
         }
 
         // wait for the spell’s cast time (inherited from BossSpell)

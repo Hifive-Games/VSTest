@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
@@ -11,6 +12,10 @@ public class MainScenePanelController : PanelController
     [SerializeField] private Slider experienceSlider;
     [SerializeField] private Slider healthSlider;
 
+    [SerializeField] private TextMeshProUGUI currentEXPText;
+    [SerializeField] private TextMeshProUGUI maxEXPText;
+    [SerializeField] private TextMeshProUGUI currentHPText;
+    [SerializeField] private TextMeshProUGUI maxHPText;
     private void OnEnable()
     {
         GameEvents.OnExperienceUpdated += UpdateExperienceSlider;
@@ -39,6 +44,9 @@ public class MainScenePanelController : PanelController
         {
             experienceSlider.maxValue = maxXP;
             experienceSlider.value = currentXP;
+
+            maxEXPText.text = maxXP.ToString();
+            currentEXPText.text = currentXP.ToString();
         }
     }
     private void UpdateHealthSlider(float currentHP, float maxHp)
@@ -49,6 +57,9 @@ public class MainScenePanelController : PanelController
         {
             healthSlider.maxValue = maxHp;
             healthSlider.value = currentHP;
+            
+            maxHPText.text = maxHp.ToString();
+            currentHPText.text = currentHP.ToString();
         }
     }
 }

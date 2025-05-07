@@ -13,14 +13,7 @@ public static class EnemyFactory
         Color color = Color.white;
 
         enemyObj = ObjectPooler.Instance.SpawnFromPool(prefab, position, rotation);
-
-
-        Debug.Log("EnemyFactory.CreateEnemy: " + data.enemyType);
-
-        if (enemyObj.TryGetComponent<BossController>(out _))
-        {
-            return enemyObj; // If it's a boss, return it immediately
-        }
+        
         switch (data.enemyType)
         {
             case EnemyType.BasicMelee:

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 573768519456468251}
   - component: {fileID: 5072699104557281291}
   - component: {fileID: 2859126140692115464}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: ExplosionV1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4843,7 +4843,7 @@ GameObject:
   - component: {fileID: 1096580838548659048}
   - component: {fileID: 3587268137680251832}
   - component: {fileID: 5023702953670881021}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Smoke
   m_TagString: Untagged
   m_Icon: {fileID: 0}

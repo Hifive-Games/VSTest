@@ -73,7 +73,7 @@ public class PlayerMagnet : MonoBehaviourSingleton<PlayerMagnet>
 
     private void MoveExperiance(ExperienceParticle experienceParticle)
     {
-        if (!experienceParticle.isTweening)
+        /*if (!experienceParticle.isTweening)
         {
             experienceParticle.isTweening = true;
             Vector3 targetPosition = transform.position;
@@ -90,7 +90,7 @@ public class PlayerMagnet : MonoBehaviourSingleton<PlayerMagnet>
 
                 GlobalGameEventManager.Instance.Notify("PlayerGetExperiance", experienceParticle.experience);
             });
-        }
+        }*/
     }
 
     private void OnDrawGizmosSelected()

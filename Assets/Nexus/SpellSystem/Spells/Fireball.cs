@@ -16,6 +16,13 @@ public class Fireball : Spell
         base.OnDisable();
     }
 
+    public override void Release()
+    {
+        // Play fireball sound effect
+        SFXManager.Instance.PlayAt(SFX.Fireball);
+        base.Release();
+    }
+
     public void Explode()
     {
         ObjectPooler.Instance.SpawnFromPool(ExplosionEffect, transform.position, Quaternion.identity);
@@ -27,23 +34,14 @@ public class Fireball : Spell
             {
                 enemy.TakeDamage(damage);
             }
-            if (collider.TryGetComponent(out CharacterController player) && (Caster == Caster.Enemy || Caster == Caster.Boss))
-            {
-                //Damage
-                Debug.Log($"Player hit by {Name} spell!\nDamage: {damage}");
-            }
         }
     }
     public override void CollisionEffect(Enemy enemy)
     {
         if (enemy != null) enemy.TakeDamage(damage);
         Explode();
+        // Play explosion sound effect
+        SFXManager.Instance.PlayAt(SFX.FireballExplosion);
         base.CollisionEffect(enemy);
-    }
-
-    public override void CollisionEffect(CharacterController player)
-    {
-        if (player != null) Explode();
-        base.CollisionEffect(player);
     }
 }

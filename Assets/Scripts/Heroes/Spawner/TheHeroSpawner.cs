@@ -7,7 +7,7 @@ public class TheHeroSpawner : MonoBehaviour
     [SerializeField] private HeroBaseData[] Heroes;  // Karakter SO'larını dizi olarak alıyoruz
     private HeroBaseData selectedHero;
 
-    [SerializeField] private GameObject pm;
+    //[SerializeField] private GameObject pm;
     private void Awake()
     {
         InstantianteTheHero();
@@ -31,7 +31,7 @@ public class TheHeroSpawner : MonoBehaviour
             Debug.LogError("Selected character not found or no character is selected.");
         }
 
-        Instantiate(pm, TheHero.Instance.transform); // Player Magnet'i spawn et
+        //Instantiate(pm, TheHero.Instance.transform); // Player Magnet'i spawn et
     }
 
     // Seçili karakteri bulma

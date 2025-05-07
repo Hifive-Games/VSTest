@@ -51,12 +51,12 @@ public class BossController : Enemy
         player = GameObject.FindGameObjectWithTag("Player");
         Initialize(enemySO);
         _stateMachine.Initialize(this, spawningState);
+        base.OnEnable();
     }
 
     public override void OnDisable()
     {
         BossHealthBarUI.Instance.ActivateHealthBarUI(false);
-        base.OnDisable();
     }
 
     public void SetBossUI()

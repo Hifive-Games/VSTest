@@ -52,11 +52,11 @@ public class LightningOrbRenderer : MonoBehaviour
     private Material orbMaterial;
     #endregion
 
-    /*#region Unity Event Hooks
+    #region Unity Event Hooks
     private void OnEnable() => AudioSpectrum.OnBandTrigger += OnBandTrigger;
     private void OnDisable() => AudioSpectrum.OnBandTrigger -= OnBandTrigger;
     private void OnDestroy() => AudioSpectrum.OnBandTrigger -= OnBandTrigger;
-    #endregion*/
+    #endregion
 
     #region Initialization
     private void Start()

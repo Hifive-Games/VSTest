@@ -8,7 +8,7 @@ public abstract class Enemy : MonoBehaviour
 {
     public EnemyDataSO enemySO;
     public int maxHealth;
-    public int damage=10;
+    public int damage = 10;
     public float speed;
     public int currentHealth;
     public int Armor;
@@ -27,7 +27,7 @@ public abstract class Enemy : MonoBehaviour
     public List<Debuff> Debuffs { get; private set; } = new List<Debuff>();
 
     // Caching enemy layer mask.
-    private int enemyLayerMask;
+    [SerializeField] LayerMask enemyLayerMask;
 
     // Fields for movement smoothing.
     public float smoothTime = 0.1f; // adjust as needed for smoothness
@@ -67,8 +67,9 @@ public abstract class Enemy : MonoBehaviour
         currentHealth = maxHealth;
         attackTimer = 0f; // reset attack timer on enable
 
-        // Cache the enemy layer mask.
-        enemyLayerMask = LayerMask.GetMask("Enemy");
+        // Cache the enemy layer mask.(enemy and obstacle layers)
+        enemyLayerMask = LayerMask.GetMask("Enemy", "Obstacle");
+
     }
 
     public virtual void OnDisable()
@@ -147,8 +148,8 @@ public abstract class Enemy : MonoBehaviour
 
     private void AttackPlayer()
     {
-        Debug.Log($"Enemy {name} tries to attack player(Damage: {damage}).");
         player.GetComponent<TheHeroDamageManager>().TakeDamage(damage);
+        
     }
 
     public virtual void TakeDamage(int damage)
@@ -160,6 +161,8 @@ public abstract class Enemy : MonoBehaviour
         else
         {
             currentHealth -= damage;
+            if (player != null)
+                SFXManager.Instance.PlayAt(SFX.EnemyHit);
         }
 
         if (currentHealth <= 0)
@@ -176,11 +179,11 @@ public abstract class Enemy : MonoBehaviour
 
     public virtual void Die()
     {
+        SFXManager.Instance.PlayAt(SFX.EnemyDie);
         ObjectPooler.Instance.ReturnObject(gameObject);
         Vector3 position = new Vector3(transform.position.x, .5f, transform.position.z);
         CheckExperienceInVicinity(position);
         Debuffs.Clear();
-
         EnemySpawner.Instance.AddKill();
     }
 

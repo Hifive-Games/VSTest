@@ -50,6 +50,7 @@ public class DroneWeapon : MonoBehaviour
     {
         GameObject bulletObj = Instantiate(bullet, shooterParent.position, transform.rotation);
         bulletObj.transform.localScale = Vector3.one * attackSize;
+        SFXManager.Instance.PlayAt(SFX.BulletFire); // Play bullet fire sound effect
     }
 
     private Enemy FindClosestEnemy()

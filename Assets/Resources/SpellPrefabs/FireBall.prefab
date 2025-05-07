@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6202837975034740040}
   - component: {fileID: 2325762076148259762}
   - component: {fileID: 6756473322833114045}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: flare
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4845,7 +4845,7 @@ GameObject:
   - component: {fileID: 5823937079332205352}
   - component: {fileID: 1325581381360341680}
   - component: {fileID: 3921368058347473932}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: FireBall
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -39,16 +39,10 @@ public class CryomancerFireball : MonoBehaviour
     void OnTriggerEnter(Collider other)
     {
         // Check if the fireball hit the player
-        if (other.CompareTag("Player"))
+        if (other.TryGetComponent<TheHeroDamageManager>(out var damageManager))
         {
-            // Deal damage to the player
-            /*TheHeroDamageManager playerHealth = other.GetComponent<TheHeroDamageManager>();
-            if (playerHealth != null)
-            {
-                playerHealth.TakeDamage(damage);
-            }*/
-
-            // Destroy the fireball after hitting the player
+            // Apply damage to the player
+            damageManager.TakeDamage(damage);
             Destroy();
         }
     }

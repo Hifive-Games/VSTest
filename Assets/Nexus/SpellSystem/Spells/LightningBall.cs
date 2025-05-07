@@ -23,7 +23,7 @@ public class LightningBall : Spell
     }
     private IEnumerator WaitAndReturnToPool()
     {
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(duration);
         ObjectPooler.Instance.ReturnObject(gameObject);
     }
     private Vector3 GetRandomPointInRange()

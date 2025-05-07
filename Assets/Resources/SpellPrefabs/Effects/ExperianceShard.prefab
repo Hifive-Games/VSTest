@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 6812687940669432569}
   - component: {fileID: 4132854684129252828}
   - component: {fileID: 1439220852181614006}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: ExperianceShard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -151,4 +151,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   experience: 1
-  isTweening: 0
+  mergeDelay: 30
+  mergeRadius: 5
+  mergeLayer:
+    serializedVersion: 2
+    m_Bits: 16384

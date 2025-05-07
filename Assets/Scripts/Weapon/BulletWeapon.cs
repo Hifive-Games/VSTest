@@ -8,7 +8,7 @@ public class BulletWeapon : MonoBehaviour
     [SerializeField] private float explosionDuration = 2f; // Patlama efektinin süresi
 
     private Rigidbody rb;
-    
+
     [SerializeField] private LayerMask affectedLayers;
 
 
@@ -22,29 +22,23 @@ public class BulletWeapon : MonoBehaviour
     {
         // Mermiyi ileriye doğru sürekli hareket ettir
         rb.velocity = transform.forward * bulletSpeed;
+
+        // Merminin belli bir süre sonra yok olmasını sağla
+        Invoke(nameof(ReturnBullet), 5f); // 5 saniye sonra yok ol
     }
     private void OnTriggerEnter(Collider other)
-    {
-        // Collision durumunu kontrol et (Layer'a göre)
-        if ((affectedLayers.value & (1 << other.gameObject.layer)) != 0)
-        {
-            // Eğer layer uyuyorsa, patlama efekti oluştur
-            if (explosionPrefab != null)
-            {
-                GameObject explosion = Instantiate(explosionPrefab, transform.position, Quaternion.identity);
-                Destroy(explosion, explosionDuration);
-            }
-
-            Destroy(gameObject);
-        }
-
-        // Eğer bir Enemy objesine çarptıysa, hasar ver
+    {        // Eğer bir Enemy objesine çarptıysa, hasar ver
         if (other.TryGetComponent(out Enemy enemy))
         {
-            enemy.TakeDamage(1); 
-            Destroy(gameObject);
+            enemy.TakeDamage(1);
+            ObjectPooler.Instance.ReturnObject(gameObject); // Mermiyi geri dön
         }
     }
 
-    
+    private void ReturnBullet()
+    {
+        // Mermiyi geri dön
+        ObjectPooler.Instance.ReturnObject(gameObject);
+    }
+
 }

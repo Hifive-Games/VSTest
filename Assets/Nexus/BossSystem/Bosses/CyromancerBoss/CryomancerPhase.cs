@@ -105,6 +105,8 @@ public class CryomancerPhase : ScriptableBossPhase
             CheckSpellCasting(boss);
         }
 
+        //look the players direction
+        LookPlayer(boss);
 
         _currentHealth = boss.currentHealth;
 
@@ -120,6 +122,17 @@ public class CryomancerPhase : ScriptableBossPhase
         if (_currentHealth <= 0)
         {
             boss.StateMachine.ChangeState(boss.DyingState);
+        }
+    }
+
+    private void LookPlayer(BossController boss)
+    {
+        // look at the player
+        if (boss.Player != null)
+        {
+            Vector3 direction = (boss.Player.transform.position - boss.transform.position).normalized;
+            Quaternion lookRotation = Quaternion.LookRotation(direction);
+            boss.transform.rotation = Quaternion.Slerp(boss.transform.rotation, lookRotation, Time.deltaTime * 2f);
         }
     }
 

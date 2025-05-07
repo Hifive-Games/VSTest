@@ -83,10 +83,9 @@ public class BossAttack : MonoBehaviour, IBossAttacker
             warnInst = Instantiate(info.attackWarningPrefab, center, Quaternion.identity);
         warnInst.transform.localScale = new Vector3(info.attackArea, info.attackArea, info.attackArea);
 
-        yield return new WaitForSeconds(info.attackDelay);
+        Destroy(warnInst, info.attackDelay);
 
-        if (warnInst != null)
-            Destroy(warnInst);
+        yield return new WaitForSeconds(info.attackDelay);
 
         // 2) Spawn attack VFX
         GameObject atkInst = null;
@@ -112,9 +111,9 @@ public class BossAttack : MonoBehaviour, IBossAttacker
         for (int i = 0; i < hits; i++)
         {
             var col = _hitBuffer[i];
-            if (col != null && col.TryGetComponent<CharacterController>(out _))
+            if (col != null && col.TryGetComponent<TheHeroDamageManager>(out var damageManager))
             {
-                Debug.Log($"Player hit! Damage: {damage}");
+                damageManager.TakeDamage(damage);
                 // TODO: actually apply damage to player here but we taking 2 hits Should fix this
             }
         }

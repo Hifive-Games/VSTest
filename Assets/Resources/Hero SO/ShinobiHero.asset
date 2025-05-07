@@ -20,7 +20,7 @@ MonoBehaviour:
   heroStatsBaseDatas:
   - heroStatsBaseData: {fileID: 11400000, guid: 905f210108b5f724f8b7aa91341987d3,
       type: 2}
-    value: 2
+    value: 3
   - heroStatsBaseData: {fileID: 11400000, guid: 8a2d976ed8f17ec479379af0f7320a2c,
       type: 2}
     value: 0.3
@@ -44,7 +44,7 @@ MonoBehaviour:
     value: 10
   - heroStatsBaseData: {fileID: 11400000, guid: 28e25c386dd409047bdbe05175d41765,
       type: 2}
-    value: 3
+    value: 4
   - heroStatsBaseData: {fileID: 11400000, guid: b462032bd2e342246b4eca4119f8c754,
       type: 2}
     value: 1

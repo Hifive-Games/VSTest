@@ -19,11 +19,11 @@ MonoBehaviour:
   enemyPrefab: {fileID: 38425708285727113, guid: ddf62b28df0e5134eae644c4ec3801c6,
     type: 3}
   maxHealth: 1
-  damage: 5
-  speed: 10
+  damage: 2
+  speed: 5
   score: 5
-  attackRange: 2.5
+  attackRange: 2
   attackSpeed: 0.5
-  experience: 5
+  experience: 4
   deathEffect: {fileID: 7642634975434891464, guid: b6eb006e0faad0d4b8de30ddadf3edf5,
     type: 3}

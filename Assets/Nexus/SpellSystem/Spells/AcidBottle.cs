@@ -24,6 +24,7 @@ public class AcidBottle : Spell
 
     public override void Release()
     {
+        SFXManager.Instance.PlayAt(SFX.AcidBottle);
     }
 
     private IEnumerator ThrowBottle()
@@ -51,6 +52,8 @@ public class AcidBottle : Spell
 
         // Spawn acid area at the target point
         SpawnAcidArea(randomPoint);
+        // Play explosion sound effect
+        SFXManager.Instance.PlayAt(SFX.AcidExplosion);
         ObjectPooler.Instance.ReturnObject(gameObject); // Return bottle to the object pool
     }
 

@@ -12,6 +12,16 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private float gatheringDistance = 30f;
     [SerializeField] private float gatherCheckInterval = 5f;
 
+    [Header("Bosses")]
+    [SerializeField] private Bosses[] bosses;
+
+    private bool _bossActive = false;
+    private GameObject _currentBoss;
+    private int _nextBossIndex = 0;
+
+    [Header("Timer")]
+    [SerializeField] private float timer = 0f;
+
     private Camera _cam;
     private Transform _player;
     private List<GameObject> _active = new List<GameObject>();
@@ -42,26 +52,32 @@ public class EnemySpawner : MonoBehaviour
     private void Update()
     {
         _phaseTimer += Time.deltaTime;
+        UpdateUI();
+        
+        // 1) If boss is up, only watch for its death
+        if (_bossActive)
+        {
+            if (_currentBoss == null || !_currentBoss.activeInHierarchy)
+                OnBossDefeated();
+            else
+                return;
+        }
 
+        // 2) Try to spawn next boss at its scheduled game‐time
+        TrySpawnBosses();
+
+        // 3) Normal phase logic – countdown ONLY when no boss is active
         if (_currentPhase < phases.Length)
         {
             var phase = phases[_currentPhase];
-
-            // wait until phase.startTime in both modes
             if (_phaseTimer < phase.startTime) return;
 
-            // still in this phase?
             if (_phaseTimer <= phase.startTime + phase.duration)
             {
                 switch (phase.behavior)
                 {
-                    case SpawnBehavior.Cluster:
-                        TrySpawnCluster(phase);
-                        break;
-
-                    case SpawnBehavior.MaintainCount:
-                        TryMaintainCount(phase);
-                        break;
+                    case SpawnBehavior.Cluster: TrySpawnCluster(phase); break;
+                    case SpawnBehavior.MaintainCount: TryMaintainCount(phase); break;
                 }
             }
             else
@@ -76,8 +92,29 @@ public class EnemySpawner : MonoBehaviour
             GatherAndCull();
             _nextGatherCheck = Time.time + gatherCheckInterval;
         }
+    }
 
-        UpdateUI();
+    private void TrySpawnBosses()
+    {
+        if (_bossActive || _nextBossIndex >= bosses.Length) return;
+
+        var bossData = bosses[_nextBossIndex];
+        if (Time.time >= bossData.spawnTime)
+        {
+            Vector3 pos = _player.position + Random.insideUnitSphere * bossData.spawnDistance;
+            pos.y = 1.5f;
+            _currentBoss = ObjectPooler.Instance.SpawnFromPool(bossData.prefab, pos, Quaternion.identity);
+            _currentBoss.transform.position = new Vector3(pos.x, 2f, pos.z);
+            _currentBoss.transform.LookAt(_player.position);
+            _bossActive = true;
+            _nextBossIndex++;
+        }
+    }
+    private void OnBossDefeated()
+    {
+        // simply un‐pause.  We do NOT adjust _currentPhase or _phaseTimer –
+        // any phases whose windows expired during the fight are gone.
+        _bossActive = false;
     }
 
     public void UpdateUI()
@@ -85,6 +122,7 @@ public class EnemySpawner : MonoBehaviour
         // update timer text but min:sec format
         int minutes = (int)(Time.time / 60f);
         int seconds = (int)(Time.time % 60f);
+        timer = Time.time;
         TimerText.text = $"{minutes:D2}:{seconds:D2}";
         enemyCountText.text = $"Enemies: {_active.Count}";
 
@@ -266,4 +304,12 @@ public class EnemySpawner : MonoBehaviour
         var go = EnemyFactory.CreateEnemy(enemyData, position);
         _active.Add(go);
     }
+}
+
+[System.Serializable]
+public struct Bosses
+{
+    public GameObject prefab;
+    public float spawnTime;
+    public float spawnDistance;
 }

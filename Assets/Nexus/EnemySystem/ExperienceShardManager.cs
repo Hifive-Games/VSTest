@@ -35,7 +35,7 @@ public class ExperienceShardManager : IGameEventObserver
 
             GameObject exp = ObjectPooler.Instance.SpawnFromPool(gameObject, position + randomOffset, Quaternion.identity);
             exp.GetComponent<ExperienceParticle>().experience = 10;
-            exp.GetComponent<ExperienceParticle>().DetermineScaleAndColor();
+            //exp.GetComponent<ExperienceParticle>().DetermineScaleAndColor();
         }
 
         // Spawn small shards (each worth 1)
@@ -49,7 +49,7 @@ public class ExperienceShardManager : IGameEventObserver
 
             GameObject exp = ObjectPooler.Instance.SpawnFromPool(gameObject, position + randomOffset, Quaternion.identity);
             exp.GetComponent<ExperienceParticle>().experience = 1;
-            exp.GetComponent<ExperienceParticle>().DetermineScaleAndColor();
+            //exp.GetComponent<ExperienceParticle>().DetermineScaleAndColor();
         }
     }
 

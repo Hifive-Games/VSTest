@@ -18,12 +18,12 @@ MonoBehaviour:
   enemySprite: {fileID: 0}
   enemyPrefab: {fileID: 4304281364575161984, guid: 14f1cd6ae06b7404bb4d45f4d899ed7d,
     type: 3}
-  maxHealth: 5
-  damage: 20
+  maxHealth: 15
+  damage: 10
   speed: 1
   score: 7
-  attackRange: 2.5
+  attackRange: 2
   attackSpeed: 2
-  experience: 5
+  experience: 20
   deathEffect: {fileID: 7642634975434891464, guid: b6eb006e0faad0d4b8de30ddadf3edf5,
     type: 3}

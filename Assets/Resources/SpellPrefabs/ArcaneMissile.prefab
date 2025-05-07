@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5886886027270525604}
   - component: {fileID: 5685719592352198090}
   - component: {fileID: 1192349317608148324}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: ArcaneMissile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -150,7 +150,6 @@ MonoBehaviour:
   Name: ArcaneMissile
   Description: Hits and splits
   Icon: {fileID: 0}
-  level: 1
   speed: 30
   damage: 10
   duration: 5

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: -5482275223296825415}
   - component: {fileID: 4182462363686168321}
   - component: {fileID: 2539627158570420908}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: LightningOrb
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -95,7 +95,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63187ab2de8f0ba45ab4db174bca7ede, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  triggerMode: 1
+  triggerMode: 0
   sparkInterval: 0.05
   maxSparksInPool: 100
   sparkDuration: 0.5
@@ -120,11 +120,11 @@ MonoBehaviour:
   Icon: {fileID: 0}
   speed: 5
   damage: 1
-  duration: 5
-  range: 10
+  duration: 10
+  range: 5
   cooldown: 5
   explosionRadius: 5
   projectileCount: 1
   radius: 3
-  tickInterval: 0.75
+  tickInterval: 1
   Caster: 0

@@ -14,6 +14,7 @@ public class Drone : MonoBehaviour
     public void Shoot()
     {
         ObjectPooler.Instance.SpawnFromPool(bullet, transform.position, transform.rotation);
+        SFXManager.Instance.PlayAt(SFX.BulletFire);
     }
 
     private void Update()

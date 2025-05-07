@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4188919611806016053}
   - component: {fileID: 2807481352740939836}
   - component: {fileID: 5611985932248434747}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: AcidBottle
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -1,13 +1,17 @@
+using Unity.Mathematics;
 using UnityEngine;
 
 public class GarlicSpell : Spell
 {
+    #region Unity Event Hooks
+    public override void OnEnable() => AudioSpectrum.OnBandTrigger += OnBandTrigger;
+    public override void OnDisable() => AudioSpectrum.OnBandTrigger -= OnBandTrigger;
+    private void OnDestroy() => AudioSpectrum.OnBandTrigger -= OnBandTrigger;
+    #endregion
 
     float tickTimer;
 
-    public override void OnEnable()
-    {
-    }
+    private bool[] bandTriggered = new bool[8];
 
     public override void Release()
     {
@@ -19,10 +23,13 @@ public class GarlicSpell : Spell
         //no need to seek, garlic will follow the player
     }
 
-    public override void OnDisable()
+    #region Event Handlers
+    private void OnBandTrigger(int band)
     {
-        //no need to disable garlic, it will follow the player
+        if (band >= 0 && band < bandTriggered.Length)
+            bandTriggered[band] = true;
     }
+    #endregion
 
     private void Update()
     {
@@ -32,6 +39,11 @@ public class GarlicSpell : Spell
             DamageNearbyEnemies();
             tickTimer = tickInterval;
         }
+
+        //check if the garlic is triggered by the audio spectrum, lerp back the radius to 5f if not triggered
+        radius = math.lerp(math.max(AudioSpectrum.Instance.GetAmplitude() * 5f,5), 5f, Time.deltaTime/2f);
+        gameObject.transform.localScale = new Vector3(radius, .1f, radius);
+
 
         //return the garlic when duration is over
         if (duration > 0)
@@ -44,15 +56,18 @@ public class GarlicSpell : Spell
         }
 
 
-        transform.position = FollowCasterTransform().position;
+        transform.position = FollowCasterTransform();
 
         //rotate the garlic
         transform.Rotate(Vector3.up, 360 * Time.deltaTime);
     }
 
-    public Transform FollowCasterTransform()
+    public Vector3 FollowCasterTransform()
     {
-        return TheHero.Instance.transform;
+        Vector3 pos = TheHero.Instance.transform.position;
+        pos.y = 0;
+
+        return pos;
     }
 
     void DamageNearbyEnemies()

@@ -18,7 +18,7 @@ MonoBehaviour:
   spawnInterval: 0
   maxClusterGroups: 0
   targetEnemyCount: 5
-  refillThreshold: 0.2
+  refillThreshold: 0.15
   maintainSpawnInterval: 0.5
   enemyGroups:
   - enemyData: {fileID: 11400000, guid: 8a468ad0bad7212489b164ba04fd8055, type: 2}

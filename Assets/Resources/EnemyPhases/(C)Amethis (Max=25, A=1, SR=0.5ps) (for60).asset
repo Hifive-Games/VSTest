@@ -22,6 +22,6 @@ MonoBehaviour:
   maintainSpawnInterval: 0
   enemyGroups:
   - enemyData: {fileID: 11400000, guid: 8152467218c8a1242995c124adf84141, type: 2}
-    amount: 1
+    amount: 2
     minSpwanRadius: 0.5
     maxSpawnRadius: 1.5

@@ -49,7 +49,7 @@ public class ShinobiHero : TheHero
             for (int i = 1; i <= shurikenCount; i++)
             {
                 Vector3 offset = GetSpawnOffset(i);
-                GameObject temp = Instantiate(objectToSpawn, spawnParent.position + offset, Quaternion.LookRotation(offset != Vector3.zero ? offset : spawnParent.forward));
+                GameObject temp = ObjectPooler.Instance.SpawnFromPool(objectToSpawn, spawnParent.position + offset, Quaternion.LookRotation(offset != Vector3.zero ? offset : spawnParent.forward));
                 temp.transform.localScale = defaultScale; // Scale ayarı
                 StartCoroutine(DestroyAfterDelay(temp, selfDestructTime));
             }
@@ -86,7 +86,7 @@ public class ShinobiHero : TheHero
     private IEnumerator DestroyAfterDelay(GameObject obj, float delay)
     {
         yield return new WaitForSecondsRealtime(delay);
-        Destroy(obj);
+        ObjectPooler.Instance.ReturnObject(obj); // Obje havuzuna geri döndür
     }
     
     //Hero Stats

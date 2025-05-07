@@ -14,6 +14,12 @@ public class ArcaneMissile : Spell
         base.OnDisable();
     }
 
+    public override void Release()
+    {
+        SFXManager.Instance.PlayAt(SFX.ArcaneMissile);
+        base.Release();
+    }
+
     public void Split()
     {
         //split into multiple projectiles

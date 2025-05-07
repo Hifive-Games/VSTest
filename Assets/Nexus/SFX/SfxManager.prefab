@@ -1,0 +1,93 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3235878273217738733
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4574977654513923682}
+  - component: {fileID: 7895409783000485981}
+  m_Layer: 0
+  m_Name: SfxManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4574977654513923682
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3235878273217738733}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7895409783000485981
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3235878273217738733}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1df7bcd2c1b86b44e883b3bcd6948fdd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sounds:
+  - id: 0
+    clip: {fileID: 8300000, guid: f3a3dbd83d1c6b147a2b7137df9b7f0c, type: 3}
+    volume: 1
+    pitchMin: 0.75
+    pitchMax: 1.25
+  - id: 1
+    clip: {fileID: 8300000, guid: 0a3e90f5f44ba7748802fa209ca3a4d3, type: 3}
+    volume: 1
+    pitchMin: 0.5
+    pitchMax: 1.5
+  - id: 2
+    clip: {fileID: 8300000, guid: 0bd631e982394dd41933908c5c52dacf, type: 3}
+    volume: 1
+    pitchMin: 0.5
+    pitchMax: 1.5
+  - id: 3
+    clip: {fileID: 8300000, guid: a8d0445728e5c9c409ab5ad45289fc95, type: 3}
+    volume: 1
+    pitchMin: 1
+    pitchMax: 1.5
+  - id: 5
+    clip: {fileID: 8300000, guid: 660a076a616c144468ae91e8ad54a61d, type: 3}
+    volume: 1
+    pitchMin: 0.5
+    pitchMax: 1.5
+  - id: 6
+    clip: {fileID: 8300000, guid: b5154a5fe0ba2b54d98449d776786e07, type: 3}
+    volume: 1
+    pitchMin: 0.5
+    pitchMax: 1.5
+  - id: 7
+    clip: {fileID: 8300000, guid: e25ef6a42fff8464c838f3baaecb14f2, type: 3}
+    volume: 1
+    pitchMin: 0.5
+    pitchMax: 1.5
+  - id: 8
+    clip: {fileID: 8300000, guid: 0a3e90f5f44ba7748802fa209ca3a4d3, type: 3}
+    volume: 1
+    pitchMin: 0.5
+    pitchMax: 1.5
+  - id: 9
+    clip: {fileID: 8300000, guid: a8d0445728e5c9c409ab5ad45289fc95, type: 3}
+    volume: 1
+    pitchMin: 0.5
+    pitchMax: 1.5
+  poolSize: 50

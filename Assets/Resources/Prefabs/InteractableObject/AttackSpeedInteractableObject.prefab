@@ -36,6 +36,7 @@ Transform:
   - {fileID: 1239941728364341414}
   - {fileID: 5292932198071382883}
   - {fileID: 8934383236380507137}
+  - {fileID: 80550830836354005}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &5300419614430551583
@@ -278,7 +279,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactionDuration: 3
-  interactionText: Tree Of Green
+  interactionText: Altar of Failed Hero
   effect: {fileID: 11400000, guid: ab7d699c7e7d5ad49b951b11088e63d4, type: 2}
   gizmoSize: {x: 5, y: 5, z: 5}
   gizmoColor: {r: 0, g: 0, b: 1, a: 1}
@@ -521,6 +522,80 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!1001 &843714802455236086
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 946026928983238475}
+    m_Modifications:
+    - target: {fileID: 768803446559622691, guid: 0203041d86498a24e98165b760cc6048,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 768803446559622691, guid: 0203041d86498a24e98165b760cc6048,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 768803446559622691, guid: 0203041d86498a24e98165b760cc6048,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 768803446559622691, guid: 0203041d86498a24e98165b760cc6048,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 768803446559622691, guid: 0203041d86498a24e98165b760cc6048,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 768803446559622691, guid: 0203041d86498a24e98165b760cc6048,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 768803446559622691, guid: 0203041d86498a24e98165b760cc6048,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 768803446559622691, guid: 0203041d86498a24e98165b760cc6048,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 768803446559622691, guid: 0203041d86498a24e98165b760cc6048,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 768803446559622691, guid: 0203041d86498a24e98165b760cc6048,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5519088744762564551, guid: 0203041d86498a24e98165b760cc6048,
+        type: 3}
+      propertyPath: m_Name
+      value: MiniMapIcon
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 0203041d86498a24e98165b760cc6048, type: 3}
+--- !u!4 &80550830836354005 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 768803446559622691, guid: 0203041d86498a24e98165b760cc6048,
+    type: 3}
+  m_PrefabInstance: {fileID: 843714802455236086}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4298007152949401540
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -604,6 +679,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7749077602415165648, guid: 431d183444877a34ea69757645fd590a,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: d0595d6a45ab56647aea4720e16ff162, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

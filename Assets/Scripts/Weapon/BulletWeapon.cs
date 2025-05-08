@@ -5,7 +5,6 @@ public class BulletWeapon : MonoBehaviour
 {
     [SerializeField] private float bulletSpeed = 20f; // Merminin hızı
     [SerializeField] private GameObject explosionPrefab; // Patlama efekti prefab'i
-    [SerializeField] private float explosionDuration = 2f; // Patlama efektinin süresi
 
     private Rigidbody rb;
 
@@ -18,16 +17,19 @@ public class BulletWeapon : MonoBehaviour
         rb.useGravity = false;
     }
 
-    private void Start()
+    private void OnEnable()
     {
-        // Mermiyi ileriye doğru sürekli hareket ettir
         rb.velocity = transform.forward * bulletSpeed;
-
-        // Merminin belli bir süre sonra yok olmasını sağla
         Invoke(nameof(ReturnBullet), 5f); // 5 saniye sonra yok ol
     }
+
+    void OnDisable()
+    {
+        rb.velocity = Vector3.zero; // Mermi geri döndüğünde hızını sıfırla
+        rb.angularVelocity = Vector3.zero; // Merminin açısal hızını sıfırla
+    }
     private void OnTriggerEnter(Collider other)
-    {        // Eğer bir Enemy objesine çarptıysa, hasar ver
+    {   // Eğer bir Enemy objesine çarptıysa, hasar ver
         if (other.TryGetComponent(out Enemy enemy))
         {
             enemy.TakeDamage(1);

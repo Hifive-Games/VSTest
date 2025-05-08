@@ -130,11 +130,11 @@ MonoBehaviour:
   Icon: {fileID: 0}
   speed: 10
   damage: 2
-  duration: 1
+  duration: 5
   range: 5
   cooldown: 8
   explosionRadius: 0
-  projectileCount: 5
+  projectileCount: 2
   radius: 3
   tickInterval: 0.5
   Caster: 0

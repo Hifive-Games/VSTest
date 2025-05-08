@@ -104,7 +104,7 @@ public class SFXManager : MonoBehaviour
     /// <summary>
     /// Play a 3D sound at a world position
     /// </summary>
-    public void PlayAt(SFX id, float spatialBlend = 1f)
+    public void PlayAt(SFX id, float spatialBlend = 0f)
     {
         if (!_lookup.TryGetValue(id, out var s)) return;
         var src = GetSource();

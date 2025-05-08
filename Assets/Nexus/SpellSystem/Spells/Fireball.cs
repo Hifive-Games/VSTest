@@ -7,6 +7,8 @@ public class Fireball : Spell
 {
     [SerializeField] GameObject ExplosionEffect;
 
+    private Collider[] _hitBuffer = new Collider[16]; // Reusable buffer for overlap sphere
+
     public override void OnEnable()
     {
         base.OnEnable();
@@ -27,11 +29,18 @@ public class Fireball : Spell
     {
         ObjectPooler.Instance.SpawnFromPool(ExplosionEffect, transform.position, Quaternion.identity);
 
-        Collider[] colliders = Physics.OverlapSphere(transform.position, radius/2f);
-        foreach (Collider collider in colliders)
+        int hits = Physics.OverlapSphereNonAlloc(transform.position, radius /2, _hitBuffer);
+        Collider[] colliders = new Collider[hits];
+        for (int i = 0; i < hits; i++)
         {
-            if (collider.TryGetComponent(out Enemy enemy) && Caster == Caster.Player)
+            colliders[i] = _hitBuffer[i];
+        }
+
+        foreach (var collider in colliders)
+        {
+            if (collider.TryGetComponent<Enemy>(out Enemy enemy))
             {
+                // Apply damage
                 enemy.TakeDamage(damage);
             }
         }

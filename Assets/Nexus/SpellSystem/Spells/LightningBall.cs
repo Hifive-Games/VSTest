@@ -7,6 +7,8 @@ public class LightningBall : Spell
 {
     float tickTimer;
 
+    private Collider[] _hitBuffer = new Collider[16]; // Reusable buffer for overlap sphere
+
     public override void OnEnable()
     {
         base.OnEnable();
@@ -44,11 +46,20 @@ public class LightningBall : Spell
     }
     void DamageNearbyEnemies()
     {
-        Collider[] colliders = Physics.OverlapSphere(transform.position, radius/2f);
-        foreach (Collider c in colliders)
+        int hits = Physics.OverlapSphereNonAlloc(transform.position, radius /2, _hitBuffer);
+        Collider[] colliders = new Collider[hits];
+        for (int i = 0; i < hits; i++)
         {
-            if (c.TryGetComponent(out Enemy e) && Caster == Caster.Player)
-                e.TakeDamage(damage);
+            colliders[i] = _hitBuffer[i];
+        }
+
+        foreach (var collider in colliders)
+        {
+            if (collider.TryGetComponent<Enemy>(out Enemy enemy))
+            {
+                // Apply damage
+                enemy.TakeDamage(damage);
+            }
         }
     }
 

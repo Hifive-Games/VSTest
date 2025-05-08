@@ -19,8 +19,8 @@ MonoBehaviour:
   Level: 0
   maxUpgrades: 5
   ValuePerLevel:
+  - 2
+  - 2
+  - 4
+  - 4
   - 5
-  - 5
-  - 7
-  - 7
-  - 9

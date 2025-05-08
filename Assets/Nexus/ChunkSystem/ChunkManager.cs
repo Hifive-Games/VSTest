@@ -13,6 +13,9 @@ public class ChunkManager : MonoBehaviour
     public GameObject bossAltarPrefab;
     public int chunkSize = 16;
 
+    private Vector2Int currentChunk;
+    private Vector2Int startingChunk;
+
     [Header("Object Settings")]
     public int minObjects = 3;
     public int maxObjects = 8;
@@ -35,8 +38,6 @@ public class ChunkManager : MonoBehaviour
     private Dictionary<Vector2Int, GameObject> activeChunks = new Dictionary<Vector2Int, GameObject>();
     private Dictionary<Vector2Int, List<(GameObject prefab, Vector3 position, Quaternion rotation)>> chunkData
         = new Dictionary<Vector2Int, List<(GameObject, Vector3, Quaternion)>>();
-
-    private Vector2Int currentChunk;
     private HashSet<Vector2Int> bossAltarChunks = new HashSet<Vector2Int>();
 
     public event Action<Vector3> OnBossAltarActivated;
@@ -49,15 +50,11 @@ public class ChunkManager : MonoBehaviour
     public void Initialize()
     {
         player = FindAnyObjectByType<CharacterController>().transform;
-
-        //load objects from a file
         objectPrefabs = Resources.LoadAll<GameObject>("Objects");
+        if (useSeed) Random.InitState(seed);
 
-        if (useSeed)
-        {
-            Random.InitState(seed);
-        }
         currentChunk = GetChunkCoord(player.position);
+        startingChunk = currentChunk;                 // <- capture start
         GenerateInitialChunks();
     }
 
@@ -168,16 +165,24 @@ public class ChunkManager : MonoBehaviour
 
     List<(GameObject, Vector3, Quaternion)> GenerateObjectData(Vector2Int chunkCoord)
     {
+        if (chunkCoord == startingChunk)
+            return new List<(GameObject, Vector3, Quaternion)>();
+
         Vector3 chunkOrigin = new Vector3(chunkCoord.x * chunkSize, 0, chunkCoord.y * chunkSize);
         List<(GameObject, Vector3, Quaternion)> list = new List<(GameObject, Vector3, Quaternion)>();
-        int objectCount = UnityEngine.Random.Range(minObjects, maxObjects + 1);
+        int objectCount = Random.Range(minObjects, maxObjects + 1);
         HashSet<Vector2Int> occupiedPositions = new HashSet<Vector2Int>();
 
-        // 🔥 Boss Altar spawn kontrolü
-        // Determine if the chunk falls within the initial 9 (centered around 0,0)
+        // Boss altar check (still excludes the whole 3×3 initial)
         bool isInitialChunk = Mathf.Abs(chunkCoord.x) <= 1 && Mathf.Abs(chunkCoord.y) <= 1;
-        // Boss altar spawn only if not an initial chunk and fits the spawn pattern
-        bool isBossAltarChunk = !isInitialChunk && (chunkCoord.x % bossAltarSpawnDistance == 0) && (chunkCoord.y % bossAltarSpawnDistance == 0);
+        bool isBossAltarChunk = !isInitialChunk
+                                && (chunkCoord.x % bossAltarSpawnDistance == 0)
+                                && (chunkCoord.y % bossAltarSpawnDistance == 0);
+
+        //Todo: Boss altar spawn kontrolü şimdilik kapalı, ileride açılacak
+
+        isBossAltarChunk = false;
+
         if (isBossAltarChunk)
         {
             bossAltarChunks.Add(chunkCoord);

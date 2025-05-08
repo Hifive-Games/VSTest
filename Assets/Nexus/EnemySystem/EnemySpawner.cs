@@ -24,7 +24,7 @@ public class EnemySpawner : MonoBehaviour
 
     private Camera _cam;
     private Transform _player;
-    private List<GameObject> _active = new List<GameObject>();
+    [SerializeField] private List<GameObject> _active = new List<GameObject>();
 
     private int _currentPhase = 0;
     private float _phaseTimer = 0f;
@@ -53,7 +53,14 @@ public class EnemySpawner : MonoBehaviour
     {
         _phaseTimer += Time.deltaTime;
         UpdateUI();
-        
+
+        // culling/gathering unchanged…
+        if (Time.time >= _nextGatherCheck)
+        {
+            GatherEnemies();
+            _nextGatherCheck = Time.time + gatherCheckInterval;
+        }
+
         // 1) If boss is up, only watch for its death
         if (_bossActive)
         {
@@ -84,13 +91,6 @@ public class EnemySpawner : MonoBehaviour
             {
                 EndPhase();
             }
-        }
-
-        // culling/gathering unchanged…
-        if (Time.time >= _nextGatherCheck)
-        {
-            GatherAndCull();
-            _nextGatherCheck = Time.time + gatherCheckInterval;
         }
     }
 
@@ -224,52 +224,43 @@ public class EnemySpawner : MonoBehaviour
         _clustersThisPhase = 0;
     }
 
-    private void GatherAndCull()
+    private void GatherEnemies()
     {
-        // gather: if average out‐of‐bounds cluster too far, teleport them
-        var oob = new List<GameObject>();
-        Vector3 sum = Vector3.zero;
-        foreach (var e in _active)
+        foreach (var enemy in _active)
         {
-            if (!IsInView(e.transform.position))
+            if (enemy == null) continue;
+            if (Vector3.Distance(enemy.transform.position, _player.position) > gatheringDistance)
             {
-                oob.Add(e);
-                sum += e.transform.position;
-            }
-        }
-        if (oob.Count > 0)
-        {
-            var avg = sum / oob.Count;
-            if (Vector3.Distance(avg, _player.position) > gatheringDistance)
-            {
-                foreach (var e in oob)
-                    e.transform.position = GetOutsideCameraView();
+                Vector3 pos = GetOutsideCameraView();
+                enemy.transform.position = pos;
             }
         }
 
-        // cull any dead/invisible if you want:
-        _active.RemoveAll(e =>
-        {
-            if (e == null) return true;
-            if (!IsInView(e.transform.position) && !e.TryGetComponent<BossController>(out _))
-            {
-                ObjectPooler.Instance.ReturnObject(e);
-                return true;
-            }
-            return false;
-        });
     }
 
     private Vector3 GetOutsideCameraView()
     {
+        float spawnHeight = 1.5f;
+
+        float minR = gatheringDistance;
+        float maxR = gatheringDistance * 1.5f;
+
+        // try a bunch of random angles/radii until it’s outside camera
         for (int i = 0; i < 20; i++)
         {
-            var p = _player.position + Random.insideUnitSphere * 50f;
-            p.y = 1.5f;
+            float ang = Random.Range(0f, Mathf.PI * 2f);
+            float r = Random.Range(minR, maxR);
+            Vector3 dir = new Vector3(Mathf.Cos(ang), 0f, Mathf.Sin(ang));
+            Vector3 p = _player.position + dir * r;
+            p.y = spawnHeight;
             if (!IsInView(p)) return p;
         }
-        var fallback = _player.position + Random.insideUnitSphere * 70f;
-        fallback.y = 1.5f;
+
+        // fallback: just pick any direction at a larger radius
+        float fallbackAng = Random.Range(0f, Mathf.PI * 2f);
+        Vector3 fd = new Vector3(Mathf.Cos(fallbackAng), 0f, Mathf.Sin(fallbackAng));
+        Vector3 fallback = _player.position + fd * (maxR * 2f);
+        fallback.y = spawnHeight;
         return fallback;
     }
 
@@ -282,14 +273,11 @@ public class EnemySpawner : MonoBehaviour
 
     public void RemoveEnemy(GameObject enemy)
     {
-        if (_active.Contains(enemy))
+        // just remove from active list, don’t pool here
+        if (_active.Remove(enemy))
         {
-            _active.Remove(enemy);
-            ObjectPooler.Instance.ReturnObject(enemy);
+            _clustersThisPhase = Mathf.Max(0, _clustersThisPhase - 1);
         }
-
-        _clustersThisPhase--;
-        if (_clustersThisPhase < 0) _clustersThisPhase = 0;
     }
     public void ClearEnemies()
     {

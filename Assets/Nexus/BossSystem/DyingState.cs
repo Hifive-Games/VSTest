@@ -8,6 +8,8 @@ public class DyingState : ScriptableBossState
     [Tooltip("Set this in Inspector once you add a Death animation")]
     public string deathAnimTrigger = "";
 
+    public GameObject bossDropPrefab;
+
     public override void Enter(BossController boss)
     {
         boss.StartCoroutine(DeathRoutine(boss));
@@ -18,7 +20,7 @@ public class DyingState : ScriptableBossState
         if (!string.IsNullOrEmpty(deathAnimTrigger))
             boss.AnimatorComponent.SetTrigger(deathAnimTrigger);
         yield return new WaitForSeconds(deathDelay);
-        Destroy(boss.gameObject);
+        //Destroy(boss.gameObject);
     }
 
     public override void Tick(BossController boss) { }

@@ -37,6 +37,8 @@ public class BossController : Enemy
 
     public Animator AnimatorComponent => _anim;
 
+    public GameObject bossDropPrefab;
+
     public void Start()
     {
         SetBossUI();
@@ -56,7 +58,22 @@ public class BossController : Enemy
 
     public override void OnDisable()
     {
+        if (currentHealth <= 0)
+        {
+            Debug.LogWarning($"<color=blue>Entering Dying State</color> for {name}");
+        }
         BossHealthBarUI.Instance.ActivateHealthBarUI(false);
+    }
+    
+
+    public void DropLoot()
+    {
+        if (bossDropPrefab != null)
+        {
+            Instantiate(bossDropPrefab,
+                transform.position + Vector3.up * 2f,
+                Quaternion.identity);
+        }
     }
 
     public void SetBossUI()
@@ -72,7 +89,7 @@ public class BossController : Enemy
     }
 
     [Button("Deal Damage")]
-    public void DealDamage(float amount = 10f)
+    public void DealDamage(float amount = 40f)
     {
         //check if the boss is in the fighting state
         if (ReferenceEquals(_stateMachine.CurrentState, fightingState))
@@ -87,7 +104,10 @@ public class BossController : Enemy
 
     public override void TakeDamage(int damage)
     {
-        base.TakeDamage(damage);
+        if (ReferenceEquals(_stateMachine.CurrentState, fightingState))
+        {
+            base.TakeDamage(damage);
+        }
 
         //Adjust the health bar
         float healthPercentage = (float)currentHealth / maxHealth;

@@ -127,13 +127,12 @@ public class CryomancerPhase : ScriptableBossPhase
 
     private void LookPlayer(BossController boss)
     {
-        // look at the player
-        if (boss.Player != null)
-        {
-            Vector3 direction = (boss.Player.transform.position - boss.transform.position).normalized;
-            Quaternion lookRotation = Quaternion.LookRotation(direction);
-            boss.transform.rotation = Quaternion.Slerp(boss.transform.rotation, lookRotation, Time.deltaTime * 2f);
-        }
+        // look at the player but only x and z axis
+        Vector3 direction = boss.Player.transform.position - boss.transform.position;
+        direction.y = 0f; // ignore y axis
+        direction.Normalize(); // normalize the direction vector
+        Quaternion lookRotation = Quaternion.LookRotation(direction);
+        boss.transform.rotation = Quaternion.Slerp(boss.transform.rotation, lookRotation, Time.deltaTime * 5f); // smooth rotation
     }
 
 

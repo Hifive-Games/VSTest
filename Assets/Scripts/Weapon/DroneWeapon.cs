@@ -40,7 +40,7 @@ public class DroneWeapon : MonoBehaviour
                 if (shootTimer <= 0f)
                 {
                     Shoot();
-                    shootTimer = 1f / Mathf.Max(attackSpeed, 0.01f); // 0'a bölünme hatasını önler
+                    shootTimer = 1f / Mathf.Max(attackSpeed, 0.1f); // 0'a bölünme hatasını önler
                 }
             }
         }
@@ -48,7 +48,7 @@ public class DroneWeapon : MonoBehaviour
 
     private void Shoot()
     {
-        GameObject bulletObj = Instantiate(bullet, shooterParent.position, transform.rotation);
+        GameObject bulletObj = ObjectPooler.Instance.SpawnFromPool(bullet, shooterParent.position, transform.rotation);
         bulletObj.transform.localScale = Vector3.one * attackSize;
         SFXManager.Instance.PlayAt(SFX.BulletFire); // Play bullet fire sound effect
     }

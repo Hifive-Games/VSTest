@@ -74,7 +74,6 @@ public abstract class Enemy : MonoBehaviour
 
     public virtual void OnDisable()
     {
-        EnemySpawner.Instance.RemoveEnemy(gameObject);
         player = null;
         Destroy(this);
     }
@@ -180,42 +179,16 @@ public abstract class Enemy : MonoBehaviour
     public virtual void Die()
     {
         SFXManager.Instance.PlayAt(SFX.EnemyDie);
+
+        EnemySpawner.Instance.RemoveEnemy(gameObject);
         ObjectPooler.Instance.ReturnObject(gameObject);
+
         Vector3 position = new Vector3(transform.position.x, .5f, transform.position.z);
-        CheckExperienceInVicinity(position);
+        GlobalGameEventManager.Instance.Notify("EnemyDied", experience, position, expPrefab);
+
         Debuffs.Clear();
         EnemySpawner.Instance.AddKill();
     }
-
-    //check how many experiance in the vicinty of the enemy
-    public void CheckExperienceInVicinity(Vector3 position)
-    {
-        GlobalGameEventManager.Instance.Notify("EnemyDied", experience, position, expPrefab);
-    }
-
-    public void TestVicinity()
-    {
-        Collider[] colliders = Physics.OverlapSphere(transform.position, 5);
-        int experienceCount = 0;
-        foreach (Collider collider in colliders)
-        {
-            if (collider.TryGetComponent(out ExperienceParticle experienceParticle))
-            {
-                ObjectPooler.Instance.ReturnObject(collider.gameObject);
-                experienceCount += experienceParticle.experience;
-            }
-        }
-
-        switch (experienceCount)
-        {
-            case <= 10:
-                break;
-            case > 10:
-                experience = experienceCount;
-                break;
-        }
-    }
-
     // Adjust the direction based on enemy detection.
     private Vector3 GetAdjustedDirection(Vector3 targetDirection)
     {
@@ -253,22 +226,6 @@ public abstract class Enemy : MonoBehaviour
                 return false;
         }
         return true;
-    }
-
-    public void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, detectionRange);
-
-        Vector3 forward = transform.forward;
-        Vector3 right = Quaternion.Euler(0, detectionAngle, 0) * forward;
-        Vector3 left = Quaternion.Euler(0, -detectionAngle, 0) * forward;
-
-        Gizmos.color = Color.green;
-        Gizmos.DrawRay(transform.position, forward * detectionRange);
-        Gizmos.color = Color.blue;
-        Gizmos.DrawRay(transform.position, right * detectionRange);
-        Gizmos.DrawRay(transform.position, left * detectionRange);
     }
 
     public void ApplyDebuff(Debuff debuff)

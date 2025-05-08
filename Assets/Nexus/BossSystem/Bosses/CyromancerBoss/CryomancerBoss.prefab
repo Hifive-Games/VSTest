@@ -279,6 +279,9 @@ MonoBehaviour:
   score: 0
   experience: 0
   expPrefab: {fileID: 0}
+  enemyLayerMask:
+    serializedVersion: 2
+    m_Bits: 0
   smoothTime: 0.1
   detectionRange: 1.5
   detectionAngle: 45
@@ -291,6 +294,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: fd52bcdd3baf18146aeaed5054120ec5, type: 2}
   - {fileID: 11400000, guid: 54b75c5db0f53e647b4341bfb3c75dc9, type: 2}
   - {fileID: 11400000, guid: bee8234f1d2cdf140883b6971ba1f343, type: 2}
+  bossDropPrefab: {fileID: 5768510730815123354, guid: 7f9a8e076af6e6546a664b745031385e,
+    type: 3}
 --- !u!136 &2472423757669753046
 CapsuleCollider:
   m_ObjectHideFlags: 0

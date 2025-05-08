@@ -18,12 +18,15 @@ public class TheHeroDamageManager : MonoBehaviour
     {
         if (armor >= 0)
         {
-            // Zırh pozitifse hasarı azalt
-            return baseDamage * (1 - Mathf.Clamp01(armor / 100f)); // Zırh oranını % olarak ele al
-			// baseDamage = baseDamage * (100 /(100 + armor));
+            baseDamage = baseDamage * (100 /(100 + armor));
+            return baseDamage;
         }
         // Zırh negatifse hasarı artır
-        return baseDamage * (1 + Mathf.Abs(armor) / 100f);
+        else
+        {
+            baseDamage = baseDamage * (100 / (100 - armor));
+            return baseDamage;
+        }
         
     }
 }

@@ -17,24 +17,24 @@ public class HeroBaseData : ScriptableObject
     public GameObject prefab;
     public Sprite characterImage;
     public bool isSelected = false;
-    
+
     [SerializeField] public List<HeroStat> heroStatsBaseDatas;  // Her bir öğeyi tutmak için dizi kullanıyoruz
     [SerializeField] private List<PassiveUpgradeBaseData> appliedPassiveUpgrades;
-    [SerializeField] private List<ActiveUpgradeBaseData>  appliedActiveUpgrades;
-    
+    [SerializeField] private List<ActiveUpgradeBaseData> appliedActiveUpgrades;
+
     #region Editor Code
     [Button]
     public void AddAllPassiveUpgradeToAppliedPassiveUpgrades()
     {
-        #if UNITY_EDITOR
+#if UNITY_EDITOR
         if (!Application.isPlaying)
         {
             UnityEditor.EditorUtility.DisplayDialog("Hata", "Bu işlem yalnızca Play Mode sırasında çalıştırılabilir.", "Tamam");
-        return;
+            return;
 
         }
-        #endif
-    
+#endif
+
         // AppliedPassiveUpgrades listesini temizle
         appliedPassiveUpgrades.Clear();
 
@@ -47,26 +47,26 @@ public class HeroBaseData : ScriptableObject
             appliedPassiveUpgrades.Add(upgrade);
         }
 
-        #if UNITY_EDITOR
-                // Değişiklikleri kalıcı hale getirme
-                UnityEditor.EditorUtility.SetDirty(this);
-                UnityEditor.AssetDatabase.SaveAssets();
-                UnityEditor.AssetDatabase.Refresh();
-        #endif
+#if UNITY_EDITOR
+        // Değişiklikleri kalıcı hale getirme
+        UnityEditor.EditorUtility.SetDirty(this);
+        UnityEditor.AssetDatabase.SaveAssets();
+        UnityEditor.AssetDatabase.Refresh();
+#endif
     }
 
     [Button()]
     public void AddAllActiveUpgradeToAppliedPassiveUpgrades()
     {
-        #if UNITY_EDITOR
+#if UNITY_EDITOR
         if (!Application.isPlaying)
         {
             UnityEditor.EditorUtility.DisplayDialog("Hata", "Bu işlem yalnızca Play Mode sırasında çalıştırılabilir.", "Tamam");
             return;
 
         }
-        #endif
-    
+#endif
+
         // AppliedPassiveUpgrades listesini temizle
         appliedActiveUpgrades.Clear();
 
@@ -79,14 +79,14 @@ public class HeroBaseData : ScriptableObject
             appliedActiveUpgrades.Add(upgrade);
         }
 
-        #if UNITY_EDITOR
+#if UNITY_EDITOR
         // Değişiklikleri kalıcı hale getirme
         UnityEditor.EditorUtility.SetDirty(this);
         UnityEditor.AssetDatabase.SaveAssets();
         UnityEditor.AssetDatabase.Refresh();
-        #endif
+#endif
     }
-    
+
     [Button()]
     public void AddAllHeroStatsToAppliedPassiveUpgrades()
     {
@@ -117,8 +117,8 @@ public class HeroBaseData : ScriptableObject
         UnityEditor.AssetDatabase.Refresh();
 #endif
     }
-    
-    #if UNITY_EDITOR
+
+#if UNITY_EDITOR
     // Burası tamamiyle herostatla ilgili kısım. Yenilemesi gerekiyor bu şekilde yeniliyor onvalidate çok kasıyordu onun yerine yazdım
     private bool isProcessing = false;
 
@@ -136,12 +136,16 @@ public class HeroBaseData : ScriptableObject
 
     private void UpdateStats()
     {
-        // Değişiklik olup olmadığını kontrol ediyoruz
-        bool hasChanges = false;
+        // If this SO has been destroyed or our list never initialized, stop subscribing and quit
+        if (this == null || heroStatsBaseDatas == null)
+        {
+            EditorApplication.update -= UpdateStats;
+            return;
+        }
 
+        bool hasChanges = false;
         foreach (var stat in heroStatsBaseDatas)
         {
-            // HeroStatsBaseData'nın değerini kontrol ediyoruz
             if (stat.heroStatsBaseData.value != stat.value)
             {
                 stat.heroStatsBaseData.value = stat.value;
@@ -149,19 +153,16 @@ public class HeroBaseData : ScriptableObject
             }
         }
 
-        // Eğer değişiklik olduysa, işlemi kaydediyoruz
         if (hasChanges)
         {
             EditorUtility.SetDirty(this);
             AssetDatabase.SaveAssets();
-            isProcessing = true; // İşlem yapıldığı için isProcessing'yi true yapıyoruz
+            isProcessing = true;
         }
 
-        // Eğer işlem yapıldıysa, editor'un update sırasını bekliyoruz
         if (isProcessing)
         {
             isProcessing = false;
-            // Gereksiz yere sürekli işlem yapmamayı sağlıyoruz
             EditorApplication.update -= UpdateStats;
         }
     }
@@ -185,7 +186,7 @@ public class HeroBaseData : ScriptableObject
             stat.heroStatsBaseData.ApplyStat(this);
         }
     }
-    
+
     public void HeroSetCurrentHealth(float value)
     {
         TheHero.Instance.SetCurrentHealth(value);
@@ -220,7 +221,7 @@ public class HeroBaseData : ScriptableObject
     {
         TheHero.Instance.SetAttackRange(value);
     }
-    
+
     public void HeroSetAttackSize(float value)
     {
         TheHero.Instance.SetAttackSize(value);
@@ -238,7 +239,7 @@ public class HeroBaseData : ScriptableObject
     {
         TheHero.Instance.SetLuck(value);
     }
-    public virtual void HeroSetBuffEffectScaler( float heroBuffEffectScaler)
+    public virtual void HeroSetBuffEffectScaler(float heroBuffEffectScaler)
     {
         TheHero.Instance.SetBuffEffectScaler(heroBuffEffectScaler);
     }
@@ -246,7 +247,7 @@ public class HeroBaseData : ScriptableObject
     {
         TheHero.Instance.SetDeBuffEffectScaler(heroDebuffEffectScaler);
     }
-    
+
     public void RunAllPassiveUpgrades()
     {
         foreach (var upgrade in appliedPassiveUpgrades)
@@ -254,7 +255,7 @@ public class HeroBaseData : ScriptableObject
             upgrade.ApplyUpgrade(this);
         }
     }
-    
+
     public virtual void HeroAttackSpeedPassiveUpgrade(float value)
     {
         TheHero.Instance.AddAttackSpeed(value);
@@ -273,7 +274,7 @@ public class HeroBaseData : ScriptableObject
     {
         TheHero.Instance.AddHealthRegenRate(value);
     }
-    
+
     public virtual void HeroMovementSpeedPassiveUpgrade(float value)
     {
         TheHero.Instance.AddMovementSpeed(value);
@@ -306,11 +307,11 @@ public class HeroBaseData : ScriptableObject
     {
         TheHero.Instance.AddDeBuffEffectScaler(value);
     }
-    
+
     /*
      * Burası (aşağısı) Active Upgradeler içim
      */
-    
+
     public List<ActiveUpgradeBaseData> GetAppliedActiveUpgrades()
     {
         return appliedActiveUpgrades;
@@ -367,7 +368,7 @@ public class HeroBaseData : ScriptableObject
     {
         TheHero.Instance.AddDeBuffEffectScaler(value);
     }
-    
+
 }
 /*
  public class ActiveUpgradeManager : MonoBehaviour

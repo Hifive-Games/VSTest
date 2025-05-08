@@ -72,5 +72,15 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 6d35326d412e744428118318101ff079, type: 2}
   appliedActiveUpgrades:
   - {fileID: 11400000, guid: b95c73d7ccd7fe943b3afc0621087528, type: 2}
-  - {fileID: 11400000, guid: 1086db7d920c1f64abf72f9fca447eaf, type: 2}
   - {fileID: 11400000, guid: 0f3e9160e8e9162488682655c9f3671e, type: 2}
+  - {fileID: 11400000, guid: fc1b1f86c73e3f74081d62f18dffb8fd, type: 2}
+  - {fileID: 11400000, guid: 08ffd1dcd158d2b458796b4194476604, type: 2}
+  - {fileID: 11400000, guid: 5385984ed1743ad4b80cc3e4f639c37b, type: 2}
+  - {fileID: 11400000, guid: 0f2a6ace0bc838444848ba94d2b4793f, type: 2}
+  - {fileID: 11400000, guid: 788403802c7b70c4496594d4ede14cb9, type: 2}
+  - {fileID: 11400000, guid: a73c2d3259b9c7b428b69a3b15292121, type: 2}
+  - {fileID: 11400000, guid: a3262399006613040beacafcbebdaf7f, type: 2}
+  - {fileID: 11400000, guid: 42e0792b70b99414ba274ecc7ab3aa5b, type: 2}
+  - {fileID: 11400000, guid: 1086db7d920c1f64abf72f9fca447eaf, type: 2}
+  - {fileID: 11400000, guid: 039e338e46968ae43abe5dce4e82ba09, type: 2}
+  - {fileID: 11400000, guid: dabd21aee09d3a241b80bfab66405f7e, type: 2}

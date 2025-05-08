@@ -34,7 +34,7 @@ public class RandomizeBuffDeBuff : BuffDebuffSystemBaseData
     {
         if (randomizeBuffDebuff == null || randomizeBuffDebuff.Count == 0)
         {
-            ShowEditorError($"{name}: Buff/Debuff listesi boş! Editörden liste ekleyin.");
+            Debug.LogError($"{name}: RandomizeBuffDeBuff listesi boş! Lütfen listeyi doldurun.");
             return;
         }
 
@@ -51,13 +51,13 @@ public class RandomizeBuffDeBuff : BuffDebuffSystemBaseData
     {
         if (randomizeBuffDebuff == null || randomizeBuffDebuff.Count == 0)
         {
-            ShowEditorError($"{name}: Buff/Debuff listesi boş! Editörden liste ekleyin.");
+            Debug.LogError($"{name}: RandomizeBuffDeBuff listesi boş! Lütfen listeyi doldurun.");
         }
 
         if (randomCount < 1)
         {
             randomCount = 1;
-            ShowEditorError($"{name}: RandomCount en az 1 olmalı! Değer 1'e ayarlandı.");
+            Debug.LogWarning($"{name}: randomCount 1'den küçük olamaz! 1 olarak ayarlandı.");
         }
     }
 

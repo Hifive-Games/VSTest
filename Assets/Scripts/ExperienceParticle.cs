@@ -4,7 +4,7 @@ using System.Collections;
 public class ExperienceParticle : MonoBehaviour
 {
     [SerializeField] public int experience = 1;
-    [SerializeField] private float mergeDelay = 30f;
+    [SerializeField] private float mergeDelay = 10f;
     [SerializeField] private float mergeRadius = 5f;
     [SerializeField] private LayerMask mergeLayer;
     private Transform _t;
@@ -15,17 +15,19 @@ public class ExperienceParticle : MonoBehaviour
 
     private static readonly VisualSetting[] _settings =
     {
-        new VisualSetting(10,    Color.green,  0.5f),
-        new VisualSetting(20,    Color.yellow, 1f),
-        new VisualSetting(50,    Color.red,    1.5f),
-        new VisualSetting(100,   Color.blue,   2f),
-        new VisualSetting(int.MaxValue, Color.white, 1f)
+        new VisualSetting(10,    Color.yellow,  .75f),
+        new VisualSetting(20,    Color.red, 1f),
+        new VisualSetting(50,    Color.blue,    1.25f),
+        new VisualSetting(100,   Color.magenta,   1.5f),
+        new VisualSetting(int.MaxValue, Color.green, .5f)
     };
 
     private void Awake()
     {
         _t = transform;
         _r = GetComponentInChildren<Renderer>();
+        _r.material.color = Color.green;
+        _t.localScale = Vector3.one * .5f;
     }
 
     private void OnEnable()
@@ -48,9 +50,14 @@ public class ExperienceParticle : MonoBehaviour
 
     private void MergeExp()
     {
-        int count = Physics.OverlapSphereNonAlloc(_t.position, mergeRadius, _buf, mergeLayer);
-        int total = experience;
+        int initialExp = experience;
 
+        int count = Physics.OverlapSphereNonAlloc(_t.position, mergeRadius, _buf, mergeLayer);
+
+        if (count <= 1)
+            return;
+
+        int total = initialExp;
         for (int i = 0; i < count; i++)
         {
             if (_buf[i].TryGetComponent<ExperienceParticle>(out var p) && p != this)
@@ -59,6 +66,9 @@ public class ExperienceParticle : MonoBehaviour
                 ObjectPooler.Instance.ReturnObject(p.gameObject);
             }
         }
+
+        if (total == initialExp)
+            return;
 
         experience = total;
         ApplyVisuals();
@@ -85,8 +95,8 @@ public class ExperienceParticle : MonoBehaviour
 
     private void ResetVisual()
     {
-        _t.localScale = Vector3.one;
-        _r.material.color = Color.white;
+        _t.localScale = Vector3.one * .5f;
+        _r.material.color = Color.green;
     }
 
     private readonly struct VisualSetting
@@ -98,8 +108,8 @@ public class ExperienceParticle : MonoBehaviour
         public VisualSetting(int maxExp, Color color, float scale)
         {
             MaxExp = maxExp;
-            Color  = color;
-            Scale  = scale;
+            Color = color;
+            Scale = scale;
         }
     }
 }

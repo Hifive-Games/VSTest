@@ -128,15 +128,6 @@ public abstract class Spell : MonoBehaviour
         if (other.TryGetComponent(out Enemy enemy) && Caster == Caster.Player)
         {
             CollisionEffect(enemy);
-
-            print($"Cast by {Caster} collided with {enemy.name}");
-        }
-
-        if (other.TryGetComponent(out CharacterController player) && Caster == Caster.Boss)
-        {
-            CollisionEffect(player);
-
-            print($"Cast by {Caster} collided with {player.name}");
         }
     }
 

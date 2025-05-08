@@ -117,7 +117,7 @@ public class ShinobiHero : TheHero
     // Burası TheHero'dan Override edilen fonksiyonlar
     public override void AddAttackSpeed(float newRate)
     {
-        spawnRate = Mathf.Max(0.1f, spawnRate+newRate);
+        spawnRate = Mathf.Max(0.1f, spawnRate - newRate / 100f); // Yüzde olarak azaltma
     }
 
     public override void AddAttackRange(float newRate)

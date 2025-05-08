@@ -7,7 +7,8 @@ public class AcidAreaEffect : MonoBehaviour
     private float radius;
     private float tickInterval;
     private float duration;
-    [SerializeField] private int armorReduction = 10; // Armor reduction value
+    private static Collider[] _hitBuffer = new Collider[16]; // Reusable buffer for overlap sphere
+    //[SerializeField] private int armorReduction = 10; // Armor reduction value
 
     private float tickTimer;
 
@@ -21,7 +22,7 @@ public class AcidAreaEffect : MonoBehaviour
         this.duration = duration;
         tickTimer = tickInterval;
         this.caster = caster;
-        
+
         StartCoroutine(AcidEffect());
     }
 
@@ -58,29 +59,19 @@ public class AcidAreaEffect : MonoBehaviour
 
     private void DamageEnemies()
     {
-        Collider[] colliders = Physics.OverlapSphere(transform.position, radius);
-        foreach (Collider collider in colliders)
+        int hits = Physics.OverlapSphereNonAlloc(transform.position, radius /2, _hitBuffer);
+        Collider[] colliders = new Collider[hits];
+        for (int i = 0; i < hits; i++)
         {
-            if (collider.TryGetComponent(out Enemy enemy) && caster == Caster.Player && enemy != null)
-            {
-                enemy.TakeDamage(damage);
-                // Apply armor reduction debuff (you'll need to add an ApplyDebuff method to the Enemy class)
-                if (enemy.HasDebuff(DebuffType.ArmorReduction))
-                {
-                    enemy.RemoveDebuff(DebuffType.ArmorReduction);
-                }
-                enemy.ApplyDebuff(new Debuff
-                {
-                    Type = DebuffType.ArmorReduction,
-                    Value = armorReduction,
-                    Duration = tickInterval // Duration of armor reduction per tick
-                });
-            }
+            colliders[i] = _hitBuffer[i];
+        }
 
-            if (collider.TryGetComponent(out Player player) && caster == Caster.Boss)
+        foreach (var collider in colliders)
+        {
+            if (collider.TryGetComponent<Enemy>(out Enemy enemy))
             {
-                print($"Acid area cast by {caster} collided with {player.name}");
-                player.TakeDamage(damage);
+                // Apply damage
+                enemy.TakeDamage(damage);
             }
         }
     }

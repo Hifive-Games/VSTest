@@ -22,6 +22,7 @@ public class LightningOrbRenderer : MonoBehaviour
 
     [Header("Core Orb")]
     public float orbRadius = 0.2f;
+    public GameObject groundIndicatorPrefab;
     #endregion
 
     #region Private Fields

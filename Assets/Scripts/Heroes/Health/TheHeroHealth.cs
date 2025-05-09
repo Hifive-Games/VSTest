@@ -81,7 +81,8 @@ public class TheHeroHealth : MonoBehaviour
     public void AddHealthRegenRate(float newRate)
     {
         //healthRegenRate = Mathf.Clamp(healthRegenRate+newRate, 0, maxHealth);
-        healthRegenRate=newRate;
+        //healthRegenRate=newRate;
+        healthRegenRate = healthRegenRate - (healthRegenRate * newRate) / 100f;
     }
     public void AddCurrentHealth(float health)
     {

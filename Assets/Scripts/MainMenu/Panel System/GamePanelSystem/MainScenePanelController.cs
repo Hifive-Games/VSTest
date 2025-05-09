@@ -8,9 +8,9 @@ using UnityEngine.UI;
 public class MainScenePanelController : PanelController
 {
     // Bu expler gelirken slider biraz saçmalıyo. Expleri aynı anda aldığı için oluyo dotween ile 1 saniyede falan toplama yaparsak işimizi çözer
-    
-    [SerializeField] private Slider experienceSlider;
-    [SerializeField] private Slider healthSlider;
+
+    [SerializeField] private Image experienceFillImage;
+    [SerializeField] private Image healthFillImage;
 
     [SerializeField] private TextMeshProUGUI currentEXPText;
     [SerializeField] private TextMeshProUGUI maxEXPText;
@@ -40,26 +40,22 @@ public class MainScenePanelController : PanelController
 
     private void UpdateExperienceSlider(int currentXP, int maxXP)
     {
-        if (experienceSlider != null)
+        if (experienceFillImage != null)
         {
-            experienceSlider.maxValue = maxXP;
-            experienceSlider.value = currentXP;
-
-            maxEXPText.text = maxXP.ToString();
-            currentEXPText.text = currentXP.ToString();
+            // fillAmount expects 0–1
+            experienceFillImage.fillAmount = maxXP > 0 ? (float)currentXP / maxXP : 0f;
+            //maxEXPText.text = maxXP.ToString();
+            currentEXPText.text = $"{currentXP}/{maxXP}";
         }
     }
+
     private void UpdateHealthSlider(float currentHP, float maxHp)
     {
-        Debug.LogError("Cureent: " + currentHP);
-        Debug.LogError("Max: " + maxHp);
-        if (healthSlider != null)
+        if (healthFillImage != null)
         {
-            healthSlider.maxValue = maxHp;
-            healthSlider.value = currentHP;
-            
-            maxHPText.text = maxHp.ToString();
-            currentHPText.text = currentHP.ToString();
+            healthFillImage.fillAmount = maxHp > 0f ? currentHP / maxHp : 0f;
+            //maxHPText.text = maxHp.ToString();
+            currentHPText.text = $"{(int)currentHP}/{maxHp}";
         }
     }
 }

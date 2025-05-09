@@ -43,7 +43,7 @@ public class GarlicSpell : Spell
         }
 
         //check if the garlic is triggered by the audio spectrum, lerp back the radius to 5f if not triggered
-        radius = math.lerp(math.max(AudioSpectrum.Instance.GetAmplitude() * 5f,5), 5f, Time.deltaTime/2f);
+        radius = math.lerp(math.max(AudioSpectrum.Instance.GetAmplitude() * 5f,5), 5f, Time.deltaTime * .01f);
         gameObject.transform.localScale = new Vector3(radius, .1f, radius);
 
 
@@ -61,7 +61,7 @@ public class GarlicSpell : Spell
         transform.position = FollowCasterTransform();
 
         //rotate the garlic
-        transform.Rotate(Vector3.up, 360 * Time.deltaTime);
+        transform.Rotate(Vector3.up, 360 * Time.deltaTime * 0.5f);
     }
 
     public Vector3 FollowCasterTransform()

@@ -1346,6 +1346,8 @@ MonoBehaviour:
   playerMoneyPrefab: {fileID: 6359504811972714366, guid: 54b3f57e1752dd64d892e90c764b877c,
     type: 3}
   playerMoneyParent: {fileID: 524053888}
+  notEnoughMoneyPrefab: {fileID: 4084738400191080202, guid: 471bd266ac5eba340aaedcf6e7a98ec5,
+    type: 3}
 --- !u!4 &664995512
 Transform:
   m_ObjectHideFlags: 0

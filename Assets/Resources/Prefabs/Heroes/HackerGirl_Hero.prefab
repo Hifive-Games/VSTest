@@ -169,7 +169,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
-  rotationSpeed: 5
+  rotationSpeed: 2
 --- !u!114 &1620016682407551100
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -245,7 +245,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dronePrefab: {fileID: 566991966021545137, guid: 213f71f34ceaa214eabbf993044e5291,
     type: 3}
-  numberOfDrones: 2
   radius: 2
   rotationSpeed: 1
   floatSpeed: 1

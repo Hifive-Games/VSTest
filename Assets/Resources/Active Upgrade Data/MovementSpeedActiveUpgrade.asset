@@ -16,22 +16,22 @@ MonoBehaviour:
   description: Movement Speed will be increased
   rareValues:
   - rareLevel: 0
-    value: 0.1
+    value: 2.5
     baseProbability: 60
     luckFactor: 0.2
   - rareLevel: 1
-    value: 0.5
+    value: 5
     baseProbability: 30
     luckFactor: 0.5
   - rareLevel: 2
-    value: 1
+    value: 7.5
     baseProbability: 15
     luckFactor: 2
   - rareLevel: 3
-    value: 2
+    value: 10
     baseProbability: 5
     luckFactor: 2
   - rareLevel: 4
-    value: 2.5
+    value: 12.5
     baseProbability: 1
     luckFactor: 4

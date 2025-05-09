@@ -278,7 +278,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71148a80b0ffa6b48adfb78ba19ee58b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactionDuration: 3
+  interactionDuration: 1
   interactionText: Shard of Silvers
   effect: {fileID: 11400000, guid: dcaf34e1735e5d44b9ce2fd7b59738e7, type: 2}
   gizmoSize: {x: 5, y: 5, z: 5}

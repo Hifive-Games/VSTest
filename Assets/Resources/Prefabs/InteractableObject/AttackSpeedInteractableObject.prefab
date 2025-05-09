@@ -278,7 +278,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71148a80b0ffa6b48adfb78ba19ee58b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactionDuration: 3
+  interactionDuration: 1
   interactionText: Altar of Failed Hero
   effect: {fileID: 11400000, guid: ab7d699c7e7d5ad49b951b11088e63d4, type: 2}
   gizmoSize: {x: 5, y: 5, z: 5}

@@ -278,7 +278,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71148a80b0ffa6b48adfb78ba19ee58b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactionDuration: 3
+  interactionDuration: 1
   interactionText: Banana of Fortune
   effect: {fileID: 11400000, guid: b9a2204db7a07774a97a376d39d7fcb7, type: 2}
   gizmoSize: {x: 5, y: 5, z: 5}

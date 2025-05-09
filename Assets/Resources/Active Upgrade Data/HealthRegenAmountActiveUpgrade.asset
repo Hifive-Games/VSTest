@@ -16,22 +16,22 @@ MonoBehaviour:
   description: Health Regen will be increased
   rareValues:
   - rareLevel: 0
-    value: 1
+    value: 0.5
     baseProbability: 60
     luckFactor: 0.2
   - rareLevel: 1
-    value: 2
+    value: 0.75
     baseProbability: 30
     luckFactor: 0.5
   - rareLevel: 2
-    value: 3
+    value: 1
     baseProbability: 15
     luckFactor: 2
   - rareLevel: 3
-    value: 4
+    value: 1.25
     baseProbability: 5
     luckFactor: 2
   - rareLevel: 4
-    value: 5
+    value: 1.5
     baseProbability: 1
     luckFactor: 4

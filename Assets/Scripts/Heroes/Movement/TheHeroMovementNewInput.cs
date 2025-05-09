@@ -36,11 +36,13 @@ public class TheHeroMovementNewInput : MonoBehaviour
 
     public void AddMoveSpeed(float value)
     {
-        moveSpeed =value+moveSpeed;
+        //moveSpeed += value; // Doğrudan artırma
+        moveSpeed += moveSpeed * (value / 100f); // Yüzde olarak artırma
+        moveSpeed = Mathf.Round(moveSpeed * 100f) / 100f; // İki ondalık basamağa yuvarlama
     }
     public void SetMoveSpeed(float value)
     {
-        moveSpeed =value;
+        moveSpeed = value;
     }
     
     private Vector2 GetMovementVectorNormalized()

@@ -9,8 +9,12 @@ public class LightningBall : Spell
 
     private Collider[] _hitBuffer = new Collider[16]; // Reusable buffer for overlap sphere
 
+    private GameObject player;
+    [SerializeField] private GameObject groundIndicatorPrefab;
+
     public override void OnEnable()
     {
+        player = FindAnyObjectByType<CharacterController>().gameObject;
         base.OnEnable();
     }
     public override void OnDisable()
@@ -30,9 +34,12 @@ public class LightningBall : Spell
     }
     private Vector3 GetRandomPointInRange()
     {
-        Vector2 randomCircle = Random.insideUnitCircle * range;
-        Vector3 randomPoint = new Vector3(randomCircle.x, 1, randomCircle.y);
-        return randomPoint;
+        // Generate a random point within a circle araound the player
+        Vector2 randomPoint = Random.insideUnitCircle * radius;
+        Vector3 targetPoint = new Vector3(randomPoint.x, 1, randomPoint.y) + player.transform.position;
+        targetPoint.y = 1; // Ensure it's on the ground (Y = 1)
+        return targetPoint;
+
     }
 
     public void Update()
@@ -43,7 +50,22 @@ public class LightningBall : Spell
             DamageNearbyEnemies();
             tickTimer = tickInterval;
         }
+
+        SetIndicatorScale();
     }
+
+    private void SetIndicatorScale()
+    {
+        if (groundIndicatorPrefab != null)
+        {
+            Vector3 scale = groundIndicatorPrefab.transform.localScale;
+            scale.x = radius * 2;
+            scale.y = radius * 2;
+            scale.z = .5f;
+            groundIndicatorPrefab.transform.localScale = scale;
+        }
+    }
+
     void DamageNearbyEnemies()
     {
         int hits = Physics.OverlapSphereNonAlloc(transform.position, radius /2, _hitBuffer);

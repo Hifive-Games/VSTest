@@ -15,6 +15,7 @@ public class PassiveUpgradeManager : MonoBehaviourSingleton<PassiveUpgradeManage
     [SerializeField] private Transform PassiveUpgradeUIParent; // UI objeleri için parent
     [SerializeField] private GameObject playerMoneyPrefab; // Player money texti
     [SerializeField] private Transform playerMoneyParent; // Player money texti için parent
+    [SerializeField] private GameObject notEnoughMoneyPrefab; // Yetersiz para UI prefabı
     private TextMeshProUGUI playerMoneyText; // Player money text bileşeni
     //private Dictionary<string, int> upgradeLevels = new Dictionary<string, int>(); // Yükseltme seviyeleri
     private List<PassiveUpgradeUI> upgradeUIs = new List<PassiveUpgradeUI>(); // Yükseltme UI bileşenleri
@@ -128,7 +129,7 @@ public class PassiveUpgradeManager : MonoBehaviourSingleton<PassiveUpgradeManage
             }
             else
             {
-                Debug.Log("Yetersiz bakiye!");
+                NotEnoghMoneyUI();
             }
         }
         else
@@ -138,6 +139,18 @@ public class PassiveUpgradeManager : MonoBehaviourSingleton<PassiveUpgradeManage
 
         UpdatePlayerMoneyUI(); // Yükseltmeden sonra PlayerMoney UI'sını güncelle
         UpdateAllPassiveUpgradeUI();
+    }
+
+    private void NotEnoghMoneyUI()
+    {
+        GameObject uiObject = Instantiate(notEnoughMoneyPrefab, playerMoneyParent);
+        uiObject.transform.DOLocalMoveY(-50, 0.5f).SetEase(Ease.OutBack).OnComplete(() =>
+        {
+            uiObject.transform.DOLocalMoveY(-100, 0.5f).SetEase(Ease.InBack).OnComplete(() =>
+            {
+                Destroy(uiObject);
+            });
+        });
     }
 
     private bool CanAffordUpgrade(int cost)

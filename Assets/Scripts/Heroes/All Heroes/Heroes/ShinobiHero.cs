@@ -51,7 +51,7 @@ public class ShinobiHero : TheHero
             {
                 Vector3 offset = GetSpawnOffset(i);
                 GameObject temp = ObjectPooler.Instance.SpawnFromPool(objectToSpawn, spawnParent.position + offset, Quaternion.LookRotation(offset != Vector3.zero ? offset : spawnParent.forward));
-                objectToSpawn.GetComponent<BulletWeapon>().SetBulletDamage(attackDamage);
+                temp.GetComponent<BulletWeapon>().SetBulletDamage(attackDamage);
                 temp.transform.localScale = defaultScale; // Scale ayarı
                 StartCoroutine(DestroyAfterDelay(temp, selfDestructTime));
             }

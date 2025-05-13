@@ -9,7 +9,7 @@ public class RareLevelColorData : ScriptableObject
     public class RareColorPair
     {
         public RareLevel rareLevel;
-        public Color color = new Color(1, 1, 1, 100f / 255f);
+        public Color color = new Color(1, 1, 1, 50f);
     }
 
     [HideInInspector] public List<RareColorPair> rareColors = new();

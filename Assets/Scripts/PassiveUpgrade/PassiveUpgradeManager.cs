@@ -155,7 +155,7 @@ public class PassiveUpgradeManager : MonoBehaviourSingleton<PassiveUpgradeManage
 
     private bool CanAffordUpgrade(int cost)
     {
-        int playerMoney = FileSaveLoadManager.Instance.GetPlayerMoneyDataFromFile();
+        int playerMoney = CurrencyManager.Instance.GetPlayerMoney();
         return playerMoney >= cost;
     }
 
@@ -174,11 +174,11 @@ public class PassiveUpgradeManager : MonoBehaviourSingleton<PassiveUpgradeManage
             
             FileSaveLoadManager.Instance.SetLevelDataFromFile(passiveUpgradeBase, nextLevel);
 
-            int playerMoney = FileSaveLoadManager.Instance.GetPlayerMoneyDataFromFile();
+            int playerMoney = CurrencyManager.Instance.GetPlayerMoney();
             // int cost = costData.GetCost(costData.currentLevelCostIndex); // Geçerli maliyeti al
             
             playerMoney -= cost; // Oyuncunun parasını azalt
-            FileSaveLoadManager.Instance.SetPlayerMoneyDataFromFile(playerMoney);
+            CurrencyManager.Instance.SetPlayerMoney(playerMoney);
             PlayerPrefs.Save();
             
             Debug.Log($"{passiveUpgradeBase.upgradeName} yükseltildi. Yeni Seviye: {nextLevel}, Yeni Değer: {nextValue}");
@@ -204,11 +204,11 @@ public class PassiveUpgradeManager : MonoBehaviourSingleton<PassiveUpgradeManage
         // Eğer "PlayerMoney" PlayerPrefs'te yoksa, 0 değeri ile oluştur
         if (!FileSaveLoadManager.Instance.HasKeyCheckMoney())
         {
-            FileSaveLoadManager.Instance.SetPlayerMoneyDataFromFile(0);
+            CurrencyManager.Instance.SetPlayerMoney(0);
         }
     
         // PlayerMoney'yi al ve UI'ya ata
-        int playerMoney = FileSaveLoadManager.Instance.GetPlayerMoneyDataFromFile();
+        int playerMoney = CurrencyManager.Instance.GetPlayerMoney();
         playerMoneyText.text = $"Money: {playerMoney}"; // Parayı TextMeshPro bileşenine ata
     }
 

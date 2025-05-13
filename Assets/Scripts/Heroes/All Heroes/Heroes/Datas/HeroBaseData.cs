@@ -235,6 +235,10 @@ public class HeroBaseData : ScriptableObject
     {
         TheHero.Instance.SetArmor(value);
     }
+    public void HeroSetAttackDamage(float value)
+    {
+        TheHero.Instance.SetAttackDamage(value);
+    }
     public void HeroSetLuck(float value)
     {
         TheHero.Instance.SetLuck(value);
@@ -298,6 +302,10 @@ public class HeroBaseData : ScriptableObject
     public virtual void HeroArmorPassiveUpgrade(float value)
     {
         TheHero.Instance.AddArmor(value);
+    }
+    public virtual void HeroAttackDamagePassiveUpgrade(float value)
+    {
+        TheHero.Instance.AddAttackDamage(value);
     }
     public virtual void HeroBuffEffectScalerPassiveUpgrade(float value)
     {
@@ -367,6 +375,10 @@ public class HeroBaseData : ScriptableObject
     public virtual void HeroDeBuffEffectScalerActiveUpgrade(float value)
     {
         TheHero.Instance.AddDeBuffEffectScaler(value);
+    }
+    public virtual void HeroAttackDamageActiveUpgrade(float value)
+    {
+        TheHero.Instance.AddAttackDamage(value);
     }
 
 }

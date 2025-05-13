@@ -17,6 +17,8 @@ public class TechHero : TheHero
     private List<GameObject> drones = new List<GameObject>();
     private List<Vector3> initialOffsets = new List<Vector3>();
 
+    private float attackDamage=1;
+    
     public void AddDrone()
     {
         numberOfDrones++;
@@ -175,6 +177,29 @@ public override void AddAttackAmount(float newRate)
         AddDrone();
     }
 }
-
+public override void AddAttackDamage(float newRate)
+{
+    attackDamage += attackDamage * (newRate / 100f);
+    foreach (var drone in drones)
+    {
+        var weapon = drone.GetComponent<DroneWeapon>();
+        if (weapon != null)
+        {
+            weapon.GetComponent<BulletWeapon>().SetBulletDamage(attackDamage);
+        }
+    }
+}
+public override void SetAttackDamage(float newRate)
+{
+    attackDamage = newRate;
+    foreach (var drone in drones)
+    {
+        var weapon = drone.GetComponent<DroneWeapon>();
+        if (weapon != null)
+        {
+            weapon.GetComponent<BulletWeapon>().SetBulletDamage(attackDamage);
+        }
+    }
+}
 
 }

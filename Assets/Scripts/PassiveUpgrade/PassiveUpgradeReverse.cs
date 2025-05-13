@@ -41,7 +41,7 @@ public class PassiveUpgradeReverse : MonoBehaviour
         }
         Debug.Log("Total refund: " + totalRefund);
         
-        FileSaveLoadManager.Instance.SetPlayerMoneyDataFromFile(FileSaveLoadManager.Instance.GetPlayerMoneyDataFromFile()+totalRefund);
+        CurrencyManager.Instance.SetPlayerMoney(CurrencyManager.Instance.GetPlayerMoney()+totalRefund);
         
         passiveUpgradeManager.UpdateAllPassiveUpgradeUI();
         passiveUpgradeManager.UpdatePlayerMoneyUI();

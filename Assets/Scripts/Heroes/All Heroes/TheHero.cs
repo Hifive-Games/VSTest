@@ -55,7 +55,7 @@ public abstract class TheHero : MonoBehaviourSingleton<TheHero>
     public abstract void SetAttackRange(float newRate);
     public abstract void SetAttackSize(float newRate);
     public abstract void SetAttackAmount(float newRate);
-
+    public abstract void SetAttackDamage(float newRate);
     
     // Diğer Upgradeler
     public virtual void AddMovementSpeed(float value)
@@ -134,7 +134,8 @@ public abstract class TheHero : MonoBehaviourSingleton<TheHero>
     public abstract void AddAttackRange(float newRate);
     public abstract void AddAttackSize(float newRate);
     public abstract void AddAttackAmount(float newRate);
-   
+    public abstract void AddAttackDamage(float newRate);
+
     // Reduce Hero Upgradeler
     public abstract void ReduceAttackSpeed(float newRate);
 

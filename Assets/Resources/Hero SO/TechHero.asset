@@ -57,6 +57,9 @@ MonoBehaviour:
   - heroStatsBaseData: {fileID: 11400000, guid: 6853ffd818b374243bce0574b9f5dbc5,
       type: 2}
     value: 1
+  - heroStatsBaseData: {fileID: 11400000, guid: e523606175f2be042935e8c85b12f33b,
+      type: 2}
+    value: 1
   appliedPassiveUpgrades:
   - {fileID: 11400000, guid: 337825ec2c59b7549a1d8b60f6be57ab, type: 2}
   - {fileID: 11400000, guid: e5e327a7caab44e4a83ad80e1775f8e1, type: 2}
@@ -70,6 +73,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: bcb7d7cd0655dcc4fb3bf070a3b8a0b2, type: 2}
   - {fileID: 11400000, guid: 1c0a674e19d5de74a9fb514de797eb41, type: 2}
   - {fileID: 11400000, guid: 6d35326d412e744428118318101ff079, type: 2}
+  - {fileID: 11400000, guid: ea0d3d93c9b1c80499dee92339ae19e9, type: 2}
   appliedActiveUpgrades:
   - {fileID: 11400000, guid: b95c73d7ccd7fe943b3afc0621087528, type: 2}
   - {fileID: 11400000, guid: 0f3e9160e8e9162488682655c9f3671e, type: 2}
@@ -84,3 +88,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: dabd21aee09d3a241b80bfab66405f7e, type: 2}
   - {fileID: 11400000, guid: 0f2a6ace0bc838444848ba94d2b4793f, type: 2}
   - {fileID: 11400000, guid: a73c2d3259b9c7b428b69a3b15292121, type: 2}
+  - {fileID: 11400000, guid: 6c0027b8ebe94e049a6cb63940285127, type: 2}

@@ -10,6 +10,7 @@ public class BulletWeapon : MonoBehaviour
 
     [SerializeField] private LayerMask affectedLayers;
 
+    [SerializeField] private float bulletDamage = 1;
 
     private void Awake()
     {
@@ -32,15 +33,18 @@ public class BulletWeapon : MonoBehaviour
     {   // Eğer bir Enemy objesine çarptıysa, hasar ver
         if (other.TryGetComponent(out Enemy enemy))
         {
-            enemy.TakeDamage(1);
+            enemy.TakeDamage((int)bulletDamage);
             ObjectPooler.Instance.ReturnObject(gameObject); // Mermiyi geri dön
         }
     }
-
     private void ReturnBullet()
     {
         // Mermiyi geri dön
         ObjectPooler.Instance.ReturnObject(gameObject);
     }
 
+    public void SetBulletDamage(float damage)
+    {
+        bulletDamage = damage;
+    }
 }

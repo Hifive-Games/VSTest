@@ -11,7 +11,8 @@ public class ShinobiHero : TheHero
     [SerializeField] private float selfDestructTime = 0.2f; // Obje yok olma süresi
     [SerializeField] private int shurikenCount = 1; // Üretilecek obje sayısı
     [SerializeField] private Vector3 defaultScale = new Vector3(5f, 5f, 5f); // Obje scale değeri
-
+    private float attackDamage = 1;
+    
     private float spawnTimer;
 
     private void Start()
@@ -50,6 +51,7 @@ public class ShinobiHero : TheHero
             {
                 Vector3 offset = GetSpawnOffset(i);
                 GameObject temp = ObjectPooler.Instance.SpawnFromPool(objectToSpawn, spawnParent.position + offset, Quaternion.LookRotation(offset != Vector3.zero ? offset : spawnParent.forward));
+                objectToSpawn.GetComponent<BulletWeapon>().SetBulletDamage(attackDamage);
                 temp.transform.localScale = defaultScale; // Scale ayarı
                 StartCoroutine(DestroyAfterDelay(temp, selfDestructTime));
             }
@@ -113,6 +115,11 @@ public class ShinobiHero : TheHero
     {
         shurikenCount = (int)Mathf.Max(1f, (int)newCount); // Minimum 1 adet şuriken
     }
+    // Attack Damage Setter
+    public override void SetAttackDamage(float newCount)
+    {
+        attackDamage = newCount;
+    }
 
     // Burası TheHero'dan Override edilen fonksiyonlar
     public override void AddAttackSpeed(float newRate)
@@ -133,6 +140,10 @@ public class ShinobiHero : TheHero
     public override void AddAttackAmount(float newRate)
     {
         shurikenCount = (int)newRate+shurikenCount;
+    }
+    public override void AddAttackDamage(float newRate)
+    {
+        attackDamage += attackDamage * (newRate / 100f);
     }
     
     //Reduce Upgradeler

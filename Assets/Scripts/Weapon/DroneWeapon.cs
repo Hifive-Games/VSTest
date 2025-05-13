@@ -5,7 +5,7 @@ using UnityEngine.Serialization;
 
 public class DroneWeapon : MonoBehaviour
 {
-    [SerializeField] private GameObject bullet;
+    [SerializeField] private BulletWeapon bullet;
     [SerializeField] private Transform shooterParent;
 
     public float detectionRange = 15f;
@@ -48,7 +48,7 @@ public class DroneWeapon : MonoBehaviour
 
     private void Shoot()
     {
-        GameObject bulletObj = ObjectPooler.Instance.SpawnFromPool(bullet, shooterParent.position, transform.rotation);
+        GameObject bulletObj = ObjectPooler.Instance.SpawnFromPool(bullet.gameObject, shooterParent.position, transform.rotation);
         bulletObj.transform.localScale = Vector3.one * attackSize;
         SFXManager.Instance.PlayAt(SFX.BulletFire); // Play bullet fire sound effect
     }

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TargetID: 3
   Name: Acid Bottle Duration
-  Description: 
+  Description: Acid pools last longer.
   Target: 3
   Level: 0
   maxUpgrades: 5

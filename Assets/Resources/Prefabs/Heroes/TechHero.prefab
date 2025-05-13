@@ -818,6 +818,7 @@ GameObject:
   - component: {fileID: 2456267131842952038}
   - component: {fileID: 1391536779622871428}
   - component: {fileID: 4538479283227469523}
+  - component: {fileID: 5207073086890444032}
   m_Layer: 10
   m_Name: TechHero
   m_TagString: Player
@@ -883,8 +884,8 @@ CharacterController:
   serializedVersion: 3
   m_Height: 2
   m_Radius: 0.5
-  m_SlopeLimit: 45
-  m_StepOffset: 0.3
+  m_SlopeLimit: 0
+  m_StepOffset: 0
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0.82, z: 0}
@@ -902,7 +903,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dronePrefab: {fileID: 566991966021545137, guid: 213f71f34ceaa214eabbf993044e5291,
     type: 3}
-  numberOfDrones: 2
   radius: 2
   rotationSpeed: 1
   floatSpeed: 1
@@ -983,6 +983,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64cdf137bea0bd8498f7576130a8799e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &5207073086890444032
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3396665030701579226}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 361ce19beff83b84ca1a6f3fc47510d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  initialRadius: 1
+  experienceData: {fileID: 0}
 --- !u!1 &3899358083024401084
 GameObject:
   m_ObjectHideFlags: 0

@@ -16,7 +16,10 @@ MonoBehaviour:
   startTime: 0
   duration: 60
   spawnInterval: 1.5
-  maxClusterGroups: 50
+  maxClusterGroups: 100
+  targetEnemyCount: 0
+  refillThreshold: 0
+  maintainSpawnInterval: 0
   enemyGroups:
   - enemyData: {fileID: 11400000, guid: 4049b9c30bd94df4c979b020e41738d4, type: 2}
     amount: 2
@@ -26,6 +29,3 @@ MonoBehaviour:
     amount: 5
     minSpwanRadius: 0.5
     maxSpawnRadius: 1.5
-  targetEnemyCount: 0
-  refillThreshold: 0
-  maintainSpawnInterval: 0

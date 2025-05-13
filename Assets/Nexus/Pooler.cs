@@ -5,7 +5,7 @@ using UnityEngine;
 public class Pooler : MonoBehaviour
 {
     [System.Serializable]
-    private struct PoolItem
+    private class PoolItem
     {
         public GameObject prefab;
         public Transform parent;
@@ -14,15 +14,17 @@ public class Pooler : MonoBehaviour
 
     public const int DEFAULT_POOL_SIZE = 10;
     [SerializeField]
-    private List<PoolItem> itemsToPool = new List<PoolItem>
-    {
-        new PoolItem { prefab = null, parent = null, size = 0 }
-    };
+    private List<PoolItem> itemsToPool = new List<PoolItem>();
 
-    private void Start()
+    private void Awake()
     {
         LoadObjects();
         CreatePools();
+    }
+
+    private void OnDisable()
+    {
+        ObjectPooler.Instance.ClearAllPools();
     }
 
     void LoadObjects()
@@ -43,7 +45,7 @@ public class Pooler : MonoBehaviour
 
         foreach (var item in loadedObjects)
         {
-            itemsToPool.Add(new PoolItem { prefab = item, parent = _parent.transform , size = DEFAULT_POOL_SIZE });
+            itemsToPool.Add(new PoolItem { prefab = item, parent = _parent.transform, size = DEFAULT_POOL_SIZE });
         }
     }
 

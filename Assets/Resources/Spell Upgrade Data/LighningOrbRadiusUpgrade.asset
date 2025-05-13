@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TargetID: 4
   Name: Lighning Orb Radius
-  Description: 
+  Description: Increase spark radius of the spell.
   Target: 5
   Level: 1
   maxUpgrades: 5

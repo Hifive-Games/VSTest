@@ -4980,7 +4980,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SpellID: 0
   Name: FireBall
-  Description: Ball of Fire
+  Description: Ball of fire that explodes when it hits an enemy.
   Icon: {fileID: 0}
   speed: 3
   damage: 10
@@ -4992,5 +4992,6 @@ MonoBehaviour:
   radius: 10
   tickInterval: 0.5
   Caster: 0
+  player: {fileID: 0}
   ExplosionEffect: {fileID: 5158311172378158182, guid: 6ed4c3455eed5e34abcc7c10f88ef52b,
     type: 3}

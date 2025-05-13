@@ -21,6 +21,17 @@ public abstract class Spell : MonoBehaviour
 
     public Caster Caster;
 
+    public GameObject player;
+
+    void Start()
+    {
+        player = FindObjectOfType<CharacterController>()?.gameObject;
+        if (player == null)
+        {
+            Debug.LogError("Player not found in the scene.");
+        }
+    }
+
     public virtual void OnEnable()
     {
         target = null;

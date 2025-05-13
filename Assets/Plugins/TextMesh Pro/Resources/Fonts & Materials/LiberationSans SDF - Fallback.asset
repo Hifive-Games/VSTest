@@ -237,6 +237,18 @@ MonoBehaviour:
     m_Y: 0
     m_Width: 482
     m_Height: 511
+  - m_X: 112
+    m_Y: 74
+    m_Width: 4
+    m_Height: 18
+  - m_X: 116
+    m_Y: 154
+    m_Width: 395
+    m_Height: 17
+  - m_X: 130
+    m_Y: 154
+    m_Width: 381
+    m_Height: 357
   m_fontInfo:
     Name: Liberation Sans
     PointSize: 86
@@ -268,7 +280,22 @@ MonoBehaviour:
   m_KerningTable:
     kerningPairs: []
   m_FontFeatureTable:
-    m_GlyphPairAdjustmentRecords: []
+    m_GlyphPairAdjustmentRecords:
+    - m_FirstAdjustmentRecord:
+        m_GlyphIndex: 20
+        m_GlyphValueRecord:
+          m_XPlacement: 0
+          m_YPlacement: 0
+          m_XAdvance: -6.390625
+          m_YAdvance: 0
+      m_SecondAdjustmentRecord:
+        m_GlyphIndex: 20
+        m_GlyphValueRecord:
+          m_XPlacement: 0
+          m_YPlacement: 0
+          m_XAdvance: 0
+          m_YAdvance: 0
+      m_FeatureLookupFlags: 0
   fallbackFontAssets: []
   m_FallbackFontAssetTable: []
   m_CreationSettings:

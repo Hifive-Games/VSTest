@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TargetID: 4
   Name: Lightning Orb Tick Rate
-  Description: 
+  Description: Decrease tick rate of the sparks.
   Target: 7
   Level: 0
   maxUpgrades: 5

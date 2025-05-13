@@ -10,6 +10,7 @@ public class TheHeroSpawner : MonoBehaviour
     //[SerializeField] private GameObject pm;
     private void Awake()
     {
+        Application.targetFrameRate = 120; // Uygulamanın hedef kare hızını ayarla
         InstantianteTheHero();
     }
 

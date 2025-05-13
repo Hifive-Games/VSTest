@@ -41,13 +41,12 @@ public class Fireball : Spell
             if (collider.TryGetComponent<Enemy>(out Enemy enemy))
             {
                 // Apply damage
-                enemy.TakeDamage(damage);
+                enemy.TakeDamage(damage, DamageNumberType.Spell);
             }
         }
     }
     public override void CollisionEffect(Enemy enemy)
     {
-        if (enemy != null) enemy.TakeDamage(damage);
         Explode();
         // Play explosion sound effect
         SFXManager.Instance.PlayAt(SFX.FireballExplosion);

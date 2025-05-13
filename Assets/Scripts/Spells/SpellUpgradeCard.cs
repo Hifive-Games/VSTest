@@ -22,7 +22,7 @@ public class SpellUpgradeCard : MonoBehaviour
     {
         SpellUpgrade = spellUpgrade;
         NameText.text = SpellUpgrade.Name;
-        DescriptionText.text = $"{SpellUpgrade.Description} ({SpellUpgrade.GetValue()})";
+        DescriptionText.text = $"{SpellUpgrade.Description}";
         ValueText.text = ValueTxt();
         //IconImage.sprite = Resources.Load<Sprite>("Icons/" + spellUpgrade.Target.ToString());
     }
@@ -33,7 +33,25 @@ public class SpellUpgradeCard : MonoBehaviour
         SpellData spell = SpellManager.Instance.GetSpellInfo(SpellUpgrade);
         if (spell != null)
         {
-            return $"{spell.GetValue(SpellUpgrade.Target)} -> {spell.GetValue(SpellUpgrade.Target) + SpellUpgrade.GetValue()}";
+            float currentValue = spell.GetValue(SpellUpgrade.Target);
+            float newValue = 0;
+
+            //if the spell is cooldown or duration or tick interval new value is calculated by subtracting the current value from the new value, otherwise it is calculated by adding the current value to the new value
+
+            if (SpellUpgrade.Target == UpgradeTarget.Cooldown || SpellUpgrade.Target == UpgradeTarget.TickInterval)
+            {
+                newValue = currentValue - SpellUpgrade.GetValue();
+            }
+            else
+            {
+                newValue = currentValue + SpellUpgrade.GetValue();
+            }
+
+            // Format the value. Not more than 1 decimal place
+            currentValue = Mathf.Round(currentValue * 10f) / 10f;
+            newValue = Mathf.Round(newValue * 10f) / 10f;
+
+            return $"{currentValue} -> {newValue}";
         }
         return "N/A";
     }
@@ -46,7 +64,7 @@ public class SpellUpgradeCard : MonoBehaviour
 
             SpellUpgradePanelManager.Instance.CheckSpellAvalibility();
 
-            SpellUpgradePanelManager.Instance.HideSpellUpgradePanel();
+            ActiveUpgradeManager.Instance.CloseActiveUpgradeUI();
         }
     }
 }

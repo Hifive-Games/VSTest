@@ -44,7 +44,11 @@ public class ChunkManager : MonoBehaviour
 
     void Start()
     {
-        Invoke(nameof(Initialize), 0.1f);
+        if (player == null)
+        {
+            player = FindAnyObjectByType<CharacterController>().transform;
+        }
+        Initialize();
     }
 
     public void Initialize()
@@ -60,10 +64,6 @@ public class ChunkManager : MonoBehaviour
 
     void Update()
     {
-        if (player == null)
-        {
-            return;
-        }
         Vector2Int newChunk = GetChunkCoord(player.position);
         if (newChunk != currentChunk)
         {
@@ -205,7 +205,7 @@ public class ChunkManager : MonoBehaviour
 
                 GameObject altarPrefab = altarPrefabs[UnityEngine.Random.Range(0, altarPrefabs.Length)];
                 Quaternion altarRotation = Quaternion.Euler(0, UnityEngine.Random.Range(0, 360), 0);
-                Vector3 altarWorldPos = chunkOrigin + new Vector3(altarPos.x, 1, altarPos.y);
+                Vector3 altarWorldPos = chunkOrigin + new Vector3(altarPos.x, 0, altarPos.y);
                 list.Add((altarPrefab, altarWorldPos, altarRotation));
             }
 

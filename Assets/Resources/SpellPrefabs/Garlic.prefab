@@ -123,7 +123,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SpellID: 1
   Name: Garlic
-  Description: Damages Nearby
+  Description: Stays with Player and deal damage neraby enemies.
   Icon: {fileID: 0}
   speed: 0
   damage: 2
@@ -135,6 +135,7 @@ MonoBehaviour:
   radius: 5
   tickInterval: 1
   Caster: 0
+  player: {fileID: 0}
 --- !u!54 &7414985338347674824
 Rigidbody:
   m_ObjectHideFlags: 0

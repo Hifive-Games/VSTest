@@ -83,7 +83,9 @@ public class SlasherPhase : ScriptableBossPhase
 
     public override void Tick(BossController boss)
     {
-        // MELEE CHASE/ROAM
+        // 1) always tick down your melee cooldown
+        _meleeTimer -= Time.deltaTime;
+
         Vector3 bossPos = new Vector3(boss.transform.position.x, 2, boss.transform.position.z);
         Vector3 playerPos = new Vector3(boss.Player.transform.position.x, 1, boss.Player.transform.position.z);
         float dist = Vector3.Distance(bossPos, playerPos);
@@ -91,25 +93,50 @@ public class SlasherPhase : ScriptableBossPhase
         if (_roaming)
         {
             boss.Mover.MoveTo(_roamTarget, boss.speed);
+            // once we reach the roam point…
             if (Vector3.Distance(bossPos, _roamTarget) < .1f)
             {
-                _roaming = false;
+                if (_meleeTimer <= 0f)
+                {
+                    // CD is ready: stop roaming and go back to chase/attack logic
+                    _roaming = false;
+                }
+                else
+                {
+                    // CD still cooling: pick another roam target
+                    float bossY = boss.transform.position.y;
+                    Vector3 playerXZ = new Vector3(boss.Player.transform.position.x, 1f, boss.Player.transform.position.z);
+                    Vector3 roamPoint;
+                    int tries = 0;
+                    do
+                    {
+                        Vector2 rnd = Random.insideUnitCircle * roamRadius;
+                        roamPoint = new Vector3(playerXZ.x + rnd.x,
+                                                 bossY,
+                                                 playerXZ.z + rnd.y);
+                        tries++;
+                    }
+                    while (tries < 10 &&
+                           Vector3.Distance(new Vector3(roamPoint.x, 0f, roamPoint.z), playerXZ) <= meleeRange);
+
+                    _roamTarget = roamPoint;
+                }
             }
         }
         else
         {
-            // chase
-            boss.Mover.MoveTo(playerPos, boss.speed);
+            // chase only if outside meleeRange
+            if (dist > meleeRange)
+                boss.Mover.MoveTo(playerPos, boss.speed);
 
-            // melee
-            _meleeTimer -= Time.deltaTime;
+            // melee attack only when in range AND CD is ready
             if (dist <= meleeRange && _meleeTimer <= 0f)
             {
                 int attackId = Random.Range(0, attackInfos.Count);
                 boss.Attacker.DoAttack(attackId, boss.Player.transform);
                 _meleeTimer = meleeCooldown;
 
-                // pick a roam target at the boss's y-height and *outside* of meleeRange
+                // pick initial roam target after attack
                 float bossY = boss.transform.position.y;
                 Vector3 playerXZ = new Vector3(boss.Player.transform.position.x, 1f, boss.Player.transform.position.z);
                 Vector3 roamPoint;

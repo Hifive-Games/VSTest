@@ -19,6 +19,8 @@ public class SpellSelectionManager : MonoBehaviourSingleton<SpellSelectionManage
         OnChestOpened?.Invoke(); // Eğer olay varsa çağır
         MainPanel.SetActive(true); // Büyü seçim panelini kapat
         SetAvailableSpells(); // Mevcut büyüleri ayarla
+
+        Time.timeScale = 0f; // Oyun zamanını durdur
     }
 
     public void SetAvailableSpells()
@@ -72,5 +74,6 @@ public class SpellSelectionManager : MonoBehaviourSingleton<SpellSelectionManage
         SpellDatabase.Instance.RemoveSpell(spell); // Büyüyü veritabanından çıkar
 
         MainPanel.SetActive(false); // Büyü seçim panelini kapat
+        Time.timeScale = 1f; // Oyun zamanını başlat
     }
 }

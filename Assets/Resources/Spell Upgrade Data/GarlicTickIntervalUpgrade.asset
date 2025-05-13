@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TargetID: 1
   Name: Garlic Tick Interval
-  Description: 
+  Description: Decrease tick rate of the spell.
   Target: 7
   Level: 0
   maxUpgrades: 5

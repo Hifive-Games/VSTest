@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TargetID: 4
   Name: Lightning Orb Damage
-  Description: 
+  Description: "\u0131ncresae damage of the sparks."
   Target: 0
   Level: 0
   maxUpgrades: 5

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TargetID: 0
   Name: Fireball Cooldown
-  Description: 
+  Description: Reduce cast cooldown of the spell.
   Target: 1
   Level: 0
   maxUpgrades: 5

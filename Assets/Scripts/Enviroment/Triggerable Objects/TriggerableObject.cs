@@ -13,8 +13,9 @@ public abstract class TriggerableObject : MonoBehaviour
         return !isInteracted; // Sadece henüz etkileşime geçilmediyse true döner
     }
 
-    protected void SetInteracted()
+    protected void SetInteracted(GameObject gameObject)
     {
+        gameObject.SetActive(false); // Oyun nesnesini devre dışı bırak
         isInteracted = true;
     }
 }

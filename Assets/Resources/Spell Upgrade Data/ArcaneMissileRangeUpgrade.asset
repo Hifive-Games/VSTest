@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TargetID: 2
   Name: Arcane Missile Range
-  Description: 
+  Description: Increase detection range of the spell.
   Target: 2
   Level: 0
   maxUpgrades: 5

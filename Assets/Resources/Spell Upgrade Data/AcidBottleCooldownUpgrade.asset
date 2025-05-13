@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TargetID: 3
   Name: Acid Bottle Cooldown
-  Description: 
+  Description: Faster bottle throw.
   Target: 1
   Level: 0
   maxUpgrades: 5

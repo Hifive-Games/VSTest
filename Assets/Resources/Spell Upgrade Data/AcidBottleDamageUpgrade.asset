@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TargetID: 3
   Name: Acid Bottle Damage
-  Description: 
+  Description: Increase tick damage of the acid pools.
   Target: 0
   Level: 0
   maxUpgrades: 5

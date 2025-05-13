@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TargetID: 3
   Name: Acid Bottle Tick Interval
-  Description: 
+  Description: Reduce the tick rate of the acid pools.
   Target: 7
   Level: 0
   maxUpgrades: 3

@@ -202,7 +202,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SpellID: 4
   Name: Lightning Orb
-  Description: A ball of lightning.
+  Description: Spawn near player and deals damage around itself.
   Icon: {fileID: 0}
   speed: 5
   damage: 1
@@ -214,4 +214,5 @@ MonoBehaviour:
   radius: 3
   tickInterval: 1
   Caster: 0
+  player: {fileID: 0}
   groundIndicatorPrefab: {fileID: 2334951180251031768}

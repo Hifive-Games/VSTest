@@ -16,7 +16,7 @@ MonoBehaviour:
   startTime: 0
   duration: 60
   spawnInterval: 0.5
-  maxClusterGroups: 25
+  maxClusterGroups: 100
   targetEnemyCount: 0
   refillThreshold: 0
   maintainSpawnInterval: 0

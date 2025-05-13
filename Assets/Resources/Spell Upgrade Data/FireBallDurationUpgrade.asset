@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TargetID: 0
   Name: Fireball Duration
-  Description: 
+  Description: Increase the spell duration before finding a target.
   Target: 3
   Level: 0
   maxUpgrades: 5

@@ -66,29 +66,40 @@ public class ArcaneMissileChild : MonoBehaviour
 
     private IEnumerator MoveToTarget()
     {
-        while (target != null && lifetime > 0)
+        // keep going until child’s lifetime runs out
+        while (lifetime > 0f)
         {
-            transform.position = Vector3.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
-
-            if (Vector3.Distance(transform.position, target.position) < 0.5f)
+            if (target != null)
             {
-                if (target.TryGetComponent(out Enemy enemy) && !enemy.hitBySpell)
-                {
-                    enemy.TakeDamage(damage);
-                    ObjectPooler.Instance.ReturnObject(gameObject);
-                }
-                else
-                {
-                    print("Target has already been hit by the spell");
-                    Seek();
-                }
-                yield break;
-            }
+                // move toward current target
+                transform.position = Vector3.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
 
+                // if close enough, apply damage and immediately pick a new target
+                if (Vector3.Distance(transform.position, target.position) < 0.5f)
+                {
+                    if (target.TryGetComponent(out Enemy enemy) && !enemy.hitBySpell)
+                    {
+                        // deal damage and mark so no other missile hits it
+                        enemy.TakeDamage(damage, DamageNumberType.Spell);
+                        enemy.hitBySpell = true;
+
+                        // look for the next closest enemy
+                        target = FindClosestEnemy();
+                        if (target != null)
+                        {
+                            // loop back and chase the new target
+                            yield return null;
+                            continue;
+                        }
+                    }
+                    // either no valid enemy left or it was already hit
+                    break;
+                }
+            }
             yield return null;
         }
 
-        // If target is lost, start rotating around caster
+        // no more targets (or lifetime expired), switch to orbiting until lifetime runs out
         StartCoroutine(RotateAroundCaster());
     }
 

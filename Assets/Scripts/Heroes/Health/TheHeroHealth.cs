@@ -33,8 +33,6 @@ public class TheHeroHealth : MonoBehaviour
             GameEvents.OnZeroHealth?.Invoke(); // Can 0 olduğunda Action tetiklenir
         }
         GameEvents.OnHealthChanged?.Invoke(Mathf.Max(0, currentHealth), maxHealth);
-        Debug.LogError("IncreaseHealth : " + currentHealth);
-
     }
 
 

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TargetID: 1
   Name: Garlic Damage
-  Description: 
+  Description: Increase tick damage of the spell.
   Target: 0
   Level: 0
   maxUpgrades: 5

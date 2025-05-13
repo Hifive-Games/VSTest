@@ -126,7 +126,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SpellID: 3
   Name: AcidBottle
-  Description: Thorws Acid Bottle
+  Description: Thorws an acid bottle that splash and create a Acid Pool.
   Icon: {fileID: 0}
   speed: 10
   damage: 2
@@ -134,10 +134,11 @@ MonoBehaviour:
   range: 5
   cooldown: 8
   explosionRadius: 0
-  projectileCount: 2
+  projectileCount: 1
   radius: 3
   tickInterval: 0.5
   Caster: 0
+  player: {fileID: 0}
   acidAreaPrefab: {fileID: 3489518626545583903, guid: 60c3f546824910f49a4c7b2d133c41b1,
     type: 3}
   arcHeight: 2

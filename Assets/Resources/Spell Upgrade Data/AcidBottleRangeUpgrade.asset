@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TargetID: 3
   Name: Acid Bottle Range
-  Description: 
+  Description: Increase acid pool throwing range.
   Target: 2
   Level: 0
   maxUpgrades: 5

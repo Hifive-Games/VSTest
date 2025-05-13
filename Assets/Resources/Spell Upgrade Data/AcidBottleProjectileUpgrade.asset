@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TargetID: 3
   Name: Acid Bottle Projectile Count
-  Description: 
+  Description: Throws one more bottle.
   Target: 6
   Level: 0
   maxUpgrades: 2

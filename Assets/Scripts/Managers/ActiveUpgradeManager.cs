@@ -13,6 +13,7 @@ public class ActiveUpgradeManager : MonoBehaviourSingleton<ActiveUpgradeManager>
     
     [SerializeField] private GameObject heroActiveUpgradePrefab; // UI prefab referansı
     [SerializeField] private PanelController heroActiveUpgradeParent; // UI prefab parent
+    [SerializeField] private GameObject LevelUpPanel; // LevelUp paneli
     
     public static event UnityAction<ActiveUpgradeBaseData, RareLevel> OnActiveUpgradeRequested;
 
@@ -122,11 +123,16 @@ public class ActiveUpgradeManager : MonoBehaviourSingleton<ActiveUpgradeManager>
 
     private void OpenActiveUpgradeUI()
     {
+        // LevelUp panelini aç
+        LevelUpPanel.SetActive(true);
         // UI ekrana getir
         PanelManager.Instance.OpenPanel(heroActiveUpgradeParent);
+        SpellUpgradePanelManager.Instance.ShowSpellUpgradePanel();
     }
-    private void CloseActiveUpgradeUI()
+    public void CloseActiveUpgradeUI()
     {
+        // LevelUp panelini kapat
+        LevelUpPanel.SetActive(false);
         PanelManager.Instance.GoBack();
     }
     

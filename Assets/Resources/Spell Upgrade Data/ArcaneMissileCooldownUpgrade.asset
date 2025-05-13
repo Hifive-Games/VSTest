@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TargetID: 2
   Name: Arcane Missile Cooldown
-  Description: 
+  Description: Decrase the missle cooldown.
   Target: 1
   Level: 0
   maxUpgrades: 5

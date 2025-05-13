@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TargetID: 0
   Name: Fireball Radius
-  Description: 
+  Description: Increase explosion radius of the spell.
   Target: 5
   Level: 0
   maxUpgrades: 5

@@ -114,6 +114,8 @@ public class BossAttack : MonoBehaviour, IBossAttacker
             if (col != null && col.TryGetComponent<TheHeroDamageManager>(out var damageManager))
             {
                 damageManager.TakeDamage(damage);
+                //debug log the damage but orange color
+                Debug.Log($"<color=orange>Damage dealt: {damage}</color>");
                 // TODO: actually apply damage to player here but we taking 2 hits Should fix this
             }
         }

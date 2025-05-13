@@ -16,12 +16,13 @@ public class InteractableObject : TriggerableObject
 
     [Header("UI Settings")]
     [SerializeField] private Vector3 textOffset = new Vector3(0f, 1.5f, 0f);
+    [SerializeField] GameObject mapIconPrefab;
     
     private Collider interactionCollider;
     private Transform canvasTransform;
 
     [SerializeField] private GameObject canvasObject; // sahnede bulunan InteractionTextCanvas objesi
-    private TextMeshProUGUI textComponent;
+    private TMP_Text textComponent;
 
     private void Awake()
     {
@@ -68,7 +69,7 @@ public class InteractableObject : TriggerableObject
         }
 
         // Text bileşenini bul
-        textComponent = canvasObject.GetComponentInChildren<TextMeshProUGUI>();
+        textComponent = canvasObject.GetComponentInChildren<TMP_Text>();
         if (textComponent == null)
         {
             Debug.LogError("TextMeshProUGUI component not found in children.");
@@ -115,7 +116,7 @@ public class InteractableObject : TriggerableObject
             effect.SetHeroDeBuffEffectScaler(DeBuffEffectScaler);
             effect.ApplyBuffDeBuffSystem();
             
-            SetInteracted();
+            SetInteracted(mapIconPrefab);
 
             Debug.Log($"Effect Applied: {effect.effectName}");
             Debug.Log($"Effect Applied: {effect.description}");

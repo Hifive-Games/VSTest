@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TargetID: 4
   Name: Lightning Orb Duration
-  Description: 
+  Description: Orbs last longer.
   Target: 3
   Level: 0
   maxUpgrades: 3

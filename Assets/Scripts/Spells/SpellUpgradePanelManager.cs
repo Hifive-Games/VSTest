@@ -15,16 +15,7 @@ public class SpellUpgradePanelManager : MonoBehaviourSingleton<SpellUpgradePanel
     public int MaxSpellUpgradeCardCount = 3;
     private void Start()
     {
-        SpellUpgradePanel.SetActive(false);
         LoadSpellUpgrades();
-    }
-
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.U))
-        {
-            ShowSpellUpgradePanel();
-        }
     }
 
     private void LoadSpellUpgrades()
@@ -79,12 +70,12 @@ public class SpellUpgradePanelManager : MonoBehaviourSingleton<SpellUpgradePanel
 
     public void CheckSpellAvalibility()
     {
-        for(int i = AvailableSpellUpgrades.Count - 1; i >= 0; i--)
+        for (int i = AvailableSpellUpgrades.Count - 1; i > 0; i--)
         {
             if (AvailableSpellUpgrades[i].Level >= AvailableSpellUpgrades[i].maxUpgrades)
             {
-                AvailableSpellUpgrades.RemoveAt(i);
                 Debug.Log("Removed spell upgrade: " + AvailableSpellUpgrades[i].Name + " from available upgrades.");
+                AvailableSpellUpgrades.RemoveAt(i);
             }
         }
     }
@@ -101,19 +92,11 @@ public class SpellUpgradePanelManager : MonoBehaviourSingleton<SpellUpgradePanel
         if (SpellManager.Instance.EquippedSpells.Count == 0 || AvailableSpellUpgrades.Count == 0)
         {
             Debug.Log("No spells equipped or no available upgrades.");
-            HideSpellUpgradePanel();
             return;
         }
         else
         {
-            SpellUpgradePanel.SetActive(true);
             PopulateSpellUpgradePanel();
         }
-    }
-
-    public void HideSpellUpgradePanel()
-    {
-        SpellUpgradePanel.SetActive(false);
-        ClearSpellUpgradePanel();
     }
 }

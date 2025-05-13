@@ -50,7 +50,6 @@ public class BossController : Enemy
         Attacker = GetComponent<BossAttack>();
         Caster = GetComponent<BossCaster>();
         _anim = GetComponent<Animator>();
-        player = GameObject.FindGameObjectWithTag("Player");
         Initialize(enemySO);
         _stateMachine.Initialize(this, spawningState);
         base.OnEnable();
@@ -58,7 +57,7 @@ public class BossController : Enemy
 
     public override void OnDisable()
     {
-        if (currentHealth <= 0)
+        if (!ReferenceEquals(_stateMachine.CurrentState, spawningState))
         {
             Debug.LogWarning($"<color=blue>Entering Dying State</color> for {name}");
         }

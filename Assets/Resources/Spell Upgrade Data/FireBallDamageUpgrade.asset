@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TargetID: 0
   Name: Fireball Damage
-  Description: 
+  Description: Increase explosion damage.
   Target: 0
   Level: 0
   maxUpgrades: 5

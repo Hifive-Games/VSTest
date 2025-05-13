@@ -71,7 +71,7 @@ public class AcidAreaEffect : MonoBehaviour
             if (collider.TryGetComponent<Enemy>(out Enemy enemy))
             {
                 // Apply damage
-                enemy.TakeDamage(damage);
+                enemy.TakeDamage(damage, DamageNumberType.Spell);
             }
         }
     }

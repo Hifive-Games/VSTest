@@ -58,12 +58,18 @@ public abstract class Enemy : MonoBehaviour
         expPrefab = enemySO.deathEffect;
     }
 
-    public virtual void OnEnable()
+    private void Start()
     {
+        player = TheHero.Instance.gameObject;
         if (player == null)
         {
-            player = FindAnyObjectByType<CharacterController>().gameObject;
+            Debug.LogError("Player not found.");
+            return;
         }
+    }
+
+    public virtual void OnEnable()
+    {
         currentHealth = maxHealth;
         attackTimer = 0f; // reset attack timer on enable
 
@@ -162,6 +168,28 @@ public abstract class Enemy : MonoBehaviour
             currentHealth -= damage;
             if (player != null)
                 SFXManager.Instance.PlayAt(SFX.EnemyHit);
+
+            DamageNumberManager.Instance.ShowDamage(damage, transform.position);
+        }
+
+        if (currentHealth <= 0)
+        {
+            Die();
+        }
+    }
+    public virtual void TakeDamage(int damage, DamageNumberType damageNumberType)
+    {
+        if (hitBySpell)
+        {
+            Invoke("ResetHitBySpell", 2f);
+        }
+        else
+        {
+            currentHealth -= damage;
+            if (player != null)
+                SFXManager.Instance.PlayAt(SFX.EnemyHit);
+
+            DamageNumberManager.Instance.ShowDamage(damage, transform.position, damageNumberType);
         }
 
         if (currentHealth <= 0)

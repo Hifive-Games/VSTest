@@ -148,17 +148,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SpellID: 2
   Name: ArcaneMissile
-  Description: Hits and splits
+  Description: Seeks and damages new target until its duration is over.
   Icon: {fileID: 0}
   speed: 20
-  damage: 10
+  damage: 2
   duration: 5
-  range: 40
+  range: 10
   cooldown: 3.5
   explosionRadius: 0
   projectileCount: 1
   radius: 3
   tickInterval: 0.5
   Caster: 0
-  child: {fileID: 7629484514301876640, guid: be40c17b019ed904886fb163c64ce360, type: 3}
-  childCount: 3
+  player: {fileID: 0}
+  seekerSpeed: 10
+  lifetime: 2

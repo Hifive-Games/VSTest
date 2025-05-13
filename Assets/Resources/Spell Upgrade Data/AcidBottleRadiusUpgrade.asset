@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TargetID: 3
   Name: Acid Bottle Radius
-  Description: 
+  Description: Increase acid pool area.
   Target: 5
   Level: 0
   maxUpgrades: 5

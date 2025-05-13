@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TargetID: 2
   Name: Arcane Missile Projectile Count
-  Description: 
+  Description: Cast one more spell after first one.
   Target: 6
   Level: 0
   maxUpgrades: 5

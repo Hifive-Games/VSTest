@@ -64,7 +64,7 @@ public class ActiveUpgradeUI : MonoBehaviour
 
         upgradeNameText.text = m_ActiveUpgradeBaseData.upgradeName; // Yükseltme adını ayarla
         descriptionText.text = m_ActiveUpgradeBaseData.description; // Açıklama metnini ayarla
-        rareText.text = selectedRare.ToString(); // RareLevel metnini ayarla
-        valueText.text = activeUpgradeBaseData.rareValues.Find(r => r.rareLevel == selectedRare).value.ToString(); // Değer metnini ayarla
+        rareText.text = $"({selectedRare})"; // RareLevel metnini ayarla
+        valueText.text = $"{m_ActiveUpgradeBaseData.rareValues.Find(r => r.rareLevel == selectedRare).value}"; // Değer metnini ayarla
     }
 }

@@ -9,17 +9,11 @@ public class LightningBall : Spell
 
     private Collider[] _hitBuffer = new Collider[16]; // Reusable buffer for overlap sphere
 
-    private GameObject player;
     [SerializeField] private GameObject groundIndicatorPrefab;
 
     public override void OnEnable()
     {
-        player = FindAnyObjectByType<CharacterController>().gameObject;
-        base.OnEnable();
-    }
-    public override void OnDisable()
-    {
-        base.OnDisable();
+        player = FindObjectOfType<CharacterController>()?.gameObject;
     }
     public override void Seek(Transform target = null)
     {
@@ -80,7 +74,7 @@ public class LightningBall : Spell
             if (collider.TryGetComponent<Enemy>(out Enemy enemy))
             {
                 // Apply damage
-                enemy.TakeDamage(damage);
+                enemy.TakeDamage(damage, DamageNumberType.Spell);
             }
         }
     }

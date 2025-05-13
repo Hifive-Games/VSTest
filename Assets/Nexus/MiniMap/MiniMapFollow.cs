@@ -4,9 +4,9 @@ public class MiniMapFollow : MonoBehaviour
 {
     public Transform target;
 
-    private void Start()
+    void Start()
     {
-        target = FindObjectOfType<CharacterController>().transform;
+        target = FindAnyObjectByType<CharacterController>().transform;
     }
 
     void LateUpdate()

@@ -136,7 +136,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd01aa7ef25a2904393f9f1c747c96df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bullet: {fileID: 2147895002730076875, guid: b210e3186cd41c44a933b28b65300e21, type: 3}
+  bullet: {fileID: 5231834951748331027, guid: b210e3186cd41c44a933b28b65300e21, type: 3}
   shooterParent: {fileID: 7340481152594479344}
   detectionRange: 15
   attackSpeed: 1

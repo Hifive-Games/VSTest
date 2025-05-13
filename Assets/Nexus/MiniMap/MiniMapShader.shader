@@ -3,6 +3,7 @@ Shader "UI/MiniMapShader"
     Properties
     {
         _MainTex ("Texture", 2D) = "white" {}
+        _AntiAliasing ("Anti Aliasing", Range(0, 8)) = 0
 
         // Required by Unity UI Masking system:
         [HideInInspector] _StencilComp ("Stencil Comparison", Float) = 8

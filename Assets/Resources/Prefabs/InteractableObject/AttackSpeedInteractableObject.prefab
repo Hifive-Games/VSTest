@@ -284,8 +284,8 @@ MonoBehaviour:
   gizmoSize: {x: 5, y: 5, z: 5}
   gizmoColor: {r: 0, g: 0, b: 1, a: 1}
   textOffset: {x: 0, y: 1.5, z: 0}
-  mapIconPrefab: {fileID: 0}
-  canvasObject: {fileID: 5125879075075297841}
+  mapIconPrefab: {fileID: 5125879075075297841}
+  canvasObject: {fileID: 8855949145787292042}
 --- !u!1 &7160491132953716075
 GameObject:
   m_ObjectHideFlags: 0

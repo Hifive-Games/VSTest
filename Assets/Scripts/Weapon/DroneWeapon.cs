@@ -5,7 +5,7 @@ using UnityEngine.Serialization;
 
 public class DroneWeapon : MonoBehaviour
 {
-    [SerializeField] private BulletWeapon bullet;
+    public GameObject bullet;
     [SerializeField] private Transform shooterParent;
 
     public float detectionRange = 15f;

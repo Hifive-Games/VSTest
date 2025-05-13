@@ -14,4 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   effectName: Movement speed
   description: "ko\u015Fu h\u0131z\u0131"
-  valueOfBuffOrDeBuff: 2
+  valueOfBuffOrDeBuff: 0.25
+  textColor: 0

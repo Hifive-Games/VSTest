@@ -14,7 +14,7 @@ public class TechHero : TheHero
     public float smoothRate = 5f;
 
     private float baseAngle = 0f;
-    private List<GameObject> drones = new List<GameObject>();
+    [SerializeField] private List<GameObject> drones = new List<GameObject>();
     private List<Vector3> initialOffsets = new List<Vector3>();
 
     private float attackDamage=1;
@@ -179,6 +179,7 @@ public override void AddAttackAmount(float newRate)
 }
 public override void AddAttackDamage(float newRate)
 {
+    Debug.LogError("AddAttackDamage");
     attackDamage += attackDamage * (newRate / 100f);
     foreach (var drone in drones)
     {
@@ -191,13 +192,14 @@ public override void AddAttackDamage(float newRate)
 }
 public override void SetAttackDamage(float newRate)
 {
+    Debug.LogError("SetAttackDamage");
     attackDamage = newRate;
     foreach (var drone in drones)
     {
         var weapon = drone.GetComponent<DroneWeapon>();
         if (weapon != null)
         {
-            weapon.GetComponent<BulletWeapon>().SetBulletDamage(attackDamage);
+            weapon.bullet.GetComponent<BulletWeapon>().SetBulletDamage(attackDamage);
         }
     }
 }

@@ -21,7 +21,7 @@ MonoBehaviour:
     attackDelay: 1
     attackDuration: 1
     attackCount: 0
-    attackDamage: 10
+    attackDamage: 50
     attackRange: 0
     attackArea: 4
     attackWarningPrefab: {fileID: 3267069490693012620, guid: dce88d1dd71f3664e85f25a9d2bb1dcd,
@@ -32,7 +32,7 @@ MonoBehaviour:
     attackDelay: 2
     attackDuration: 3
     attackCount: 3
-    attackDamage: 20
+    attackDamage: 70
     attackRange: 5
     attackArea: 20
     attackWarningPrefab: {fileID: 4630068627692092880, guid: 494d9016afd24fc4da65ba92465669e4,

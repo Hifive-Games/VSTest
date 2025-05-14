@@ -16,22 +16,22 @@ MonoBehaviour:
   description: Attack Damage will be increased
   rareValues:
   - rareLevel: 0
-    value: 10
+    value: 25
     baseProbability: 80
     luckFactor: -0.8
   - rareLevel: 1
-    value: 15
+    value: 30
     baseProbability: 15
     luckFactor: 0.5
   - rareLevel: 2
-    value: 20
+    value: 35
     baseProbability: 4
     luckFactor: 1.5
   - rareLevel: 3
-    value: 25
+    value: 40
     baseProbability: 0.9
     luckFactor: 3
   - rareLevel: 4
-    value: 30
+    value: 45
     baseProbability: 0.1
     luckFactor: 5

@@ -12,15 +12,15 @@ GameObject:
   - component: {fileID: 2389951414440775636}
   - component: {fileID: 490372770517990174}
   - component: {fileID: 5312867287634462565}
-  - component: {fileID: 7425488400777978173}
   - component: {fileID: 5231834951748331027}
+  - component: {fileID: -3427844049860879751}
   m_Layer: 0
   m_Name: Drone_Bullet_Weapon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1622716105877373041
 Transform:
   m_ObjectHideFlags: 0
@@ -108,7 +108,26 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.026417866, y: 0.027438458, z: 0.07655414}
   m_Center: {x: 0.00008791452, y: 0.00051398575, z: -0.00072293356}
---- !u!54 &7425488400777978173
+--- !u!114 &5231834951748331027
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2147895002730076875}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd5c4e2cb23ef3a40ab511a2349d1edb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletSpeed: 15
+  explosionPrefab: {fileID: 0}
+  affectedLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  bulletDamage: 10
+  destroyTime: 5
+--- !u!54 &-3427844049860879751
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -116,7 +135,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2147895002730076875}
   serializedVersion: 4
-  m_Mass: 0.0000001
+  m_Mass: 1
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -135,23 +154,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &5231834951748331027
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2147895002730076875}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fd5c4e2cb23ef3a40ab511a2349d1edb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bulletSpeed: 15
-  explosionPrefab: {fileID: 0}
-  affectedLayers:
-    serializedVersion: 2
-    m_Bits: 0
 --- !u!1 &7050082976577143579
 GameObject:
   m_ObjectHideFlags: 0

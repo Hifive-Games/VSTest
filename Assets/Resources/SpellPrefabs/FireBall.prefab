@@ -4983,10 +4983,10 @@ MonoBehaviour:
   Description: Ball of fire that explodes when it hits an enemy.
   Icon: {fileID: 0}
   speed: 3
-  damage: 10
+  damage: 50
   duration: 5
   range: 20
-  cooldown: 5
+  cooldown: 7.5
   explosionRadius: 2.5
   projectileCount: 1
   radius: 10

@@ -1,50 +1,52 @@
+using UnityEditor.SceneManagement;
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody))]
 public class BulletWeapon : MonoBehaviour
 {
     [SerializeField] private float bulletSpeed = 20f; // Merminin hızı
     [SerializeField] private GameObject explosionPrefab; // Patlama efekti prefab'i
 
-    private Rigidbody rb;
-
     [SerializeField] private LayerMask affectedLayers;
 
     [SerializeField] private float bulletDamage = 1;
 
-    private void Awake()
-    {
-        rb = GetComponent<Rigidbody>();
-        rb.useGravity = false;
-    }
+    public float destroyTime = 5f; // Merminin yok olma süresi
 
-    private void OnEnable()
-    {
-        rb.velocity = transform.forward * bulletSpeed;
-        Invoke(nameof(ReturnBullet), 5f); // 5 saniye sonra yok ol
-    }
-
-    void OnDisable()
-    {
-        rb.velocity = Vector3.zero; // Mermi geri döndüğünde hızını sıfırla
-        rb.angularVelocity = Vector3.zero; // Merminin açısal hızını sıfırla
-    }
     private void OnTriggerEnter(Collider other)
     {   // Eğer bir Enemy objesine çarptıysa, hasar ver
         if (other.TryGetComponent(out Enemy enemy))
         {
             enemy.TakeDamage((int)bulletDamage);
-            ObjectPooler.Instance.ReturnObject(gameObject); // Mermiyi geri dön
+            // Mermi geri döndüğünde Rigidbody bileşenini kaldır
+            if (TryGetComponent<Rigidbody>(out Rigidbody rb))
+            {
+                Destroy(rb);
+            }
+            ObjectPooler.Instance.ReturnObject(gameObject);
+            CancelInvoke("ReturnBullet");
         }
     }
     private void ReturnBullet()
     {
+        // Mermi geri döndüğünde Rigidbody bileşenini kaldır
+        if (TryGetComponent<Rigidbody>(out Rigidbody rb))
+        {
+            Destroy(rb);
+        }
         // Mermiyi geri dön
         ObjectPooler.Instance.ReturnObject(gameObject);
     }
 
     public void SetBulletDamage(float damage)
     {
+        Rigidbody rb;
+        gameObject.AddComponent<Rigidbody>();
+        rb = GetComponent<Rigidbody>();
+        rb.useGravity = false; // Merminin yer çekiminden etkilenmemesi için
+
+        rb.velocity = transform.forward * bulletSpeed;
         bulletDamage = damage;
+
+        Invoke("ReturnBullet", destroyTime);
     }
 }

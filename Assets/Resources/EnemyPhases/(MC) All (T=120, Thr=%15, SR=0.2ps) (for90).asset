@@ -37,3 +37,7 @@ MonoBehaviour:
     amount: 1
     minSpwanRadius: 0.5
     maxSpawnRadius: 1
+  - enemyData: {fileID: 11400000, guid: 951252455d642024da16355bf86ef939, type: 2}
+    amount: 1
+    minSpwanRadius: 0.5
+    maxSpawnRadius: 1

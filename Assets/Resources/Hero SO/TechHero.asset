@@ -20,10 +20,10 @@ MonoBehaviour:
   heroStatsBaseDatas:
   - heroStatsBaseData: {fileID: 11400000, guid: 905f210108b5f724f8b7aa91341987d3,
       type: 2}
-    value: 1
+    value: 11
   - heroStatsBaseData: {fileID: 11400000, guid: 8a2d976ed8f17ec479379af0f7320a2c,
       type: 2}
-    value: 5
+    value: 7.5
   - heroStatsBaseData: {fileID: 11400000, guid: 65e2d01146ae5e54a9f5f0b0c6eea805,
       type: 2}
     value: 3
@@ -32,16 +32,16 @@ MonoBehaviour:
     value: 1
   - heroStatsBaseData: {fileID: 11400000, guid: 21006fa5d1be75f46a76b7eed788978f,
       type: 2}
-    value: 10
+    value: 100
   - heroStatsBaseData: {fileID: 11400000, guid: f05cd66f0e82b1b4d87d9a11f2a265a0,
       type: 2}
-    value: 1
+    value: 10
   - heroStatsBaseData: {fileID: 11400000, guid: e4cef4e709765b341852e684d4d61a1b,
       type: 2}
     value: 10
   - heroStatsBaseData: {fileID: 11400000, guid: 6ef6df4d76f811a45b9e19a39248d04b,
       type: 2}
-    value: 10
+    value: 100
   - heroStatsBaseData: {fileID: 11400000, guid: 28e25c386dd409047bdbe05175d41765,
       type: 2}
     value: 4
@@ -50,7 +50,7 @@ MonoBehaviour:
     value: 1
   - heroStatsBaseData: {fileID: 11400000, guid: 5a09a4b7a0e010449ae230840c9d8bde,
       type: 2}
-    value: 0
+    value: 50
   - heroStatsBaseData: {fileID: 11400000, guid: 3c3113d55777a10458b6809809adb4c2,
       type: 2}
     value: 1
@@ -59,7 +59,7 @@ MonoBehaviour:
     value: 1
   - heroStatsBaseData: {fileID: 11400000, guid: e523606175f2be042935e8c85b12f33b,
       type: 2}
-    value: 1
+    value: 10
   appliedPassiveUpgrades:
   - {fileID: 11400000, guid: 337825ec2c59b7549a1d8b60f6be57ab, type: 2}
   - {fileID: 11400000, guid: e5e327a7caab44e4a83ad80e1775f8e1, type: 2}

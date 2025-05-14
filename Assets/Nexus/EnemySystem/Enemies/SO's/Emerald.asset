@@ -10,20 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 087d57d282b2c764db86741b10528730, type: 3}
-  m_Name: Amethis
+  m_Name: Emerald
   m_EditorClassIdentifier: 
-  enemyType: 0
-  ID: 1001
-  enemyName: Amethis
+  enemyType: 2
+  ID: 1005
+  enemyName: Emerald
   enemySprite: {fileID: 0}
-  enemyPrefab: {fileID: 5551546460413965189, guid: e35e7dc459bc63248b36e87956c38882,
+  enemyPrefab: {fileID: 8755793352199167666, guid: c31a306a30c468143976f95d586106e9,
     type: 3}
   maxHealth: 10
-  damage: 10
-  speed: 2
+  damage: 5
+  speed: 7.5
   score: 1
   attackRange: 2
-  attackSpeed: 1
-  experience: 3
+  attackSpeed: 0.1
+  experience: 5
   deathEffect: {fileID: 7642634975434891464, guid: b6eb006e0faad0d4b8de30ddadf3edf5,
     type: 3}

@@ -17,10 +17,12 @@ MonoBehaviour:
   castTime: 1
   range: 10
   duration: 1
-  damage: 10
+  damage: 25
+  haveChainSpell: 0
+  chainSpells: []
   projectilePrefab: {fileID: 6910229491382688879, guid: 2226bcc950067f941a18205259fa9c36,
     type: 3}
   spawnPoint: {fileID: 0}
-  speed: 10
-  count: 5
-  spreadAngle: 15
+  speed: 5
+  count: 7
+  spreadAngle: 12.5

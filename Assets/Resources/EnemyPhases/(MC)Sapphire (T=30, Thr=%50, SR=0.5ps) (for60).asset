@@ -21,7 +21,7 @@ MonoBehaviour:
   refillThreshold: 0.5
   maintainSpawnInterval: 0.5
   enemyGroups:
-  - enemyData: {fileID: 11400000, guid: 5f1bc4fce1b087041b22b852c432c4e6, type: 2}
+  - enemyData: {fileID: 11400000, guid: 951252455d642024da16355bf86ef939, type: 2}
     amount: 3
     minSpwanRadius: 0.5
     maxSpawnRadius: 1

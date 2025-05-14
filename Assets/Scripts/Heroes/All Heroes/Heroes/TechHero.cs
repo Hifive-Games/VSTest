@@ -17,8 +17,8 @@ public class TechHero : TheHero
     [SerializeField] private List<GameObject> drones = new List<GameObject>();
     private List<Vector3> initialOffsets = new List<Vector3>();
 
-    private float attackDamage=1;
-    
+    private float attackDamage = 1;
+
     public void AddDrone()
     {
         numberOfDrones++;
@@ -66,142 +66,142 @@ public class TechHero : TheHero
         }
     }
 
-    
+
     // Miras alınanlar
-    
-    
-   public override void SetAttackSpeed(float newRate)
-{
-    foreach (var drone in drones)
-    {
-        var weapon = drone.GetComponent<DroneWeapon>();
-        if (weapon != null)
-        {
-            weapon.attackSpeed = Mathf.Max(0.01f, newRate);
-        }
-    }
-}
 
-public override void AddAttackSpeed(float newRate)
-{
-    foreach (var drone in drones)
-    {
-        var weapon = drone.GetComponent<DroneWeapon>();
-        if (weapon != null)
-        {
-            weapon.attackSpeed *= (1f + newRate / 100f);
-            weapon.attackSpeed = Mathf.Max(0.01f, weapon.attackSpeed);
-        }
-    }
-}
 
-public override void ReduceAttackSpeed(float newRate)
-{
-    foreach (var drone in drones)
+    public override void SetAttackSpeed(float newRate)
     {
-        var weapon = drone.GetComponent<DroneWeapon>();
-        if (weapon != null)
+        foreach (var drone in drones)
         {
-            weapon.attackSpeed *= (1f - newRate / 100f);
-            weapon.attackSpeed = Mathf.Max(0.01f, weapon.attackSpeed);
+            var weapon = drone.GetComponent<DroneWeapon>();
+            if (weapon != null)
+            {
+                weapon.attackSpeed = Mathf.Max(0.01f, newRate);
+            }
         }
     }
-}
 
-public override void SetAttackRange(float newRate)
-{
-    foreach (var drone in drones)
+    public override void AddAttackSpeed(float newRate)
     {
-        var weapon = drone.GetComponent<DroneWeapon>();
-        if (weapon != null)
+        foreach (var drone in drones)
         {
-            weapon.detectionRange = Mathf.Max(0f, newRate);
+            var weapon = drone.GetComponent<DroneWeapon>();
+            if (weapon != null)
+            {
+                weapon.attackSpeed *= (1f + newRate / 100f);
+                weapon.attackSpeed = Mathf.Max(0.01f, weapon.attackSpeed);
+            }
         }
     }
-}
 
-public override void AddAttackRange(float newRate)
-{
-    foreach (var drone in drones)
+    public override void ReduceAttackSpeed(float newRate)
     {
-        var weapon = drone.GetComponent<DroneWeapon>();
-        if (weapon != null)
+        foreach (var drone in drones)
         {
-            weapon.detectionRange *= (1f + newRate / 100f);
+            var weapon = drone.GetComponent<DroneWeapon>();
+            if (weapon != null)
+            {
+                weapon.attackSpeed *= (1f - newRate / 100f);
+                weapon.attackSpeed = Mathf.Max(0.01f, weapon.attackSpeed);
+            }
         }
     }
-}
 
-public override void SetAttackSize(float newRate)
-{
-    foreach (var drone in drones)
+    public override void SetAttackRange(float newRate)
     {
-        var weapon = drone.GetComponent<DroneWeapon>();
-        if (weapon != null)
+        foreach (var drone in drones)
         {
-            weapon.attackSize = Mathf.Max(0.1f, newRate);
+            var weapon = drone.GetComponent<DroneWeapon>();
+            if (weapon != null)
+            {
+                weapon.detectionRange = Mathf.Max(0f, newRate);
+            }
         }
     }
-}
 
-public override void AddAttackSize(float newRate)
-{
-    foreach (var drone in drones)
+    public override void AddAttackRange(float newRate)
     {
-        var weapon = drone.GetComponent<DroneWeapon>();
-        if (weapon != null)
+        foreach (var drone in drones)
         {
-            weapon.attackSize *= (1f + newRate / 100f);
+            var weapon = drone.GetComponent<DroneWeapon>();
+            if (weapon != null)
+            {
+                weapon.detectionRange *= (1f + newRate / 100f);
+            }
         }
     }
-}
 
-public override void SetAttackAmount(float newRate)
-{
-    numberOfDrones = (int)newRate;
-    for (int i = 0; i < numberOfDrones; i++)
+    public override void SetAttackSize(float newRate)
     {
-        float angle = i * Mathf.PI * 2f / numberOfDrones;
-        Vector3 offset = new Vector3(Mathf.Cos(angle), 0, Mathf.Sin(angle)) * radius;
-        GameObject drone = Instantiate(dronePrefab, transform.position + offset, Quaternion.identity, transform);
-        drones.Add(drone);
-        initialOffsets.Add(offset);
+        foreach (var drone in drones)
+        {
+            var weapon = drone.GetComponent<DroneWeapon>();
+            if (weapon != null)
+            {
+                weapon.attackSize = Mathf.Max(0.1f, newRate);
+            }
+        }
     }
-}
 
-public override void AddAttackAmount(float newRate)
-{
-    int amountToAdd = Mathf.Max(0, Mathf.RoundToInt(newRate));
-    for (int i = 0; i < amountToAdd; i++)
+    public override void AddAttackSize(float newRate)
     {
-        AddDrone();
-    }
-}
-public override void AddAttackDamage(float newRate)
-{
-    Debug.LogError("AddAttackDamage");
-    attackDamage += attackDamage * (newRate / 100f);
-    foreach (var drone in drones)
-    {
-        var weapon = drone.GetComponent<DroneWeapon>();
-        if (weapon != null)
+        foreach (var drone in drones)
         {
-            weapon.GetComponent<BulletWeapon>().SetBulletDamage(attackDamage);
+            var weapon = drone.GetComponent<DroneWeapon>();
+            if (weapon != null)
+            {
+                weapon.attackSize *= (1f + newRate / 100f);
+            }
         }
     }
-}
-public override void SetAttackDamage(float newRate)
-{
-    Debug.LogError("SetAttackDamage");
-    attackDamage = newRate;
-    foreach (var drone in drones)
+
+    public override void SetAttackAmount(float newRate)
     {
-        var weapon = drone.GetComponent<DroneWeapon>();
-        if (weapon != null)
+        numberOfDrones = (int)newRate;
+        for (int i = 0; i < numberOfDrones; i++)
         {
-            weapon.bullet.GetComponent<BulletWeapon>().SetBulletDamage(attackDamage);
+            float angle = i * Mathf.PI * 2f / numberOfDrones;
+            Vector3 offset = new Vector3(Mathf.Cos(angle), 0, Mathf.Sin(angle)) * radius;
+            GameObject drone = Instantiate(dronePrefab, transform.position + offset, Quaternion.identity, transform);
+            drones.Add(drone);
+            initialOffsets.Add(offset);
         }
     }
-}
+
+    public override void AddAttackAmount(float newRate)
+    {
+        int amountToAdd = Mathf.Max(0, Mathf.RoundToInt(newRate));
+        for (int i = 0; i < amountToAdd; i++)
+        {
+            AddDrone();
+        }
+    }
+    public override void AddAttackDamage(float newRate)
+    {
+        Debug.LogError("AddAttackDamage");
+        attackDamage += attackDamage * (newRate / 100f);
+        foreach (var drone in drones)
+        {
+            var weapon = drone.GetComponent<DroneWeapon>();
+            if (weapon != null)
+            {
+                weapon.bullet.GetComponent<BulletWeapon>().SetBulletDamage(attackDamage);
+            }
+        }
+    }
+    public override void SetAttackDamage(float newRate)
+    {
+        Debug.LogError("SetAttackDamage");
+        attackDamage = newRate;
+        foreach (var drone in drones)
+        {
+            var weapon = drone.GetComponent<DroneWeapon>();
+            if (weapon != null)
+            {
+                weapon.bullet.GetComponent<BulletWeapon>().SetBulletDamage(attackDamage);
+            }
+        }
+    }
 
 }

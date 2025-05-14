@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9338de1d149cce14e8bcaf7de862d145, type: 3}
-  m_Name: (C)Amethis (Max=50, A=5, SR=1ps) (for60)
+  m_Name: (C)Emnerald (Max=50, A=5, SR=1ps) (for60)
   m_EditorClassIdentifier: 
   behavior: 0
   startTime: 0
@@ -21,7 +21,7 @@ MonoBehaviour:
   refillThreshold: 0
   maintainSpawnInterval: 0
   enemyGroups:
-  - enemyData: {fileID: 11400000, guid: 8152467218c8a1242995c124adf84141, type: 2}
+  - enemyData: {fileID: 11400000, guid: 951252455d642024da16355bf86ef939, type: 2}
     amount: 5
     minSpwanRadius: 0.5
     maxSpawnRadius: 1.5

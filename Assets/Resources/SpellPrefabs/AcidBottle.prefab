@@ -129,7 +129,7 @@ MonoBehaviour:
   Description: Thorws an acid bottle that splash and create a Acid Pool.
   Icon: {fileID: 0}
   speed: 10
-  damage: 2
+  damage: 10
   duration: 5
   range: 5
   cooldown: 8

@@ -205,7 +205,7 @@ MonoBehaviour:
   Description: Spawn near player and deals damage around itself.
   Icon: {fileID: 0}
   speed: 5
-  damage: 1
+  damage: 10
   duration: 10
   range: 5
   cooldown: 5

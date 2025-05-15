@@ -20,7 +20,17 @@ public class DyingState : ScriptableBossState
         if (!string.IsNullOrEmpty(deathAnimTrigger))
             boss.AnimatorComponent.SetTrigger(deathAnimTrigger);
         yield return new WaitForSeconds(deathDelay);
-        //Destroy(boss.gameObject);
+
+        if (boss.name == "SlasherBoss(Clone)")
+        {
+            Debug.Log("SlasherBoss died");
+            GameEvents.OnZeroHealth?.Invoke();
+        }
+
+        GameObject loot = ObjectPooler.Instance.SpawnFromPool(bossDropPrefab, boss.transform.position, Quaternion.identity);
+        loot.transform.position = new Vector3(boss.transform.position.x, 0f, boss.transform.position.z);
+
+        ObjectPooler.Instance.ReturnObject(boss.gameObject);
     }
 
     public override void Tick(BossController boss) { }

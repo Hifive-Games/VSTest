@@ -25,7 +25,7 @@ public class TheHeroSpawner : MonoBehaviour
         {
             Instantiate(selectedHero.prefab, Vector3.zero, Quaternion.identity); // Seçilen karakteri spawn et
             selectedHero.RunAllHeroStats();
-            //selectedHero.RunAllPassiveUpgrades();
+            selectedHero.RunAllPassiveUpgrades();
         }
         else
         {

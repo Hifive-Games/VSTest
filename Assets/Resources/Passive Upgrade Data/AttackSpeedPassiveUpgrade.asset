@@ -14,10 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   upgradeName: Attack Speed
   upgradeLevels:
-  - value: 1
+  - value: 0
     cost: 10
   - value: 1.1
-    cost: 20
+    cost: 100
   - value: 1.2
-    cost: 30
-  Prefix: _
+    cost: 300

@@ -29,10 +29,13 @@ public class CryomancerPhase : ScriptableBossPhase
 
     int _origDamage;
 
+    private GameObject _player;
+
     public override void Enter(BossController boss)
     {
         _spellTimer = SpellTimer;
         Debug.Log($"Entering phase: {name}");
+        _player = FindAnyObjectByType<CharacterController>().gameObject;
         BossPhaseUI(boss);
         // store & apply buffs
         _origDamage = boss.damage;
@@ -128,7 +131,7 @@ public class CryomancerPhase : ScriptableBossPhase
     private void LookPlayer(BossController boss)
     {
         // look at the player but only x and z axis
-        Vector3 direction = boss.Player.transform.position - boss.transform.position;
+        Vector3 direction = _player.transform.position - boss.transform.position;
         direction.y = 0f; // ignore y axis
         direction.Normalize(); // normalize the direction vector
         Quaternion lookRotation = Quaternion.LookRotation(direction);
@@ -148,7 +151,7 @@ public class CryomancerPhase : ScriptableBossPhase
             if (spell != null)
             {
                 // cast the spell
-                boss.Caster.Cast(spell, boss.Player.transform);
+                boss.Caster.Cast(spell, _player.transform);
                 // reset the spell timer
                 _spellTimer = SpellTimer;
             }

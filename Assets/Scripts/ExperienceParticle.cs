@@ -19,7 +19,7 @@ public class ExperienceParticle : MonoBehaviour
         new VisualSetting(20,    Color.red, 1f),
         new VisualSetting(50,    Color.blue,    1.25f),
         new VisualSetting(100,   Color.magenta,   1.5f),
-        new VisualSetting(int.MaxValue, Color.green, .5f)
+        new VisualSetting(int.MaxValue, Color.black, 2f)
     };
 
     private void Awake()

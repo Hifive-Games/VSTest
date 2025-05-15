@@ -16,7 +16,7 @@ MonoBehaviour:
   upgradeLevels:
   - value: 0
     cost: 10
-  - value: 1
+  - value: 0.25
     cost: 100
-  - value: 2
-    cost: 1000
+  - value: 0.5
+    cost: 300

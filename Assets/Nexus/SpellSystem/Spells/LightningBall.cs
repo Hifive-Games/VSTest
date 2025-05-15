@@ -44,8 +44,16 @@ public class LightningBall : Spell
             DamageNearbyEnemies();
             tickTimer = tickInterval;
         }
+        SetRadius();
+        //SetIndicatorScale();
+    }
 
-        SetIndicatorScale();
+
+    private void SetRadius()
+    {
+        radius = Mathf.Lerp(radius, AudioSpectrum.Instance._maxAmplitude * 2f, Time.deltaTime * 2f);
+        gameObject.GetComponent<LightningOrbRenderer>().sparkRadius = radius/2f;
+        gameObject.GetComponent<SphereCollider>().radius = radius / 2f;
     }
 
     private void SetIndicatorScale()
@@ -53,8 +61,8 @@ public class LightningBall : Spell
         if (groundIndicatorPrefab != null)
         {
             Vector3 scale = groundIndicatorPrefab.transform.localScale;
-            scale.x = radius * 2;
-            scale.y = radius * 2;
+            scale.x = radius * 5;
+            scale.y = radius * 5;
             scale.z = .5f;
             groundIndicatorPrefab.transform.localScale = scale;
         }
@@ -62,7 +70,7 @@ public class LightningBall : Spell
 
     void DamageNearbyEnemies()
     {
-        int hits = Physics.OverlapSphereNonAlloc(transform.position, radius /2, _hitBuffer);
+        int hits = Physics.OverlapSphereNonAlloc(transform.position, radius / 2, _hitBuffer);
         Collider[] colliders = new Collider[hits];
         for (int i = 0; i < hits; i++)
         {
@@ -79,7 +87,8 @@ public class LightningBall : Spell
         }
     }
 
-    private void OnDrawGizmosSelected() {
+    private void OnDrawGizmosSelected()
+    {
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, radius / 2f);
     }

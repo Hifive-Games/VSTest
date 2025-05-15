@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 
 public enum SFX // add all your SFX here
 {
@@ -27,9 +28,17 @@ public class Sound
     [Range(.5f, 1.5f)] public float pitchMax = 1f;
 }
 
-public class SFXManager : MonoBehaviour
+public class SFXManager : MonoBehaviourSingletonPersistent<SFXManager>
 {
-    public static SFXManager Instance { get; private set; }
+    [Header("SFX Manager")]
+    [Tooltip("Mute all sounds")]
+    public bool muteAll = false;
+
+    [Tooltip("Mute all sounds except UI")]
+    public bool muteSFX = false;
+
+    [Tooltip("Mute all UI sounds")]
+    public bool muteUI = false;
 
     [Tooltip("Configure all your sound clips here")]
     public List<Sound> sounds = new List<Sound>();
@@ -41,28 +50,21 @@ public class SFXManager : MonoBehaviour
     private Queue<AudioSource> _pool;
     private GameObject _sourcePrefab;
 
-    void Awake()
+    void Start()
     {
-        if (Instance == null)
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
+        // build lookup
+        _lookup = sounds.ToDictionary(s => s.id, s => s);
 
-            // build lookup
-            _lookup = sounds.ToDictionary(s => s.id, s => s);
+        // create a hidden prefab to spawn sources from
+        _sourcePrefab = new GameObject("SFX_Source");
+        var a = _sourcePrefab.AddComponent<AudioSource>();
+        a.playOnAwake = false;
+        _sourcePrefab.SetActive(false);
 
-            // create a hidden prefab to spawn sources from
-            _sourcePrefab = new GameObject("SFX_Source");
-            var a = _sourcePrefab.AddComponent<AudioSource>();
-            a.playOnAwake = false;
-            _sourcePrefab.SetActive(false);
-
-            // warm up pool
-            _pool = new Queue<AudioSource>();
-            for (int i = 0; i < poolSize; i++)
-                _pool.Enqueue(SpawnNew());
-        }
-        else Destroy(gameObject);
+        // warm up pool
+        _pool = new Queue<AudioSource>();
+        for (int i = 0; i < poolSize; i++)
+            _pool.Enqueue(SpawnNew());
     }
 
     AudioSource SpawnNew()
@@ -106,6 +108,8 @@ public class SFXManager : MonoBehaviour
     /// </summary>
     public void PlayAt(SFX id, float spatialBlend = 0f)
     {
+        if (muteAll || muteSFX) return;
+
         if (!_lookup.TryGetValue(id, out var s)) return;
         var src = GetSource();
         src.transform.position = Vector3.zero;
@@ -115,5 +119,26 @@ public class SFXManager : MonoBehaviour
         src.pitch = Random.Range(s.pitchMin, s.pitchMax);
         src.Play();
         StartCoroutine(ReturnToPool(src, s.clip.length / src.pitch));
+    }
+
+    //add a method to mute all sounds
+    public void MuteAll(Toggle mute)
+    {
+        muteAll = mute.isOn;
+        AudioListener.volume = muteAll ? 0 : 1;
+        if (muteAll)
+        {
+            foreach (var sound in sounds)
+            {
+                sound.volume = 0f;
+            }
+        }
+        else
+        {
+            foreach (var sound in sounds)
+            {
+                sound.volume = 1f;
+            }
+        }
     }
 }

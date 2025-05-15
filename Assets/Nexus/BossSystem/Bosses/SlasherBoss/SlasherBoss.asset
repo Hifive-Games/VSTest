@@ -24,6 +24,6 @@ MonoBehaviour:
   score: 100
   attackRange: 4
   attackSpeed: 2
-  experience: 55
+  experience: 0
   deathEffect: {fileID: 7642634975434891464, guid: b6eb006e0faad0d4b8de30ddadf3edf5,
     type: 3}

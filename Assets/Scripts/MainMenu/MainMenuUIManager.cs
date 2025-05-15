@@ -17,4 +17,10 @@ public class MainMenuUIManager : MonoBehaviour
         Time.timeScale = 1; // Oyun zamanını başlat
         SceneManager.LoadScene(sceneIndex); // Belirtilen sahneyi yükle
     }
+
+    public void ExitGame()
+    {
+        Application.Quit(); // Uygulamayı kapat
+        Debug.Log("Uygulama kapatıldı."); // Konsola mesaj yazdır
+    }
 }

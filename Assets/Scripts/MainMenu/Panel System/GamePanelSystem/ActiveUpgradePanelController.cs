@@ -14,5 +14,6 @@ public class ActiveUpgradePanelController : PanelController
     {
         base.ClosePanel();
         GameEvents.OnGameResumed?.Invoke();
+        Debug.Log("ActiveUpgradePanelController: ClosePanel() called");
     }
 }

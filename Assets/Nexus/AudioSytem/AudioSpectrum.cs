@@ -62,8 +62,6 @@ public class AudioSpectrum : MonoBehaviour
     }
     void Start()
     {
-        Application.targetFrameRate = 60;
-
         Initialization();
     }
 

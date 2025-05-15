@@ -115,7 +115,7 @@ public class TechHero : TheHero
             var weapon = drone.GetComponent<DroneWeapon>();
             if (weapon != null)
             {
-                weapon.detectionRange = Mathf.Max(0f, newRate);
+                weapon.detectionRange = Mathf.Max(0.1f, newRate); // Yüzde olarak artırma
             }
         }
     }
@@ -127,7 +127,7 @@ public class TechHero : TheHero
             var weapon = drone.GetComponent<DroneWeapon>();
             if (weapon != null)
             {
-                weapon.detectionRange *= (1f + newRate / 100f);
+                weapon.detectionRange = Mathf.Max(0.1f, weapon.detectionRange + weapon.detectionRange * (newRate / 100f)); // Yüzde olarak artırma
             }
         }
     }

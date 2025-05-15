@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using NaughtyAttributes;
+using Unity.VisualScripting;
 
 [RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(BossMovement))]
@@ -37,8 +38,6 @@ public class BossController : Enemy
 
     public Animator AnimatorComponent => _anim;
 
-    public GameObject bossDropPrefab;
-
     public void Start()
     {
         SetBossUI();
@@ -57,22 +56,7 @@ public class BossController : Enemy
 
     public override void OnDisable()
     {
-        if (!ReferenceEquals(_stateMachine.CurrentState, spawningState))
-        {
-            Debug.LogWarning($"<color=blue>Entering Dying State</color> for {name}");
-        }
         BossHealthBarUI.Instance.ActivateHealthBarUI(false);
-    }
-    
-
-    public void DropLoot()
-    {
-        if (bossDropPrefab != null)
-        {
-            Instantiate(bossDropPrefab,
-                transform.position + Vector3.up * 2f,
-                Quaternion.identity);
-        }
     }
 
     public void SetBossUI()
@@ -111,6 +95,25 @@ public class BossController : Enemy
         //Adjust the health bar
         float healthPercentage = (float)currentHealth / maxHealth;
         BossHealthBarUI.Instance.SetHealthBar(healthPercentage);
+
+        if(currentHealth <= 0)
+        {
+            //change to dying state
+            _stateMachine.ChangeState(dyingState);
+        }
+    }
+
+    public override void Die()
+    {
+        SFXManager.Instance.PlayAt(SFX.EnemyDie);
+
+        EnemySpawner.Instance.RemoveEnemy(gameObject);
+
+        Vector3 position = new Vector3(transform.position.x, .5f, transform.position.z);
+        GlobalGameEventManager.Instance.Notify("EnemyDied", experience, position, expPrefab);
+
+        Debuffs.Clear();
+        EnemySpawner.Instance.AddKill();
     }
 
 }

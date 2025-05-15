@@ -56,6 +56,48 @@ public class SpellSelectionManager : MonoBehaviourSingleton<SpellSelectionManage
             return;
         }
 
+        if (SFXManager.Instance.muteAll)
+        {
+            {
+                bool isSpell1Or4Present = false;
+                foreach (Spell spell in randomSpells)
+                {
+                    if (spell.SpellID == 1 || spell.SpellID == 4)
+                    {
+                        // Eğer varsa, büyü sesini kapat
+                        isSpell1Or4Present = true;
+                    }
+                    else
+                    {
+                        // Eğer yoksa, büyü sesini aç
+                        isSpell1Or4Present = false;
+                    }
+                }
+
+                if (!isSpell1Or4Present)
+                {
+                    randomSpells.RemoveAt(0); // Eğer 1 veya 4 yoksa, ilk büyüyü kaldır
+                    //1 ya da 4 numaralı büyüyü ekle
+                    int randomIndex = UnityEngine.Random.Range(0, 2); // 0 veya 1
+                    if (randomIndex == 0)
+                    {
+                        randomSpells.Add(SpellDatabase.Instance.GetSpell(1)); // 1 numaralı büyüyü ekle
+                    }
+                    else
+                    {
+                        randomSpells.Add(SpellDatabase.Instance.GetSpell(4)); // 4 numaralı büyüyü ekle
+                    }
+
+                    Debug.Log("1 or 4 added to the selected spells."); // 1 veya 4 eklendi mesajı ver
+                }
+                else
+                {
+                    Debug.Log("1 or 4 is already present in the selected spells."); // 1 veya 4 zaten mevcutsa mesaj ver
+                }
+            }
+        }
+
+
         // Populate the UI with the selected spells
         foreach (Spell spell in randomSpells)
         {

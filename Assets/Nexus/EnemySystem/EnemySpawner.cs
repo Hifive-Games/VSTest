@@ -31,6 +31,8 @@ public class EnemySpawner : MonoBehaviourSingleton<EnemySpawner>
     private int _clustersThisPhase = 0;
     private float _nextGatherCheck = 0f;
 
+    private int kill = 0;
+
     public TMPro.TMP_Text TimerText;
     public TMPro.TMP_Text enemyCountText;
     public TMPro.TMP_Text killsText;
@@ -38,6 +40,21 @@ public class EnemySpawner : MonoBehaviourSingleton<EnemySpawner>
 
     private bool _startSpwaning = false;
     public void StartSpwaning() => _startSpwaning = true;
+
+    void OnEnable()
+    {
+        GameEvents.OnZeroHealth += GameOver;
+    }
+
+    void OnDisable()
+    {
+        GameEvents.OnZeroHealth -= GameOver;
+    }
+
+    private void GameOver()
+    {
+        CurrencyManager.Instance.AddMoney(kill);
+    }
 
     private void Start()
     {
@@ -134,7 +151,8 @@ public class EnemySpawner : MonoBehaviourSingleton<EnemySpawner>
 
     public void AddKill()
     {
-        killsText.text = $"Kills: {int.Parse(killsText.text.Split(':')[1]) + 1}";
+        kill++;
+        killsText.text = $"Kills: {kill}";
     }
     private void TrySpawnCluster(SpawnPhaseData phase)
     {

@@ -14,10 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   upgradeName: Health
   upgradeLevels:
+  - value: 0
+    cost: 100
   - value: 100
     cost: 100
   - value: 200
-    cost: 200
-  - value: 300
     cost: 300
-  Prefix: _

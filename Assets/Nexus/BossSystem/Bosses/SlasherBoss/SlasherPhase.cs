@@ -35,11 +35,14 @@ public class SlasherPhase : ScriptableBossPhase
     float _origSpeed, _origCooldown;
     int _origDamage;
 
+    private GameObject _player;
+
     public override void Enter(BossController boss)
     {
         BossPhaseUI(boss);
 
-        Debug.Log($"Entering phase: {name}");
+        _player = FindAnyObjectByType<CharacterController>().gameObject;
+
         // store & apply buffs
         _origSpeed = boss.speed;
         _origDamage = boss.damage;
@@ -57,7 +60,6 @@ public class SlasherPhase : ScriptableBossPhase
         //fill the attack list if Attacks are enabled
         if (enableAttacks)
         {
-            Debug.Log($"[SlasherPhase] adding {attackInfos.Count} attacks");
             // clear existing attacks
             for (int i = 0; i < boss.Attacker.AttackCount; i++)
             {
@@ -87,7 +89,7 @@ public class SlasherPhase : ScriptableBossPhase
         _meleeTimer -= Time.deltaTime;
 
         Vector3 bossPos = new Vector3(boss.transform.position.x, 2, boss.transform.position.z);
-        Vector3 playerPos = new Vector3(boss.Player.transform.position.x, 1, boss.Player.transform.position.z);
+        Vector3 playerPos = new Vector3(_player.transform.position.x, 1, _player.transform.position.z);
         float dist = Vector3.Distance(bossPos, playerPos);
 
         if (_roaming)
@@ -105,7 +107,7 @@ public class SlasherPhase : ScriptableBossPhase
                 {
                     // CD still cooling: pick another roam target
                     float bossY = boss.transform.position.y;
-                    Vector3 playerXZ = new Vector3(boss.Player.transform.position.x, 1f, boss.Player.transform.position.z);
+                    Vector3 playerXZ = new Vector3(_player.transform.position.x, 1f, _player.transform.position.z);
                     Vector3 roamPoint;
                     int tries = 0;
                     do
@@ -133,12 +135,12 @@ public class SlasherPhase : ScriptableBossPhase
             if (dist <= meleeRange && _meleeTimer <= 0f)
             {
                 int attackId = Random.Range(0, attackInfos.Count);
-                boss.Attacker.DoAttack(attackId, boss.Player.transform);
+                boss.Attacker.DoAttack(attackId, _player.transform);
                 _meleeTimer = meleeCooldown;
 
                 // pick initial roam target after attack
                 float bossY = boss.transform.position.y;
-                Vector3 playerXZ = new Vector3(boss.Player.transform.position.x, 1f, boss.Player.transform.position.z);
+                Vector3 playerXZ = new Vector3(_player.transform.position.x, 1f, _player.transform.position.z);
                 Vector3 roamPoint;
                 int tries = 0;
                 do
@@ -160,6 +162,7 @@ public class SlasherPhase : ScriptableBossPhase
         _currentHealth = boss.currentHealth;
 
         float hpPct = _currentHealth / _maxHealth * 100f;
+
         // check for phase change
         if (hpPct <= healthThreshold)
         {
@@ -171,6 +174,7 @@ public class SlasherPhase : ScriptableBossPhase
         if (_currentHealth <= 0)
         {
             boss.StateMachine.ChangeState(boss.DyingState);
+            Die();
         }
     }
 
@@ -180,6 +184,19 @@ public class SlasherPhase : ScriptableBossPhase
         boss.speed = _origSpeed;
         boss.damage = _origDamage;
         meleeCooldown = _origCooldown;
+
+        if(boss.currentHealth <= 0)
+        {
+            Die();
+        }
+    }
+
+
+
+    public void Die()
+    {
+        Debug.Log($"<color=red>Slasher is dead</color>");
+        GameEvents.OnZeroHealth?.Invoke();
     }
 
     public override ScriptableBossPhase GetPhase()

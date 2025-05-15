@@ -43,7 +43,18 @@ public class GarlicSpell : Spell
         }
 
         //check if the garlic is triggered by the audio spectrum, lerp back the radius to 5f if not triggered
-        radius = math.lerp(math.max(AudioSpectrum.Instance.GetAmplitude() * 5f,5), 5f, Time.deltaTime * .01f);
+        for (int i = 0; i < bandTriggered.Length; i++)
+        {
+            if (bandTriggered[i])
+            {
+                radius = Mathf.Lerp(radius, AudioSpectrum.Instance._maxAmplitude * 10f, Time.deltaTime * 2f);
+                bandTriggered[i] = false;
+            }
+            else
+            {
+                radius = Mathf.Lerp(radius, 5f, Time.deltaTime * 2f);
+            }
+        }
         gameObject.transform.localScale = new Vector3(radius, .1f, radius);
 
 

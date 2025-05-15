@@ -14,10 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   upgradeName: Attack Size
   upgradeLevels:
-  - value: 5
+  - value: 0
     cost: 10
-  - value: 10
+  - value: 5
     cost: 100
-  - value: 12
-    cost: 200
-  Prefix: _
+  - value: 10
+    cost: 300

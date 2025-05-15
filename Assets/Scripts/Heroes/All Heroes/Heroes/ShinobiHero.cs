@@ -12,7 +12,7 @@ public class ShinobiHero : TheHero
     [SerializeField] private int shurikenCount = 1; // Üretilecek obje sayısı
     [SerializeField] private Vector3 defaultScale = new Vector3(5f, 5f, 5f); // Obje scale değeri
     private float attackDamage = 1;
-    
+
     private float spawnTimer;
 
     private void Start()
@@ -53,6 +53,7 @@ public class ShinobiHero : TheHero
                 GameObject temp = ObjectPooler.Instance.SpawnFromPool(objectToSpawn, spawnParent.position + offset, Quaternion.LookRotation(offset != Vector3.zero ? offset : spawnParent.forward));
                 temp.GetComponent<BulletWeapon>().SetBulletDamage(attackDamage);
                 temp.GetComponent<BulletWeapon>().destroyTime = selfDestructTime; // Yok olma süresi
+                temp.GetComponent<BulletWeapon>().Shoot();
                 temp.transform.localScale = defaultScale; // Scale ayarı
                 //StartCoroutine(DestroyAfterDelay(temp, selfDestructTime));
             }
@@ -94,7 +95,7 @@ public class ShinobiHero : TheHero
 
         ObjectPooler.Instance.ReturnObject(obj); // Obje havuzuna geri döndür
     }
-    
+
     //Hero Stats
     // Attack Speed Setter
     public override void SetAttackSpeed(float newRate)
@@ -105,7 +106,7 @@ public class ShinobiHero : TheHero
     // Attack Range Setter
     public override void SetAttackRange(float newRate)
     {
-        selfDestructTime = Mathf.Max(0.1f, newRate);
+        selfDestructTime = Mathf.Max(0.1f, newRate); // Yüzde olarak artırma
     }
 
     // Attack Size Setter
@@ -133,25 +134,25 @@ public class ShinobiHero : TheHero
 
     public override void AddAttackRange(float newRate)
     {
-        selfDestructTime = Mathf.Max(0.1f, selfDestructTime+newRate);
+        selfDestructTime = Mathf.Max(0.1f, selfDestructTime + selfDestructTime * (newRate / 100f));
     }
 
     public override void AddAttackSize(float newRate)
     {
-        defaultScale = new Vector3(newRate+defaultScale.x, newRate+defaultScale.y, newRate+defaultScale.z);
+        defaultScale = new Vector3(newRate + defaultScale.x, newRate + defaultScale.y, newRate + defaultScale.z);
     }
 
     public override void AddAttackAmount(float newRate)
     {
-        shurikenCount = (int)newRate+shurikenCount;
+        shurikenCount = (int)newRate + shurikenCount;
     }
     public override void AddAttackDamage(float newRate)
     {
         attackDamage += attackDamage * (newRate / 100f);
     }
-    
+
     //Reduce Upgradeler
-    
+
     public override void ReduceAttackSpeed(float newRate)
     {
         spawnRate = Mathf.Max(0.1f, spawnRate - spawnRate * newRate / 100f); // Yüzde olarak artış

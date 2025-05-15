@@ -48,8 +48,11 @@ public class DroneWeapon : MonoBehaviour
 
     private void Shoot()
     {
+        float selfDestructTime = detectionRange / 10f; // Yok olma süresi
         GameObject bulletObj = ObjectPooler.Instance.SpawnFromPool(bullet.gameObject, shooterParent.position, transform.rotation);
         bulletObj.transform.localScale = Vector3.one * attackSize;
+        bulletObj.GetComponent<BulletWeapon>().Shoot();
+        bulletObj.GetComponent<BulletWeapon>().destroyTime = selfDestructTime; // Yok olma süresi
         SFXManager.Instance.PlayAt(SFX.BulletFire); // Play bullet fire sound effect
     }
 

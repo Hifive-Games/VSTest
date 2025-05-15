@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: HealthRegenAmountActiveUpgrade
   m_EditorClassIdentifier: 
   upgradeName: Health Regen
-  description: Health Regen will be increased
+  description: Health Regen will be increased for every tick.
   rareValues:
   - rareLevel: 0
     value: 5

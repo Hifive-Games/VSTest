@@ -14,12 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   upgradeName: Health Regen Amount
   upgradeLevels:
-  - value: 1
+  - value: 0
     cost: 15
   - value: 2
-    cost: 25
+    cost: 100
   - value: 3
-    cost: 35
+    cost: 300
   - value: 4
-    cost: 45
-  Prefix: _
+    cost: 900

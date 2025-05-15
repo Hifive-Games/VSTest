@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6022544150568984104}
   - component: {fileID: 330607108545091658}
-  - component: {fileID: 1159193341062705159}
   - component: {fileID: 632579456645220400}
   - component: {fileID: 3457021112583981522}
   m_Layer: 0
@@ -69,14 +68,14 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.3
-  far clip plane: 25
-  field of view: 90
+  far clip plane: 100
+  field of view: 80
   orthographic: 0
   orthographic size: 13.02
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 503
+    m_Bits: 14839
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -88,14 +87,6 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!81 &1159193341062705159
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2965055338940572235}
-  m_Enabled: 1
 --- !u!114 &632579456645220400
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -184,6 +175,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5112243191272611621}
   - component: {fileID: 3688665413361032552}
+  - component: {fileID: 2660996681335777244}
   m_Layer: 0
   m_Name: Virtual Camera
   m_TagString: Untagged
@@ -228,10 +220,10 @@ MonoBehaviour:
   m_LookAt: {fileID: 0}
   m_Follow: {fileID: 0}
   m_Lens:
-    FieldOfView: 90
+    FieldOfView: 80
     OrthographicSize: 13.02
     NearClipPlane: 0.3
-    FarClipPlane: 25
+    FarClipPlane: 100
     Dutch: 0
     ModeOverride: 2
     LensShift: {x: 0, y: 0}
@@ -246,6 +238,18 @@ MonoBehaviour:
         m_Calls: []
   m_LegacyBlendHint: 0
   m_ComponentOwner: {fileID: 170878724110238837}
+--- !u!114 &2660996681335777244
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3505988401151709432}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd994fd70b98bdf4f868f6025aadf3a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4481509007335877606
 GameObject:
   m_ObjectHideFlags: 0
@@ -303,8 +307,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa7155796051b734daa718462081dc5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_BindingMode: 2
-  m_FollowOffset: {x: 0, y: 10, z: -3.5}
+  m_BindingMode: 4
+  m_FollowOffset: {x: 0, y: 9, z: -4.5}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1

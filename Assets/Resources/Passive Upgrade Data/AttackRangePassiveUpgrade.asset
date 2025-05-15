@@ -14,10 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   upgradeName: Attack Range
   upgradeLevels:
-  - value: 1
+  - value: 0
     cost: 10
-  - value: 2
+  - value: 10
     cost: 100
-  - value: 3
-    cost: 100
-  Prefix: _
+  - value: 20
+    cost: 300
+  - value: 30
+    cost: 900

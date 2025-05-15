@@ -56,6 +56,12 @@ public abstract class Enemy : MonoBehaviour
         attackRange = enemySO.attackRange;
         attackSpeed = enemySO.attackSpeed;
         expPrefab = enemySO.deathEffect;
+        {
+            maxHealth += Mathf.FloorToInt(maxHealth * (GameEvents.currentLevel / 30f));
+            currentHealth = maxHealth;
+
+            damage += Mathf.FloorToInt(damage * (GameEvents.currentLevel / 50f));
+        }
     }
 
     private void Start()
@@ -70,7 +76,6 @@ public abstract class Enemy : MonoBehaviour
 
     public virtual void OnEnable()
     {
-        currentHealth = maxHealth;
         attackTimer = 0f; // reset attack timer on enable
 
         // Cache the enemy layer mask.(enemy and obstacle layers)
@@ -154,7 +159,7 @@ public abstract class Enemy : MonoBehaviour
     private void AttackPlayer()
     {
         player.GetComponent<TheHeroDamageManager>().TakeDamage(damage);
-        
+
     }
 
     public virtual void TakeDamage(int damage)
@@ -163,14 +168,12 @@ public abstract class Enemy : MonoBehaviour
         {
             Invoke("ResetHitBySpell", 2f);
         }
-        else
-        {
-            currentHealth -= damage;
-            if (player != null)
-                SFXManager.Instance.PlayAt(SFX.EnemyHit);
 
-            DamageNumberManager.Instance.ShowDamage(damage, transform.position);
-        }
+        currentHealth -= damage;
+        if (player != null)
+            SFXManager.Instance.PlayAt(SFX.EnemyHit);
+
+        DamageNumberManager.Instance.ShowDamage(damage, transform.position);
 
         if (currentHealth <= 0)
         {
@@ -183,14 +186,11 @@ public abstract class Enemy : MonoBehaviour
         {
             Invoke("ResetHitBySpell", 2f);
         }
-        else
-        {
-            currentHealth -= damage;
-            if (player != null)
-                SFXManager.Instance.PlayAt(SFX.EnemyHit);
 
-            DamageNumberManager.Instance.ShowDamage(damage, transform.position, damageNumberType);
-        }
+        currentHealth -= damage;
+        if (player != null)
+            SFXManager.Instance.PlayAt(SFX.EnemyHit);
+        DamageNumberManager.Instance.ShowDamage(damage, transform.position, damageNumberType);
 
         if (currentHealth <= 0)
         {

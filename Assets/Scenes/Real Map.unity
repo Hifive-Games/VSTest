@@ -686,6 +686,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 9a47743155574c54b9b76e36c7c2741e, type: 2}
   - {fileID: 11400000, guid: e54638612a1c6174b83b502617f2977f, type: 2}
   - {fileID: 11400000, guid: ae2d4cb4ccacf23428bfbf83ffd0b268, type: 2}
+  - {fileID: 11400000, guid: ae2d4cb4ccacf23428bfbf83ffd0b268, type: 2}
+  - {fileID: 11400000, guid: ae2d4cb4ccacf23428bfbf83ffd0b268, type: 2}
+  - {fileID: 11400000, guid: ae2d4cb4ccacf23428bfbf83ffd0b268, type: 2}
   gatheringDistance: 30
   gatherCheckInterval: 7.5
   bosses:
@@ -694,7 +697,7 @@ MonoBehaviour:
     spawnTime: 420
     spawnDistance: 20
   - prefab: {fileID: 309624559866207983, guid: 8fed0f4abf12c4241a565f0e55381a39, type: 3}
-    spawnTime: 780
+    spawnTime: 900
     spawnDistance: 20
   timer: 0
   _active: []
@@ -1182,65 +1185,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 330607108545091658, guid: aa636adedc8dc604ca7230b445f54bda,
-        type: 3}
-      propertyPath: field of view
-      value: 80
-      objectReference: {fileID: 0}
-    - target: {fileID: 330607108545091658, guid: aa636adedc8dc604ca7230b445f54bda,
-        type: 3}
-      propertyPath: far clip plane
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 330607108545091658, guid: aa636adedc8dc604ca7230b445f54bda,
-        type: 3}
-      propertyPath: m_CullingMask.m_Bits
-      value: 14839
-      objectReference: {fileID: 0}
-    - target: {fileID: 1354040550279486068, guid: aa636adedc8dc604ca7230b445f54bda,
-        type: 3}
-      propertyPath: m_BindingMode
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 1354040550279486068, guid: aa636adedc8dc604ca7230b445f54bda,
-        type: 3}
-      propertyPath: m_FollowOffset.y
-      value: 7
-      objectReference: {fileID: 0}
     - target: {fileID: 2965055338940572235, guid: aa636adedc8dc604ca7230b445f54bda,
         type: 3}
       propertyPath: m_Name
       value: Main Camera
-      objectReference: {fileID: 0}
-    - target: {fileID: 3688665413361032552, guid: aa636adedc8dc604ca7230b445f54bda,
-        type: 3}
-      propertyPath: m_Follow
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 3688665413361032552, guid: aa636adedc8dc604ca7230b445f54bda,
-        type: 3}
-      propertyPath: m_LookAt
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 3688665413361032552, guid: aa636adedc8dc604ca7230b445f54bda,
-        type: 3}
-      propertyPath: m_Lens.FieldOfView
-      value: 80
-      objectReference: {fileID: 0}
-    - target: {fileID: 3688665413361032552, guid: aa636adedc8dc604ca7230b445f54bda,
-        type: 3}
-      propertyPath: m_Lens.FarClipPlane
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 5112243191272611621, guid: aa636adedc8dc604ca7230b445f54bda,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5112243191272611621, guid: aa636adedc8dc604ca7230b445f54bda,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6022544150568984104, guid: aa636adedc8dc604ca7230b445f54bda,
         type: 3}
@@ -1295,30 +1243,8 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 3505988401151709432, guid: aa636adedc8dc604ca7230b445f54bda,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 269449112}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aa636adedc8dc604ca7230b445f54bda, type: 3}
---- !u!1 &269449111 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3505988401151709432, guid: aa636adedc8dc604ca7230b445f54bda,
-    type: 3}
-  m_PrefabInstance: {fileID: 269449110}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &269449112
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 269449111}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cd994fd70b98bdf4f868f6025aadf3a2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &309150312
 GameObject:
   m_ObjectHideFlags: 0
@@ -5654,10 +5580,6 @@ MonoBehaviour:
     parent: {fileID: 338254509}
     size: 20
   - prefab: {fileID: 1112075257042900928, guid: 981c9e6477a909b479e0c4d6d2ab964b,
-      type: 3}
-    parent: {fileID: 338254509}
-    size: 3
-  - prefab: {fileID: 8652968255780303988, guid: 9560f622466abc747a66109c1481672a,
       type: 3}
     parent: {fileID: 338254509}
     size: 3

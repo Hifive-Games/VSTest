@@ -1,50 +1,50 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class TheHeroExperienceManager : MonoBehaviour
 {
-    private GameObject experienceColliderObject; // Alt obje referansı
+    private GameObject experienceColliderObject;
     private SphereCollider sphereCollider;
-    
+
     [SerializeField] private float initialRadius = 1f;
-    [SerializeField] private HeroExperienceLevelSO experienceData; // SO dosyası
-    
-    private int currentLevel = 1; // Oyuncunun mevcut seviyesi
-    private int currentXP = 0; // Toplanan XP
-    
+    [SerializeField] private HeroExperienceLevelSO experienceData;
+
+    private int currentLevel = 1;
+    private int currentXP = 0;
+
+    // Çoklu level atlama durumunu kontrol eden Stack
+    private Stack<int> levelUpStack = new Stack<int>();
+    private bool isLevelUpInProgress = false;
+
     private void OnEnable()
     {
         GameEvents.OnExperienceGathered += ExperienceGathered;
+        GameEvents.OnGameResumed += ProcessNextLevelInStack;
     }
-    
+
     private void OnDisable()
     {
         GameEvents.OnExperienceGathered -= ExperienceGathered;
+        GameEvents.OnGameResumed -= ProcessNextLevelInStack;
     }
 
     private void Start()
     {
-        // Alt obje oluştur ve ana karaktere bağla
         experienceColliderObject = new GameObject("ExperienceCollider");
         experienceColliderObject.transform.SetParent(transform);
         experienceColliderObject.transform.localPosition = Vector3.zero;
-
         experienceColliderObject.layer = LayerMask.NameToLayer("Colliders");
 
-        
-        // ExperienceCollider sınıfını da ekle
         experienceColliderObject.AddComponent<ExperienceCollider>();
-        
-        // Collider ekle
+
         sphereCollider = experienceColliderObject.AddComponent<SphereCollider>();
         sphereCollider.radius = initialRadius;
         sphereCollider.isTrigger = true;
 
-        // Rigidbody ekle (Unity'nin trigger sisteminde sağlıklı çalışması için)
         Rigidbody rb = experienceColliderObject.AddComponent<Rigidbody>();
         rb.isKinematic = true;
         rb.useGravity = false;
-        
     }
 
     public void AddExperienceSize(float a)
@@ -60,14 +60,14 @@ public class TheHeroExperienceManager : MonoBehaviour
         if (sphereCollider != null)
         {
             sphereCollider.radius *= (1 - a / 100f);
-        
-            if (sphereCollider.radius < 0.5f) 
+
+            if (sphereCollider.radius < 0.5f)
             {
                 sphereCollider.radius = 0.5f;
             }
         }
     }
-    
+
     private void ExperienceGathered(int xp)
     {
         if (experienceData == null || experienceData.experienceRequired.Length == 0)
@@ -79,8 +79,8 @@ public class TheHeroExperienceManager : MonoBehaviour
         currentXP += xp;
 
         int maxLevelIndex = experienceData.experienceRequired.Length - 1;
-        int requiredXP = currentLevel - 1 <= maxLevelIndex 
-            ? experienceData.experienceRequired[currentLevel - 1] 
+        int requiredXP = currentLevel - 1 <= maxLevelIndex
+            ? experienceData.experienceRequired[currentLevel - 1]
             : experienceData.experienceRequired[maxLevelIndex];
 
         GameEvents.OnExperienceUpdated?.Invoke(currentXP, requiredXP);
@@ -89,14 +89,35 @@ public class TheHeroExperienceManager : MonoBehaviour
         {
             currentXP -= requiredXP;
             currentLevel++;
-            requiredXP = currentLevel - 1 <= maxLevelIndex 
-                ? experienceData.experienceRequired[currentLevel - 1] 
+            levelUpStack.Push(currentLevel);
+
+            requiredXP = currentLevel - 1 <= maxLevelIndex
+                ? experienceData.experienceRequired[currentLevel - 1]
                 : experienceData.experienceRequired[maxLevelIndex];
-            
-            GameEvents.OnExperienceUpdated?.Invoke(currentXP, requiredXP); // Yeni level için tekrar gönder
-            GameEvents.OnLevelUp?.Invoke();
+
+            GameEvents.OnExperienceUpdated?.Invoke(currentXP, requiredXP);
+        }
+
+        if (!isLevelUpInProgress && levelUpStack.Count > 0)
+        {
+            isLevelUpInProgress = true;
+            ProcessNextLevelInStack();
         }
     }
 
+    private void ProcessNextLevelInStack()
+    {
+        if (levelUpStack.Count > 0)
+        {
+            int level = levelUpStack.Pop();
+            Debug.Log($"Level Up to: {level}");
+            GameEvents.OnLevelUp?.Invoke();
+            GameEvents.currentLevel++;
+        }
 
+        if (levelUpStack.Count == 0)
+        {
+            isLevelUpInProgress = false;
+        }
+    }
 }

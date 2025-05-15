@@ -17,6 +17,6 @@ MonoBehaviour:
   - value: 0
     cost: 10
   - value: 10
-    cost: 100
-  - value: 100
     cost: 1000
+  - value: 20
+    cost: 2000

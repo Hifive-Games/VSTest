@@ -5678,6 +5678,15 @@ MonoBehaviour:
   - prefab: {fileID: 355925290938367036, guid: c6010c466bdccdb4dafb02b2ec11eb1c, type: 3}
     parent: {fileID: 338254509}
     size: 50
+  - prefab: {fileID: 355925290938367036, guid: 200eef96381962842b1777f2de968cb7, type: 3}
+    parent: {fileID: 338254509}
+    size: 50
+  - prefab: {fileID: 355925290938367036, guid: 5563c0f3d6acb45488cf19f2b20e5171, type: 3}
+    parent: {fileID: 338254509}
+    size: 50
+  - prefab: {fileID: 355925290938367036, guid: 7aa80d1e01f134d4bacc1c5a8c3fc1d6, type: 3}
+    parent: {fileID: 338254509}
+    size: 50
 --- !u!4 &1520455485
 Transform:
   m_ObjectHideFlags: 0
@@ -6406,12 +6415,15 @@ MonoBehaviour:
   - {fileID: 355925290938367036, guid: f8e35484ea3d08f48b7d83f66a72429e, type: 3}
   - {fileID: 355925290938367036, guid: c6010c466bdccdb4dafb02b2ec11eb1c, type: 3}
   - {fileID: 355925290938367036, guid: 71911be9e1c1c134ea24048426a907b2, type: 3}
+  - {fileID: 355925290938367036, guid: 200eef96381962842b1777f2de968cb7, type: 3}
+  - {fileID: 355925290938367036, guid: 7aa80d1e01f134d4bacc1c5a8c3fc1d6, type: 3}
+  - {fileID: 355925290938367036, guid: 5563c0f3d6acb45488cf19f2b20e5171, type: 3}
   bossAltarPrefab: {fileID: 919132149155446097, guid: 9178db12bb408ee4db566f8be18e4728,
     type: 3}
   chunkSize: 40
   minObjects: 3
   maxObjects: 5
-  altarChance: 20
+  altarChance: 100
   bossAltarSpawnDistance: 5
   bossArenaPrefab: {fileID: 8652968255780303988, guid: 9560f622466abc747a66109c1481672a,
     type: 3}

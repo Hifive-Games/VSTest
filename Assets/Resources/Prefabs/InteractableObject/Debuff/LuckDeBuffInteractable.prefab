@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8467405686912563605}
   - component: {fileID: 8424255666920771886}
   m_Layer: 12
-  m_Name: AttackSpeedDeBuffInteractableObject
+  m_Name: LuckDeBuffInteractable
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -37,6 +37,7 @@ Transform:
   - {fileID: 8934383236380507137}
   - {fileID: 80550830836354005}
   - {fileID: 8580777354318139602}
+  - {fileID: 4607606617584611932}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &5300419614430551583
@@ -666,6 +667,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Altar_4
       objectReference: {fileID: 0}
+    - target: {fileID: 6619075521858244543, guid: 09d403f7d24c7cc49a14b16d217dcb2c,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -676,4 +682,78 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5805279225861133573, guid: 09d403f7d24c7cc49a14b16d217dcb2c,
     type: 3}
   m_PrefabInstance: {fileID: 2847811226177701335}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &6516340579113506762
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 946026928983238475}
+    m_Modifications:
+    - target: {fileID: 7322625348831061398, guid: 092a5d7e2508b9f41ac2fce2ea07df6e,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7322625348831061398, guid: 092a5d7e2508b9f41ac2fce2ea07df6e,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 7322625348831061398, guid: 092a5d7e2508b9f41ac2fce2ea07df6e,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7322625348831061398, guid: 092a5d7e2508b9f41ac2fce2ea07df6e,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7322625348831061398, guid: 092a5d7e2508b9f41ac2fce2ea07df6e,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.00000003774895
+      objectReference: {fileID: 0}
+    - target: {fileID: 7322625348831061398, guid: 092a5d7e2508b9f41ac2fce2ea07df6e,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7322625348831061398, guid: 092a5d7e2508b9f41ac2fce2ea07df6e,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7322625348831061398, guid: 092a5d7e2508b9f41ac2fce2ea07df6e,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7322625348831061398, guid: 092a5d7e2508b9f41ac2fce2ea07df6e,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7322625348831061398, guid: 092a5d7e2508b9f41ac2fce2ea07df6e,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7986254715025948460, guid: 092a5d7e2508b9f41ac2fce2ea07df6e,
+        type: 3}
+      propertyPath: m_Name
+      value: Altar_6
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 092a5d7e2508b9f41ac2fce2ea07df6e, type: 3}
+--- !u!4 &4607606617584611932 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7322625348831061398, guid: 092a5d7e2508b9f41ac2fce2ea07df6e,
+    type: 3}
+  m_PrefabInstance: {fileID: 6516340579113506762}
   m_PrefabAsset: {fileID: 0}

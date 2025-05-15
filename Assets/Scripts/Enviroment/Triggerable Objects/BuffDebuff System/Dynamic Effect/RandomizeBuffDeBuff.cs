@@ -1,9 +1,11 @@
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
+using System;
 using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
+using Random = UnityEngine.Random;
 
 [CreateAssetMenu(fileName = "RandomizeBuffDeBuff", menuName = "BuffDeBuffSystem/DynamicBuffDeBuffSystem/RandomizeBuffDeBuff")]
 public class RandomizeBuffDeBuff : BuffDebuffSystemBaseData
@@ -43,9 +45,18 @@ public class RandomizeBuffDeBuff : BuffDebuffSystemBaseData
         {
             effectName = effect.name;
             description = effect.description;
+            valueOfBuffOrDeBuff = effect.valueOfBuffOrDeBuff;
+            textColor = effect.textColor;
             effect.ApplyBuffDeBuffSystem();
         }
     }
+
+    /*
+    public override String GetBuffDebuffText()
+    {
+        return "a";
+    }
+    */
 
     private void OnValidate()
     {

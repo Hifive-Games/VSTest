@@ -16,11 +16,10 @@ public abstract class BuffDebuffSystemBaseData : ScriptableObject
     public enum BuffDebuffTextColor
     {
         Green,
-        Red,
-        Yellow
+        Red
     }
 
-    [SerializeField] private BuffDebuffTextColor textColor = BuffDebuffTextColor.Green; // Default renk
+    [SerializeField] public BuffDebuffTextColor textColor = BuffDebuffTextColor.Green; // Default renk
 
     public void SetHeroBuffEffectScaler(float value)
     {
@@ -44,7 +43,7 @@ public abstract class BuffDebuffSystemBaseData : ScriptableObject
         return HeroDeBuffEffectScaler * DeBuffEffectScaler * valueOfBuffOrDeBuff;
     }
 
-    public string GetBuffDebuffText()
+    public virtual string GetBuffDebuffText()
     {
         // Yüzdeyi renkli yapmak
         string percentageText = $"%{valueOfBuffOrDeBuff}";
@@ -62,9 +61,6 @@ public abstract class BuffDebuffSystemBaseData : ScriptableObject
                 break;
             case BuffDebuffTextColor.Red:
                 colorCode = "#FF0000";
-                break;
-            case BuffDebuffTextColor.Yellow:
-                colorCode = "#FFFF00";
                 break;
         }
 

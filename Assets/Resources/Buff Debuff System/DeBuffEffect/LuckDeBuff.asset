@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: LuckDeBuff
   m_EditorClassIdentifier: 
   effectName: Luck DeBuff
-  description: "\u015Fanss\u0131z yarat\u0131k"
+  description: "\u015Fans azal\u0131yor"
   valueOfBuffOrDeBuff: 10
   textColor: 1

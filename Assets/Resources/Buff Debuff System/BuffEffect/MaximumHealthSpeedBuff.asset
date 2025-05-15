@@ -14,4 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   effectName: Maximum Health
   description: max can ekliyo
-  valueOfBuffOrDeBuff: 0
+  valueOfBuffOrDeBuff: 30
+  textColor: 0

@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   effectName: Movement Speed DeBuff
   description: "ko\u015Fu h\u0131z\u0131 azal\u0131yo"
-  valueOfBuffOrDeBuff: 0
+  valueOfBuffOrDeBuff: 10
   textColor: 1

@@ -15,8 +15,11 @@ MonoBehaviour:
   effectName: Random geliyo
   description: "ko\u015Fu h\u0131z\u0131"
   valueOfBuffOrDeBuff: 1
+  textColor: 2
   randomizeBuffDebuff:
-  - {fileID: 11400000, guid: dcaf34e1735e5d44b9ce2fd7b59738e7, type: 2}
-  - {fileID: 11400000, guid: 87795eeba6195c2418c6b5871af1119e, type: 2}
+  - {fileID: 11400000, guid: ce3ba6eeee9b41d44a5ccb20fd8832e4, type: 2}
+  - {fileID: 11400000, guid: 3302007d83c5eb440af1b9e062e3287a, type: 2}
+  - {fileID: 11400000, guid: 8b2501b58fdaeff469045d2588a1cb19, type: 2}
   - {fileID: 11400000, guid: 27a982c8770f13a40bcda7fd3805a481, type: 2}
+  - {fileID: 11400000, guid: 87795eeba6195c2418c6b5871af1119e, type: 2}
   randomCount: 1

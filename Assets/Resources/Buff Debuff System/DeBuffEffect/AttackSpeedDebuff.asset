@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   effectName: Attack Speed DeBuff
   description: "sald\u0131r\u0131 h\u0131z\u0131 azalyo"
-  valueOfBuffOrDeBuff: 0.1
+  valueOfBuffOrDeBuff: 10
   textColor: 1

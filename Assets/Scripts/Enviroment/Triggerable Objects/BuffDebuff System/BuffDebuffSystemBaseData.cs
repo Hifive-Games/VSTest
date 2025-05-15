@@ -16,7 +16,8 @@ public abstract class BuffDebuffSystemBaseData : ScriptableObject
     public enum BuffDebuffTextColor
     {
         Green,
-        Red
+        Red,
+        Yellow
     }
 
     [SerializeField] private BuffDebuffTextColor textColor = BuffDebuffTextColor.Green; // Default renk
@@ -47,12 +48,25 @@ public abstract class BuffDebuffSystemBaseData : ScriptableObject
     {
         // Yüzdeyi renkli yapmak
         string percentageText = $"%{valueOfBuffOrDeBuff}";
-        
+
         // Geri kalan metin
         string descriptionText = $"{description}";
 
         // Renk belirleme
-        string colorCode = textColor == BuffDebuffTextColor.Green ? "#00FF00" : "#FF0000";
+        string colorCode = "#00FF00"; // Default Green
+
+        switch (textColor)
+        {
+            case BuffDebuffTextColor.Green:
+                colorCode = "#00FF00";
+                break;
+            case BuffDebuffTextColor.Red:
+                colorCode = "#FF0000";
+                break;
+            case BuffDebuffTextColor.Yellow:
+                colorCode = "#FFFF00";
+                break;
+        }
 
         // Yüzdeyi renkli yap, geri kalan kısmı beyaz tut
         return $"<color={colorCode}>{percentageText}</color> {descriptionText}";

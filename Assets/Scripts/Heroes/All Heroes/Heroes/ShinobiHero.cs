@@ -73,7 +73,7 @@ public class ShinobiHero : TheHero
     {
         if (shurikenCount == 1 || index == 1)
         {
-            return spawnParent.forward * 2f; // İlk şuriken ileri doğru atılır.
+            return spawnParent.forward * .3f; // İlk şuriken ileri doğru atılır.
         }
 
         float angleStep = 360f / shurikenCount; // Her şuriken arasındaki açı
@@ -84,7 +84,7 @@ public class ShinobiHero : TheHero
         Quaternion rotation = Quaternion.Euler(0, angle - angleStep, 0); // İlk şuriken baz alınır
         Vector3 offsetDirection = rotation * baseDirection;
 
-        return offsetDirection * 2f; // Mesafe çarpanı
+        return offsetDirection * .3f; // Mesafe çarpanı
     }
 
     private IEnumerator DestroyAfterDelay(GameObject obj, float delay)

@@ -26,7 +26,9 @@ public class ExperienceParticle : MonoBehaviour
     {
         _t = transform;
         _r = GetComponentInChildren<Renderer>();
-        _r.material.color = Color.green;
+        //change emmision color and intensity to 1.5
+        _r.material.SetColor("_EmissionColor", Color.green);
+        _r.material.SetFloat("_EmissionIntensity", 1.5f);
         _t.localScale = Vector3.one * .5f;
     }
 
@@ -44,8 +46,8 @@ public class ExperienceParticle : MonoBehaviour
     public void GetExperience()
     {
         GameEvents.OnExperienceGathered?.Invoke(experience);
-        ObjectPooler.Instance.ReturnObject(gameObject);
         SFXManager.Instance.PlayAt(SFX.ExpShard);
+        ObjectPooler.Instance.ReturnObject(gameObject);
     }
 
     private void MergeExp()
@@ -81,7 +83,8 @@ public class ExperienceParticle : MonoBehaviour
             if (experience <= s.MaxExp)
             {
                 _t.localScale = Vector3.one * s.Scale;
-                _r.material.color = s.Color;
+                _r.material.SetColor("_EmissionColor", s.Color);
+                _r.material.SetFloat("_EmissionIntensity", 1.5f);
                 return;
             }
         }
@@ -96,7 +99,8 @@ public class ExperienceParticle : MonoBehaviour
     private void ResetVisual()
     {
         _t.localScale = Vector3.one * .5f;
-        _r.material.color = Color.green;
+        _r.material.SetColor("_EmissionColor", Color.green);
+        _r.material.SetFloat("_EmissionIntensity", 1.5f);
     }
 
     private readonly struct VisualSetting

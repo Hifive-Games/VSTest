@@ -16,6 +16,7 @@ public class EnemyDataSO : ScriptableObject
     public string enemyName;
     public Sprite enemySprite;
     public GameObject enemyPrefab;
+    public GameObject enemyAttackPrefab;
 
     [Header("Stats")]
     public int maxHealth;
@@ -24,6 +25,7 @@ public class EnemyDataSO : ScriptableObject
     public int score;
     public float attackRange;
     public float attackSpeed;
+    public float attackCooldown;
 
     [Header("Experience")]
     public int experience;

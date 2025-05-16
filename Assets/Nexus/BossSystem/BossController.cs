@@ -37,7 +37,6 @@ public class BossController : Enemy
     Animator _anim;
 
     public Animator AnimatorComponent => _anim;
-
     public void Start()
     {
         SetBossUI();
@@ -51,6 +50,7 @@ public class BossController : Enemy
         _anim = GetComponent<Animator>();
         Initialize(enemySO);
         _stateMachine.Initialize(this, spawningState);
+
         base.OnEnable();
     }
 

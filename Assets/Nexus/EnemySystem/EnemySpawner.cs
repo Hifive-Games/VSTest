@@ -13,6 +13,7 @@ public class EnemySpawner : MonoBehaviourSingleton<EnemySpawner>
 
     [Header("Bosses")]
     [SerializeField] private Bosses[] bosses;
+    [SerializeField] public GameObject arena;
 
     private bool _bossActive = false;
     private GameObject _currentBoss;
@@ -126,6 +127,8 @@ public class EnemySpawner : MonoBehaviourSingleton<EnemySpawner>
             _currentBoss.transform.LookAt(_player.position);
             _bossActive = true;
             _nextBossIndex++;
+            arena = ObjectPooler.Instance.SpawnFromPool(arena, _currentBoss.transform.position, Quaternion.identity);
+            arena.transform.position = new Vector3(arena.transform.position.x, 0f, arena.transform.position.z);
         }
     }
 

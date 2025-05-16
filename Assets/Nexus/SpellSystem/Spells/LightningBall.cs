@@ -14,6 +14,11 @@ public class LightningBall : Spell
     public override void OnEnable()
     {
         player = FindObjectOfType<CharacterController>()?.gameObject;
+
+        if (!SFXManager.Instance.muteAll)
+        {
+            gameObject.GetComponent<LightningOrbRenderer>().triggerMode = LightningOrbRenderer.TriggerMode.Timed;
+        }
     }
     public override void Seek(Transform target = null)
     {
@@ -44,7 +49,10 @@ public class LightningBall : Spell
             DamageNearbyEnemies();
             tickTimer = tickInterval;
         }
-        SetRadius();
+        if (SFXManager.Instance.muteAll)
+        {
+            SetRadius();
+        }
         //SetIndicatorScale();
     }
 
@@ -52,7 +60,7 @@ public class LightningBall : Spell
     private void SetRadius()
     {
         radius = Mathf.Lerp(radius, AudioSpectrum.Instance._maxAmplitude * 2f, Time.deltaTime * 2f);
-        gameObject.GetComponent<LightningOrbRenderer>().sparkRadius = radius/2f;
+        gameObject.GetComponent<LightningOrbRenderer>().sparkRadius = radius / 2f;
         gameObject.GetComponent<SphereCollider>().radius = radius / 2f;
     }
 

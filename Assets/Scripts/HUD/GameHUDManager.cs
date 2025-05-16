@@ -17,9 +17,8 @@ public class GameHUDManager : MonoBehaviour
     }
     private void OpengameHUDPanel()
     {
-        if (gameHUDPanel != null && gameHUDPanel.gameObject.activeSelf==false)
+        if (gameHUDPanel != null && gameHUDPanel.gameObject.activeSelf == false)
         {
-            Debug.Log("Açılacak panel: " + gameHUDPanel.name);
             PanelManager.Instance.OpenPanel(gameHUDPanel);
         }
         else

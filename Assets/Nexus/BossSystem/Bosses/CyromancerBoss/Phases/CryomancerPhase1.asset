@@ -16,6 +16,7 @@ MonoBehaviour:
   SpellTimer: 5
   spells:
   - {fileID: 11400000, guid: f9e894d24f2bf3144aac6b2acb5809d0, type: 2}
+  - {fileID: 11400000, guid: 612bd74a204cd36409ca73d53255a424, type: 2}
   damageMultiplier: 1
   healthThreshold: 66
   nextPhase: {fileID: 11400000, guid: 54b75c5db0f53e647b4341bfb3c75dc9, type: 2}

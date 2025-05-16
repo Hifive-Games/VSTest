@@ -20,7 +20,8 @@ public abstract class Enemy : MonoBehaviour
 
     // New properties for attack behavior
     protected float attackRange;
-    protected float attackSpeed; // cooldown duration
+    protected float attackSpeed;
+    protected float attackCooldown;
     private float attackTimer = 0f;
 
     // Keeps track of debuffs
@@ -44,6 +45,8 @@ public abstract class Enemy : MonoBehaviour
     private float physicsCheckTimer = 0f;
     private Vector3 cachedDirection = Vector3.zero;
 
+    private GameObject attackPrefab;
+
     public void Initialize(EnemyDataSO enemySO)
     {
         this.enemySO = enemySO;
@@ -55,6 +58,8 @@ public abstract class Enemy : MonoBehaviour
         experience = enemySO.experience;
         attackRange = enemySO.attackRange;
         attackSpeed = enemySO.attackSpeed;
+        attackCooldown = enemySO.attackCooldown;
+        attackPrefab = enemySO.enemyAttackPrefab;
         expPrefab = enemySO.deathEffect;
         {
             maxHealth += Mathf.FloorToInt(maxHealth * (GameEvents.currentLevel / 30f));
@@ -76,7 +81,7 @@ public abstract class Enemy : MonoBehaviour
 
     public virtual void OnEnable()
     {
-        attackTimer = 0f; // reset attack timer on enable
+        attackTimer = 0f;
 
         // Cache the enemy layer mask.(enemy and obstacle layers)
         enemyLayerMask = LayerMask.GetMask("Enemy", "Obstacle");
@@ -99,23 +104,23 @@ public abstract class Enemy : MonoBehaviour
         if (player == null)
             return;
 
-        Vector3 diff = player.transform.position - transform.position;
-        float sqrDistance = diff.sqrMagnitude;
+        float sqrDistance = (player.transform.position - transform.position).sqrMagnitude;
         float attackRangeSqr = attackRange * attackRange;
+
+
+        attackTimer -= Time.deltaTime;
 
         if (sqrDistance <= attackRangeSqr)
         {
-            // Enemy in attack range—accumulate timer.
-            attackTimer += Time.deltaTime;
-            if (attackTimer >= attackSpeed)
+            // countdown
+            if (attackTimer <= 0f)
             {
                 AttackPlayer();
-                attackTimer = 0f;
+                attackTimer = attackCooldown + attackSpeed;
             }
         }
         else
         {
-            attackTimer = 0f;
             MoveTowardsPlayer();
         }
     }
@@ -158,8 +163,12 @@ public abstract class Enemy : MonoBehaviour
 
     private void AttackPlayer()
     {
-        player.GetComponent<TheHeroDamageManager>().TakeDamage(damage);
-
+        //mid point between enemy and player
+        Vector3 midPoint = (player.transform.position + transform.position) / 2;
+        midPoint.y = .1f;
+        var go = ObjectPooler.Instance.SpawnFromPool(enemySO.enemyAttackPrefab, midPoint, Quaternion.identity);
+        var atk = go.GetComponent<EnemyAttack>();
+        atk.SetAttackData(damage, attackRange, attackSpeed);
     }
 
     public virtual void TakeDamage(int damage)

@@ -47,9 +47,9 @@ public class SpellUpgradeCard : MonoBehaviour
                 newValue = currentValue + SpellUpgrade.GetValue();
             }
 
-            // Format the value. Not more than 1 decimal place
-            currentValue = Mathf.Round(currentValue * 10f) / 10f;
-            newValue = Mathf.Round(newValue * 10f) / 10f;
+            // Format the value. show not more than 2 decimal places
+            currentValue = Mathf.Round(currentValue * 100f) / 100f;
+            newValue = Mathf.Round(newValue * 100f) / 100f;
 
             return $"{currentValue} -> {newValue}";
         }

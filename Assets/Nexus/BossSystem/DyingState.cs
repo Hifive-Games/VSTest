@@ -30,6 +30,9 @@ public class DyingState : ScriptableBossState
         GameObject loot = ObjectPooler.Instance.SpawnFromPool(bossDropPrefab, boss.transform.position, Quaternion.identity);
         loot.transform.position = new Vector3(boss.transform.position.x, 0f, boss.transform.position.z);
 
+        GameObject arena = EnemySpawner.Instance.arena;
+        ObjectPooler.Instance.ReturnObject(arena);
+
         ObjectPooler.Instance.ReturnObject(boss.gameObject);
     }
 

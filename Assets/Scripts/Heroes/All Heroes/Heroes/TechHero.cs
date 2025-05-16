@@ -38,7 +38,7 @@ public class TechHero : TheHero
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.F11))
         {
             AddDrone();
         }

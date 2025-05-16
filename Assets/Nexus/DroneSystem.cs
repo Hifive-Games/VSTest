@@ -46,7 +46,7 @@ public class DroneSystem : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.F11))
         {
             AddDrone();
         }

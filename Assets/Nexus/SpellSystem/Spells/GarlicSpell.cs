@@ -42,19 +42,22 @@ public class GarlicSpell : Spell
             tickTimer = tickInterval;
         }
 
-        //check if the garlic is triggered by the audio spectrum, lerp back the radius to 5f if not triggered
-        for (int i = 0; i < bandTriggered.Length; i++)
+        if(SFXManager.Instance.muteAll)
         {
-            if (bandTriggered[i])
+            for (int i = 0; i < bandTriggered.Length; i++)
             {
-                radius = Mathf.Lerp(radius, AudioSpectrum.Instance._maxAmplitude * 10f, Time.deltaTime * 2f);
-                bandTriggered[i] = false;
-            }
-            else
-            {
-                radius = Mathf.Lerp(radius, 5f, Time.deltaTime * 2f);
+                if (bandTriggered[i])
+                {
+                    radius = Mathf.Lerp(radius, AudioSpectrum.Instance._maxAmplitude * 10f, Time.deltaTime * 2f);
+                    bandTriggered[i] = false;
+                }
+                else
+                {
+                    radius = Mathf.Lerp(radius, 5f, Time.deltaTime * 2f);
+                }
             }
         }
+
         gameObject.transform.localScale = new Vector3(radius, .1f, radius);
 
 
@@ -85,7 +88,7 @@ public class GarlicSpell : Spell
 
     void DamageNearbyEnemies()
     {
-        int hits = Physics.OverlapSphereNonAlloc(transform.position, radius /2, _hitBuffer);
+        int hits = Physics.OverlapSphereNonAlloc(transform.position, radius / 2, _hitBuffer);
         Collider[] colliders = new Collider[hits];
         for (int i = 0; i < hits; i++)
         {

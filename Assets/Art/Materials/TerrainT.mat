@@ -29,7 +29,6 @@ Material:
   - _METALLICSPECGLOSSMAP
   - _NORMALMAP
   - _PARALLAXMAP
-  - _RECEIVE_SHADOWS_OFF
   - _SPECULARHIGHLIGHTS_OFF
   - _SPECULAR_SETUP
   m_InvalidKeywords: []
@@ -46,7 +45,7 @@ Material:
     m_TexEnvs:
     - _BaseMap:
         m_Texture: {fileID: 2800000, guid: 0f9757fd42071dc479aa2793285605e2, type: 3}
-        m_Scale: {x: 3, y: 3}
+        m_Scale: {x: 4, y: 4}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
         m_Texture: {fileID: 2800000, guid: ab76f6780ec8f6946acbf60296cf441a, type: 3}
@@ -74,7 +73,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     - _MainTex:
         m_Texture: {fileID: 2800000, guid: 0f9757fd42071dc479aa2793285605e2, type: 3}
-        m_Scale: {x: 3, y: 3}
+        m_Scale: {x: 4, y: 4}
         m_Offset: {x: 0, y: 0}
     - _Mask0:
         m_Texture: {fileID: 0}
@@ -163,7 +162,7 @@ Material:
     - _Blend: 2
     - _BlendModePreserveSpecular: 1
     - _BlendOp: 0
-    - _BumpScale: 10
+    - _BumpScale: 5
     - _ClearCoatMask: 0
     - _ClearCoatSmoothness: 0
     - _Cull: 2
@@ -190,7 +189,7 @@ Material:
     - _OcclusionStrength: 1
     - _Parallax: 0.01
     - _QueueOffset: 0
-    - _ReceiveShadows: 0
+    - _ReceiveShadows: 1
     - _SampleGI: 0
     - _Shininess: 0
     - _Smoothness: 0
@@ -209,8 +208,8 @@ Material:
     - _WorkflowMode: 0
     - _ZWrite: 1
     m_Colors:
-    - _BaseColor: {r: 0.75, g: 0.5979452, b: 0.45, a: 1}
-    - _Color: {r: 0.75, g: 0.5979452, b: 0.45, a: 1}
+    - _BaseColor: {r: 0.6981132, g: 0.6220712, b: 0.5499288, a: 1}
+    - _Color: {r: 0.6981132, g: 0.6220712, b: 0.5499288, a: 1}
     - _EmissionColor: {r: 0.0754717, g: 0.0754717, b: 0.0754717, a: 1}
     - _SpecColor: {r: 1, g: 1, b: 1, a: 0}
   m_BuildTextureStacks: []

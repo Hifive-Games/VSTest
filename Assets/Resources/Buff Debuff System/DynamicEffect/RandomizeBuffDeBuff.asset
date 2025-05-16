@@ -14,17 +14,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   effectName: CurrentHealthSpeedDeBuff
   description: "can azal\u0131yo anl\u0131k"
-  valueOfBuffOrDeBuff: 10000
+  valueOfBuffOrDeBuff: 9.98988e+27
   textColor: 2
   randomizeBuffDebuff:
-  - {fileID: 11400000, guid: ce3ba6eeee9b41d44a5ccb20fd8832e4, type: 2}
-  - {fileID: 11400000, guid: 3302007d83c5eb440af1b9e062e3287a, type: 2}
-  - {fileID: 11400000, guid: 8b2501b58fdaeff469045d2588a1cb19, type: 2}
-  - {fileID: 11400000, guid: 27a982c8770f13a40bcda7fd3805a481, type: 2}
-  - {fileID: 11400000, guid: 87795eeba6195c2418c6b5871af1119e, type: 2}
+  - {fileID: 11400000, guid: 1fd7a3e76e149bd41a39eb22f4194ceb, type: 2}
+  - {fileID: 11400000, guid: 8076213446ebf6d47ae60d52f7910283, type: 2}
+  - {fileID: 11400000, guid: 09490b77d7080e94e8b705a33818b3d0, type: 2}
+  - {fileID: 11400000, guid: 771a139eca1c3a84690798554a7f355a, type: 2}
   - {fileID: 11400000, guid: ba120a2249055de46899c1939149aa2b, type: 2}
   - {fileID: 11400000, guid: ab7d699c7e7d5ad49b951b11088e63d4, type: 2}
   - {fileID: 11400000, guid: b9a2204db7a07774a97a376d39d7fcb7, type: 2}
   - {fileID: 11400000, guid: 226f746e1a19b114bb0c95dcec3433c9, type: 2}
   - {fileID: 11400000, guid: dcaf34e1735e5d44b9ce2fd7b59738e7, type: 2}
+  - {fileID: 11400000, guid: ce3ba6eeee9b41d44a5ccb20fd8832e4, type: 2}
+  - {fileID: 11400000, guid: 3302007d83c5eb440af1b9e062e3287a, type: 2}
+  - {fileID: 11400000, guid: 8b2501b58fdaeff469045d2588a1cb19, type: 2}
+  - {fileID: 11400000, guid: 27a982c8770f13a40bcda7fd3805a481, type: 2}
+  - {fileID: 11400000, guid: 87795eeba6195c2418c6b5871af1119e, type: 2}
   randomCount: 1

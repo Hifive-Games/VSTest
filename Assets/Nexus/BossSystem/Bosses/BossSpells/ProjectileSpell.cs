@@ -33,19 +33,23 @@ public class ProjectileSpell : BossSpell
     private void SpawnProjectilesSpread(BossController boss, Transform target)
     {
         Vector3 origin = (spawnPoint != null) ? spawnPoint.position : boss.transform.position;
+        origin.y = 1;
         Vector3 baseDir = (target.position - origin).normalized;
+        baseDir.y = 0; // Ignore vertical direction
+        baseDir.Normalize();
+        float spreadAngle = this.spreadAngle / (count - 1); // Adjust the spread angle based on the number of projectiles
 
         for (int i = 0; i < count; i++)
         {
-            // rotate baseDir by a random yaw within spreadAngle
-            float yaw = Random.Range(-spreadAngle, spreadAngle);
-            Vector3 dir = Quaternion.Euler(0, yaw, 0) * baseDir;
-
+            float angle = (i - (count - 1) / 2f) * spreadAngle;
+            Quaternion rotation = Quaternion.Euler(0f, angle, 0f);
+            Vector3 dir = rotation * baseDir;
             var proj = ObjectPooler.Instance.SpawnFromPool(
                 projectilePrefab,
                 origin,
                 Quaternion.LookRotation(dir)
             );
+
             if (proj.TryGetComponent<Rigidbody>(out var rb))
                 rb.velocity = dir * speed;
 

@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: CryomancerPhase2
   m_EditorClassIdentifier: 
   enableSpells: 1
-  SpellTimer: 5
+  SpellTimer: 3
   spells:
   - {fileID: 11400000, guid: 48608ead24673bc419755ceaa6423d16, type: 2}
-  damageMultiplier: 1
+  damageMultiplier: 1.25
   healthThreshold: 33
   nextPhase: {fileID: 11400000, guid: bee8234f1d2cdf140883b6971ba1f343, type: 2}

@@ -10,6 +10,8 @@ public class MainMenuUIManager : MonoBehaviour
     private void Start()
     {
         Application.targetFrameRate = 60; // Uygulamanın hedef kare hızını ayarla
+
+        SFXManager.Instance.PickRandomMusic(); // Rastgele müzik çal
     }
 
     public void OpenStartGameScene()

@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4574977654513923682}
   - component: {fileID: 7895409783000485981}
+  - component: {fileID: 4837484913312733048}
   m_Layer: 0
   m_Name: SfxManager
   m_TagString: Untagged
@@ -44,6 +45,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1df7bcd2c1b86b44e883b3bcd6948fdd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  muteAll: 0
+  muteSFX: 0
+  muteUI: 0
   sounds:
   - id: 0
     clip: {fileID: 8300000, guid: f3a3dbd83d1c6b147a2b7137df9b7f0c, type: 3}
@@ -90,4 +94,20 @@ MonoBehaviour:
     volume: 1
     pitchMin: 0.5
     pitchMax: 1.5
-  poolSize: 50
+  musics:
+  - clip: {fileID: 8300000, guid: dbea85af7f7185a4fbc92def94018985, type: 3}
+    volume: 0
+  - clip: {fileID: 8300000, guid: e58ba14a6a0034741aceab1c016b8d65, type: 3}
+    volume: 0
+  - clip: {fileID: 8300000, guid: 2725d7c39dda5cc429c39e643518fd94, type: 3}
+    volume: 0
+  muteMusic: 0
+  poolSize: 200
+--- !u!81 &4837484913312733048
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3235878273217738733}
+  m_Enabled: 1

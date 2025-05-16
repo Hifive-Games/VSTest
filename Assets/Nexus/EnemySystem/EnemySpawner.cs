@@ -39,8 +39,8 @@ public class EnemySpawner : MonoBehaviourSingleton<EnemySpawner>
     public TMPro.TMP_Text killsText;
     public TMPro.TMP_Text phaseText;
 
-    private bool _startSpwaning = false;
-    public void StartSpwaning() => _startSpwaning = true;
+    //private bool _startSpwaning = false;
+    //public void StartSpwaning() => _startSpwaning = true;
 
     void OnEnable()
     {

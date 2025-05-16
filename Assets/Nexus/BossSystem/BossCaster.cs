@@ -94,7 +94,6 @@ public class BossCaster : MonoBehaviour, IBossSpellCaster
             Debug.LogError("Cannot cast a null spell.");
             return;
         }
-
         // Cast the spell
         spell.Cast(_bossController, target);
         // Reset the cooldown timer

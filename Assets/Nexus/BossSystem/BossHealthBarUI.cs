@@ -86,7 +86,7 @@ public class BossHealthBarUI : MonoBehaviour
     public void SetBossPhase(int phase)
     {
         if (phase != 0)
-            BossPhaseText.text = $"Pashe {phase}"; // Set the boss phase text
+            BossPhaseText.text = $"Phase {phase}"; // Set the boss phase text
         else
             BossPhaseText.text = string.Empty; // Clear the boss phase text if phase is 0
     }

@@ -28,6 +28,13 @@ public class Sound
     [Range(.5f, 1.5f)] public float pitchMax = 1f;
 }
 
+[System.Serializable]
+public class Musics
+{
+    public AudioClip clip;
+    [Range(0f, 1f)] public float volume = 1f;
+}
+
 public class SFXManager : MonoBehaviourSingletonPersistent<SFXManager>
 {
     [Header("SFX Manager")]
@@ -42,6 +49,14 @@ public class SFXManager : MonoBehaviourSingletonPersistent<SFXManager>
 
     [Tooltip("Configure all your sound clips here")]
     public List<Sound> sounds = new List<Sound>();
+
+    [Header("Music")]
+    [Tooltip("Configure all your music clips here")]
+    public List<Musics> musics = new List<Musics>();
+    [Tooltip("Mute all music")]
+    public bool muteMusic = false;
+
+    private AudioSource _musicSource;
 
     [Tooltip("Number of pooled sources for concurrent SFX")]
     public int poolSize = 10;
@@ -65,6 +80,12 @@ public class SFXManager : MonoBehaviourSingletonPersistent<SFXManager>
         _pool = new Queue<AudioSource>();
         for (int i = 0; i < poolSize; i++)
             _pool.Enqueue(SpawnNew());
+
+        // pick a random music
+        if (musics.Count > 0)
+        {
+            PickRandomMusic();
+        }
     }
 
     AudioSource SpawnNew()
@@ -125,13 +146,13 @@ public class SFXManager : MonoBehaviourSingletonPersistent<SFXManager>
     public void MuteAll(Toggle mute)
     {
         muteAll = mute.isOn;
-        AudioListener.volume = muteAll ? 0 : 1;
         if (muteAll)
         {
             foreach (var sound in sounds)
             {
                 sound.volume = 0f;
             }
+            LerpMusicVolume(0f, 2f);
         }
         else
         {
@@ -139,6 +160,61 @@ public class SFXManager : MonoBehaviourSingletonPersistent<SFXManager>
             {
                 sound.volume = 1f;
             }
+
+            foreach (var music in musics)
+            {
+                music.volume = 1f;
+            }
+
+            LerpMusicVolume(1f, 2f);
         }
+    }
+
+    //lerp music volume
+    public void LerpMusicVolume(float targetVolume, float duration)
+    {
+        StopAllCoroutines();
+        StartCoroutine(LerpMusicVolumeCoroutine(targetVolume, duration));
+    }
+    private IEnumerator LerpMusicVolumeCoroutine(float targetVolume, float duration)
+    {
+        if (_musicSource == null) yield break;
+
+        float startVolume = _musicSource.volume;
+        float time = 0f;
+
+        while (time < duration)
+        {
+            time += Time.deltaTime;
+            _musicSource.volume = Mathf.Lerp(startVolume, targetVolume, time / duration);
+            yield return null;
+        }
+
+        _musicSource.volume = targetVolume;
+    }
+
+    public void PickRandomMusic()
+    {
+        if (muteAll || muteMusic) return;
+
+        var music = musics[Random.Range(0, musics.Count)];
+        var src = _musicSource;
+        if (src == null)
+        {
+            _musicSource = gameObject.AddComponent<AudioSource>();
+            src = _musicSource;
+        }
+        src.clip = music.clip;
+        src.volume = 0f;
+        src.loop = true;
+        src.Play();
+        LerpMusicVolume(1, 5f);
+    }
+
+    //mute music when changing scenes
+    public void MuteMusic()
+    {
+        _musicSource.volume = 0f;
+        _musicSource.Stop();
     }
 }

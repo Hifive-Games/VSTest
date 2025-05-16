@@ -108,8 +108,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.8383847, y: 3.841103, z: 1.6127903}
-  m_Center: {x: -0.03311485, y: 1.9205515, z: -0.0008300543}
+  m_Size: {x: 2, y: 4, z: 2}
+  m_Center: {x: 0, y: 2, z: 0}
 --- !u!54 &8424255666920771886
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -264,7 +264,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 5, y: 2, z: 5}
+  m_Size: {x: 3, y: 2, z: 3}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &7011491116034889830
 MonoBehaviour:
@@ -281,7 +281,7 @@ MonoBehaviour:
   interactionDuration: 1
   interactionText: Snail
   effect: {fileID: 11400000, guid: 23e7e4e9ba87e184a8509983becf5e84, type: 2}
-  gizmoSize: {x: 5, y: 5, z: 5}
+  gizmoSize: {x: 3, y: 3, z: 3}
   gizmoColor: {r: 0, g: 0, b: 1, a: 1}
   textOffset: {x: 0, y: 1.5, z: 0}
   mapIconPrefab: {fileID: 5125879075075297841}
@@ -619,7 +619,7 @@ PrefabInstance:
     - target: {fileID: 5805279225861133573, guid: 09d403f7d24c7cc49a14b16d217dcb2c,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 1.513
       objectReference: {fileID: 0}
     - target: {fileID: 5805279225861133573, guid: 09d403f7d24c7cc49a14b16d217dcb2c,
         type: 3}

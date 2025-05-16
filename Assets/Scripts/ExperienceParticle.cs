@@ -28,7 +28,7 @@ public class ExperienceParticle : MonoBehaviour
         _r = GetComponentInChildren<Renderer>();
         //change emmision color and intensity to 1.5
         _r.material.SetColor("_EmissionColor", Color.green);
-        _r.material.SetFloat("_EmissionIntensity", 1.5f);
+        _r.material.SetFloat("_EmissionIntensity", 2f);
         _t.localScale = Vector3.one * .5f;
     }
 
@@ -84,7 +84,7 @@ public class ExperienceParticle : MonoBehaviour
             {
                 _t.localScale = Vector3.one * s.Scale;
                 _r.material.SetColor("_EmissionColor", s.Color);
-                _r.material.SetFloat("_EmissionIntensity", 1.5f);
+                _r.material.SetFloat("_EmissionIntensity", 2f);
                 return;
             }
         }
@@ -100,7 +100,7 @@ public class ExperienceParticle : MonoBehaviour
     {
         _t.localScale = Vector3.one * .5f;
         _r.material.SetColor("_EmissionColor", Color.green);
-        _r.material.SetFloat("_EmissionIntensity", 1.5f);
+        _r.material.SetFloat("_EmissionIntensity", 2f);
     }
 
     private readonly struct VisualSetting

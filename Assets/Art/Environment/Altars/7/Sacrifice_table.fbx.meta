@@ -3,12 +3,17 @@ guid: e4f702e1bf0cd3648918a4e3ca7d2360
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Sacrifice_table_Mat
+    second: {fileID: 2100000, guid: dc9b66c3d7b844547bf162efb62c662d, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
     materialSearch: 1
-    materialLocation: 0
+    materialLocation: 1
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0

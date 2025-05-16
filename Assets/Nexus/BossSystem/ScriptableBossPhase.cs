@@ -9,10 +9,8 @@ public abstract class ScriptableBossPhase : ScriptableObject, IState<BossControl
 
     public virtual void BossPhaseUI(BossController boss)
     {
-        //set the boss phase number but reverse the index
-        int totalPhases = boss.Phases.Count;
-        int phaseNumber = totalPhases - boss.Phases.IndexOf(this);
-        
+        //grt the phase number
+        int phaseNumber = boss.Phases.IndexOf(this) + 1;
         BossHealthBarUI.Instance.SetBossPhase(phaseNumber);
     }
 }

@@ -59,11 +59,14 @@ public abstract class Enemy : MonoBehaviour
         attackCooldown = enemySO.attackCooldown;
         attackPrefab = enemySO.enemyAttackPrefab;
         expPrefab = enemySO.deathEffect;
+
+        int currentLevel = TheHeroExperienceManager.Instance.GetCurrentLevel();
+
         {
-            maxHealth += Mathf.FloorToInt(maxHealth * (GameEvents.currentLevel / 30f));
+            maxHealth += Mathf.FloorToInt(maxHealth * (currentLevel / 30f));
             currentHealth = maxHealth;
 
-            damage += Mathf.FloorToInt(damage * (GameEvents.currentLevel / 50f));
+            damage += Mathf.FloorToInt(damage * (currentLevel / 50f));
         }
     }
 

@@ -64,6 +64,6 @@ public class MainScenePanelController : PanelController
 
     private void UpdateLevelText()
     {
-        levelText.text = GameEvents.currentLevel.ToString();
+        levelText.text = TheHeroExperienceManager.Instance.GetCurrentLevel().ToString();
     }
 }

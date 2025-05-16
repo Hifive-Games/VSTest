@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5b0f6fb4b057bae4da644a8a6873159a, type: 3}
-  m_Name: LighningOrbRadiusUpgrade
+  m_Name: LightningOrbRadiusUpgrade
   m_EditorClassIdentifier: 
   TargetID: 4
   Name: Lighning Orb Radius
   Description: Increase spark radius of the spell.
   Target: 5
-  Level: 1
+  Level: 0
   maxUpgrades: 5
   ValuePerLevel:
   - 1

@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TheHeroExperienceManager : MonoBehaviour
+public class TheHeroExperienceManager : MonoBehaviourSingleton<TheHeroExperienceManager>
 {
     private GameObject experienceColliderObject;
     private SphereCollider sphereCollider;
@@ -112,12 +112,16 @@ public class TheHeroExperienceManager : MonoBehaviour
             int level = levelUpStack.Pop();
             Debug.Log($"Level Up to: {level}");
             GameEvents.OnLevelUp?.Invoke();
-            GameEvents.currentLevel++;
         }
 
         if (levelUpStack.Count == 0)
         {
             isLevelUpInProgress = false;
-        }
-    }
+        }
+    }
+
+    public int GetCurrentLevel()
+    {
+        return currentLevel;
+    }
 }

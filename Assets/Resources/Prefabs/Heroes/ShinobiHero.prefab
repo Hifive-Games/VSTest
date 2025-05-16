@@ -1028,7 +1028,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   initialRadius: 1
-  experienceData: {fileID: 0}
+  experienceData: {fileID: 11400000, guid: 8b3ba28ce9c9bcc4ab07eb8524196559, type: 2}
 --- !u!1 &3899358083024401084
 GameObject:
   m_ObjectHideFlags: 0

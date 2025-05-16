@@ -13,5 +13,4 @@ public static class GameEvents
     // HEALTH EVENTLERI
     public static Action<float, float> OnHealthChanged;
     public static Action OnZeroHealth;
-    public static int currentLevel = 1; // Oyuncunun mevcut seviyesi
 }

@@ -16,7 +16,7 @@ MonoBehaviour:
   characterName: Wolfgang
   prefab: {fileID: 2731352494871173876, guid: d102e6975a3ea15409541a2fd43e8afb, type: 3}
   characterImage: {fileID: 21300000, guid: 1dadb071e19c4c945976e45ca4c89693, type: 3}
-  isSelected: 0
+  isSelected: 1
   heroStatsBaseDatas:
   - heroStatsBaseData: {fileID: 11400000, guid: 905f210108b5f724f8b7aa91341987d3,
       type: 2}

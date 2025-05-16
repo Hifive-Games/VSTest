@@ -786,12 +786,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd003d55a95666846ae8690729ad7c7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SpellUpgrade: {fileID: 0}
-  NameText: {fileID: 332714622804979438}
-  DescriptionText: {fileID: 1333446273085612695}
-  ValueText: {fileID: 6227122363333902827}
-  UpgradeButton: {fileID: 9001539919252944917}
-  IconImage: {fileID: 2742182752180463326}
+  nameText: {fileID: 332714622804979438}
+  descriptionText: {fileID: 1333446273085612695}
+  valueText: {fileID: 6227122363333902827}
+  upgradeButton: {fileID: 9001539919252944917}
+  iconImage: {fileID: 2742182752180463326}
 --- !u!1 &6808602200827535754
 GameObject:
   m_ObjectHideFlags: 0

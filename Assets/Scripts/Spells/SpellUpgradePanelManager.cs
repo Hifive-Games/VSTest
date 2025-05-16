@@ -1,7 +1,6 @@
 using System;
-using System.Collections;
+using System.Linq;
 using System.Collections.Generic;
-using Unity.Mathematics;
 using UnityEngine;
 
 public class SpellUpgradePanelManager : MonoBehaviourSingleton<SpellUpgradePanelManager>
@@ -13,7 +12,7 @@ public class SpellUpgradePanelManager : MonoBehaviourSingleton<SpellUpgradePanel
     private List<SpellUpgrade> AvailableSpellUpgrades = new List<SpellUpgrade>();
 
     public int MaxSpellUpgradeCardCount = 3;
-    private void Start()
+    private void Awake()
     {
         LoadSpellUpgrades();
     }
@@ -34,47 +33,46 @@ public class SpellUpgradePanelManager : MonoBehaviourSingleton<SpellUpgradePanel
 
     public void AddEquippedSpellUpgrades(Spell spell)
     {
-        foreach (var spellUpgrade in SpellUpgrades)
+        foreach (var blueprint in SpellUpgrades)
         {
-            if (spell.SpellID == spellUpgrade.TargetID && !AvailableSpellUpgrades.Contains(spellUpgrade))
+            if (spell.SpellID == blueprint.TargetID)
             {
-                AvailableSpellUpgrades.Add(spellUpgrade);
+                // 1) Clone the ScriptableObject so you don’t mutate the asset
+                var clone = ScriptableObject.Instantiate(blueprint);
+                clone.name = blueprint.name + "_Instance";
+
+                // 2) Add the clone to your runtime list
+                AvailableSpellUpgrades.Add(clone);
             }
         }
 
-        Debug.Log("Added " + AvailableSpellUpgrades.Count + " spell upgrades for spell ID: " + spell.SpellID);
+        Debug.Log($"Added {AvailableSpellUpgrades.Count} spell upgrades for spell ID: {spell.SpellID}");
     }
 
     //now we can populate the spell upgrade panel with the available upgrades
     public void PopulateSpellUpgradePanel()
     {
         ClearSpellUpgradePanel();
-        int cardCount = math.min(AvailableSpellUpgrades.Count, MaxSpellUpgradeCardCount);
 
+        var eligible = AvailableSpellUpgrades
+            .Where(u => u.Level < u.maxUpgrades)
+            .OrderBy(_ => UnityEngine.Random.value)
+            .Take(MaxSpellUpgradeCardCount);
 
-
-        for (int i = 0; i < cardCount; i++)
+        foreach (var upgrade in eligible)
         {
-            int randomIndex = UnityEngine.Random.Range(0, AvailableSpellUpgrades.Count - cardCount + 1);
-            SpellUpgrade upgrade = AvailableSpellUpgrades[randomIndex];
-            if (upgrade.Level < upgrade.maxUpgrades)
-            {
-                GameObject card = Instantiate(SpellUpgradeCardPrefab, SpellUpgradeCardParent.transform);
-
-                SpellUpgradeCard cardScript = card.GetComponent<SpellUpgradeCard>();
-
-                cardScript.SetSpellUpgrade(upgrade);
-            }
+            var card = Instantiate(SpellUpgradeCardPrefab, SpellUpgradeCardParent.transform);
+            card.GetComponent<SpellUpgradeCard>().SetSpellUpgrade(upgrade);
         }
     }
 
-    public void CheckSpellAvalibility()
+    public void CheckSpellAvailability()
     {
-        for (int i = AvailableSpellUpgrades.Count - 1; i > 0; i--)
+        for (int i = AvailableSpellUpgrades.Count - 1; i >= 1; i--)
         {
             if (AvailableSpellUpgrades[i].Level >= AvailableSpellUpgrades[i].maxUpgrades)
             {
-                Debug.Log("Removed spell upgrade: " + AvailableSpellUpgrades[i].Name + " from available upgrades.");
+                Debug.Log($"Removed spell upgrade: {AvailableSpellUpgrades[i].Name}");
                 AvailableSpellUpgrades.RemoveAt(i);
             }
         }

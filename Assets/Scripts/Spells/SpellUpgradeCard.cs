@@ -1,70 +1,68 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
 using UnityEngine.UI;
+using TMPro;
 
 public class SpellUpgradeCard : MonoBehaviour
 {
-    public SpellUpgrade SpellUpgrade;
-    public TextMeshProUGUI NameText;
-    public TextMeshProUGUI DescriptionText;
-    public TextMeshProUGUI ValueText;
-    public Button UpgradeButton;
-    public Image IconImage;
+    [SerializeField] private TextMeshProUGUI nameText;
+    [SerializeField] private TextMeshProUGUI descriptionText;
+    [SerializeField] private TextMeshProUGUI valueText;
+    [SerializeField] private Button upgradeButton;
+    [SerializeField] private Image iconImage;
 
-    private void Start()
+    private SpellUpgrade spellUpgrade;
+    private SpellManager spellMgr;
+
+    private void Awake()
     {
-        UpgradeButton.onClick.AddListener(OnUpgradeButtonClicked);
+        if (upgradeButton == null) Debug.LogError("UpgradeButton not set", this);
+        upgradeButton.onClick.AddListener(OnUpgradeButtonClicked);
+        spellMgr = SpellManager.Instance;
     }
 
-    public void SetSpellUpgrade(SpellUpgrade spellUpgrade)
+    private void OnDestroy()
     {
-        SpellUpgrade = spellUpgrade;
-        NameText.text = SpellUpgrade.Name;
-        DescriptionText.text = $"{SpellUpgrade.Description}";
-        ValueText.text = ValueTxt();
-        //IconImage.sprite = Resources.Load<Sprite>("Icons/" + spellUpgrade.Target.ToString());
+        upgradeButton.onClick.RemoveListener(OnUpgradeButtonClicked);
     }
 
-    //get spells current value and the value after the upgrade ("now" -> "after")
-    private string ValueTxt()
+    public void SetSpellUpgrade(SpellUpgrade upgrade)
     {
-        SpellData spell = SpellManager.Instance.GetSpellInfo(SpellUpgrade);
-        if (spell != null)
-        {
-            float currentValue = spell.GetValue(SpellUpgrade.Target);
-            float newValue = 0;
+        spellUpgrade = upgrade ?? throw new System.ArgumentNullException(nameof(upgrade));
+        nameText.text = spellUpgrade.Name;
+        descriptionText.text = spellUpgrade.Description;
+        valueText.text = FormatValueText();
+        // iconImage.sprite = … preload or reference directly
+        upgradeButton.interactable = true;
+    }
 
-            //if the spell is cooldown or duration or tick interval new value is calculated by subtracting the current value from the new value, otherwise it is calculated by adding the current value to the new value
+    private string FormatValueText()
+    {
+        var data = spellMgr.GetSpellInfo(spellUpgrade);
+        if (data == null) return "N/A";
 
-            if (SpellUpgrade.Target == UpgradeTarget.Cooldown || SpellUpgrade.Target == UpgradeTarget.TickInterval)
-            {
-                newValue = currentValue - SpellUpgrade.GetValue();
-            }
-            else
-            {
-                newValue = currentValue + SpellUpgrade.GetValue();
-            }
+        float current = data.GetValue(spellUpgrade.Target);
+        float delta = spellUpgrade.GetValue();
+        float next = (spellUpgrade.Target == UpgradeTarget.Cooldown
+                   || spellUpgrade.Target == UpgradeTarget.TickInterval)
+                   ? current - delta
+                   : current + delta;
 
-            // Format the value. show not more than 2 decimal places
-            currentValue = Mathf.Round(currentValue * 100f) / 100f;
-            newValue = Mathf.Round(newValue * 100f) / 100f;
-
-            return $"{currentValue} -> {newValue}";
-        }
-        return "N/A";
+        current = Mathf.Round(current * 100f) / 100f;
+        next = Mathf.Round(next * 100f) / 100f;
+        return $"{current} → {next}";
     }
 
     private void OnUpgradeButtonClicked()
     {
-        if (SpellManager.Instance != null)
+        if (!spellMgr.ApplyUpgrade(spellUpgrade))
         {
-            SpellManager.Instance.ApplyUpgrade(SpellUpgrade);
-
-            SpellUpgradePanelManager.Instance.CheckSpellAvalibility();
-
-            ActiveUpgradeManager.Instance.CloseActiveUpgradeUI();
+            Debug.LogWarning($"Failed to apply upgrade {spellUpgrade.Name}");
+            upgradeButton.interactable = false;
+            return;
         }
+
+        // refresh availability & close UI
+        SpellUpgradePanelManager.Instance.CheckSpellAvailability();
+        ActiveUpgradeManager.Instance.CloseActiveUpgradeUI();
     }
 }

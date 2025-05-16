@@ -908,6 +908,7 @@ MonoBehaviour:
   floatSpeed: 1
   floatHeight: 0.5
   smoothRate: 5
+  drones: []
 --- !u!114 &2268261746450309607
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -996,7 +997,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   initialRadius: 1
-  experienceData: {fileID: 0}
+  experienceData: {fileID: 11400000, guid: 8b3ba28ce9c9bcc4ab07eb8524196559, type: 2}
 --- !u!1 &3899358083024401084
 GameObject:
   m_ObjectHideFlags: 0

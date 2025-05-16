@@ -72,7 +72,7 @@ public class SpellManager : MonoBehaviour
         return null;
     }
 
-    public void ApplyUpgrade(SpellUpgrade upgrade)
+    public bool ApplyUpgrade(SpellUpgrade upgrade)
     {
         foreach (SpellData spell in spellDataList)
         {
@@ -80,8 +80,12 @@ public class SpellManager : MonoBehaviour
             {
                 // Apply the upgrade to the spell data
                 spell.Upgrade(upgrade);
+
+                return true;
             }
         }
+
+        return false;
     }
 
     //create an empty spelldata object and add it to the list of spell data

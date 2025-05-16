@@ -44,4 +44,5 @@ public class FileSaveLoadManager : MonoBehaviourSingletonPersistent<FileSaveLoad
     {
         return PlayerPrefs.HasKey(moneyIdentifier);
     }
+
 }

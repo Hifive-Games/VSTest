@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TheHeroExperienceManager : MonoBehaviourSingleton<TheHeroExperienceManager>
+public class TheHeroExperienceManager : MonoBehaviour
 {
     private GameObject experienceColliderObject;
     private SphereCollider sphereCollider;
@@ -16,7 +16,7 @@ public class TheHeroExperienceManager : MonoBehaviourSingleton<TheHeroExperience
     // Çoklu level atlama durumunu kontrol eden Stack
     private Stack<int> levelUpStack = new Stack<int>();
     private bool isLevelUpInProgress = false;
-
+    
     private void OnEnable()
     {
         GameEvents.OnExperienceGathered += ExperienceGathered;

@@ -179,14 +179,14 @@ public class TechHero : TheHero
     }
     public override void AddAttackDamage(float newRate)
     {
-        Debug.LogError("AddAttackDamage");
         attackDamage += attackDamage * (newRate / 100f);
+        Debug.LogError("AddAttackDamage : "+ attackDamage + "New rate: "+newRate);
         foreach (var drone in drones)
         {
             var weapon = drone.GetComponent<DroneWeapon>();
             if (weapon != null)
             {
-                weapon.bullet.GetComponent<BulletWeapon>().SetBulletDamage(attackDamage);
+                weapon.SetBulletDamage(attackDamage);
             }
         }
     }
@@ -199,7 +199,7 @@ public class TechHero : TheHero
             var weapon = drone.GetComponent<DroneWeapon>();
             if (weapon != null)
             {
-                weapon.bullet.GetComponent<BulletWeapon>().SetBulletDamage(attackDamage);
+                weapon.SetBulletDamage(attackDamage);
             }
         }
     }

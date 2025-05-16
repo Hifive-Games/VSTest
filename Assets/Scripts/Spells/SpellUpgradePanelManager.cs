@@ -51,12 +51,12 @@ public class SpellUpgradePanelManager : MonoBehaviourSingleton<SpellUpgradePanel
         ClearSpellUpgradePanel();
         int cardCount = math.min(AvailableSpellUpgrades.Count, MaxSpellUpgradeCardCount);
 
-        int randomIndex = UnityEngine.Random.Range(0, AvailableSpellUpgrades.Count - cardCount + 1);
 
 
         for (int i = 0; i < cardCount; i++)
         {
-            SpellUpgrade upgrade = AvailableSpellUpgrades[randomIndex + i];
+            int randomIndex = UnityEngine.Random.Range(0, AvailableSpellUpgrades.Count - cardCount + 1);
+            SpellUpgrade upgrade = AvailableSpellUpgrades[randomIndex];
             if (upgrade.Level < upgrade.maxUpgrades)
             {
                 GameObject card = Instantiate(SpellUpgradeCardPrefab, SpellUpgradeCardParent.transform);

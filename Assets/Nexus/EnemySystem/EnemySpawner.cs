@@ -124,7 +124,12 @@ public class EnemySpawner : MonoBehaviourSingleton<EnemySpawner>
             Vector3 pos = _player.position + Random.insideUnitSphere * boss.spawnDistance;
             pos.y = 2f;
             _currentBoss = ObjectPooler.Instance.SpawnFromPool(boss.prefab, pos, Quaternion.identity);
-            _currentBoss.transform.LookAt(_player.position);
+            //look the player direction
+            Vector3 direction = _player.position - _currentBoss.transform.position;
+            direction.y = 0f; // ignore y axis
+            direction.Normalize(); // normalize the direction vector
+            Quaternion lookRotation = Quaternion.LookRotation(direction);
+            _currentBoss.transform.rotation = lookRotation;
             _bossActive = true;
             _nextBossIndex++;
             arena = ObjectPooler.Instance.SpawnFromPool(arena, _currentBoss.transform.position, Quaternion.identity);
@@ -159,6 +164,9 @@ public class EnemySpawner : MonoBehaviourSingleton<EnemySpawner>
     }
     private void TrySpawnCluster(SpawnPhaseData phase)
     {
+        int current = _active.Count;
+        //check max cluster groups
+        if (current >= phase.maxClusterGroups) return;
         if (Time.time >= _nextSpawnTime
             && _clustersThisPhase < phase.maxClusterGroups)
         {

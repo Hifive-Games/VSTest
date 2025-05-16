@@ -1,7 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Xml.Schema;
-using Unity.Mathematics;
 using UnityEngine;
 
 public abstract class Enemy : MonoBehaviour
@@ -175,7 +173,7 @@ public abstract class Enemy : MonoBehaviour
     {
         if (hitBySpell)
         {
-            Invoke("ResetHitBySpell", 2f);
+            StartCoroutine(ResetHitBySpell());
         }
 
         currentHealth -= damage;
@@ -193,7 +191,7 @@ public abstract class Enemy : MonoBehaviour
     {
         if (hitBySpell)
         {
-            Invoke("ResetHitBySpell", 2f);
+            StartCoroutine(ResetHitBySpell());
         }
 
         currentHealth -= damage;
@@ -207,11 +205,12 @@ public abstract class Enemy : MonoBehaviour
         }
     }
 
-    private void ResetHitBySpell()
+    private IEnumerator ResetHitBySpell()
     {
-        Debug.Log("ResetHitBySpell");
+        yield return new WaitForSeconds(2f);
         hitBySpell = false;
     }
+
 
     public virtual void Die()
     {

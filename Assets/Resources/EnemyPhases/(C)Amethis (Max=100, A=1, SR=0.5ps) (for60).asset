@@ -10,22 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9338de1d149cce14e8bcaf7de862d145, type: 3}
-  m_Name: (C)Quartz-Emerald (Max=30, A=1-2, SR=1ps) (for30)
+  m_Name: (C)Amethis (Max=100, A=1, SR=0.5ps) (for60)
   m_EditorClassIdentifier: 
   behavior: 0
   startTime: 0
-  duration: 30
-  spawnInterval: 1
-  maxClusterGroups: 60
+  duration: 60
+  spawnInterval: 0.5
+  maxClusterGroups: 100
   targetEnemyCount: 0
   refillThreshold: 0
   maintainSpawnInterval: 0
   enemyGroups:
-  - enemyData: {fileID: 11400000, guid: 8a468ad0bad7212489b164ba04fd8055, type: 2}
-    amount: 4
-    minSpwanRadius: 0.5
-    maxSpawnRadius: 1.5
-  - enemyData: {fileID: 11400000, guid: 951252455d642024da16355bf86ef939, type: 2}
+  - enemyData: {fileID: 11400000, guid: 8152467218c8a1242995c124adf84141, type: 2}
     amount: 2
     minSpwanRadius: 0.5
     maxSpawnRadius: 1.5

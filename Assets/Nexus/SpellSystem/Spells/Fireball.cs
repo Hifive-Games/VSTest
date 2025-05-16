@@ -1,7 +1,5 @@
-using System;
-using System.Collections;
+
 using UnityEngine;
-using Zenject.SpaceFighter;
 
 public class Fireball : Spell
 {
@@ -28,8 +26,7 @@ public class Fireball : Spell
     public void Explode()
     {
         ObjectPooler.Instance.SpawnFromPool(ExplosionEffect, transform.position, Quaternion.identity);
-
-        int hits = Physics.OverlapSphereNonAlloc(transform.position, radius /2, _hitBuffer);
+        int hits = Physics.OverlapSphereNonAlloc(transform.position, radius / 2, _hitBuffer);
         Collider[] colliders = new Collider[hits];
         for (int i = 0; i < hits; i++)
         {

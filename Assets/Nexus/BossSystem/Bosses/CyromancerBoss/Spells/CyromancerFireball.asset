@@ -23,6 +23,6 @@ MonoBehaviour:
   projectilePrefab: {fileID: 6910229491382688879, guid: 2226bcc950067f941a18205259fa9c36,
     type: 3}
   spawnPoint: {fileID: 0}
-  speed: 5
+  speed: 3.5
   count: 7
-  spreadAngle: 12.5
+  spreadAngle: 30

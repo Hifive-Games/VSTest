@@ -75,7 +75,7 @@ public class ArcaneMissile : Spell
     public override Transform FindClosestEnemy()
     {
         LayerMask mask = LayerMask.GetMask("Enemy");
-        Collider[] hits = Physics.OverlapSphere(transform.position, range, mask);
+        Collider[] hits = Physics.OverlapSphere(transform.position, range/2, mask);
 
         Transform closest = null;
         float bestDist = range;

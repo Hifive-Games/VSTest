@@ -17,12 +17,13 @@ public class MainMenuUIManager : MonoBehaviour
     public void OpenStartGameScene()
     {
         Time.timeScale = 1; // Oyun zamanını başlat
+        SFXManager.Instance.MuteMusic(); // Müzikleri sustur
         SceneManager.LoadScene(sceneIndex); // Belirtilen sahneyi yükle
     }
 
     public void ExitGame()
     {
-        Application.Quit(); // Uygulamayı kapat
         Debug.Log("Uygulama kapatıldı."); // Konsola mesaj yazdır
+        Application.Quit(); // Uygulamayı kapat
     }
 }

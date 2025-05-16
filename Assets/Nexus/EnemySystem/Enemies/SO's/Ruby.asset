@@ -25,7 +25,7 @@ MonoBehaviour:
   speed: 3
   score: 7
   attackRange: 1.5
-  attackSpeed: 1
+  attackSpeed: 0.75
   attackCooldown: 1
   experience: 5
   deathEffect: {fileID: 7642634975434891464, guid: b6eb006e0faad0d4b8de30ddadf3edf5,

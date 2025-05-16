@@ -5,7 +5,7 @@ using UnityEngine;
 public class CryomancerFireball : MonoBehaviour
 {
     [Header("Fireball Settings")]
-    public float speed = 10f;
+    public float speed = 7.5f;
     public float damage = 10f;
     public float lifetime = 5f;
 

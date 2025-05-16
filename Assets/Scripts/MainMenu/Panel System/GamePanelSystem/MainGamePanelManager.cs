@@ -23,7 +23,8 @@ public class MainGamePanelManager : PanelManager
    }
    private void GameOver()
    {
-     OpenPanel(gameOverPanelController);
+      GameEvents.currentLevel = 1;
+      OpenPanel(gameOverPanelController);
    }
    
 }

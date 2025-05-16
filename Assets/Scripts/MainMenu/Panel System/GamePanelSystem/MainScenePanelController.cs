@@ -16,16 +16,19 @@ public class MainScenePanelController : PanelController
     [SerializeField] private TextMeshProUGUI maxEXPText;
     [SerializeField] private TextMeshProUGUI currentHPText;
     [SerializeField] private TextMeshProUGUI maxHPText;
+    [SerializeField] private TextMeshProUGUI levelText;
     private void OnEnable()
     {
         GameEvents.OnExperienceUpdated += UpdateExperienceSlider;
         GameEvents.OnHealthChanged += UpdateHealthSlider;
+        GameEvents.OnLevelUp += UpdateLevelText;
     }
 
     private void OnDisable()
     {
         GameEvents.OnExperienceUpdated -= UpdateExperienceSlider;
         GameEvents.OnHealthChanged -= UpdateHealthSlider;
+        GameEvents.OnLevelUp -= UpdateLevelText;
     }
 
     public override void OpenPanel()
@@ -57,5 +60,10 @@ public class MainScenePanelController : PanelController
             //maxHPText.text = maxHp.ToString();
             currentHPText.text = $"{(int)currentHP}/{maxHp}";
         }
+    }
+
+    private void UpdateLevelText()
+    {
+        levelText.text = GameEvents.currentLevel.ToString();
     }
 }

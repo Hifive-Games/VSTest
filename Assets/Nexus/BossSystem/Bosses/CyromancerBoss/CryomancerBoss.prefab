@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 4311248611201218855}
   - component: {fileID: 432184997371650458}
   - component: {fileID: 6604109399306450103}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: CryomancerBoss
   m_TagString: Enemy
   m_Icon: {fileID: 0}
